@@ -36,6 +36,34 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
+      # The current repository has mobile artwork at:
+      # site/public/assets/mobile-assets/
+      # The app and verifier expect it at:
+      # site/public/mobile-assets/
+      - name: Normalize mobile artwork directory
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          misplaced="site/public/assets/mobile-assets"
+          correct="site/public/mobile-assets"
+
+          if [ -d "$misplaced" ]; then
+            mkdir -p "$correct"
+            cp -a "$misplaced/." "$correct/"
+            rm -rf "$misplaced"
+            echo "Moved mobile artwork into $correct"
+          elif [ -d "$correct" ]; then
+            echo "Mobile artwork is already in the correct location."
+          else
+            echo "::error::Mobile artwork folder was not found at either $misplaced or $correct"
+            exit 1
+          fi
+
+          test -d "$correct/portrait"
+          test -d "$correct/landscape"
+          echo "Portrait and landscape folders are present."
+
       - name: Verify the static payload
         run: |
           python tools/verify_github_pages_site.py site
