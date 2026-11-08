@@ -17,7 +17,8 @@ let state = {
   windowMode: 'main', auto: false, awaitingClick: false, waitingTimer: null,
   settings: { ...DEFAULT_SETTINGS }, audioChannels: new Map(), musicAudio: null, currentMusicLoop: false,
   centerNext: false, chapterComplete: false, pendingAdvance: false,
-  history: [], passageHistory: [], downloadBusy: false, lastRenderedDialogueId: null
+  history: [], passageHistory: [], downloadBusy: false,
+  revealActive: false, revealTimer: null, revealDurationMs: 0, revealEndsAt: 0
 };
 
 function safeJSONParse(value, fallback) { try { return value ? JSON.parse(value) : fallback; } catch { return fallback; } }
@@ -58,7 +59,7 @@ function loadSettings() {
   state.settings.textSize = Math.min(24, Math.max(16, Number(state.settings.textSize) || 18));
   applyVisualPreferences();
 }
-function setLanguage(language) {
+function setLanguage(language, { render = true } = {}) {
   state.language = language === 'fa' ? 'fa' : 'en';
   localStorage.setItem('narcissu-language-v1', state.language);
   document.documentElement.lang = state.language;
@@ -68,7 +69,10 @@ function setLanguage(language) {
   $('languageSwitch').setAttribute('aria-label', `Switch to ${target}`);
   $('languageSwitch').title = `Switch to ${target}`;
   $('languageSwitch').innerHTML = `<span class="${state.language === 'en' ? 'switch-current' : ''}">EN</span><span class="switch-arrow">↔</span><span class="${state.language === 'fa' ? 'switch-current' : ''}">FA</span>`;
-  if (state.currentEvent) renderCurrentDialogue();
+  if (render && state.currentEvent) {
+    renderCurrentDialogue({ animate: false });
+    if (state.auto && state.screen === 'reader' && !state.pendingAdvance) scheduleAutoAdvance();
+  }
 }
 function escapeHTML(value) {
   return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -79,9 +83,82 @@ function renderMarkedText(value) {
   html = html.replace(/~s~([\s\S]*?)~s~/g, '<span class="small">$1</span>');
   return html;
 }
-function renderCurrentDialogue() {
+function clearDialogueReveal() {
+  if (state.revealTimer) clearTimeout(state.revealTimer);
+  state.revealTimer = null;
+  state.revealActive = false;
+  state.revealDurationMs = 0;
+  state.revealEndsAt = 0;
+  const textNode = $('dialogueText');
+  if (textNode && typeof textNode.querySelectorAll === 'function') {
+    textNode.querySelectorAll('.word-reveal').forEach(word => {
+      word.classList.remove('word-reveal');
+      word.style.removeProperty('--word-delay');
+    });
+  }
+}
+function finishDialogueReveal() {
+  clearDialogueReveal();
+  if (state.currentEvent && state.screen === 'reader') {
+    $('dialogueStatus').textContent = state.auto
+      ? `Auto · ${state.settings.autoDelay}s`
+      : 'Tap to continue';
+  }
+}
+function remainingDialogueRevealMs() {
+  return state.revealActive ? Math.max(0, state.revealEndsAt - Date.now()) : 0;
+}
+function prepareWordReveal(textNode, animate = false) {
+  clearDialogueReveal();
+  const systemReduceMotion = !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  if (!animate || state.settings.reduceMotion || systemReduceMotion || !textNode ||
+      typeof document.createTreeWalker !== 'function' || typeof NodeFilter === 'undefined') return 0;
+
+  const walker = document.createTreeWalker(textNode, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+  while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+  let wordCount = 0;
+  for (const node of textNodes) {
+    const parts = node.textContent.match(/\s+|[^\s]+/gu) || [];
+    if (!parts.some(part => !/^\s+$/u.test(part))) continue;
+    const fragment = document.createDocumentFragment();
+    for (const part of parts) {
+      if (/^\s+$/u.test(part)) {
+        fragment.append(document.createTextNode(part));
+      } else {
+        const word = document.createElement('span');
+        word.className = 'word-reveal';
+        word.textContent = part;
+        fragment.append(word);
+        wordCount += 1;
+      }
+    }
+    node.replaceWith(fragment);
+  }
+
+  if (!wordCount) return 0;
+  const enhanced = state.settings.mode === 'enhanced';
+  const animationMs = enhanced ? 210 : 140;
+  const baseInterval = enhanced ? 85 : 55;
+  const interval = wordCount > 1
+    ? Math.min(baseInterval, 2200 / (wordCount - 1))
+    : 0;
+  let index = 0;
+  textNode.querySelectorAll('.word-reveal').forEach(word => {
+    word.style.setProperty('--word-delay', `${Math.round(index * interval)}ms`);
+    index += 1;
+  });
+
+  state.revealDurationMs = Math.round((wordCount - 1) * interval + animationMs);
+  state.revealEndsAt = Date.now() + state.revealDurationMs;
+  state.revealActive = true;
+  state.revealTimer = setTimeout(finishDialogueReveal, state.revealDurationMs + 30);
+  return state.revealDurationMs;
+}
+function renderCurrentDialogue({ animate = false } = {}) {
   const ev = state.currentEvent;
-  if (!ev || ev.type !== 'say') return;
+  if (!ev || ev.type !== 'say') return 0;
   const sourceEntry = faData?.translations?.[ev.id] || ev.text_fa || null;
   const overlayEntry = revisedOverlay?.translations?.[ev.id] || null;
   const translated = overlayEntry?.text ||
@@ -104,15 +181,12 @@ function renderCurrentDialogue() {
 
   $('dialoguePanel').classList.toggle('centered', ev.align === 'center');
   $('readerScreen').classList.toggle('caption-mode', ev.window === 'caption');
-  if (state.lastRenderedDialogueId !== ev.id) {
-    const textNode = $('dialogueText');
-    textNode.classList.remove('passage-enter');
-    void textNode.offsetWidth;
-    textNode.classList.add('passage-enter');
-    state.lastRenderedDialogueId = ev.id;
-  }
-  $('dialogueStatus').textContent = state.auto ? `Auto · ${state.settings.autoDelay}s` : 'Tap to continue';
+  const revealDuration = prepareWordReveal($('dialogueText'), animate);
+  $('dialogueStatus').textContent = state.auto
+    ? `Auto · ${state.settings.autoDelay}s`
+    : revealDuration > 0 ? 'Tap to reveal' : 'Tap to continue';
   updateProgress();
+  return revealDuration;
 }
 function updateProgress() {
   const ch = chapter();
@@ -303,13 +377,12 @@ function saveProgress() {
 function getProgress() { return safeJSONParse(localStorage.getItem(STORAGE_KEYS.progress), null); }
 function restoreProgress(payload) {
   if (!payload || !story) return false;
-  clearWaitingTimer();
+  clearWaitingTimer(); clearDialogueReveal();
   stopAllAudio();
   state.auto = false;
   $('autoButton').setAttribute('aria-pressed', 'false');
   state.pendingAdvance = false;
   state.awaitingClick = false;
-  state.lastRenderedDialogueId = null;
   requestLandscapeOrientation();
   state.chapterIndex = Math.max(0, Math.min(story.chapters.length - 1, payload.chapterIndex || 0));
   const ch = chapter(); state.eventIndex = Math.max(0, Math.min(ch.events.length, payload.eventIndex || 0));
@@ -323,7 +396,7 @@ function restoreProgress(payload) {
   state.settings.textSize = Math.min(24, Math.max(16, Number(state.settings.textSize) || 18));
   applyVisualPreferences();
   setAudioVolume(state.musicAudio, state.settings.musicVolume);
-  setLanguage(payload.language || state.language);
+  setLanguage(payload.language || state.language, { render: false });
   if (state.backgroundPath) setBackground(state.backgroundPath, 0, 0);
   renderChapterHeading();
   updatePreviousButton();
@@ -350,11 +423,11 @@ function renderChapterHeading() {
 }
 function startChapter(index, eventIndex = 0, options = {}) {
   requestLandscapeOrientation();
-  clearWaitingTimer(); stopAllAudio();
+  clearWaitingTimer(); clearDialogueReveal(); stopAllAudio();
   if (!options.preserveHistory) state.passageHistory = [];
   state.auto = false; $('autoButton').setAttribute('aria-pressed', 'false');
   state.chapterIndex = Math.max(0, Math.min(story.chapters.length - 1, index));
-  state.eventIndex = eventIndex; state.currentEvent = null; state.lastRenderedDialogueId = null; state.windowMode = 'main';
+  state.eventIndex = eventIndex; state.currentEvent = null; state.windowMode = 'main';
   state.awaitingClick = false; state.chapterComplete = false; state.centerNext = false;
   $('backgroundImage').src = '';
   state.backgroundPath = null;
@@ -428,7 +501,6 @@ function goPrevious() {
     // Rewind within the same chapter must not restart or seek the background music.
     for (const channel of [...state.audioChannels.keys()]) stopChannel(channel);
   }
-  state.lastRenderedDialogueId = null;
   state.chapterIndex = Math.max(0, Math.min(story.chapters.length - 1, target.chapterIndex));
   const ch = chapter();
   state.eventIndex = Math.max(0, Math.min(ch.events.length, target.eventIndex));
@@ -441,11 +513,18 @@ function goPrevious() {
   setScreen('reader');
   renderChapterHeading();
   if (state.backgroundPath) setBackground(state.backgroundPath, 0, 0);
-  setLanguage(state.language);
+  setLanguage(state.language, { render: false });
   if (chapterChanged && target.currentMusic) playMusic(target.currentMusic, !!target.currentMusicLoop);
-  if (state.currentEvent) renderCurrentDialogue();
+  if (state.currentEvent) renderCurrentDialogue({ animate: true });
   updatePreviousButton();
   saveProgress();
+}
+function scheduleAutoAdvance(extraDelayMs = 0) {
+  clearWaitingTimer();
+  state.waitingTimer = setTimeout(() => {
+    state.waitingTimer = null;
+    processNext();
+  }, Math.max(0, extraDelayMs) + state.settings.autoDelay * 1000);
 }
 function processNext() {
   if (state.screen !== 'reader') return;
@@ -485,10 +564,10 @@ function processNext() {
         updateProgress(); saveProgress(); return;
       case 'say':
         state.currentEvent = ev; state.awaitingClick = true; rememberPassage(ev); addHistory(ev);
-        renderCurrentDialogue(); saveProgress();
+        const revealDuration = renderCurrentDialogue({ animate: true }); saveProgress();
         if (state.auto) {
           $('dialogueStatus').textContent = `Auto · ${state.settings.autoDelay}s`;
-          state.waitingTimer = setTimeout(() => { state.waitingTimer = null; processNext(); }, state.settings.autoDelay * 1000);
+          scheduleAutoAdvance(revealDuration);
         }
         return;
       case 'chapter_jump':
@@ -502,6 +581,12 @@ function processNext() {
 }
 function advance() {
   if (state.screen !== 'reader') return;
+  if (state.revealActive) {
+    clearWaitingTimer();
+    finishDialogueReveal();
+    if (state.auto && !state.pendingAdvance) scheduleAutoAdvance();
+    return;
+  }
   if (state.waitingTimer) { clearWaitingTimer(); state.waitingTimer = null; }
   if (state.awaitingClick || state.pendingAdvance) { processNext(); return; }
   processNext();
@@ -524,7 +609,7 @@ function continueChapter() {
   if ($('nextChapterButton').dataset.last === 'true') { setScreen('home'); return; }
   startChapter(state.chapterIndex + 1, 0, { preserveHistory: true });
 }
-function returnHome() { clearWaitingTimer(); saveProgress(); state.auto = false; $('autoButton').setAttribute('aria-pressed','false'); setScreen('home'); stopAllAudio(); }
+function returnHome() { clearWaitingTimer(); clearDialogueReveal(); saveProgress(); state.auto = false; $('autoButton').setAttribute('aria-pressed','false'); setScreen('home'); stopAllAudio(); }
 function renderChapters() {
   const list = $('chapterList'); list.innerHTML = '';
   story.chapters.forEach((ch, i) => {
@@ -652,14 +737,18 @@ function applySettings() {
   state.settings.mode=$('modeSetting').value;state.settings.textSize=Number($('textSizeSetting').value);state.settings.autoDelay=Number($('autoDelaySetting').value);
   state.settings.musicVolume=Number($('musicVolumeSetting').value);state.settings.sfxVolume=Number($('sfxVolumeSetting').value);state.settings.reduceMotion=$('reduceMotionSetting').checked;
   applyVisualPreferences();
+  if(state.settings.reduceMotion && state.revealActive){
+    finishDialogueReveal();
+    if(state.auto&&!state.pendingAdvance)scheduleAutoAdvance();
+  }
   if(state.musicAudio)setAudioVolume(state.musicAudio,state.settings.musicVolume);for(const [channel,audio] of state.audioChannels)setAudioVolume(audio,state.settings.sfxVolume);
-  persistSettings();$('settingsDialog').close();if(state.currentEvent)renderCurrentDialogue();showToast('Settings applied.');
+  persistSettings();$('settingsDialog').close();showToast('Settings applied.');
 }
 function toggleAuto() {
   state.auto=!state.auto;$('autoButton').setAttribute('aria-pressed',String(state.auto));
   // Do not replace a timeline wait (including the opening statistics cards) with the auto timer.
-  if(state.auto&&state.currentEvent&&!state.pendingAdvance){clearWaitingTimer();$('dialogueStatus').textContent=`Auto · ${state.settings.autoDelay}s`;state.waitingTimer=setTimeout(()=>{state.waitingTimer=null;processNext();},state.settings.autoDelay*1000);}
-  else if(!state.auto&&!state.pendingAdvance){clearWaitingTimer();$('dialogueStatus').textContent='Tap to continue';}
+  if(state.auto&&state.currentEvent&&!state.pendingAdvance){$('dialogueStatus').textContent=`Auto · ${state.settings.autoDelay}s`;scheduleAutoAdvance(remainingDialogueRevealMs());}
+  else if(!state.auto&&!state.pendingAdvance){clearWaitingTimer();$('dialogueStatus').textContent=state.revealActive?'Tap to reveal':'Tap to continue';}
 }
 function toggleFullscreen() {
   if(!document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(()=>showToast('Fullscreen is not available here.'));

@@ -1,4 +1,4 @@
-const SHELL_CACHE = 'narcissu-shell-v38';
+const SHELL_CACHE = 'narcissu-shell-v39';
 const ASSET_CACHE = 'narcissu-assets-v3';
 const SHELL_FILES = [
   './', './index.html', './styles.css', './app.js', './manifest.webmanifest',

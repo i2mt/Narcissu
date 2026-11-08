@@ -119,14 +119,7 @@ html[dir='ltr'] .reader-screen.is-fa .dialogue-text{direction:rtl;text-align:rig
   .orientation-prompt:not([hidden]){display:grid}
 }
 
-/* Classic keeps a restrained dissolve; Enhanced adds a cinematic passage reveal. */
-@keyframes classicDialogueIn{from{opacity:0}to{opacity:1}}
-@keyframes enhancedDialogueIn{
-  from{opacity:0;transform:translateY(9px);filter:blur(2px)}
-  to{opacity:1;transform:translateY(0);filter:blur(0)}
-}
-body[data-mode="classic"] .dialogue-text.passage-enter{animation:classicDialogueIn .2s ease-out both}
-body[data-mode="enhanced"] .dialogue-text.passage-enter{animation:enhancedDialogueIn .46s cubic-bezier(.2,.75,.25,1) both}
+/* Increment 43 replaces whole-passage fades with per-word reveal animations below. */
 body[data-mode="classic"] .dialogue-panel{border-radius:0;backdrop-filter:none;box-shadow:none}
 body[data-mode="enhanced"] .stage.is-reading .dialogue-panel{
   position:relative;overflow:hidden;border-radius:7px;
@@ -143,4 +136,46 @@ body[data-mode="enhanced"] .dialogue-text{text-shadow:0 1px 12px rgba(0,0,0,.25)
 body[data-mode="enhanced"] .background-frame img{transition:opacity .78s ease,transform .78s ease}
 body[data-mode="enhanced"] .background-frame img.fade-out{opacity:0;transform:scale(1.012)}
 body[data-mode="classic"] .background-frame img{transition:opacity .34s ease}
-body.reduce-motion .dialogue-text.passage-enter{animation:none!important}
+
+/* Increment 43: reveal complete words, never individual glyphs.
+   This preserves Persian letter joining while keeping the same reading rhythm in English. */
+.dialogue-text .word-reveal{
+  display:inline-block;
+  opacity:0;
+  animation-name:dialogueWordReveal;
+  animation-duration:var(--word-duration,160ms);
+  animation-delay:var(--word-delay,0ms);
+  animation-timing-function:cubic-bezier(.2,.72,.25,1);
+  animation-fill-mode:both;
+  will-change:opacity,transform,filter
+}
+@keyframes dialogueWordReveal{
+  from{opacity:0;transform:translateY(.16em);filter:blur(1.6px)}
+  to{opacity:1;transform:translateY(0);filter:blur(0)}
+}
+body[data-mode="classic"] .dialogue-text .word-reveal{
+  animation-name:dialogueWordRevealClassic;
+  animation-duration:140ms;
+  animation-timing-function:ease-out
+}
+@keyframes dialogueWordRevealClassic{
+  from{opacity:0}
+  to{opacity:1}
+}
+body[data-mode="enhanced"] .dialogue-text .word-reveal{
+  animation-name:dialogueWordReveal;
+  animation-duration:210ms;
+  animation-timing-function:cubic-bezier(.2,.72,.25,1)
+}
+body.reduce-motion .dialogue-text .word-reveal{
+  animation:none!important;
+  opacity:1!important;
+  transform:none!important;
+  filter:none!important
+}
+@media(prefers-reduced-motion:reduce){
+  .dialogue-text .word-reveal{
+    animation:none!important;opacity:1!important;transform:none!important;filter:none!important
+  }
+}
+
