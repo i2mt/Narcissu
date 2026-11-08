@@ -1,5 +1,7 @@
-const SHELL_CACHE = 'narcissu-shell-v39';
+const SHELL_CACHE = 'narcissu-shell-v41';
 const ASSET_CACHE = 'narcissu-assets-v3';
+const FONT_CACHE = 'narcissu-fonts-v1';
+const FONT_HOSTS = new Set(['fonts.googleapis.com', 'fonts.gstatic.com']);
 const SHELL_FILES = [
   './', './index.html', './styles.css', './app.js', './manifest.webmanifest',
   './data/story-gp32.json', './data/asset-manifest.json', './data/localization/fa.json',
@@ -30,7 +32,7 @@ self.addEventListener('install', event => {
   event.waitUntil(caches.open(SHELL_CACHE).then(cache => cache.addAll(SHELL_FILES)).then(() => self.skipWaiting()));
 });
 self.addEventListener('activate', event => {
-  event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith('narcissu-') && ![SHELL_CACHE, ASSET_CACHE].includes(k)).map(k => caches.delete(k)))).then(() => self.clients.claim()));
+  event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith('narcissu-') && ![SHELL_CACHE, ASSET_CACHE, FONT_CACHE].includes(k)).map(k => caches.delete(k)))).then(() => self.clients.claim()));
 });
 async function makeRangeResponse(fullResponse, rangeHeader) {
   const match = /^bytes=(\d*)-(\d*)$/i.exec(rangeHeader || '');
@@ -62,6 +64,25 @@ async function makeRangeResponse(fullResponse, rangeHeader) {
   headers.set('Content-Range', `bytes ${start}-${end}/${total}`);
   headers.set('Content-Length', String(end - start + 1));
   return new Response(bytes.slice(start, end + 1), { status: 206, statusText: 'Partial Content', headers });
+}
+
+async function handleFontRequest(request) {
+  const cache = await caches.open(FONT_CACHE);
+  const cached = await cache.match(request);
+  if (cached) return cached;
+  try {
+    const response = await fetch(request);
+    // Google Fonts serves CORS-enabled CSS and WOFF2 resources. Opaque responses
+    // are deliberately not cached; the app keeps its bundled Noto fallback.
+    if (response.ok && response.type !== 'opaque') {
+      try { await cache.put(request, response.clone()); }
+      catch (cacheError) { console.warn('Could not cache Persian font resource:', request.url, cacheError); }
+    }
+    return response;
+  } catch (error) {
+    if (cached) return cached;
+    return new Response('Persian font is not cached yet.', { status: 503, statusText: 'Offline' });
+  }
 }
 
 async function handleAssetRequest(request) {
@@ -99,8 +120,13 @@ async function handleAssetRequest(request) {
 
 self.addEventListener('fetch', event => {
   const req = event.request;
-  if (req.method !== 'GET' || new URL(req.url).origin !== self.location.origin) return;
+  if (req.method !== 'GET') return;
   const url = new URL(req.url);
+  if (FONT_HOSTS.has(url.hostname)) {
+    event.respondWith(handleFontRequest(req));
+    return;
+  }
+  if (url.origin !== self.location.origin) return;
   if (url.pathname.includes('/assets/')) {
     event.respondWith(handleAssetRequest(req));
     return;

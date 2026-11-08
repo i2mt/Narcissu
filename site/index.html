@@ -38,10 +38,17 @@
 
       <section class="home-screen" id="homeScreen" aria-labelledby="homeTitle">
         <div class="home-content">
-          <div class="home-emblem" aria-hidden="true">✳</div>
+          <div class="home-emblem" aria-hidden="true">
+            <svg class="fox-seal" viewBox="0 0 64 64" role="presentation" focusable="false">
+              <circle cx="32" cy="32" r="27" />
+              <path d="M14.5 15.5 27 23.5 32 20.5 37 23.5 49.5 15.5 46.5 35.5C43.5 44.5 38.5 49.5 32 53 25.5 49.5 20.5 44.5 17.5 35.5Z" />
+              <path d="m21 24 6.5 8 4.5-4 4.5 4 6.5-8M27.5 32 32 40l4.5-8" />
+            </svg>
+          </div>
           <p class="eyebrow">A visual novel by stage-nana</p>
           <h1 id="homeTitle">Narcissu</h1>
           <p class="home-subtitle">Persian Edition <span>·</span> Narcissu 1</p>
+          <p class="home-credit"><span>Translated and brought back to life by</span><strong>Mohammad Mahdi Taghavi</strong></p>
           <p class="home-description">A quiet story about a journey, a summer that never came, and the things we carry with us.</p>
           <div class="menu-actions">
             <button class="primary-button" id="newGameButton" type="button">New Game</button>
@@ -53,7 +60,7 @@
           </div>
           <div class="home-footer">
             <span>English source: gp32 / Insani 2005</span>
-            <span class="build-label">Version 0.43</span>
+            <span class="build-label">Version 0.45</span>
           </div>
         </div>
         <div class="chapter-select-panel" id="chapterSelectPanel" hidden>
@@ -117,6 +124,15 @@
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
     </main>
 
+    <section class="dedication-screen" id="dedicationScreen" aria-label="Dedication" aria-hidden="false">
+      <div class="dedication-card">
+        <span class="dedication-rule" aria-hidden="true"></span>
+        <p class="dedication-quote" lang="en" dir="ltr">For those who remain in our memories,<br>long after the journey ends.</p>
+        <span class="dedication-rule dedication-rule-short" aria-hidden="true"></span>
+        <button class="dedication-continue" id="enterFromDedication" type="button">TAP TO CONTINUE</button>
+      </div>
+    </section>
+
     <footer class="app-footer">
       <div class="footer-credits"><span class="developer-credit">Designed and developed by <strong>Mohammad Mahdi Taghavi</strong></span><span>Original story and assets remain credited to their respective rights holders.</span></div>
       <button id="offlineDownloadButton" type="button">Download for offline <span>↓</span></button>
@@ -127,6 +143,7 @@
     <form method="dialog" class="dialog-inner" id="settingsForm">
       <div class="dialog-heading"><div><p class="eyebrow">Preferences</p><h2>Settings</h2></div><button class="close-button" value="cancel" aria-label="Close">×</button></div>
       <label class="setting-row"><span><strong>Visual style</strong><small>Classic uses restrained fades; Enhanced adds cinematic dialogue and scene transitions.</small></span><select id="modeSetting"><option value="classic">Classic — minimal, original-style</option><option value="enhanced">Enhanced — cinematic transitions</option></select></label>
+      <label class="setting-row"><span><strong>Persian font</strong><small>Changes Persian dialogue only. English, Latin text and interface typography stay unchanged. Downloaded fonts are cached for offline reading.</small></span><select id="persianFontSetting"><option value="parastoo">Parastoo — literary</option><option value="vazirmatn">Vazirmatn — modern</option><option value="noto">Noto Naskh — original</option></select></label>
       <label class="setting-row"><span><strong>Text size</strong><small>Adjust reading comfort.</small></span><input id="textSizeSetting" type="range" min="16" max="24" step="1" value="18"></label>
       <label class="setting-row"><span><strong>Auto-advance delay</strong><small>Seconds before the next passage.</small></span><input id="autoDelaySetting" type="range" min="2" max="12" step="1" value="5"></label>
       <label class="setting-row"><span><strong>Music volume</strong></span><input id="musicVolumeSetting" type="range" min="0" max="1" step="0.05" value="0.55"></label>

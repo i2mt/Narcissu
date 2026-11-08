@@ -2,8 +2,22 @@
 
 const $ = (id) => document.getElementById(id);
 const STORAGE_KEYS = { progress: 'narcissu-progress-v1', settings: 'narcissu-settings-v1', history: 'narcissu-history-v1' };
-const DEFAULT_SETTINGS = { mode: 'classic', textSize: 18, autoDelay: 5, musicVolume: 0.55, sfxVolume: 0.8, reduceMotion: false };
+const DEFAULT_SETTINGS = { mode: 'classic', persianFont: 'parastoo', textSize: 18, autoDelay: 5, musicVolume: 0.55, sfxVolume: 0.8, reduceMotion: false };
 const DEFAULT_LANGUAGE = 'en';
+const PERSIAN_FONT_SOURCES = {
+  parastoo: {
+    family: 'NarcissuParastoo',
+    cssUrl: 'https://fonts.googleapis.com/css2?family=Parastoo:wght@400..700&display=swap'
+  },
+  vazirmatn: {
+    family: 'NarcissuVazirmatn',
+    cssUrl: 'https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400..700&display=swap'
+  }
+};
+const loadedPersianFonts = new Set();
+const pendingPersianFonts = new Map();
+let dedicationTimer = null;
+let dedicationDismissed = false;
 
 let story = null;
 let assetManifest = null;
@@ -40,11 +54,82 @@ function setScreen(name) {
   $('stage').classList.toggle('is-reading', name === 'reader');
   $('languageNotice').hidden = true;
 }
+function dismissDedication() {
+  if (dedicationDismissed) return;
+  dedicationDismissed = true;
+  if (dedicationTimer) clearTimeout(dedicationTimer);
+  dedicationTimer = null;
+  const screen = $('dedicationScreen');
+  if (!screen) return;
+  screen.setAttribute('aria-hidden', 'true');
+  screen.classList.add('is-leaving');
+  const finish = () => { screen.hidden = true; screen.classList.remove('is-leaving'); };
+  if (state.settings.reduceMotion || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) finish();
+  else setTimeout(finish, 740);
+}
+function startDedicationSequence() {
+  const screen = $('dedicationScreen');
+  if (!screen || dedicationDismissed) return;
+  screen.hidden = false;
+  screen.setAttribute('aria-hidden', 'false');
+  dedicationTimer = setTimeout(dismissDedication, 5200);
+}
 function applyVisualPreferences() {
   state.settings.mode = state.settings.mode === 'enhanced' ? 'enhanced' : 'classic';
+  state.settings.persianFont = ['parastoo', 'vazirmatn', 'noto'].includes(state.settings.persianFont)
+    ? state.settings.persianFont : 'parastoo';
   document.body.dataset.mode = state.settings.mode;
+  document.documentElement.dataset.persianFont = state.settings.persianFont;
   document.documentElement.style.setProperty('--text-size', `${state.settings.textSize}px`);
   document.body.classList.toggle('reduce-motion', !!state.settings.reduceMotion);
+}
+
+function extractArabicFontFaces(cssText, targetFamily) {
+  const blocks = cssText.match(/@font-face\s*\{[^}]+\}/gi) || [];
+  return blocks.filter(block => {
+    const range = block.match(/unicode-range\s*:\s*([^;]+);/i)?.[1] || '';
+    return /U\+0600|U\+0750|U\+08A0|U\+FB50|U\+FE70/i.test(range);
+  }).map(block => block.replace(/font-family\s*:\s*[^;]+;/i, `font-family: "${targetFamily}";`));
+}
+
+async function ensurePersianFontLoaded(name) {
+  const source = PERSIAN_FONT_SOURCES[name];
+  if (!source) return true;
+  if (loadedPersianFonts.has(name)) return true;
+  if (pendingPersianFonts.has(name)) return pendingPersianFonts.get(name);
+  const task = (async () => {
+    const response = await fetch(source.cssUrl, { mode: 'cors' });
+    if (!response.ok) throw new Error(`Could not load ${name} font stylesheet (${response.status}).`);
+    const cssText = await response.text();
+    const arabicFaces = extractArabicFontFaces(cssText, source.family);
+    if (!arabicFaces.length) throw new Error(`No Persian/Arabic font subset was found for ${name}.`);
+    let style = document.getElementById(`persian-font-${name}`);
+    if (!style) {
+      style = document.createElement('style');
+      style.id = `persian-font-${name}`;
+      style.textContent = arabicFaces.join('\n');
+      document.head.appendChild(style);
+    }
+    if (document.fonts?.load) {
+      await document.fonts.load(`400 ${state.settings.textSize || 18}px "${source.family}"`, 'سلام دنیا');
+      await document.fonts.load(`700 ${state.settings.textSize || 18}px "${source.family}"`, 'سلام دنیا');
+    }
+    loadedPersianFonts.add(name);
+    return true;
+  })().finally(() => pendingPersianFonts.delete(name));
+  pendingPersianFonts.set(name, task);
+  return task;
+}
+
+function preloadPersianFonts() {
+  // Load both selectable Persian faces in the background. The service worker
+  // caches their CORS font responses, so both choices remain available offline.
+  Promise.all(Object.keys(PERSIAN_FONT_SOURCES).map(name =>
+    ensurePersianFontLoaded(name).catch(error => {
+      console.info(`Persian font ${name} will use the bundled Noto fallback until it can be downloaded.`, error);
+      return false;
+    })
+  ));
 }
 function setMode(mode) {
   state.settings.mode = mode === 'enhanced' ? 'enhanced' : 'classic';
@@ -661,13 +746,18 @@ function updateNetworkStatus() {
   const online=navigator.onLine;const el=$('networkStatus');el.classList.toggle('offline',!online);el.querySelector('span').textContent=online?'Online':'Offline';
 }
 async function registerServiceWorker() {
-  if (!('serviceWorker' in navigator)) return;
+  if (!('serviceWorker' in navigator)) return null;
   try {
     const registration = await navigator.serviceWorker.register('./service-worker.js', { updateViaCache: 'none' });
     // Ask GitHub Pages for the newest worker script instead of relying on a stale HTTP cache.
     if (typeof registration.update === 'function') registration.update().catch(() => {});
+    // Wait briefly for the worker to take control so the first font downloads
+    // can be cached; do not block font loading if activation is delayed.
+    await Promise.race([navigator.serviceWorker.ready, new Promise(resolve => setTimeout(resolve, 2500))]);
+    return registration;
   } catch (e) {
     console.warn('Service worker registration failed', e);
+    return null;
   }
 }
 async function openOfflineDialog() {
@@ -729,12 +819,12 @@ async function clearOfflineAssets() {
   await caches.delete('narcissu-assets-v3');$('downloadMeterFill').style.width='0%';$('downloadPercent').textContent='0%';$('downloadStatus').textContent='Offline assets cleared.';showToast('Offline assets cleared.');
 }
 function setupSettings() {
-  $('modeSetting').value=state.settings.mode;$('textSizeSetting').value=state.settings.textSize;$('autoDelaySetting').value=state.settings.autoDelay;
+  $('modeSetting').value=state.settings.mode;$('persianFontSetting').value=state.settings.persianFont;$('textSizeSetting').value=state.settings.textSize;$('autoDelaySetting').value=state.settings.autoDelay;
   $('musicVolumeSetting').value=state.settings.musicVolume;$('sfxVolumeSetting').value=state.settings.sfxVolume;$('reduceMotionSetting').checked=state.settings.reduceMotion;
   $('settingsDialog').showModal();
 }
 function applySettings() {
-  state.settings.mode=$('modeSetting').value;state.settings.textSize=Number($('textSizeSetting').value);state.settings.autoDelay=Number($('autoDelaySetting').value);
+  state.settings.mode=$('modeSetting').value;state.settings.persianFont=$('persianFontSetting').value;state.settings.textSize=Number($('textSizeSetting').value);state.settings.autoDelay=Number($('autoDelaySetting').value);
   state.settings.musicVolume=Number($('musicVolumeSetting').value);state.settings.sfxVolume=Number($('sfxVolumeSetting').value);state.settings.reduceMotion=$('reduceMotionSetting').checked;
   applyVisualPreferences();
   if(state.settings.reduceMotion && state.revealActive){
@@ -742,7 +832,14 @@ function applySettings() {
     if(state.auto&&!state.pendingAdvance)scheduleAutoAdvance();
   }
   if(state.musicAudio)setAudioVolume(state.musicAudio,state.settings.musicVolume);for(const [channel,audio] of state.audioChannels)setAudioVolume(audio,state.settings.sfxVolume);
-  persistSettings();$('settingsDialog').close();showToast('Settings applied.');
+  persistSettings();
+  if (state.settings.persianFont !== 'noto') {
+    ensurePersianFontLoaded(state.settings.persianFont).catch(error => {
+      console.warn('Selected Persian font is not available yet; the bundled Noto fallback remains active.', error);
+      showToast('Persian font unavailable offline; using the original font for now.');
+    });
+  }
+  $('settingsDialog').close();showToast('Settings applied.');
 }
 function toggleAuto() {
   state.auto=!state.auto;$('autoButton').setAttribute('aria-pressed',String(state.auto));
@@ -855,11 +952,16 @@ async function boot() {
     state.language=localStorage.getItem('narcissu-language-v1')||DEFAULT_LANGUAGE;
     loadSettings();bindUI();renderChapters();setLanguage(state.language);updateNetworkStatus();
     $('continueButton').disabled=!getProgress();
-    registerServiceWorker();
+    registerServiceWorker().then(preloadPersianFonts);
     if(location.hash==='#play') {const p=getProgress();if(p)restoreProgress(p);}
+    startDedicationSequence();
   } catch(e) {
     console.error(e);document.body.innerHTML=`<main style="max-width:720px;margin:12vh auto;padding:24px;font:16px sans-serif;color:#eee;background:#111"> <h1>Narcissu could not start</h1><p>${escapeHTML(e.message)}</p><p>Serve this folder through a local web server or HTTPS. Opening index.html directly as a file will not load the game data.</p></main>`;
   }
 }
+
+// Bind the dedication skip control as soon as the deferred script executes,
+// so it remains responsive even while the story data is loading.
+$('enterFromDedication')?.addEventListener('click', dismissDedication);
 
 boot();
