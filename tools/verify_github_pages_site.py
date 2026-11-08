@@ -5,7 +5,14 @@ import argparse, json, re
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
-PROJECT_SITE_PREFIX = "https://example.github.io/narcissu-persian-edition/"
+PROJECT_SITE_PREFIX = "https://i2mt.github.io/Narcissu/"
+
+
+def has_relative_service_worker_registration(app: str) -> bool:
+    """Accept a relative worker URL with or without registration options."""
+    pattern = r"""navigator\s*\.\s*serviceWorker\s*\.\s*register\s*\(\s*(['"])\./service-worker\.js\1(?=\s*[,)])"""
+    return re.search(pattern, app) is not None
+
 
 def shell_files(site: Path) -> list[str]:
     source = (site / "service-worker.js").read_text(encoding="utf-8")
@@ -42,7 +49,7 @@ def verify(site: Path) -> dict:
     if re.search(r"(?:href|src)\s*=\s*['\"]/", html, re.I):
         raise SystemExit("Found root-absolute HTML asset path; project Pages sites require relative paths")
     app = (site / "app.js").read_text(encoding="utf-8")
-    if "navigator.serviceWorker.register('./service-worker.js')" not in app:
+    if not has_relative_service_worker_registration(app):
         raise SystemExit("Service worker registration is no longer relative")
     if "new URL(`./public/${item.url}`, document.baseURI)" not in app or "new URL(`./public/${x.url}`,document.baseURI)" not in app:
         raise SystemExit("Asset URLs are no longer derived from document.baseURI")
