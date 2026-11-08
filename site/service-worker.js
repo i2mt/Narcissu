@@ -1,5 +1,5 @@
-const SHELL_CACHE = 'narcissu-shell-v36';
-const ASSET_CACHE = 'narcissu-assets-v2';
+const SHELL_CACHE = 'narcissu-shell-v37';
+const ASSET_CACHE = 'narcissu-assets-v3';
 const SHELL_FILES = [
   './', './index.html', './styles.css', './app.js', './manifest.webmanifest',
   './data/story-gp32.json', './data/asset-manifest.json', './data/localization/fa.json',
@@ -30,24 +30,94 @@ self.addEventListener('install', event => {
   event.waitUntil(caches.open(SHELL_CACHE).then(cache => cache.addAll(SHELL_FILES)).then(() => self.skipWaiting()));
 });
 self.addEventListener('activate', event => {
-  event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => ![SHELL_CACHE, ASSET_CACHE].includes(k)).map(k => caches.delete(k)))).then(() => self.clients.claim()));
+  event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith('narcissu-') && ![SHELL_CACHE, ASSET_CACHE].includes(k)).map(k => caches.delete(k)))).then(() => self.clients.claim()));
 });
+async function makeRangeResponse(fullResponse, rangeHeader) {
+  const match = /^bytes=(\d*)-(\d*)$/i.exec(rangeHeader || '');
+  if (!match) return fullResponse;
+  const bytes = await fullResponse.clone().arrayBuffer();
+  const total = bytes.byteLength;
+  let start;
+  let end;
+  if (match[1] === '') {
+    const suffixLength = Number(match[2]);
+    if (!Number.isFinite(suffixLength) || suffixLength <= 0) {
+      return new Response(null, { status: 416, headers: { 'Content-Range': `bytes */${total}` } });
+    }
+    start = Math.max(0, total - suffixLength);
+    end = total - 1;
+  } else {
+    start = Number(match[1]);
+    end = match[2] === '' ? total - 1 : Math.min(Number(match[2]), total - 1);
+  }
+  if (!Number.isFinite(start) || start < 0 || start >= total || end < start) {
+    return new Response(null, { status: 416, headers: { 'Content-Range': `bytes */${total}` } });
+  }
+  const headers = new Headers(fullResponse.headers);
+  // The cached body is already decoded by Fetch; do not retain stale transfer headers.
+  headers.delete('Content-Encoding');
+  headers.delete('Content-Range');
+  headers.delete('Transfer-Encoding');
+  headers.set('Accept-Ranges', 'bytes');
+  headers.set('Content-Range', `bytes ${start}-${end}/${total}`);
+  headers.set('Content-Length', String(end - start + 1));
+  return new Response(bytes.slice(start, end + 1), { status: 206, statusText: 'Partial Content', headers });
+}
+
+async function handleAssetRequest(request) {
+  const cache = await caches.open(ASSET_CACHE);
+  const fullRequest = new Request(request.url, { method: 'GET' });
+  const rangeHeader = request.headers.get('range');
+  const cachedFull = await cache.match(fullRequest);
+
+  if (rangeHeader) {
+    try {
+      const response = await fetch(request);
+      // Pass network partial responses through unchanged; Cache API must never store status 206.
+      if (response.status === 206 || response.ok) return response;
+      if (response.status >= 500 && cachedFull) return makeRangeResponse(cachedFull, rangeHeader);
+      return response;
+    } catch (error) {
+      if (cachedFull) return makeRangeResponse(cachedFull, rangeHeader);
+      return new Response('Offline asset not cached yet.', { status: 503, statusText: 'Offline' });
+    }
+  }
+
+  if (cachedFull) return cachedFull;
+  try {
+    const response = await fetch(request);
+    if (response.status === 200 && response.ok) {
+      try { await cache.put(fullRequest, response.clone()); }
+      catch (cacheError) { console.warn('Could not cache complete media asset:', request.url, cacheError); }
+    }
+    return response;
+  } catch (error) {
+    if (cachedFull) return cachedFull;
+    return new Response('Offline asset not cached yet.', { status: 503, statusText: 'Offline' });
+  }
+}
+
 self.addEventListener('fetch', event => {
   const req = event.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== self.location.origin) return;
   const url = new URL(req.url);
   if (url.pathname.includes('/assets/')) {
-    event.respondWith(caches.open(ASSET_CACHE).then(async cache => {
-      const cached = await cache.match(req);
-      if (cached) return cached;
-      try { const response = await fetch(req); if (response.ok) await cache.put(req, response.clone()); return response; }
-      catch (err) { return new Response('Offline asset not cached yet.', {status: 503, statusText: 'Offline'}); }
-    }));
+    event.respondWith(handleAssetRequest(req));
     return;
   }
   event.respondWith(caches.match(req).then(async cached => {
     if (cached) return cached;
-    try { const response = await fetch(req); if (response.ok && url.origin === self.location.origin) { const cache = await caches.open(SHELL_CACHE); cache.put(req, response.clone()); } return response; }
-    catch (err) { return caches.match('./index.html'); }
+    try {
+      const response = await fetch(req);
+      if (response.ok && response.status === 200 && url.origin === self.location.origin) {
+        const cache = await caches.open(SHELL_CACHE);
+        try { await cache.put(req, response.clone()); } catch (cacheError) {
+          console.warn('Could not cache shell response:', req.url, cacheError);
+        }
+      }
+      return response;
+    } catch (err) {
+      return caches.match('./index.html');
+    }
   }));
 });

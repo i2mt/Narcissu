@@ -2,7 +2,7 @@
 
 const $ = (id) => document.getElementById(id);
 const STORAGE_KEYS = { progress: 'narcissu-progress-v1', settings: 'narcissu-settings-v1', history: 'narcissu-history-v1' };
-const DEFAULT_SETTINGS = { mode: 'classic', textSize: 23, autoDelay: 5, musicVolume: 0.55, sfxVolume: 0.8, reduceMotion: false, showReviewedSource: false, showEditorialDrafts: false };
+const DEFAULT_SETTINGS = { mode: 'classic', textSize: 18, autoDelay: 5, musicVolume: 0.55, sfxVolume: 0.8, reduceMotion: false };
 const DEFAULT_LANGUAGE = 'en';
 
 let story = null;
@@ -16,7 +16,7 @@ let state = {
   windowMode: 'main', auto: false, awaitingClick: false, waitingTimer: null,
   settings: { ...DEFAULT_SETTINGS }, audioChannels: new Map(), musicAudio: null, currentMusicLoop: false,
   centerNext: false, chapterComplete: false, pendingAdvance: false,
-  history: [], downloadBusy: false
+  history: [], passageHistory: [], downloadBusy: false
 };
 
 function safeJSONParse(value, fallback) { try { return value ? JSON.parse(value) : fallback; } catch { return fallback; } }
@@ -35,7 +35,8 @@ function setScreen(name) {
   $('homeScreen').hidden = name !== 'home';
   $('readerScreen').hidden = name !== 'reader';
   $('chapterEndScreen').hidden = name !== 'chapterEnd';
-  if (name !== 'reader') $('languageNotice').hidden = true;
+  $('stage').classList.toggle('is-reading', name === 'reader');
+  $('languageNotice').hidden = true;
 }
 function applyVisualPreferences() {
   state.settings.mode = state.settings.mode === 'enhanced' ? 'enhanced' : 'classic';
@@ -51,22 +52,21 @@ function setMode(mode) {
 function persistSettings() { localStorage.setItem(STORAGE_KEYS.settings, JSON.stringify(state.settings)); }
 function loadSettings() {
   state.settings = { ...DEFAULT_SETTINGS, ...safeJSONParse(localStorage.getItem(STORAGE_KEYS.settings), {}) };
-  state.settings.showReviewedSource = !!state.settings.showReviewedSource;
-  state.settings.showEditorialDrafts = !!state.settings.showEditorialDrafts;
+  delete state.settings.showReviewedSource;
+  delete state.settings.showEditorialDrafts;
+  state.settings.textSize = Math.min(24, Math.max(16, Number(state.settings.textSize) || 18));
   applyVisualPreferences();
 }
 function setLanguage(language) {
   state.language = language === 'fa' ? 'fa' : 'en';
   localStorage.setItem('narcissu-language-v1', state.language);
   document.documentElement.lang = state.language;
-  document.documentElement.dir = state.language === 'fa' ? 'rtl' : 'ltr';
+  document.documentElement.dir = 'ltr';
   $('readerScreen').classList.toggle('is-fa', state.language === 'fa');
   const target = state.language === 'en' ? 'Persian' : 'English';
   $('languageSwitch').setAttribute('aria-label', `Switch to ${target}`);
   $('languageSwitch').title = `Switch to ${target}`;
-  $('languageSwitch').innerHTML = state.language === 'en'
-    ? '<span class="switch-current">EN</span><span class="switch-arrow">↔</span><span>FA</span>'
-    : '<span class="switch-current">FA</span><span class="switch-arrow">↔</span><span>EN</span>';
+  $('languageSwitch').innerHTML = `<span class="${state.language === 'en' ? 'switch-current' : ''}">EN</span><span class="switch-arrow">↔</span><span class="${state.language === 'fa' ? 'switch-current' : ''}">FA</span>`;
   if (state.currentEvent) renderCurrentDialogue();
 }
 function escapeHTML(value) {
@@ -78,64 +78,29 @@ function renderMarkedText(value) {
   html = html.replace(/~s~([\s\S]*?)~s~/g, '<span class="small">$1</span>');
   return html;
 }
-function isCoveredWithoutVisiblePersian(ev, sourceEntry, overlayEntry) {
-  if (!ev || ev.type !== 'say' || historicalEventAlignment?.[ev.id]?.status !== 'covered') return false;
-  const sourceStatus = typeof sourceEntry === 'string' ? 'verified' : (sourceEntry?.status || 'unresolved');
-  const sourceVisible = typeof sourceEntry === 'string' ||
-    (sourceStatus === 'verified' && !!sourceEntry?.text) ||
-    (sourceStatus === 'reviewed' && state.settings.showReviewedSource && !!sourceEntry?.text);
-  const defaultOverlayStatuses = ['confirmed_no_change','pause_preserved','localized_sound_effect','transition_translation','orthographic_copy_edit','alignment_correction','assistant_reviewed_revision','assistant_new_translation'];
-  const overlayVisible = !!overlayEntry?.text && (defaultOverlayStatuses.includes(overlayEntry.status) || state.settings.showEditorialDrafts);
-  return !sourceVisible && !overlayVisible;
-}
 function renderCurrentDialogue() {
   const ev = state.currentEvent;
   if (!ev || ev.type !== 'say') return;
   const sourceEntry = faData?.translations?.[ev.id] || ev.text_fa || null;
   const overlayEntry = revisedOverlay?.translations?.[ev.id] || null;
-  const sourceStatus = typeof sourceEntry === 'string' ? 'verified' : (sourceEntry?.status || 'unresolved');
-  const overlayStatus = overlayEntry?.status || null;
-  let translated = typeof sourceEntry === 'string' ? sourceEntry : (sourceStatus === 'verified' ? sourceEntry?.text : null);
-  let notice = '';
-  if (overlayEntry && ['confirmed_no_change','pause_preserved','localized_sound_effect','transition_translation','orthographic_copy_edit','alignment_correction','assistant_reviewed_revision','assistant_new_translation'].includes(overlayStatus)) {
-    translated = overlayEntry.text;
-    if (overlayStatus === 'assistant_reviewed_revision') notice = 'بازبینی ادبی توسط دستیار انجام شده؛ تأیید مستقل انسانی دریافت نشده است.';
-    if (overlayStatus === 'assistant_new_translation') notice = 'این متن فارسی بر اساس انگلیسی بازبینی شده؛ برای این رویداد متن مستقل فارسی در نسخهٔ ۲۰۱۶ در دسترس نیست.';
-    if (overlayStatus === 'orthographic_copy_edit') notice = 'اصلاح فاصله‌گذاریِ جزئی؛ در انتظار بازبینی مستقل فارسی.';
-    if (overlayStatus === 'alignment_correction') notice = 'اصلاح هم‌ترازی با صفحهٔ منبع؛ در انتظار بازبینی مستقل فارسی.';
-  } else if (overlayEntry && state.settings.showEditorialDrafts) {
-    translated = overlayEntry.text;
-    notice = 'پیش‌نمایش بازنگری: این متن هنوز تأیید نهایی مستقل نشده است.';
-  } else if (!translated && sourceStatus === 'reviewed' && state.settings.showReviewedSource) {
-    translated = sourceEntry?.text;
-    notice = 'این عبارت از ترجمهٔ چاپی ۲۰۱۶ است و هنوز به‌عنوان ترجمهٔ نهایی تأیید نشده است.';
-  }
+  const translated = overlayEntry?.text ||
+    (typeof sourceEntry === 'string' ? sourceEntry : sourceEntry?.text) || '';
   const isPersian = state.language === 'fa';
+
   $('dialogueLanguage').textContent = isPersian ? 'فارسی' : 'ENGLISH';
-  if (isPersian && isCoveredWithoutVisiblePersian(ev, sourceEntry, overlayEntry)) {
-    $('dialogueText').textContent = '';
-    $('dialogueText').setAttribute('lang', 'fa');
-    $('dialogueText').setAttribute('dir', 'rtl');
-    $('languageNotice').textContent = 'این بخش در ترجمهٔ چاپی با جملهٔ قبلی ادغام شده است.';
-    $('languageNotice').hidden = false;
-  } else if (isPersian && translated) {
+  $('languageNotice').hidden = true;
+  $('languageNotice').textContent = '';
+
+  if (isPersian) {
     $('dialogueText').innerHTML = renderMarkedText(translated);
     $('dialogueText').setAttribute('lang', 'fa');
     $('dialogueText').setAttribute('dir', 'rtl');
-    $('languageNotice').textContent = notice;
-    $('languageNotice').hidden = !notice;
-  } else if (isPersian) {
-    $('dialogueText').textContent = 'ترجمهٔ فارسی این بخش هنوز با متن اصلی هم‌تراز و بازبینی نشده است. برای جلوگیری از نمایش متن نادرست، این بخش فعلاً در نسخهٔ فارسی در دسترس نیست.';
-    $('dialogueText').setAttribute('lang', 'fa');
-    $('dialogueText').setAttribute('dir', 'rtl');
-    $('languageNotice').textContent = 'ترجمهٔ ۲۰۱۶ در حال استخراج و هم‌ترازسازی با متن اصلی است. متن‌های پیش‌نویس فقط با فعال‌کردن پیش‌نمایش QA نمایش داده می‌شوند.';
-    $('languageNotice').hidden = false;
   } else {
     $('dialogueText').innerHTML = renderMarkedText(ev.text_en);
     $('dialogueText').setAttribute('lang', 'en');
     $('dialogueText').setAttribute('dir', 'ltr');
-    $('languageNotice').hidden = true;
   }
+
   $('dialoguePanel').classList.toggle('centered', ev.align === 'center');
   $('readerScreen').classList.toggle('caption-mode', ev.window === 'caption');
   $('dialogueStatus').textContent = state.auto ? `Auto · ${state.settings.autoDelay}s` : 'Tap to continue';
@@ -212,6 +177,7 @@ function saveProgress() {
     language: state.language, windowMode: state.windowMode, settings: state.settings,
     screen: state.screen, chapterComplete: !!state.chapterComplete,
     currentMusic: state.currentMusic, currentMusicLoop: !!state.currentMusicLoop,
+    passageHistory: state.passageHistory.slice(-500),
     savedAt: new Date().toISOString()
   };
   localStorage.setItem(STORAGE_KEYS.progress, JSON.stringify(payload));
@@ -231,12 +197,17 @@ function restoreProgress(payload) {
   state.currentEvent = payload.currentEventId ? ch.events.find(e => e.id === payload.currentEventId) || null : null;
   state.backgroundPath = payload.backgroundPath || null; state.windowMode = payload.windowMode || 'main';
   state.chapterComplete = !!payload.chapterComplete || payload.screen === 'chapterEnd';
+  state.passageHistory = Array.isArray(payload.passageHistory) ? payload.passageHistory.slice(-500) : [];
   if (payload.settings) state.settings = { ...DEFAULT_SETTINGS, ...state.settings, ...payload.settings };
+  delete state.settings.showReviewedSource;
+  delete state.settings.showEditorialDrafts;
+  state.settings.textSize = Math.min(24, Math.max(16, Number(state.settings.textSize) || 18));
   applyVisualPreferences();
   setAudioVolume(state.musicAudio, state.settings.musicVolume);
   setLanguage(payload.language || state.language);
   if (state.backgroundPath) setBackground(state.backgroundPath, 0, 0);
   renderChapterHeading();
+  updatePreviousButton();
   if (state.chapterComplete) {
     renderChapterEndScreen();
   } else {
@@ -258,8 +229,9 @@ function renderChapterHeading() {
   $('chapterNumber').textContent = ch.chapter.toUpperCase();
   $('chapterTitle').textContent = ch.title_en;
 }
-function startChapter(index, eventIndex = 0) {
+function startChapter(index, eventIndex = 0, options = {}) {
   clearWaitingTimer(); stopAllAudio();
+  if (!options.preserveHistory) state.passageHistory = [];
   state.auto = false; $('autoButton').setAttribute('aria-pressed', 'false');
   state.chapterIndex = Math.max(0, Math.min(story.chapters.length - 1, index));
   state.eventIndex = eventIndex; state.currentEvent = null; state.windowMode = 'main';
@@ -268,9 +240,86 @@ function startChapter(index, eventIndex = 0) {
   state.backgroundPath = null;
   setScreen('reader'); renderChapterHeading();
   $('dialogueText').textContent = ''; $('languageNotice').hidden = true;
-  processNext(); saveProgress();
+  processNext(); saveProgress(); updatePreviousButton();
 }
-function startNewGame() { state.history = []; localStorage.setItem(STORAGE_KEYS.history, '[]'); startChapter(0, 0); }
+function startNewGame() { state.history = []; state.passageHistory = []; localStorage.setItem(STORAGE_KEYS.history, '[]'); startChapter(0, 0); }
+function updatePreviousButton() {
+  const button = $('previousButton');
+  if (!button) return;
+  const last = state.passageHistory[state.passageHistory.length - 1];
+  const currentIsLastHistoryEntry = !!(
+    last && state.currentEvent &&
+    last.chapterIndex === state.chapterIndex &&
+    last.eventId === state.currentEvent.id
+  );
+  // During chapter-intro commands there may be no current dialogue yet; the
+  // previous chapter's last passage is still a valid rewind destination.
+  const available = currentIsLastHistoryEntry
+    ? state.passageHistory.length > 1
+    : state.passageHistory.length > 0;
+  button.disabled = !available;
+}
+function rememberPassage(ev) {
+  const snapshot = {
+    chapterIndex: state.chapterIndex,
+    eventIndex: state.eventIndex,
+    eventId: ev.id,
+    backgroundPath: state.backgroundPath,
+    windowMode: state.windowMode,
+    currentMusic: state.currentMusic,
+    currentMusicLoop: !!state.currentMusicLoop
+  };
+  const last = state.passageHistory[state.passageHistory.length - 1];
+  if (!last || last.chapterIndex !== snapshot.chapterIndex || last.eventId !== snapshot.eventId) {
+    state.passageHistory.push(snapshot);
+    if (state.passageHistory.length > 500) state.passageHistory.shift();
+  }
+  updatePreviousButton();
+}
+function goPrevious() {
+  if (!['reader', 'chapterEnd'].includes(state.screen)) return;
+  clearWaitingTimer();
+  state.auto = false;
+  $('autoButton').setAttribute('aria-pressed', 'false');
+
+  const current = state.passageHistory[state.passageHistory.length - 1];
+  let target;
+  if (state.screen === 'chapterEnd') {
+    // Chapter-end is a separate screen after the final dialogue; return to that
+    // final passage first rather than skipping back by two passages.
+    target = current || null;
+  } else {
+    if (current && state.currentEvent && current.chapterIndex === state.chapterIndex && current.eventId === state.currentEvent.id) {
+      state.passageHistory.pop();
+    }
+    target = state.passageHistory[state.passageHistory.length - 1];
+  }
+  if (!target) {
+    if (current) state.passageHistory.push(current);
+    updatePreviousButton();
+    showToast('You are already at the beginning of this reading session.');
+    return;
+  }
+
+  stopAllAudio();
+  state.chapterIndex = Math.max(0, Math.min(story.chapters.length - 1, target.chapterIndex));
+  const ch = chapter();
+  state.eventIndex = Math.max(0, Math.min(ch.events.length, target.eventIndex));
+  state.currentEvent = ch.events.find(event => event.id === target.eventId) || null;
+  state.backgroundPath = target.backgroundPath || null;
+  state.windowMode = target.windowMode || 'main';
+  state.chapterComplete = false;
+  state.awaitingClick = true;
+  state.pendingAdvance = false;
+  setScreen('reader');
+  renderChapterHeading();
+  if (state.backgroundPath) setBackground(state.backgroundPath, 0, 0);
+  setLanguage(state.language);
+  if (target.currentMusic) playMusic(target.currentMusic, !!target.currentMusicLoop);
+  if (state.currentEvent) renderCurrentDialogue();
+  updatePreviousButton();
+  saveProgress();
+}
 function processNext() {
   if (state.screen !== 'reader') return;
   clearWaitingTimer(); state.awaitingClick = false; state.pendingAdvance = false;
@@ -300,7 +349,7 @@ function processNext() {
         $('dialogueStatus').textContent = 'Tap to continue';
         updateProgress(); saveProgress(); return;
       case 'say':
-        state.currentEvent = ev; state.awaitingClick = true; addHistory(ev);
+        state.currentEvent = ev; state.awaitingClick = true; rememberPassage(ev); addHistory(ev);
         renderCurrentDialogue(); saveProgress();
         if (state.auto) {
           $('dialogueStatus').textContent = `Auto · ${state.settings.autoDelay}s`;
@@ -338,7 +387,7 @@ function showChapterEnd() {
 }
 function continueChapter() {
   if ($('nextChapterButton').dataset.last === 'true') { setScreen('home'); return; }
-  startChapter(state.chapterIndex + 1, 0);
+  startChapter(state.chapterIndex + 1, 0, { preserveHistory: true });
 }
 function returnHome() { clearWaitingTimer(); saveProgress(); state.auto = false; $('autoButton').setAttribute('aria-pressed','false'); setScreen('home'); stopAllAudio(); }
 function renderChapters() {
@@ -376,7 +425,7 @@ function buildSavePayload() {
   return { chapterIndex:state.chapterIndex,eventIndex:state.eventIndex,currentEventId:state.currentEvent?.id||null,
     backgroundPath:state.backgroundPath,language:state.language,windowMode:state.windowMode,settings:state.settings,
     screen:state.screen,chapterComplete:!!state.chapterComplete,currentMusic:state.currentMusic,currentMusicLoop:!!state.currentMusicLoop,
-    savedAt:new Date().toISOString() };
+    passageHistory:state.passageHistory.slice(-500),savedAt:new Date().toISOString() };
 }
 function openHistory() {
   const list=$('historyList');list.innerHTML='';
@@ -392,8 +441,14 @@ function updateNetworkStatus() {
   const online=navigator.onLine;const el=$('networkStatus');el.classList.toggle('offline',!online);el.querySelector('span').textContent=online?'Online':'Offline';
 }
 async function registerServiceWorker() {
-  if(!('serviceWorker' in navigator)) return;
-  try { await navigator.serviceWorker.register('./service-worker.js'); } catch(e) { console.warn('Service worker registration failed',e); }
+  if (!('serviceWorker' in navigator)) return;
+  try {
+    const registration = await navigator.serviceWorker.register('./service-worker.js', { updateViaCache: 'none' });
+    // Ask GitHub Pages for the newest worker script instead of relying on a stale HTTP cache.
+    if (typeof registration.update === 'function') registration.update().catch(() => {});
+  } catch (e) {
+    console.warn('Service worker registration failed', e);
+  }
 }
 async function openOfflineDialog() {
   $('offlineDialog').showModal();
@@ -413,7 +468,7 @@ async function downloadOfflineAssets() {
   try {
     const items=Object.values(assetManifest.assets).map(x=>new URL(`./public/${x.url}`,document.baseURI).toString());
     total=items.length;
-    const cache=await caches.open('narcissu-assets-v2');
+    const cache=await caches.open('narcissu-assets-v3');
     let cursor=0;
     const worker=async()=>{
       while(true){
@@ -451,18 +506,16 @@ async function downloadOfflineAssets() {
   }
 }
 async function clearOfflineAssets() {
-  await caches.delete('narcissu-assets-v2');$('downloadMeterFill').style.width='0%';$('downloadPercent').textContent='0%';$('downloadStatus').textContent='Offline assets cleared.';showToast('Offline assets cleared.');
+  await caches.delete('narcissu-assets-v3');$('downloadMeterFill').style.width='0%';$('downloadPercent').textContent='0%';$('downloadStatus').textContent='Offline assets cleared.';showToast('Offline assets cleared.');
 }
 function setupSettings() {
   $('modeSetting').value=state.settings.mode;$('textSizeSetting').value=state.settings.textSize;$('autoDelaySetting').value=state.settings.autoDelay;
   $('musicVolumeSetting').value=state.settings.musicVolume;$('sfxVolumeSetting').value=state.settings.sfxVolume;$('reduceMotionSetting').checked=state.settings.reduceMotion;
-  $('showReviewedSourceSetting').checked=!!state.settings.showReviewedSource;$('showEditorialDraftsSetting').checked=!!state.settings.showEditorialDrafts;
   $('settingsDialog').showModal();
 }
 function applySettings() {
   state.settings.mode=$('modeSetting').value;state.settings.textSize=Number($('textSizeSetting').value);state.settings.autoDelay=Number($('autoDelaySetting').value);
   state.settings.musicVolume=Number($('musicVolumeSetting').value);state.settings.sfxVolume=Number($('sfxVolumeSetting').value);state.settings.reduceMotion=$('reduceMotionSetting').checked;
-  state.settings.showReviewedSource=$('showReviewedSourceSetting').checked;state.settings.showEditorialDrafts=$('showEditorialDraftsSetting').checked;
   applyVisualPreferences();
   if(state.musicAudio)setAudioVolume(state.musicAudio,state.settings.musicVolume);for(const [channel,audio] of state.audioChannels)setAudioVolume(audio,state.settings.sfxVolume);
   persistSettings();$('settingsDialog').close();if(state.currentEvent)renderCurrentDialogue();showToast('Settings applied.');
@@ -487,7 +540,7 @@ function bindUI() {
   $('saveSettingsButton').addEventListener('click',applySettings);
   $('fullscreenButton').addEventListener('click',toggleFullscreen);
   $('languageSwitch').addEventListener('click',()=>setLanguage(state.language==='en'?'fa':'en'));
-  $('nextButton').addEventListener('click',advance);$('dialoguePanel').addEventListener('click',advance);
+  $('nextButton').addEventListener('click',advance);$('previousButton').addEventListener('click',goPrevious);$('dialoguePanel').addEventListener('click',advance);
   $('dialoguePanel').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();advance();}});
   $('autoButton').addEventListener('click',toggleAuto);
   $('historyButton').addEventListener('click',openHistory);
@@ -495,6 +548,7 @@ function bindUI() {
   $('readerLoadButton').addEventListener('click',()=>openSlots('load'));
   $('readerMenuButton').addEventListener('click',returnHome);
   $('nextChapterButton').addEventListener('click',continueChapter);
+  $('chapterEndPreviousButton').addEventListener('click',goPrevious);
   $('endMenuButton').addEventListener('click',()=>{setScreen('home');});
   $('offlineDownloadButton').addEventListener('click',openOfflineDialog);
   $('startDownloadButton').addEventListener('click',downloadOfflineAssets);
