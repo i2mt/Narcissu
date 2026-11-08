@@ -209,3 +209,195 @@ html[data-persian-font="noto"] .reader-screen.is-fa .dialogue-text,
 html[data-persian-font="noto"] .reader-screen.is-fa.caption-mode .dialogue-text{
   font-family:NotoNaskhPersian,NotoArabic,serif;
 }
+
+
+/* Increment 47 — compact iPhone reader: reclaim browser chrome, preserve 4:3 art,
+   and keep the dialogue panel and controls in their own compact regions. */
+.app-shell.is-compact-reading{
+  width:100%;max-width:none;height:100svh;height:100dvh;min-height:100svh;min-height:100dvh;
+  margin:0;padding:0;overflow:hidden
+}
+.app-shell.is-compact-reading>.topbar{display:none!important}
+.app-shell.is-reading>.app-footer{display:none!important}
+.app-shell.is-compact-reading>.stage{
+  flex:1 1 auto;width:100%;max-width:none;height:100%;min-height:0;max-height:none;
+  margin:0;aspect-ratio:auto;border:0;box-shadow:none
+}
+.app-shell.is-compact-reading .stage-vignette{display:none}
+.app-shell.is-compact-reading .reader-top-actions .icon-button{
+  width:28px;height:28px;min-width:28px;padding:0;font-size:14px;line-height:1
+}
+.app-shell.is-compact-reading .reader-top-actions{gap:4px}
+.app-shell.is-compact-reading .language-switch{
+  min-height:28px;padding:4px 7px;gap:5px;font-size:8px;letter-spacing:.04em
+}
+.app-shell.is-reading .dialogue-language{display:none!important}
+
+@media (max-width:760px) and (orientation:portrait){
+  .app-shell.is-reading .reader-screen{
+    padding:calc(env(safe-area-inset-top) + 40px) max(8px,env(safe-area-inset-right))
+      calc(env(safe-area-inset-bottom) + 6px) max(8px,env(safe-area-inset-left));
+    justify-content:flex-end;gap:0
+  }
+  .app-shell.is-reading .reader-topline{
+    top:calc(env(safe-area-inset-top) + 4px);left:max(8px,env(safe-area-inset-left));
+    right:max(8px,env(safe-area-inset-right));align-items:center;gap:5px;min-height:30px
+  }
+  .app-shell.is-reading .chapter-heading{min-width:0;flex:1}
+  .app-shell.is-reading .chapter-heading .eyebrow{font-size:7px;letter-spacing:.13em;margin:0 0 2px}
+  .app-shell.is-reading .chapter-heading h2{
+    font-size:13px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+  }
+  .app-shell.is-reading .reader-top-actions{flex:0 0 auto;gap:4px}
+  .app-shell.is-reading .reader-top-actions .icon-button{width:27px;height:27px;min-width:27px;font-size:13px}
+  .app-shell.is-reading .language-switch{height:27px;min-height:27px;padding:3px 6px;gap:4px;font-size:8px}
+
+  /* The original backgrounds are all 800×600 (4:3). Give them a true 4:3
+     viewport and use contain, instead of cropping them into a shallow strip. */
+  .app-shell.is-reading .stage.is-reading .background-frame{
+    top:calc(env(safe-area-inset-top) + 40px);left:0;right:0;bottom:auto;
+    width:100%;height:min(75vw,42svh);display:grid;place-items:center;
+    overflow:hidden;background:#050607
+  }
+  .app-shell.is-reading .stage.is-reading .background-frame img{
+    position:absolute;inset:0;width:100%;height:100%;max-width:100%;max-height:100%;
+    object-fit:contain;object-position:center
+  }
+  .app-shell.is-reading .reader-scene-spacer{flex:1 1 auto;min-height:0}
+  .app-shell.is-reading .dialogue-panel{
+    width:100%;height:clamp(112px,22svh,148px);min-height:0;max-height:none;
+    margin:0;padding:8px 11px 7px;justify-content:space-between;flex:0 0 auto;
+    border-radius:3px;overflow:hidden
+  }
+  .app-shell.is-reading .dialogue-text{
+    font-size:clamp(15px,4.3vw,var(--text-size));line-height:1.48;
+    max-height:none;overflow-y:auto;overscroll-behavior:contain
+  }
+  .app-shell.is-reading .dialogue-footer{margin-top:3px;font-size:7px;letter-spacing:.06em}
+  .app-shell.is-reading .advance-mark{font-size:14px}
+  .app-shell.is-reading .reader-toolbar{
+    display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;
+    align-items:stretch;margin-top:6px;flex:0 0 auto
+  }
+  .app-shell.is-reading .toolbar-left,
+  .app-shell.is-reading .toolbar-right{display:contents}
+  .app-shell.is-reading .toolbar-button,
+  .app-shell.is-reading .next-button{
+    width:100%;min-width:0;min-height:31px;padding:4px 1px;
+    font-size:8px;line-height:1;letter-spacing:0;text-align:center;
+    white-space:nowrap;overflow:hidden
+  }
+  .app-shell.is-reading .toolbar-button span,
+  .app-shell.is-reading .next-button span{margin:0;font-size:8px}
+  .app-shell.is-reading .reader-progress{height:2px}
+}
+
+@media (max-width:350px) and (orientation:portrait){
+  .app-shell.is-reading .reader-screen{padding-left:6px;padding-right:6px}
+  .app-shell.is-reading .reader-toolbar{gap:2px}
+  .app-shell.is-reading .toolbar-button,
+  .app-shell.is-reading .next-button{font-size:7px}
+  .app-shell.is-reading .dialogue-panel{height:clamp(108px,23svh,138px);padding:7px 8px}
+  .app-shell.is-reading .dialogue-text{font-size:15px}
+}
+
+/* Landscape phones get a side-by-side visual-novel layout: full 4:3 art on
+   the left, dialogue on the right, and one compact control strip below. */
+@media (max-height:500px) and (orientation:landscape){
+  .app-shell.is-reading .reader-screen{
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    grid-template-rows:minmax(0,1fr) auto;column-gap:10px;row-gap:6px;
+    padding:calc(env(safe-area-inset-top) + 40px) max(8px,env(safe-area-inset-right))
+      calc(env(safe-area-inset-bottom) + 5px) max(8px,env(safe-area-inset-left));
+  }
+  .app-shell.is-reading .reader-topline{
+    top:calc(env(safe-area-inset-top) + 4px);left:max(8px,env(safe-area-inset-left));
+    right:max(8px,env(safe-area-inset-right));align-items:center;min-height:30px;gap:6px
+  }
+  .app-shell.is-reading .chapter-heading .eyebrow{font-size:7px;margin:0 0 1px}
+  .app-shell.is-reading .chapter-heading h2{font-size:13px}
+  .app-shell.is-reading .reader-scene-spacer{display:none}
+  .app-shell.is-reading .stage.is-reading .background-frame{
+    top:calc(env(safe-area-inset-top) + 40px);left:max(8px,env(safe-area-inset-left));
+    right:52%;bottom:calc(env(safe-area-inset-bottom) + 43px);
+    width:auto;height:auto;display:grid;place-items:center
+  }
+  .app-shell.is-reading .stage.is-reading .background-frame img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center
+  }
+  .app-shell.is-reading .dialogue-panel{
+    grid-column:2;grid-row:1;align-self:center;width:100%;height:auto;
+    min-height:0;max-height:100%;padding:8px 10px;margin:0;overflow:hidden
+  }
+  .app-shell.is-reading .dialogue-text{
+    font-size:clamp(14px,2.5vw,var(--text-size));line-height:1.4;
+    max-height:calc(100% - 26px);overflow-y:auto
+  }
+  .app-shell.is-reading .dialogue-footer{margin-top:5px;font-size:7px}
+  .app-shell.is-reading .reader-toolbar{
+    grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
+    gap:4px;margin:0;align-items:stretch
+  }
+  .app-shell.is-reading .toolbar-left,
+  .app-shell.is-reading .toolbar-right{display:contents}
+  .app-shell.is-reading .toolbar-button,
+  .app-shell.is-reading .next-button{
+    width:100%;min-width:0;min-height:29px;padding:4px 2px;
+    font-size:8px;line-height:1;text-align:center;white-space:nowrap;overflow:hidden
+  }
+  .app-shell.is-reading .toolbar-button span,
+  .app-shell.is-reading .next-button span{margin:0}
+}
+
+
+/* Increment 47 follow-up: show the actual 4:3 source artwork's visible area.
+   Mobile image variants remove the letterbox baked into the original 800×600 files. */
+@media (max-width:760px) and (orientation:portrait){
+  .app-shell.is-reading .stage.is-reading .background-frame{
+    top:calc(env(safe-area-inset-top) + 40px);left:0;right:0;bottom:auto;
+    width:100%;height:auto;display:block;overflow:hidden;background:#050607
+  }
+  .app-shell.is-reading .stage.is-reading .background-frame img{
+    position:relative;inset:auto;display:block;width:100%;height:auto;
+    max-width:100%;max-height:40svh;object-fit:contain;object-position:center
+  }
+  .app-shell.is-reading .reader-screen{justify-content:flex-end}
+  .app-shell.is-reading .reader-scene-spacer{flex:1 1 auto;min-height:0}
+}
+
+/* Panoramic artwork uses the whole landscape width; larger 4:3 scenes use a split view. */
+@media (max-height:500px) and (orientation:landscape){
+  .app-shell.is-reading .stage.is-reading.is-panorama .background-frame{
+    top:calc(env(safe-area-inset-top) + 40px);left:0;right:0;bottom:auto;
+    width:100%;height:min(26.32vw,calc(100svh - 174px));
+    display:grid;place-items:center;overflow:hidden;background:#050607
+  }
+  .app-shell.is-reading .stage.is-reading.is-panorama .background-frame img{
+    position:absolute;inset:0;width:100%;height:100%;max-width:100%;max-height:100%;
+    object-fit:contain;object-position:center
+  }
+  .app-shell.is-reading .stage.is-reading:not(.is-panorama) .background-frame{
+    top:calc(env(safe-area-inset-top) + 40px);left:max(8px,env(safe-area-inset-left));
+    right:52%;bottom:calc(env(safe-area-inset-bottom) + 43px);
+    width:auto;height:auto;display:grid;place-items:center
+  }
+  .app-shell.is-reading .stage.is-reading:not(.is-panorama) .background-frame img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center
+  }
+  .app-shell.is-reading .stage.is-reading.is-panorama .reader-screen{
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:calc(env(safe-area-inset-top) + 40px) max(8px,env(safe-area-inset-right))
+      calc(env(safe-area-inset-bottom) + 5px) max(8px,env(safe-area-inset-left))
+  }
+  .app-shell.is-reading .stage.is-reading.is-panorama .reader-scene-spacer{flex:1 1 auto;min-height:0}
+  .app-shell.is-reading .stage.is-reading.is-panorama .dialogue-panel{
+    width:100%;height:clamp(72px,22svh,88px);min-height:72px;max-height:88px;
+    padding:6px 10px;margin:0;flex:0 0 auto
+  }
+  .app-shell.is-reading .stage.is-reading.is-panorama .dialogue-text{
+    font-size:clamp(13px,2.2vw,var(--text-size));line-height:1.35;
+    max-height:none;overflow-y:auto
+  }
+  .app-shell.is-reading .stage.is-reading.is-panorama .dialogue-footer{margin-top:3px;font-size:7px}
+  .app-shell.is-reading .stage.is-reading.is-panorama .reader-toolbar{margin-top:6px}
+}

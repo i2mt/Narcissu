@@ -1,5 +1,5 @@
-const SHELL_CACHE = 'narcissu-shell-v42';
-const ASSET_CACHE = 'narcissu-assets-v3';
+const SHELL_CACHE = 'narcissu-shell-v44';
+const ASSET_CACHE = 'narcissu-assets-v4';
 const FONT_CACHE = 'narcissu-fonts-v1';
 const FONT_HOSTS = new Set(['fonts.googleapis.com', 'fonts.gstatic.com']);
 const SHELL_FILES = [
@@ -127,7 +127,7 @@ self.addEventListener('fetch', event => {
     return;
   }
   if (url.origin !== self.location.origin) return;
-  if (url.pathname.includes('/assets/')) {
+  if (url.pathname.includes('/assets/') || url.pathname.includes('/mobile-assets/')) {
     event.respondWith(handleAssetRequest(req));
     return;
   }

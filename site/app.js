@@ -37,22 +37,53 @@ let state = {
 
 function safeJSONParse(value, fallback) { try { return value ? JSON.parse(value) : fallback; } catch { return fallback; } }
 function normalizePath(path) { return String(path || '').replace(/\\/g, '/').replace(/^\/+/, '').toLocaleLowerCase('en-US'); }
-function assetURL(path) {
+function isMobileArtworkViewport() {
+  return !!window.matchMedia?.('(max-width: 760px), (max-height: 500px) and (orientation: landscape)').matches;
+}
+function isMobileLandscapeViewport() {
+  return !!window.matchMedia?.('(max-height: 500px) and (orientation: landscape)').matches;
+}
+function assetURL(path, preferMobileArtwork = false) {
   const item = assetManifest?.assets?.[normalizePath(path)];
-  return item ? new URL(`./public/${item.url}`, document.baseURI).toString() : null;
+  if (!item) return null;
+  let selectedPath = item.url;
+  if (preferMobileArtwork && isMobileArtworkViewport()) {
+    selectedPath = isMobileLandscapeViewport()
+      ? (item.mobile_landscape_url || item.mobile_url || item.url)
+      : (item.mobile_url || item.url);
+  }
+  return new URL(`./public/${selectedPath}`, document.baseURI).toString();
 }
 function showToast(message) {
   const el = $('toast'); el.textContent = message; el.classList.add('show');
   clearTimeout(showToast.timer); showToast.timer = setTimeout(() => el.classList.remove('show'), 2600);
 }
 function chapter() { return story.chapters[state.chapterIndex]; }
+function updateReaderChrome() {
+  const reading = state.screen === 'reader';
+  const compact = reading && isMobileArtworkViewport();
+  const shell = document.querySelector('.app-shell');
+  shell?.classList.toggle('is-reading', reading);
+  shell?.classList.toggle('is-compact-reading', compact);
+  // Desktop keeps its familiar top bar. Phones move only the essential actions
+  // into the compact reader header while the global chrome is collapsed.
+  const targetActions = compact
+    ? document.querySelector('.reader-top-actions')
+    : document.querySelector('.topbar-actions');
+  if (targetActions) {
+    targetActions.appendChild($('fullscreenButton'));
+    targetActions.appendChild($('settingsButton'));
+  }
+}
 function setScreen(name) {
   state.screen = name;
   $('homeScreen').hidden = name !== 'home';
   $('readerScreen').hidden = name !== 'reader';
   $('chapterEndScreen').hidden = name !== 'chapterEnd';
   $('stage').classList.toggle('is-reading', name === 'reader');
+  updateReaderChrome();
   $('languageNotice').hidden = true;
+  updateOrientationPrompt();
 }
 function dismissDedication() {
   if (dedicationDismissed) return;
@@ -282,8 +313,12 @@ function updateProgress() {
   $('progressFill').style.width = `${pct}%`;
 }
 function setBackground(path, effect = 0, duration = 0) {
-  const url = assetURL(path);
+  const url = assetURL(path, true);
   state.backgroundPath = path;
+  const item = assetManifest?.assets?.[normalizePath(path)];
+  const mobileRatio = isMobileLandscapeViewport()
+    ? item?.mobile_landscape_aspect_ratio : item?.mobile_aspect_ratio;
+  $('stage').classList.toggle('is-panorama', isMobileArtworkViewport() && Number(mobileRatio) >= 2.5);
   if (!url) { showToast(`Missing background resource: ${path}`); return; }
   const img = $('backgroundImage');
   const ms = state.settings.reduceMotion ? 0 : (duration || ({1:300,3:600,5:1000,10:1000}[effect] || 450));
@@ -295,6 +330,18 @@ function setBackground(path, effect = 0, duration = 0) {
     if (img.complete) img.classList.remove('fade-out');
   };
   setTimeout(apply, ms ? Math.min(ms, 220) : 0);
+}
+function refreshBackgroundForViewport() {
+  updateReaderChrome();
+  updateOrientationPrompt();
+  if (state.screen !== 'reader' || !state.backgroundPath || !assetManifest) return;
+  const url = assetURL(state.backgroundPath, true);
+  const item = assetManifest.assets?.[normalizePath(state.backgroundPath)];
+  const mobileRatio = isMobileLandscapeViewport()
+    ? item?.mobile_landscape_aspect_ratio : item?.mobile_aspect_ratio;
+  $('stage').classList.toggle('is-panorama', isMobileArtworkViewport() && Number(mobileRatio) >= 2.5);
+  const img = $('backgroundImage');
+  if (url && img.src !== url) img.src = url;
 }
 function setAudioVolume(audio, volume) { try { audio.volume = Math.max(0, Math.min(1, volume)); } catch {} }
 function stopChannel(channel) {
@@ -411,7 +458,8 @@ function updateOrientationPrompt() {
   if (!prompt) return;
   const portrait = window.matchMedia?.('(orientation: portrait)').matches;
   const touch = window.matchMedia?.('(pointer: coarse)').matches;
-  prompt.hidden = !(isStandaloneMode() && portrait && touch);
+  const reading = state.screen === 'reader';
+  prompt.hidden = !(portrait && touch && (isStandaloneMode() || reading));
 }
 function updateInstallButton() {
   const button = $('installAppButton');
@@ -778,9 +826,14 @@ async function downloadOfflineAssets() {
   $('downloadStatus').textContent='Preparing resources…';
   let done=0,failed=0,total=0;
   try {
-    const items=Object.values(assetManifest.assets).map(x=>new URL(`./public/${x.url}`,document.baseURI).toString());
+    const items=Object.values(assetManifest.assets).flatMap(x=>{
+      const paths=[x.url];
+      if(x.mobile_url) paths.push(x.mobile_url);
+      if(x.mobile_landscape_url && x.mobile_landscape_url!==x.mobile_url) paths.push(x.mobile_landscape_url);
+      return paths.map(path=>new URL(`./public/${path}`,document.baseURI).toString());
+    });
     total=items.length;
-    const cache=await caches.open('narcissu-assets-v3');
+    const cache=await caches.open('narcissu-assets-v4');
     let cursor=0;
     const worker=async()=>{
       while(true){
@@ -818,7 +871,7 @@ async function downloadOfflineAssets() {
   }
 }
 async function clearOfflineAssets() {
-  await caches.delete('narcissu-assets-v3');$('downloadMeterFill').style.width='0%';$('downloadPercent').textContent='0%';$('downloadStatus').textContent='Offline assets cleared.';showToast('Offline assets cleared.');
+  await caches.delete('narcissu-assets-v4');$('downloadMeterFill').style.width='0%';$('downloadPercent').textContent='0%';$('downloadStatus').textContent='Offline assets cleared.';showToast('Offline assets cleared.');
 }
 function setupSettings() {
 $('persianFontSetting').value=state.settings.persianFont;$('textSizeSetting').value=state.settings.textSize;$('autoDelaySetting').value=state.settings.autoDelay;
@@ -893,9 +946,9 @@ function bindUI() {
     updateInstallButton();
     showToast('Narcissu has been installed.');
   });
-  window.addEventListener('resize',updateOrientationPrompt);
-  window.addEventListener('orientationchange',updateOrientationPrompt);
-  updateInstallButton(); updateOrientationPrompt();
+  window.addEventListener('resize',refreshBackgroundForViewport);
+  window.addEventListener('orientationchange',refreshBackgroundForViewport);
+  updateInstallButton(); refreshBackgroundForViewport();
   window.addEventListener('online',updateNetworkStatus);window.addEventListener('offline',updateNetworkStatus);
   window.addEventListener('beforeunload',saveProgress);
   document.addEventListener('visibilitychange',()=>{if(document.hidden)saveProgress();});
