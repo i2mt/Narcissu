@@ -7,13 +7,6 @@ from urllib.parse import urljoin, urlparse
 
 PROJECT_SITE_PREFIX = "https://i2mt.github.io/Narcissu/"
 
-
-def has_relative_service_worker_registration(app: str) -> bool:
-    """Accept a relative worker URL with or without registration options."""
-    pattern = r"""navigator\s*\.\s*serviceWorker\s*\.\s*register\s*\(\s*(['"])\./service-worker\.js\1(?=\s*[,)])"""
-    return re.search(pattern, app) is not None
-
-
 def shell_files(site: Path) -> list[str]:
     source = (site / "service-worker.js").read_text(encoding="utf-8")
     match = re.search(r"const\s+SHELL_FILES\s*=\s*\[(.*?)\];", source, re.S)
@@ -37,7 +30,12 @@ def verify(site: Path) -> dict:
     if missing_shell:
         raise SystemExit(f"Missing service-worker shell files: {missing_shell[:10]}")
     manifest = json.loads((site / "data/asset-manifest.json").read_text(encoding="utf-8"))
-    missing_assets = [item["url"] for item in manifest["assets"].values() if not (site / "public" / item["url"]).is_file()]
+    missing_assets = []
+    for item in manifest["assets"].values():
+        for field in ("url", "mobile_url", "mobile_landscape_url"):
+            asset_url = item.get(field)
+            if asset_url and not (site / "public" / asset_url).is_file():
+                missing_assets.append(asset_url)
     if missing_assets:
         raise SystemExit(f"Missing media assets: {missing_assets[:10]}")
     if (site / "data/source").exists():
@@ -49,10 +47,14 @@ def verify(site: Path) -> dict:
     if re.search(r"(?:href|src)\s*=\s*['\"]/", html, re.I):
         raise SystemExit("Found root-absolute HTML asset path; project Pages sites require relative paths")
     app = (site / "app.js").read_text(encoding="utf-8")
-    if not has_relative_service_worker_registration(app):
+    if "navigator.serviceWorker.register('./service-worker.js', { updateViaCache: 'none' })" not in app:
         raise SystemExit("Service worker registration is no longer relative")
-    if "new URL(`./public/${item.url}`, document.baseURI)" not in app or "new URL(`./public/${x.url}`,document.baseURI)" not in app:
+    if "new URL(`./public/${selectedPath}`, document.baseURI)" not in app or "new URL(`./public/${path}`,document.baseURI)" not in app:
         raise SystemExit("Asset URLs are no longer derived from document.baseURI")
+    if "mobile_landscape_url" not in app or "isMobileArtworkViewport" not in app:
+        raise SystemExit("Mobile artwork variants are not wired into the reader")
+    if "narcissu-assets-v4" not in app or "narcissu-assets-v4" not in (site / "service-worker.js").read_text(encoding="utf-8"):
+        raise SystemExit("Mobile artwork cache version is inconsistent")
     base = PROJECT_SITE_PREFIX
     refs = [
         "./index.html", "./styles.css", "./app.js", "./service-worker.js", "./manifest.webmanifest",
