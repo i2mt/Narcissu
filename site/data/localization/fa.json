@@ -1,0 +1,3522 @@
+{
+  "schema_version": 1,
+  "language": "fa",
+  "status": "in_progress",
+  "source_pdf": "../source/Original_2016.pdf",
+  "ocr_reference": "../source/persian-ocr-pages.json",
+  "translations": {
+    "gp32_image:087711": {
+      "text": "تو یه روز خیلی درخشان...",
+      "status": "verified",
+      "pdf_page": 5,
+      "notes": "متن آغازین روی صفحهٔ ۵، با تصویر صفحه مقابله شد."
+    },
+    "gp32_image:087714": {
+      "text": "تو یه روز زمستونی...",
+      "status": "verified",
+      "pdf_page": 5,
+      "notes": "متن آغازین روی صفحهٔ ۵، با تصویر صفحه مقابله شد."
+    },
+    "gp32_image:087748": {
+      "text": "بهار ۱۹۹۶: ستسومی",
+      "status": "verified",
+      "pdf_page": 5,
+      "notes": "عنوان زمانی/شخصیتی روی صفحهٔ ۵."
+    },
+    "gp32_image:087760": {
+      "text": "درسته، از وقتی بچه بودم خیلی شرایطم خوب نبود...",
+      "status": "verified",
+      "pdf_page": 5,
+      "notes": "ابتدای بند صفحهٔ ۵؛ عبارت مطابق PDF نگه داشته شد."
+    },
+    "gp32_image:087767": {
+      "text": "با این حال، مثل بقیه به مدرسهٔ راهنمایی رفتم... تو تعطیلات تابستونی اغلب وقتا انقدر بازی می‌کردم که پوستم حسابی می‌سوخت و تیره می‌شد.",
+      "status": "verified",
+      "pdf_page": 5,
+      "notes": "PDF «مدرسهٔ راهنمایی» دارد، درحالی‌که gp32 می‌گوید elementary school؛ برای بازبینی معنایی علامت‌گذاری شد."
+    },
+    "gp32_image:087776": {
+      "text": "تو ماه ژوئن، یکمی بعد از ورودم به دبیرستان، درست یه روز بعد از اینکه یه لباس شنا برای ماه آینده سفارش داده بودم.",
+      "status": "verified",
+      "pdf_page": 5,
+      "notes": "از متن صفحهٔ ۵ جدا شد؛ نیم‌فاصله‌ها و غلط‌های آشکار OCR اصلاح شدند."
+    },
+    "gp32_image:087780": {
+      "text": "برای بار اول بستری شدم...",
+      "status": "verified",
+      "pdf_page": 5,
+      "notes": "بند صفحهٔ ۵؛ مطابق ترتیب متن انگلیسی."
+    },
+    "gp32_image:087784": {
+      "text": "روزی که فرداش امتحانای ترم اول شروع می‌شدن... روزی که اولین قطره‌های بارون هوا رو به طرز وحشتناکی سرد کرده بودن...",
+      "status": "verified",
+      "pdf_page": 5,
+      "notes": "دو جملهٔ متوالی در صفحهٔ ۵."
+    },
+    "gp32_image:087796": {
+      "text": "تو فصل بارونی‌ای که قطرات آب از دل آسمون سفیدپوش می‌افتادن.",
+      "status": "verified",
+      "pdf_page": 5,
+      "notes": "جملهٔ صفحهٔ ۵؛ با متن انگلیسی تطبیق داده شد."
+    },
+    "gp32_image:087800": {
+      "text": "اولین باری بود که این اتفاق افتاد... همهٔ هم‌کلاسیام تقریباً هر روز برای دیدنم می‌اومدن.",
+      "status": "verified",
+      "pdf_page": 5,
+      "notes": "جمله‌های صفحهٔ ۵؛ با متن انگلیسی تطبیق داده شد."
+    },
+    "gp32_image:087805": {
+      "text": "و حتی بعد از مرخص شدنم، آخر هفته‌ها برای دیدن و سرگرم کردنم بهم سر می‌زدن؛",
+      "status": "verified",
+      "pdf_page": 5,
+      "notes": "بخش پایانی جمله در صفحهٔ ۵."
+    },
+    "gp32_image:087809": {
+      "text": "ولی این فقط اولش بود...",
+      "status": "verified",
+      "pdf_page": 5,
+      "notes": "پایان بند صفحهٔ ۵."
+    },
+    "gp32_image:087821": {
+      "text": "پاییز به زمستون، زمستون به بهار... یه چرخه‌ی بد و عذاب‌آور: بستری شدن، مرخص شدن، مراقبتای بعدش... بعد بازم بستری شدن‌های دوباره...",
+      "status": "verified",
+      "pdf_page": 5,
+      "notes": "متن صفحهٔ ۵؛ عبارت محاوره‌ای منبع حفظ شد."
+    },
+    "gp32_image:087825": {
+      "text": "و حتی قبل از اینکه خودم بفهمم، هم‌کلاسی‌هایی که یه موقعی دوست صداشون می‌کردم...",
+      "status": "verified",
+      "pdf_page": 5,
+      "notes": "متن صفحهٔ ۵؛ جمله به چند passage متناظر تقسیم شده است."
+    },
+    "gp32_image:087829": {
+      "text": "تبدیل به یه سری آشنا...",
+      "status": "verified",
+      "pdf_page": 5,
+      "notes": "متن صفحهٔ ۵؛ جمله به چند passage متناظر تقسیم شده است."
+    },
+    "gp32_image:087832": {
+      "text": "و بعد به غریبه شدن...",
+      "status": "verified",
+      "pdf_page": 5,
+      "notes": "متن صفحهٔ ۵؛ جمله به چند passage متناظر تقسیم شده است."
+    },
+    "gp32_image:087836": {
+      "text": "انگار با هر فصلی که عوض می‌شد، من از ذهن اونا محوتر می‌شدم.",
+      "status": "verified",
+      "pdf_page": 5,
+      "notes": "متن صفحهٔ ۵."
+    },
+    "gp32_image:087844": {
+      "text": "انگار همه‌ی اون آدمایی که زندگی عادی داشتن...",
+      "status": "verified",
+      "pdf_page": 5,
+      "notes": "ابتدای جملهٔ صفحهٔ ۵؛ جمله به دو passage متناظر تقسیم شده است."
+    },
+    "gp32_image:087853": {
+      "text": "وجود من براشون به یه واقعیت ناخوشایند تبدیل شده بود.",
+      "status": "verified",
+      "pdf_page": 5,
+      "notes": "ادامهٔ جملهٔ صفحهٔ ۵؛ جمله به دو passage متناظر تقسیم شده است."
+    },
+    "gp32_image:087862": {
+      "text": "و خب، این‌طور به نظر میاد که من کاملاً پاک شده باشم...",
+      "status": "verified",
+      "pdf_page": 5,
+      "notes": "متن صفحهٔ ۵."
+    },
+    "gp32_image:087876": {
+      "text": "فصلای زیادی رو گذروندم، آسمونای سفیدپوش زیادی رو دیدم... بدون اینکه بخوام یا نیاز داشته باشم که با کسی حرف بزنم.",
+      "status": "verified",
+      "pdf_page": 6,
+      "notes": "ادامهٔ متن در ابتدای صفحهٔ ۶؛ دو جمله در یک passage حفظ شده‌اند."
+    },
+    "gp32_image:087885": {
+      "text": "برای همین، دفتر انگلیسیم از اون روز قبل شروع امتحانای ترم اول هیچ تغییری نکرد...",
+      "status": "verified",
+      "pdf_page": 6,
+      "notes": "متن ابتدای صفحهٔ ۶."
+    },
+    "gp32_image:087894": {
+      "text": "اون موقع، زمانی بود که... انگار وقت من به آخر خودش رسیده بود...",
+      "status": "verified",
+      "pdf_page": 6,
+      "notes": "متن ابتدای صفحهٔ ۶."
+    },
+    "gp32_image:087920": {
+      "text": "هشت سال بعد... اوایل تابستون ۲۰۰۴",
+      "status": "verified",
+      "pdf_page": 6,
+      "notes": "عنوان زمانی صفحهٔ ۶؛ ترتیب فارسی حفظ شد."
+    },
+    "gp32_image:087930": {
+      "text": "تابستون، عرق فراوون...",
+      "status": "verified",
+      "pdf_page": 6,
+      "notes": "متن صفحهٔ ۶."
+    },
+    "gp32_image:087933": {
+      "text": "یه صفحه‌نمایش بزرگ تو مرکز امتحان گواهینامه‌ی رانندگی",
+      "status": "verified",
+      "pdf_page": 6,
+      "notes": "متن صفحهٔ ۶."
+    },
+    "gp32_image:087937": {
+      "text": "یهویی روشن می‌شه. چشمای همه و همین‌طور من دنبال شماره‌ی خودمون می‌گشت...",
+      "status": "verified",
+      "pdf_page": 6,
+      "notes": "متن صفحهٔ ۶."
+    },
+    "gp32_image:087943": {
+      "text": "«۲۳۷... ۲۳۷»",
+      "status": "verified",
+      "pdf_page": 6,
+      "notes": "عدد صفحهٔ ۶؛ ارقام فارسی‌سازی شدند."
+    },
+    "gp32_image:087949": {
+      "text": "و تو اون هشت ستون عددی که رو صفحه نوشته شده بودن، شماره‌ی من داشت برق می‌زد.",
+      "status": "verified",
+      "pdf_page": 6,
+      "notes": "متن صفحهٔ ۶."
+    },
+    "gp32_image:087959": {
+      "text": "*صدای باز شدن در*",
+      "status": "verified",
+      "pdf_page": 6,
+      "notes": "توضیح صدای صفحهٔ ۶؛ با عبارت انگلیسی clickety-clack تفاوت دارد و برای بازبینی علامت‌گذاری شد."
+    },
+    "gp32_image:087962": {
+      "text": "یه قطار شهری تقریباً خالی، که احتمالاً به لطف این عصر قشنگه...",
+      "status": "verified",
+      "pdf_page": 6,
+      "notes": "متن صفحهٔ ۶."
+    },
+    "gp32_image:087967": {
+      "text": "داشتم از محل امتحان برمی‌گشتم خونه.",
+      "status": "verified",
+      "pdf_page": 6,
+      "notes": "متن صفحهٔ ۶."
+    },
+    "gp32_image:087972": {
+      "text": "توی دست چپم یه کتاب مقررات رانندگی و توی جیب پیرهنم گواهینامه‌ی تازه‌ام رو داشتم.",
+      "status": "verified",
+      "pdf_page": 6,
+      "notes": "متن صفحهٔ ۶."
+    },
+    "gp32_image:087976": {
+      "text": "یه جورایی با خوشحالی زیر لب گفتم: «خب، حالا منم یه گواهی‌نامه دارم»",
+      "status": "verified",
+      "pdf_page": 6,
+      "notes": "متن صفحهٔ ۶."
+    },
+    "gp32_image:087981": {
+      "text": "ولی همچین احساسات قوی‌ای پشتش نبودن.",
+      "status": "verified",
+      "pdf_page": 6,
+      "notes": "متن صفحهٔ ۶."
+    },
+    "gp32_image:087986": {
+      "text": "واقعاً هیچ‌وقت نخواستم که یه ماشینو برونم؛ هیچ‌وقت انگیزه‌ای براش نداشتم.",
+      "status": "verified",
+      "pdf_page": 6,
+      "notes": "متن صفحهٔ ۶."
+    },
+    "gp32_image:087991": {
+      "text": "فقط برا این بود که همکارام و مشاور فنی بهم گفته بودن اقلاً سعی کنم گواهینامه بگیرم.",
+      "status": "verified",
+      "pdf_page": 6,
+      "notes": "متن صفحهٔ ۶."
+    },
+    "gp32_image:087998": {
+      "text": "اون شب.",
+      "status": "verified",
+      "pdf_page": 6,
+      "notes": "متن صفحهٔ ۶."
+    },
+    "gp32_image:088002": {
+      "text": "وقتی به پدر و مادرم گفتم گواهینامه گرفتم، اونا فقط صرفاً به یه «باشه» اکتفا کردن؛",
+      "status": "verified",
+      "pdf_page": 6,
+      "notes": "متن صفحهٔ ۶."
+    },
+    "gp32_image:088007": {
+      "text": "و وقتی ازشون خواستم که آیا می‌تونم ماشینو بردارم تا فقط یه رانندگی آزمایشی باهاش داشته باشم، با یه «نه»ی سریع و مختصر جوابمو دادن.",
+      "status": "verified",
+      "pdf_page": 6,
+      "notes": "متن صفحهٔ ۶."
+    },
+    "gp32_image:088012": {
+      "text": "در حالی که من واقعاً هم نمی‌خواستم ماشینو برونم یا هر چیز دیگه‌ای، ولی خب، جوابشون کاملاً قابل پیش‌بینی بود. پدر و مادرم اینجوری بودن دیگه...",
+      "status": "verified",
+      "pdf_page": 6,
+      "notes": "متن صفحهٔ ۶."
+    },
+    "gp32_image:088019": {
+      "text": "روز بعد، با درد سینه‌ام بیدار شدم و راهی بیمارستان کردنم.",
+      "status": "verified",
+      "pdf_page": 7,
+      "notes": "متن ابتدای صفحهٔ ۷."
+    },
+    "gp32_image:088024": {
+      "text": "معمولاً من و بیماری زیاد به هم ربط نداشتیم و من زیاد مریض نمی‌شدم. همین باعث شد صبر کردن تو اتاق انتظار بیمارستان برام خیلی کسل‌کننده باشه.",
+      "status": "verified",
+      "pdf_page": 7,
+      "notes": "متن صفحهٔ ۷."
+    },
+    "gp32_image:088031": {
+      "text": "درست وقتی فکر می‌کردم معایناتشون تموم شده، یه پرتونگاری با اشعه‌ی ایکس و چند تا آزمایش خون تجویز کردن و بعدش رفتن.",
+      "status": "verified",
+      "pdf_page": 7,
+      "notes": "متن صفحهٔ ۷."
+    },
+    "gp32_image:088035": {
+      "text": "بازم من یه مدت خیلی خیلی طولانی توی اتاق انتظار کسل‌کننده بودم.",
+      "status": "verified",
+      "pdf_page": 7,
+      "notes": "متن صفحهٔ ۷."
+    },
+    "gp32_image:088039": {
+      "text": "تا همون موقع سه تا مانگای شونن جامپ (به کمیک‌های ژاپنی گفته می‌شه) رو خونده بودم و وقتی می‌خواستم چهارمی رو شروع کنم...",
+      "status": "verified",
+      "pdf_page": 7,
+      "notes": "متن صفحهٔ ۷؛ نام Shonen Jump در متن فارسی به‌صورت آوانویسی آمده است."
+    },
+    "gp32_image:088042": {
+      "text": "کارای اداری پذیرشم به بیمارستان تموم شد.",
+      "status": "verified",
+      "pdf_page": 7,
+      "notes": "متن صفحهٔ ۷."
+    },
+    "gp32_image:088045": {
+      "text": "انگار گواهینامه‌ام که هنوز تو جیب پیرهنم بود...",
+      "status": "verified",
+      "pdf_page": 7,
+      "notes": "متن صفحهٔ ۷."
+    },
+    "gp32_image:088049": {
+      "text": "باید یه مدت طولانی رو صبر می‌کرد تا نوبتش برسه.",
+      "status": "verified",
+      "pdf_page": 7,
+      "notes": "متن صفحهٔ ۷."
+    },
+    "gp32_image:088068": {
+      "text": "پاییز ۲۰۰۴",
+      "status": "verified",
+      "pdf_page": 7,
+      "notes": "عنوان زمانی صفحهٔ ۷."
+    },
+    "gp32_image:088077": {
+      "text": "جیرجیرکای پرسروصدا بالاخره ساکت شدن،",
+      "status": "verified",
+      "pdf_page": 7,
+      "notes": "متن صفحهٔ ۷."
+    },
+    "gp32_image:088080": {
+      "text": "و من هنوزم تو بیمارستان بودم، مثل همیشه.",
+      "status": "verified",
+      "pdf_page": 7,
+      "notes": "متن صفحهٔ ۷."
+    },
+    "gp32_image:088086": {
+      "text": "البته این‌طور نبود که من تمام مدت تو بیمارستان بوده باشم؛ رفت‌وآمدهای پیاپی داشتم... همون چرخه‌ی بد و عذاب‌آور.",
+      "status": "verified",
+      "pdf_page": 7,
+      "notes": "متن صفحهٔ ۷."
+    },
+    "gp32_image:088091": {
+      "text": "اولین جراحیم مربوط به یه ماه قبل می‌شد. بعد از اون من باید هر روز به‌طور سرپایی معاینه‌ی پنج‌دقیقه‌ای می‌شدم؛",
+      "status": "verified",
+      "pdf_page": 7,
+      "notes": "متن صفحهٔ ۷؛ جزئیات مoped در نسخهٔ انگلیسی در ترجمهٔ فارسی دیده نمی‌شود؛ برای بازبینی علامت‌گذاری شد."
+    },
+    "gp32_image:088094": {
+      "text": "و از اون به بعد، بستری شدم، مرخص شدم، کلینیک خارج بیمارستان رفتم و بعد دوباره بستری شدم. دوباره‌هایی که مرتب تکرار می‌شدن...",
+      "status": "verified",
+      "pdf_page": 7,
+      "notes": "متن صفحهٔ ۷."
+    },
+    "gp32_image:088099": {
+      "text": "با وجود همه‌ی اینا، من خودم هنوز نمی‌دونستم چیزایی مثل PET چه معنی‌ای دارن. توی این کشمکش‌ها چند ماه گذشت...",
+      "status": "verified",
+      "pdf_page": 7,
+      "notes": "متن صفحهٔ ۷؛ نام Iressa در متن فارسی OCR/تصویر دیده نمی‌شود و برای بازبینی علامت‌گذاری شد."
+    },
+    "gp32_image:088104": {
+      "text": "همون‌طور که اشتها‌م کم‌تر می‌شد، داروهام بیشتر می‌شدن. می‌تونستم حس کنم که قدرت جسمیم داشت تحلیل می‌رفت.",
+      "status": "verified",
+      "pdf_page": 7,
+      "notes": "متن صفحهٔ ۷."
+    },
+    "gp32_image:088108": {
+      "text": "احساس می‌کردم پاهامم لاغرتر شدن.",
+      "status": "verified",
+      "pdf_page": 7,
+      "notes": "متن صفحهٔ ۷."
+    },
+    "gp32_image:088112": {
+      "text": "و خب، عقربه‌ی ترازو هم با بی‌رحمی بهم گفت که: «اینا فقط تصوراتت نیستن!»",
+      "status": "verified",
+      "pdf_page": 7,
+      "notes": "متن صفحهٔ ۷."
+    },
+    "gp32_image:088116": {
+      "text": "با این حال، تنها کاری که می‌تونستم بکنم این بود که بدون هیچ علاقه‌ای خودمو نگاه کنم، انگار...",
+      "status": "verified",
+      "pdf_page": 7,
+      "notes": "انتهای صفحهٔ ۷."
+    },
+    "gp32_image:088120": {
+      "text": "همه‌ی اینا داشتن برای کس دیگه‌ای اتفاق می‌افتادن... انگار داشتم یه صحنه‌ای رو تو تلویزیون نگاه می‌کردم... یا یه همچین چیزی...",
+      "status": "verified",
+      "pdf_page": 8,
+      "notes": "ابتدای صفحهٔ ۸."
+    },
+    "gp32_image:088125": {
+      "text": "ذهنم نمی‌تونست اتفاقایی رو که ناگهانی و به سرعت برای بدنم می‌افتادن بفهمه. اتفاقایی که...",
+      "status": "verified",
+      "pdf_page": 8,
+      "notes": "صفحهٔ ۸؛ جمله به دو passage متناظر تقسیم شده است."
+    },
+    "gp32_image:088130": {
+      "text": "می‌افتادن اصلاً واقعی به نظر نمی‌اومدن. برای همین با اینکه همه‌ی اینا داشتن برای من اتفاق می‌افتادن، جوری بهشون نگاه می‌کردم که انگار مربوط به شخص دیگه‌ای تو یه جای خیلی دور بودن.",
+      "status": "verified",
+      "pdf_page": 8,
+      "notes": "ادامهٔ جمله در صفحهٔ ۸."
+    },
+    "gp32_image:088140": {
+      "text": "زمستون ۲۰۰۴",
+      "status": "verified",
+      "pdf_page": 8,
+      "notes": "عنوان زمانی صفحهٔ ۸."
+    },
+    "gp32_image:088144": {
+      "text": "یه روز زمستونی، تقریباً وقتی که درختای کریسمس از خیابون‌ها ناپدید شده بودن،",
+      "status": "verified",
+      "pdf_page": 8,
+      "notes": "متن صفحهٔ ۸."
+    },
+    "gp32_image:088148": {
+      "text": "به خاطر سال جدید مرخص شدم و رفتم خونه. به نظر یه چیز خیلی موقت و ناپایدار بود، اما با این حال بازم یکمی منو خوشحال کرد.",
+      "status": "verified",
+      "pdf_page": 8,
+      "notes": "متن صفحهٔ ۸."
+    },
+    "gp32_image:088155": {
+      "text": "تو هوای بارونی خیلی سرد، برگشتم به خونه‌ای که خیلی وقت بود ندیده بودمش.",
+      "status": "verified",
+      "pdf_page": 8,
+      "notes": "متن صفحهٔ ۸."
+    },
+    "gp32_image:088158": {
+      "text": "خیلی عجیب بود... همه‌ی اعضای خونوادم اونجا بودن!",
+      "status": "verified",
+      "pdf_page": 8,
+      "notes": "متن صفحهٔ ۸."
+    },
+    "gp32_image:088162": {
+      "text": "پدر و مادرم که هیچ‌وقت خیلی باهام حرف نزده بودن، به همراه لبخندایی که یکمی بیش از حد با آب‌وتاب به نظر می‌اومدن، اومدن بیرون تا منو ببینن!",
+      "status": "verified",
+      "pdf_page": 8,
+      "notes": "متن صفحهٔ ۸."
+    },
+    "gp32_image:088167": {
+      "text": "حتی خواهر کوچیکم که هیچ‌وقت درست‌وحسابی و خوشایند باهام حرف نمی‌زد، برام ژله‌ی توت‌فرنگی‌ای که دوست داشتمو درست کرده بود!",
+      "status": "verified",
+      "pdf_page": 8,
+      "notes": "متن صفحهٔ ۸؛ این خوراکی با عبارت English source (cream stew and fried shrimp) تفاوت دارد؛ برای بازبینی معنایی علامت‌گذاری شد."
+    },
+    "gp32_image:088172": {
+      "text": "بردنم و پشت میز نشوندنم. برام نارنگی پوست کردن! خیلی مهربون بودن؛ صحنه‌ی خیلی عجیبی بود.",
+      "status": "verified",
+      "pdf_page": 8,
+      "notes": "متن صفحهٔ ۸."
+    },
+    "gp32_image:088176": {
+      "text": "همون موقع... یه فکرایی به ذهنم رسید...",
+      "status": "verified",
+      "pdf_page": 8,
+      "notes": "ابتدای جملهٔ صفحهٔ ۸؛ متن به سه passage متناظر تقسیم شده است."
+    },
+    "gp32_image:088179": {
+      "text": "راجع به گواهینامه‌ی تازه‌ام که تمام این مدت تو جیب پیرهنم مونده بود...",
+      "status": "verified",
+      "pdf_page": 8,
+      "notes": "ادامهٔ جملهٔ صفحهٔ ۸؛ متن به سه passage متناظر تقسیم شده است."
+    },
+    "gp32_image:088184": {
+      "text": "شاید اوضاع جوری بشه که هیچ‌وقت نتونم ازش استفاده‌ای بکنم.",
+      "status": "verified",
+      "pdf_page": 8,
+      "notes": "ادامهٔ جملهٔ صفحهٔ ۸."
+    },
+    "gp32_image:088196": {
+      "text": "درحالی‌که سه تا لبخند ساختگی و خسته‌کننده رو به‌آرومی...",
+      "status": "verified",
+      "pdf_page": 8,
+      "notes": "ابتدای جملهٔ صفحهٔ ۸؛ جمله به دو passage متناظر تقسیم شده است."
+    },
+    "gp32_image:088197": {
+      "text": "با تعجب و بدون علاقه می‌پذیرفتم، به این فکر می‌کردم که همه‌ی اینا دارن برای شخص دیگه‌ای اتفاق می‌افتن.",
+      "status": "verified",
+      "pdf_page": 8,
+      "notes": "ادامهٔ جملهٔ صفحهٔ ۸؛ نحو فارسی در اینجا با ترتیب بندهای انگلیسی متفاوت است و به‌شکل طبیعی فارسی تقسیم شده است."
+    },
+    "gp32_image:088208": {
+      "text": "ژانویهٔ ۲۰۰۵",
+      "status": "verified",
+      "pdf_page": 8,
+      "notes": "عنوان زمانی در انتهای صفحهٔ ۸."
+    },
+    "gp32_image:088215": {
+      "text": "سال جدید شروع شده بود و من به بیمارستان برگشتم.",
+      "status": "verified",
+      "pdf_page": 8,
+      "notes": "ابتدای بخش پایانی صفحهٔ ۸."
+    },
+    "gp32_image:088219": {
+      "text": "ولی این دفعه، به‌جای اتاق همیشگیم تو طبقه‌ی چهارم، منو به اتاق کنفرانس بردن.",
+      "status": "verified",
+      "pdf_page": 8,
+      "notes": "ادامهٔ متن صفحهٔ ۸."
+    },
+    "gp32_image:088224": {
+      "text": "اونجا پدرم و دکترا در حال صحبت بودن که من رسیدم و اونا شروع به حرف زدن با من کردن.",
+      "status": "verified",
+      "pdf_page": 9,
+      "notes": "جمله از انتهای صفحهٔ ۸ به ابتدای صفحهٔ ۹ ادامه دارد."
+    },
+    "gp32_image:088227": {
+      "text": "به نظر یه جور معرفی یا اطلاع‌رسانی میومد؛ خیلی مبهم و نامفهوم حرف می‌زدن،",
+      "status": "verified",
+      "pdf_page": 9,
+      "notes": "ابتدای صفحهٔ ۹."
+    },
+    "gp32_image:088231": {
+      "text": "ولی بهم گفتن که قرار بود بمیرم.",
+      "status": "verified",
+      "pdf_page": 9,
+      "notes": "صفحهٔ ۹."
+    },
+    "gp32_image:088235": {
+      "text": "«باشه...»",
+      "status": "verified",
+      "pdf_page": 9,
+      "notes": "صفحهٔ ۹."
+    },
+    "gp32_image:088241": {
+      "text": "تنها جوابم بود. یعنی چیز دیگه‌ای نداشتم بگم. از لحظه‌ی ورود به اتاق تا وقتی ازش خارج بشم، تنها کلمه‌ای بود که گفتم.",
+      "status": "verified",
+      "pdf_page": 9,
+      "notes": "صفحهٔ ۹."
+    },
+    "gp32_image:088246": {
+      "text": "با این جواب من، خودکار دکترا شروع به حرکت روی کاغذایی که احتمالاً برگه‌های مربوط به بیمارستان بود کردن.",
+      "status": "verified",
+      "pdf_page": 9,
+      "notes": "صفحهٔ ۹."
+    },
+    "gp32_image:088250": {
+      "text": "جوری که انگار منتظر همین جواب از من بودن. تا آخرش همون‌طوری منتظر نتیجه وایساده بودم. پدرم هم همین‌طور.",
+      "status": "verified",
+      "pdf_page": 9,
+      "notes": "صفحهٔ ۹."
+    },
+    "gp32_image:088254": {
+      "text": "خب پس به همین سادگیه...",
+      "status": "verified",
+      "pdf_page": 9,
+      "notes": "در فارسی این عبارت در انتهای جملهٔ بعد از «تنها فکری که داشتم» آمده؛ برای حفظ ترتیب طبیعی فارسی در این شناسه قرار گرفت."
+    },
+    "gp32_image:088257": {
+      "text": "تنها فکری که داشتم این بود که...",
+      "status": "verified",
+      "pdf_page": 9,
+      "notes": "در فارسی این عبارت پیش از «خب پس به همین سادگیه» آمده؛ ترتیب بندها نسبت به دو شناسهٔ انگلیسی جابه‌جا است."
+    },
+    "gp32_image:088265": {
+      "text": "اون روز از طبقه‌ی چهارم به طبقه‌ی هفتم منتقل شدم، از یه اتاق شش‌نفره به یه اتاق تک‌نفره.",
+      "status": "verified",
+      "pdf_page": 9,
+      "notes": "صفحهٔ ۹."
+    },
+    "gp32_image:088271": {
+      "text": "این طبقه‌ی هفتم با بقیه‌ی جاها کمی متفاوت بود.",
+      "status": "verified",
+      "pdf_page": 9,
+      "notes": "صفحهٔ ۹."
+    },
+    "gp32_image:088275": {
+      "text": "اولین چیزی که نظر آدمو به خودش جلب می‌کرد، کف زمین بود که از تمیزی برق می‌زد. همین‌طور سقفش از همه‌ی جاهایی که دیده بودم بلندتر بود.",
+      "status": "verified",
+      "pdf_page": 9,
+      "notes": "صفحهٔ ۹."
+    },
+    "gp32_image:088280": {
+      "text": "اتاق‌ها خیلی قشنگ بودن و پنجره‌های بزرگی داشتن. به نظر می‌اومد اون‌طوری طراحی شده بودن تا آفتاب گرم و روشن تو اتاق بتابه.",
+      "status": "verified",
+      "pdf_page": 9,
+      "notes": "صفحهٔ ۹."
+    },
+    "gp32_image:088286": {
+      "text": "ولی همین پنجره‌ها فقط یکمی باز می‌شدن.",
+      "status": "verified",
+      "pdf_page": 9,
+      "notes": "صفحهٔ ۹."
+    },
+    "gp32_image:088290": {
+      "text": "امتحان کردم و حتی نتونستم سرمو ازش بیرون ببرم.",
+      "status": "verified",
+      "pdf_page": 9,
+      "notes": "صفحهٔ ۹."
+    },
+    "gp32_image:088294": {
+      "text": "علاوه بر اینا، رنگ دستبندم که مشخصاتم روش بود هم عوض شده بود.",
+      "status": "verified",
+      "pdf_page": 9,
+      "notes": "صفحهٔ ۹."
+    },
+    "gp32_image:088298": {
+      "text": "دستبندی که از اولین روز بستری شدنم باهام همراه شده بود و اسم و گروه خونیم روش نوشته شده بود؛",
+      "status": "verified",
+      "pdf_page": 9,
+      "notes": "صفحهٔ ۹."
+    },
+    "gp32_image:088302": {
+      "text": "حالا رنگش از آبی به سفید تغییر کرده بود.",
+      "status": "verified",
+      "pdf_page": 9,
+      "notes": "صفحهٔ ۹."
+    },
+    "gp32_image:088307": {
+      "text": "یه سقف بلند، یه دستبند سفید و پنجره‌ای که بیشتر از ۱۵ سانتی‌متر باز نمی‌شد.",
+      "status": "verified",
+      "pdf_page": 9,
+      "notes": "صفحهٔ ۹."
+    },
+    "gp32_image:088312": {
+      "text": "وقتی که به طبقه‌ی هفتم منتقل شدم، تلویزیون هنوز برنامه‌های مربوط به سال نو رو داشت پخش می‌کرد،",
+      "status": "verified",
+      "pdf_page": 9,
+      "notes": "صفحهٔ ۹."
+    },
+    "gp32_image:088316": {
+      "text": "و همون اوایل سال جدید بود که برای بار اول اونو دیدم...",
+      "status": "verified",
+      "pdf_page": 9,
+      "notes": "پایان صفحهٔ ۹؛ پایان Prologue در متن انگلیسی."
+    },
+    "gp32_honpen2:088381": {
+      "text": "انتهای سالن نزدیک ایستیشن پرستارا یه اتاق کنفرانس مانند بود",
+      "status": "verified",
+      "pdf_page": 10,
+      "notes": "از ابتدای بند صفحهٔ ۱۰؛ با تصویر PDF مقابله و به مرز passage تقسیم شد.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088389": {
+      "text": "که یه سری مبل و صندلی داشت",
+      "status": "verified",
+      "pdf_page": 10,
+      "notes": "ادامهٔ جملهٔ صفحهٔ ۱۰؛ با تصویر PDF مقابله شد.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088393": {
+      "text": "و یه تلویزیون بزرگ ۲۸ اینچی که برنامه‌های مربوط به سال جدید رو نشون می‌داد...",
+      "status": "verified",
+      "pdf_page": 10,
+      "notes": "جملهٔ صفحهٔ ۱۰؛ املای واژه‌ها و عدد فارسی‌سازی شد.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088397": {
+      "text": "و یه دختری که به اون تلویزیون خسته‌کننده نگاه می‌کرد و به نظر خیلی حوصلش سر رفته بود.",
+      "status": "verified",
+      "pdf_page": 10,
+      "notes": "ادامهٔ توصیف دختر در صفحهٔ ۱۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088401": {
+      "text": "ریزه‌میزه بود و یه لباس خواب صورتی تنش بود، به همراه یه دستبند سفید دور مچش، درست مثل من.",
+      "status": "verified",
+      "pdf_page": 10,
+      "notes": "دو جملهٔ کوتاه از توصیف دختر در صفحهٔ ۱۰؛ در یک passage نگه داشته شد.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088405": {
+      "text": "موهاش به قدری بلند بودن که به نظرم تا کمرش می‌رسیدن...",
+      "status": "verified",
+      "pdf_page": 10,
+      "notes": "پایان توصیف دختر در صفحهٔ ۱۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088410": {
+      "text": "اممم... به نظرت جالبه؟!",
+      "status": "verified",
+      "pdf_page": 10,
+      "notes": "دیالوگ صفحهٔ ۱۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088416": {
+      "text": "از این سوالم منظور خاصی نداشتم، فقط چون کار دیگه‌ای نداشتم شروع کردم تا با اون حرف بزنم.",
+      "status": "verified",
+      "pdf_page": 10,
+      "notes": "ادامهٔ دیالوگ/روایت در صفحهٔ ۱۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088426": {
+      "text": "نه واقعا...",
+      "status": "verified",
+      "pdf_page": 10,
+      "notes": "دیالوگ صفحهٔ ۱۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088432": {
+      "text": "تنها جوابی بود که بهم داد و به تماشای اون تلویزیون خسته‌کننده ادامه داد، درحالی که حتی برنگشت تا منو ببینه.",
+      "status": "verified",
+      "pdf_page": 10,
+      "notes": "بخش نخست پاسخ دختر؛ با جملهٔ بعدی در PDF تطبیق داده شد.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088437": {
+      "text": "انگار اصلا اونجا نبودم.",
+      "status": "verified",
+      "pdf_page": 10,
+      "notes": "پایان همان جمله در صفحهٔ ۱۰؛ از بند قبلی جدا شد تا با passage انگلیسی منطبق شود.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088440": {
+      "text": "خب پس مجبور نیستی نگاش کنی...",
+      "status": "verified",
+      "pdf_page": 10,
+      "notes": "گفتار درونی راوی در صفحهٔ ۱۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088444": {
+      "text": "و روی یکی از صندلی‌ها کنارش نشستم.",
+      "status": "verified",
+      "pdf_page": 10,
+      "notes": "ادامهٔ بند صفحهٔ ۱۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088449": {
+      "text": "و با هم مشغول دیدن تلویزیون شدیم. کار دیگه‌ای نبود که بکنم، کار دیگه‌ای نمی‌تونستم بکنم.",
+      "status": "verified",
+      "pdf_page": 10,
+      "notes": "دو جملهٔ متوالی صفحهٔ ۱۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088457": {
+      "text": "نشسته بودیم و تو سکوت اتاق، تلویزیون نگاه می‌کردیم.",
+      "status": "verified",
+      "pdf_page": 10,
+      "notes": "بند صفحهٔ ۱۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088461": {
+      "text": "مثل همیشه، برنامه‌های مربوط به سال جدید و یه سری کمدین و چند تا شعبده‌باز...",
+      "status": "verified",
+      "pdf_page": 10,
+      "notes": "توصیف برنامهٔ تلویزیون در صفحهٔ ۱۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088466": {
+      "text": "و هرازگاهی هم خنده‌های بلند مجری و حاضرین در برنامه که خیلی خشک تو اون اتاق سفید و پرنور پخش می‌شد.",
+      "status": "verified",
+      "pdf_page": 10,
+      "notes": "پایان توصیف برنامهٔ تلویزیون در صفحهٔ ۱۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088478": {
+      "text": "خب، بهم بگو...",
+      "status": "verified",
+      "pdf_page": 10,
+      "notes": "دیالوگ صفحهٔ ۱۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088484": {
+      "text": "دختر ناگهان شروع به حرف زدن کرده بود، درحالی که هنوزم به صفحهٔ تلویزیون خیره شده بود.",
+      "status": "verified",
+      "pdf_page": 10,
+      "notes": "جمله از پایین صفحهٔ ۱۰ تا بالای صفحهٔ ۱۱ ادامه دارد.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088491": {
+      "text": "چندمین بارته؟",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "دیالوگ صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088496": {
+      "text": "چندمین بار؟! منظورت چیه؟!",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "دیالوگ صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088504": {
+      "text": "چندمین باره که اومدی اینجا... طبقهٔ هفتم؟",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "دیالوگ صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088509": {
+      "text": "من... متوجه منظورت نمی‌شم.",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "دیالوگ صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088523": {
+      "text": "پس دفعهٔ اولته.",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "دیالوگ صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088529": {
+      "text": "اینو از تعجب کردن من فهمیده بود... و نتیجهٔ درستی هم گرفته بود.",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "روایت صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088535": {
+      "text": "و چون کس دیگه‌ای اینجا نیست، این وظیفهٔ منه...",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "دیالوگ صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088540": {
+      "text": "وظیفه؟!",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "دیالوگ صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088548": {
+      "text": "یه قانونی هست...",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "دیالوگ صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088554": {
+      "text": "که باید به همهٔ اونایی که تازه به طبقهٔ هفتم میان گفته بشه.",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "ادامهٔ توضیح قانون در صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088557": {
+      "text": "من هیچی نمی‌دونستم، و با این حرفا داشتم گیج‌تر می‌شدم.",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "روایت صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088561": {
+      "text": "بازم انگار من اصلا اونجا نبودم، دختر حرفاشو ادامه داد...",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "روایت صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088568": {
+      "text": "پس با دقت گوش بده...",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "دیالوگ صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088575": {
+      "text": "...",
+      "status": "reviewed",
+      "pdf_page": 11,
+      "notes": "در متن فارسی passage مستقل و جداگانه‌ای برای مکث انگلیسی «... ...» دیده نمی‌شود؛ برای جلوگیری از ساختن متن، این مورد فقط به‌صورت نشانهٔ مکث و نیازمند بازبینی ثبت شد.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088578": {
+      "text": "حرفای دختر آروم‌آروم و کلمه‌کلمه بودن.",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "آغاز توصیف گفتار دختر در صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088582": {
+      "text": "متفاوت با همهٔ اونایی که دکترا تو سالن کنفرانس دربارهٔ اینجا بهم گفتن.",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "ادامهٔ همان جمله در صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088586": {
+      "text": "اونا بهم گفته بودن اینجا جاییه که افراد منتظر پیشرفت روش‌های درمان و بهبودی می‌مونن.",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "توضیح دکترا در صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088591": {
+      "text": "جایی که افراد قلب‌هاشونو التیام می‌بخشن. البته اونا هم سعی داشتن منظور مشابهی رو بهم برسونن.",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "ادامهٔ توضیح دکترا در صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088595": {
+      "text": "ولی با توجه به صحبتای اون دختر، حرفای دکترا یه مشت تعریف کلی بودن.",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "روایت صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088599": {
+      "text": "حقیقت این بود که طبقهٔ هفتم تنها جای بیمارستان بود که توش درمانی انجام نمی‌شد.",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "روایت صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088602": {
+      "text": "فقط جایی بود برای انتظار به پایان رسیدن زندگی.",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "روایت صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088606": {
+      "text": "اینا چیزایی بودن که اون بهم گفت. البته قبل از اینکه اون بهم بگه هم خودم همچین حسی داشتم.",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "پایان بند صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088617": {
+      "text": "من بار دوممه.",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "دیالوگ صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088622": {
+      "text": "بار دوم؟",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "دیالوگ صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088631": {
+      "text": "که میام اینجا...",
+      "status": "verified",
+      "pdf_page": 11,
+      "notes": "پایان دیالوگ صفحهٔ ۱۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088636": {
+      "text": "بعد برام توضیح داد.",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "ابتدای صفحهٔ ۱۲؛ جمله برای تطبیق با passage مستقل جدا شد.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088640": {
+      "text": "که اغلب افراد توی اولین ورودشون به اینجا می‌میرن.",
+      "status": "reviewed",
+      "pdf_page": 12,
+      "notes": "متن صفحهٔ ۱۲ عیناً رونویسی شد؛ از نظر معنا با جملهٔ انگلیسی دربارهٔ ماندن در طبقه تا زمان مرگ تفاوت دارد و نیازمند بررسی مترجم است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088644": {
+      "text": "حتی اگه درمان هم بشن، وقتی شرایط جسمیشون بهتر می‌شه، می‌فرستنشون خونه؛",
+      "status": "reviewed",
+      "pdf_page": 12,
+      "notes": "متن صفحهٔ ۱۲ عیناً رونویسی شد؛ تعبیر «درمان هم بشن» با متن انگلیسی دربارهٔ نبود امکان درمان تفاوت معنایی دارد و باید بررسی شود.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088648": {
+      "text": "و وقتی اوضاع بد می‌شه، دوباره به همین‌جا برگردونده می‌شن.",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "ادامهٔ توضیح در صفحهٔ ۱۲؛ از روی تصویر PDF مقابله شد.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088651": {
+      "text": "این چرخه فقط با مرگ متوقف می‌شه؛",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "جملهٔ صفحهٔ ۱۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088655": {
+      "text": "چه توی خونه و چه اینجا تو طبقهٔ هفتم، همیشه یکی از این دو تا قرار بود بمیره، و هیچ راه فراری هم نداشتن.",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "ادامهٔ بند صفحهٔ ۱۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088660": {
+      "text": "بهم گفته بود بار دومشه که میاد اونجا...",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "پایان توضیح دربارهٔ بار دوم حضور دختر در صفحهٔ ۱۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088667": {
+      "text": "فقط یه بار اینارو می‌گم،",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "دیالوگ صفحهٔ ۱۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088675": {
+      "text": "پس با دقت گوش کن...",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "پایان دیالوگ صفحهٔ ۱۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088684": {
+      "text": "و حرفاشو ادامه داد، درحالی که تمام مدت به صفحهٔ تلویزیون خیره شده بود.",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "روایت صفحهٔ ۱۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088689": {
+      "text": "حرفاش یه‌سری حرف معمولی درمورد ساعت خاموشی و محل آشپزخونه و چیزای دیگه که به تازه‌واردای بیمارستان می‌گن نبودن...",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "جملهٔ صفحهٔ ۱۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088692": {
+      "text": "حرفایی کاملاً متفاوت.",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "پایان بند صفحهٔ ۱۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088696": {
+      "text": "دفعهٔ سومی که از خونه برمی‌گردی بیمارستان، خودت رو آماده کن. بار چهارمی وجود نداره. دیگه به خونه برنمی‌گردی.",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "بخش نخست هشدار دختر در صفحهٔ ۱۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088699": {
+      "text": "اگه خواستی فرار کنی، برو سمت ایستگاه B، نه A.",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "بخش دوم هشدار دختر در صفحهٔ ۱۲؛ حروف ایستگاه‌ها مطابق PDF حفظ شد.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088703": {
+      "text": "هیچی نخور. این کوتاه‌ترین راهه و کمترین فشار رو به خونوادت میاری.",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "بخش پایانی هشدار دختر در صفحهٔ ۱۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088706": {
+      "text": "حرفای دختر خیلی شوکه‌کننده بودن.",
+      "status": "reviewed",
+      "pdf_page": 12,
+      "notes": "متن صفحهٔ ۱۲ عیناً رونویسی شد؛ نسبت به تصویر انگلیسی («packed to the brim with matters like those») خلاصه‌تر است و نیازمند بررسی معنایی است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088709": {
+      "text": "احتمالاً این یه‌جور رسم بود،",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "بخش نخست جملهٔ صفحهٔ ۱۲؛ به passage بعدی تقسیم شد.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088713": {
+      "text": "در بین اونایی که قرار بود بمیرن و بین کسایی که به اینجا می‌اومدن حفظ شده بود.",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "ادامهٔ جملهٔ صفحهٔ ۱۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088721": {
+      "text": "پس این اون وظیفه‌ای بود که درموردش می‌گفتی؟!",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "دیالوگ صفحهٔ ۱۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088729": {
+      "text": "درسته.",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "ابتدای پاسخ دختر در صفحهٔ ۱۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088737": {
+      "text": "یادت باشه تو هم یه روز به یه تازه‌وارد اینارو بگی، باشه؟...",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "ادامهٔ پاسخ دختر در صفحهٔ ۱۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088743": {
+      "text": "با گفتن اینا، به‌آرومی بلند شد و موهای بلندشو تکون داد...",
+      "status": "reviewed",
+      "pdf_page": 12,
+      "notes": "متن صفحهٔ ۱۲ رونویسی شد؛ جزئیات «موها به بینی راوی خورد» در متن انگلیسی در فارسیِ این بند دیده نمی‌شود.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088750": {
+      "text": "من باید برم تا دمای بدنمو کنترل کنن.",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "دیالوگ صفحهٔ ۱۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088758": {
+      "text": "و از اتاق خارج شد و رفت به سمت انتهای سالن،",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "بخش نخست جملهٔ صفحهٔ ۱۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088763": {
+      "text": "و من با صدای خنده‌هایی که از تلویزیون می‌اومدن و گلای سفید پشت پنجره تنها موندم.",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "بخش پایانی جملهٔ صفحهٔ ۱۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088766": {
+      "text": "اون دختر حتی یک بارم به من نگاه نکرده بود.",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "پایان صفحهٔ ۱۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088782": {
+      "text": "چند روزی گذشت.",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "عبارت زمانی در پایین صفحهٔ ۱۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088788": {
+      "text": "جشن‌های سال نو تموم شده بودن و ترم جدید تحصیلی هم داشت شروع می‌شد...",
+      "status": "verified",
+      "pdf_page": 12,
+      "notes": "ادامهٔ متن در پایین صفحهٔ ۱۲ و پایان صفحه.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088793": {
+      "text": "مثل همیشه، من و اون توی اتاق نشسته بودیم و مستقیم به تلویزیون خیره شده بودیم.",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "ابتدای صفحهٔ ۱۳؛ از روی تصویر PDF مقابله شد.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088800": {
+      "text": "خسته‌کننده‌اس.",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "دیالوگ صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088807": {
+      "text": "همین‌طوره...",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "دیالوگ صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088813": {
+      "text": "درحالی که هردومون چشمامونو به تلویزیون دوخته بودیم اینارو گفتیم.",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "روایت صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088817": {
+      "text": "اینجا همیشه اینطوریه؟!",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "دیالوگ صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088824": {
+      "text": "متوجه منظورت نمی‌شم.",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "دیالوگ صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088829": {
+      "text": "منظورم اینه که چرا همیشه انقدر خلوته؟",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "دیالوگ صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088835": {
+      "text": "اون مدت، به جز پرستارا، دکترا و بهیارا و البته اون، هیچ‌کس دیگه‌ای رو ندیده بودم.",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "روایت صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088839": {
+      "text": "همه برای سال نو رفتن خونه؟!",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "دیالوگ صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088852": {
+      "text": "واقعاً می‌خوای دلیلشو بدونی؟",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "دیالوگ صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088857": {
+      "text": "خب، نه واقعاً.",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "دیالوگ صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088864": {
+      "text": "... پس، منم چیزی نمی‌گم.",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "دیالوگ صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088869": {
+      "text": "هر از گاهی همچین سؤال و جوابایی داشتیم. حرفایی که حتی نمی‌شد اسمشونو مکالمه گذاشت.",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "روایت صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088873": {
+      "text": "یه باد ملایم از لای پنجره‌ای که فقط ۱۵ سانتی‌متر باز می‌شد اومد تو.",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "روایت صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088878": {
+      "text": "موهای بلند دختر رو تکون می‌داد، درست مثل گلای سفید پشت پنجره تکون می‌خوردن.",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "روایت صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088883": {
+      "text": "روزها رو با نگاه کردن به اون تلویزیون بی‌خود و خسته‌کننده سپری می‌کردیم.",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "پایان بند صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088894": {
+      "text": "خب پس اینجایین.",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "دیالوگ پرستار در صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088899": {
+      "text": "صدای یه پرستار مسن بود که داشت می‌اومد طرف ما.",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "روایت صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088903": {
+      "text": "طبق چیزی که توی ایستگاه پرستاری دیده بودم، اون مسئول طبقهٔ هفتم بود.",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "روایت صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088907": {
+      "text": "خب خانوم ستسومی، تب که ندارین؟",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "دیالوگ پرستار در صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088914": {
+      "text": "خوبم، تب ندارم.",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "پاسخ صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088920": {
+      "text": "ستسومی... پس اسمش این بود.",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "روایت صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088924": {
+      "text": "نباید اینطوری این‌ور اون‌ور بری.",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "دیالوگ پرستار در صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088936": {
+      "text": "متوجهی؟ همه نگرانتن.",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "دیالوگ پرستار در صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088943": {
+      "text": "... خیلی مهم نیست...",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "پاسخ ستسومی در صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088948": {
+      "text": "اوه، این دیگه چه جور جوابیه؟!",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "دیالوگ پرستار در صفحهٔ ۱۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088959": {
+      "text": "بچه‌های این دوره‌زمونه...",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "دیالوگ پرستار در صفحهٔ ۱۳؛ ادامهٔ جمله در ابتدای صفحهٔ ۱۴ است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088964": {
+      "text": "سرزنش‌کنان و درحالی که کاراشو می‌کرد، زیر لب اینارو گفت.",
+      "status": "verified",
+      "pdf_page": 13,
+      "notes": "ادامهٔ جمله از پایین صفحهٔ ۱۳ به بالای صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088968": {
+      "text": "تو اون مدت دختر، که اسمش ستسومی بود، جوری وانمود کرد که انگار اصلاً نمی‌شنوه،",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "ابتدای صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088973": {
+      "text": "مستقیم به تلویزیون خسته‌کننده زل زد و به اون پرستار غرغرو کمترین توجهی نکرد.",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "ادامهٔ جمله در صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088977": {
+      "text": "فعلاً، بعداً بازم میام تا یه‌سری نمونه خون بگیرم.",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "دیالوگ پرستار در صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088983": {
+      "text": "و بعد به ایستگاه پرستاری برگشت.",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "روایت صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088990": {
+      "text": "می‌گم که...",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "شروع دیالوگ صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:088995": {
+      "text": "ناراحت می‌شی اگه من ستسومی صدات کنم؟!",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "ادامهٔ دیالوگ صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089001": {
+      "text": "درحالی که به دستبند سفیدش نگاه می‌کردم،",
+      "status": "reviewed",
+      "pdf_page": 14,
+      "notes": "متن صفحهٔ ۱۴ رونویسی شد؛ اشارهٔ صریح به گروه خونی و نامِ نوشته‌شده روی دستبند در این بند فارسی دیده نمی‌شود.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089012": {
+      "text": "چیزی شده؟! ستسومی؟!",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "دیالوگ صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089018": {
+      "text": "چرا اون‌جوری صدام می‌کنی؟ (منظور ستسومی به‌کار نبردن کلمهٔ san بعد از اسمش بود.)",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "دیالوگ و توضیح مترجم در پرانتز؛ توضیح پرانتزی در PDF حفظ شد.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089023": {
+      "text": "ها؟!",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "دیالوگ صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089030": {
+      "text": "تو از من کوچیک‌تری.",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "دیالوگ صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089035": {
+      "text": "هی، چرا من از تو کوچیک‌تر باشم؟!",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "دیالوگ صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089042": {
+      "text": "هیچی... فقط اینطوری به نظرم اومد.",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "دیالوگ صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089047": {
+      "text": "ناراحت نشده بودم بهم گفته بود کوچیک‌ترم.",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "روایت صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089050": {
+      "text": "برای این بود که هرجوری نگاه می‌کردم، به نظرم پنج‌شیش سال بزرگ‌تر از اون بودم.",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "روایت صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089055": {
+      "text": "برای همین گواهینامه رو از جیبم درآوردم و بهش نشون دادم.",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "روایت صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089058": {
+      "text": "می‌بینی؟ شاید به نظر نیاد، اما ۲۰ سالمه.",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "دیالوگ صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089072": {
+      "text": "پس همون‌طوری که فکر می‌کردم، کوچیک‌تری به هر حال.",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "دیالوگ صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089087": {
+      "text": "خیلی مهم نیست... فقط یکم ازت بزرگ‌ترم، همین.",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "دیالوگ صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089092": {
+      "text": "مثل همیشه آروم و بدون هیچ احساسی اینو گفت.",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "روایت صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089096": {
+      "text": "چشماشو به اون تلویزیون خسته‌کننده دوخته بود، ولی این‌طور هم به نظر می‌اومد یه جای دورتر رو نگاه می‌کرد...",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "روایت صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089113": {
+      "text": "یه روز، بعد از اینکه علائم حیاتیمو قبل از صبحانه چک کردن، مخفیانه رفتم تو آسانسور.",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "جملهٔ صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089118": {
+      "text": "وقتی به طبقهٔ اول رسیدم، از در خارج شدم و رفتم بیرون از بیمارستان.",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "ادامهٔ جملهٔ صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089125": {
+      "text": "می‌خواستم برم جایی که خیلی وقت پیش درموردش بهم گفته بود؛ ایستگاه B که دورتره، نه ایستگاه A.",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "ادامهٔ جملهٔ صفحهٔ ۱۴؛ حروف ایستگاه‌ها مطابق PDF حفظ شد.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089134": {
+      "text": "این‌طور نبود که بخوام فرار کنم یا هر کار دیگه‌ای...",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "پایان بند صفحهٔ ۱۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089138": {
+      "text": "این‌طور نبود که بخوام فرار کنم یا هر کار دیگه‌ای...",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "این event 132 است؛ متن صفحهٔ ۱۴ با خط بعدی در صفحهٔ ۱۵ ادامه دارد.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089142": {
+      "text": "هیچ‌کدوم از ماها به‌جز طبقهٔ هفتم یا خونه‌هامون نمی‌مردیم...",
+      "status": "verified",
+      "pdf_page": 14,
+      "notes": "این event 133 است؛ عبارت از پایین صفحهٔ ۱۴ به بالای صفحهٔ ۱۵ ادامه دارد.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089146": {
+      "text": "این چیزی بود که شنیده بودم.",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 134 است؛ ابتدای صفحهٔ ۱۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089150": {
+      "text": "همین‌طور به نظر می‌اومد که ستسومی چندین بار اینجا، توی این ایستگاه بوده.",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 135 است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089154": {
+      "text": "برای همین می‌خواستم حداقل یه بار با چشمای خودم اینجا رو دیده باشم.",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 136 است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089158": {
+      "text": "به نظر نمی‌اومد نگهبانی داشته باشه.",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 137 است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089162": {
+      "text": "هرچند به هر حال من یکی از ساکنین طبقهٔ هفتم بودم که با بقیهٔ مریضا فرق می‌کردم.",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 138 است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089167": {
+      "text": "درحالی که به سمت ایستگاه می‌رفتم، به خیلی از شایدهایی که وجود داشتن فکر می‌کردم و به‌آرومی قدم برمی‌داشتم.",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 139 است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089172": {
+      "text": "به مردمی که با عجله به سمت مدرسه یا محل کارشون می‌رفتن نگاه می‌کردم.",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 140 است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089180": {
+      "text": "حدوداً ۲۵ دقیقه‌ای گذشت تا اینکه رسیدم جلوی ایستگاه.",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 141 است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089181": {
+      "text": "چهار تا ایستگاه اتوبوس داشت.",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 142 است؛ عبارت مربوط به فاصله در صفحهٔ ۱۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089184": {
+      "text": "وای، چقدر شلوغه!",
+      "status": "reviewed",
+      "pdf_page": 15,
+      "notes": "این event 143 است؛ دیالوگ در فارسی پیش از توضیح «اولین چیزی که به ذهنم رسید» آمده و ترتیب با gp32 جابه‌جا است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089187": {
+      "text": "اولین چیزی که با دیدن اونجا به ذهنم رسید این بود.",
+      "status": "reviewed",
+      "pdf_page": 15,
+      "notes": "این event 144 است؛ توضیح در فارسی پس از نقل‌قول آمده و ترتیب با gp32 متفاوت است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089190": {
+      "text": "زیاد خودمو نشون ندادم، چون لباس خواب تنم بود...",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 145 است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089194": {
+      "text": "ولی این فکر به ذهنم رسید که اگه می‌شد یه بلیت مترو بخرم، می‌تونستم بدون شک هرجایی که می‌خواستم برم.",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 146 است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089199": {
+      "text": "البته هنوز نمی‌دونستم چرا بهم گفته بود به ایستگاه B بیام، نه ایستگاه A.",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 147 است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089203": {
+      "text": "به هر حال اگه می‌خواستم فرار کنم، فرار کردن خیلی آسون به نظر می‌اومد.",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 148 است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089207": {
+      "text": "اون دختر حتماً چندین بار اینجا اومده، اما چرا هنوزم تو طبقهٔ هفتمه؟",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 149 است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089211": {
+      "text": "درحالی که به این چیزا فکر می‌کردم،",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 150 است؛ بخش نخست جمله.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089215": {
+      "text": "به مردمی که از ایستگاه رد می‌شدن نگاه می‌کردم.",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 151 است؛ بخش پایانی جمله.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089226": {
+      "text": "شب بعد از خاموشی،",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 152 است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089230": {
+      "text": "درحالی که از مانگا خسته شده بودم و نمی‌تونستم بخوابم، تنهایی تو بیمارستان قدم می‌زدم.",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 153 است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089235": {
+      "text": "البته طبیعتاً اجازهٔ این کار بعد از ساعت خاموشی داده نمی‌شد، ولی ما اعضای طبقهٔ هفتم یه‌جور آزادی خاصی داشتیم.",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 154 است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089241": {
+      "text": "توی سکوت تاریک سالن، درحالی که چراغا خاموش بودن،",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 155 است؛ بخش نخست جمله.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089245": {
+      "text": "دیدمش!",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 156 است؛ بخش پایانی جمله.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089250": {
+      "text": "اممم، امروز بیرونو نگاه کردی؟",
+      "status": "verified",
+      "pdf_page": 15,
+      "notes": "این event 157 است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089258": {
+      "text": "آره.",
+      "status": "reviewed",
+      "pdf_page": 15,
+      "notes": "این event 158 است؛ در PDF جملهٔ راوی و پاسخ دختر در یک ساختار ترکیبی آمده‌اند و ترتیب با eventهای gp32 یکی نیست.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089264": {
+      "text": "توی تاریکی، درحالی که به بیرون پنجره نگاه می‌کرد، جواب داد.",
+      "status": "reviewed",
+      "pdf_page": 15,
+      "notes": "این event 159 است؛ جمله در PDF با پاسخ «آره» ادغام شده و ترتیب روایت/دیالوگ با gp32 متفاوت است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089268": {
+      "text": "منم شروع کردم به صحبت درمورد اتفاقات اون روز.",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "ابتدای صفحهٔ ۱۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089274": {
+      "text": "راستی... امروز رفته بودم اون ایستگاه.",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "دیالوگ صفحهٔ ۱۶؛ ادامه در passage بعدی.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089283": {
+      "text": "ایستگاه B، همون‌طوری که بهم گفته بودی.",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "ادامهٔ دیالوگ صفحهٔ ۱۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089294": {
+      "text": "ولی جوابش تغییری نکرد...",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "روایت صفحهٔ ۱۶؛ دیالوگ کوتاه «I see» در PDF passage مستقل ندارد.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089301": {
+      "text": "فکر می‌کردم یه جور دیگه‌ای واکنش نشون بده، چون خودش هم قبلاً اونجا بود.",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "روایت صفحهٔ ۱۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089305": {
+      "text": "ولی حالا که بهش فکر می‌کنم، اینکه اون هنوزم اینجاست، به این معنی نیست که از اول هیچ علاقه‌ای به فرار نداشته؟",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "ادامهٔ روایت صفحهٔ ۱۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089311": {
+      "text": "به‌زودی قراره برم خونه.",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "دیالوگ صفحهٔ ۱۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089323": {
+      "text": "جوری حرف می‌زد که انگار کاملاً می‌دونست من چه حسی دارم...",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "روایت صفحهٔ ۱۶؛ پرسش کوتاه «What?» در PDF passage جداگانه ندارد.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089329": {
+      "text": "اما دفعهٔ بعد، بار سومه؛",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "دیالوگ صفحهٔ ۱۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089337": {
+      "text": "پس احتمالاً ما دیگه همو نمی‌بینیم.",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "ادامهٔ دیالوگ صفحهٔ ۱۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089342": {
+      "text": "همم... آره، درسته...",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "دیالوگ صفحهٔ ۱۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089348": {
+      "text": "احتمالاً چیزی که ازش حرف می‌زد، یه مرخصی موقت از بیمارستان بود.",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "روایت صفحهٔ ۱۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089352": {
+      "text": "قبلاً بهم گفته بود که هیچ‌کس بیشتر از ۳ بار از طبقهٔ هفتم مرخص نشده بود.",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "روایت صفحهٔ ۱۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089356": {
+      "text": "برخلاف بزرگ‌ترها، برای بیمارای جوون تو سن ما، پیشرفت بیماریمون خیلی بیشتر بود.",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "روایت صفحهٔ ۱۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089360": {
+      "text": "وقتی گفت احتمالاً دیگه همو نبینیم، همچین منظوری داشت.",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "پایان بند صفحهٔ ۱۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089368": {
+      "text": "بگو، کجا رو انتخاب کردی؟",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "دیالوگ صفحهٔ ۱۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089371": {
+      "text": "انتخاب کردم؟!",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "دیالوگ صفحهٔ ۱۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089377": {
+      "text": "اینکه کجا می‌خوای بمیری...",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "دیالوگ صفحهٔ ۱۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089384": {
+      "text": "وقتی ناگهان حرف از مردن شد، احساس کردم هیچی برای گفتن ندارم.",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "روایت صفحهٔ ۱۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089389": {
+      "text": "خب، نمی‌دونم... هنوز بهش فکر نکردم.",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "دیالوگ صفحهٔ ۱۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089397": {
+      "text": "... باشه، به هر حال بار اولته.",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "پاسخ ستسومی در صفحهٔ ۱۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089402": {
+      "text": "درحالی که ناراحت به نظر می‌رسید، به‌آرومی گفت:",
+      "status": "reviewed",
+      "pdf_page": 16,
+      "notes": "در PDF عبارت روایی پیش از نقل‌قول آمده است؛ در gp32 بعد از دیالوگ است. متن اصلی فارسی حفظ شد و ترتیب نیازمند تصمیم ویراستاری است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089406": {
+      "text": "مطمئناً من هم قرار نبود همیشه اونجا بمونم.",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "ادامهٔ روایت صفحهٔ ۱۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089411": {
+      "text": "منم مثل همه بارها مرخص و بستری می‌شدم. آروم‌آروم ضعیف‌تر می‌شدم و یه روز...",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "ادامهٔ روایت صفحهٔ ۱۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089416": {
+      "text": "باید انتخاب می‌کردم که می‌خوام اینجا، تو طبقهٔ هفتم تموم بشه، یا تو خونه درحالی که با اون لبخندای ساختگی احاطه شدم.",
+      "status": "verified",
+      "pdf_page": 16,
+      "notes": "پایان بند صفحهٔ ۱۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089424": {
+      "text": "دوس ندارم... تو خونه بمیرم...",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "ابتدای صفحهٔ ۱۷؛ دیالوگ به passage بعدی ادامه دارد.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089434": {
+      "text": "همین‌طور اینجا هم دوس ندارم بمیرم.",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "ادامهٔ دیالوگ صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089439": {
+      "text": "پس می‌خوای چی کار کنی؟!",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "دیالوگ صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089454": {
+      "text": "فکر کنم... تنها کار اینه که برم یه جایی...",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "پاسخ صفحهٔ ۱۷؛ ادامه در passage بعدی.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089465": {
+      "text": "تا وقتی که هنوز قدرتشو دارم.",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "پایان پاسخ صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089471": {
+      "text": "یه جایی؟! هی صبر کن...",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "دیالوگ صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089475": {
+      "text": "این دختر تو طبقهٔ هفتم بود، درحالی که می‌تونست هر وقتی که می‌خواست فرار کنه...",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "روایت صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089482": {
+      "text": "جای دیگه‌ای رو داری که بری؟",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "دیالوگ صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089498": {
+      "text": "می‌خوای... جلوتو بگیرم؟",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "دیالوگ صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089503": {
+      "text": "چی؟!",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "دیالوگ صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089511": {
+      "text": "یا می‌خوای باهام بیای؟",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "دیالوگ صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089516": {
+      "text": "خب، نه، منظورم این نبود.",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "پاسخ صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089530": {
+      "text": "پس درموردش نپرس.",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "دیالوگ صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089536": {
+      "text": "با خونسردی به بیرون پنجره خیره شده بود و مثل همیشه حتی یه بارم بهم نگاه نکرد.",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "روایت صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089540": {
+      "text": "اما اون دفعه...",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "عبارت مکث در صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089543": {
+      "text": "صورت معمولاً بی‌احساسش، به نظرم خیلی ناراحت اومد.",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "ادامهٔ روایت صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089549": {
+      "text": "من یه تازه‌وارد بودم و تازه فهمیده بودم که سومین مرخصی آخرین باره.",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "روایت صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089553": {
+      "text": "و اون دختری بود که به‌زودی برای بار دوم مرخص می‌شد.",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "روایت صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089556": {
+      "text": "هنوزم نمی‌تونستم باور کنم که چه اتفاقی داره برام می‌افته؛",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "روایت صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089560": {
+      "text": "اما یعنی منم قرار بود یه روز همچون قیافه‌ای داشته باشم؟",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "پایان بند صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089577": {
+      "text": "بارون سحرگاهی می‌بارید،",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "عبارت آغازین صفحهٔ ۱۷؛ با passage بعدی تکمیل می‌شود.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089581": {
+      "text": "که گاهی اوقات جاشو تگرگ یا برف می‌گرفت.",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "ادامهٔ عبارت زمانی صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089594": {
+      "text": "همون جای همیشگی نشسته بودم و تلویزیون تماشا می‌کردم. طبقهٔ هفتم مثل همیشه سوت‌وکور بود.",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "روایت صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089600": {
+      "text": "جالبه؟",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "دیالوگ صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089605": {
+      "text": "نه، خیلی خسته‌کننده‌اس.",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "دیالوگ صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089610": {
+      "text": "چیز دیگه‌ای نگفت و اومد کنارم نشست.",
+      "status": "reviewed",
+      "pdf_page": 17,
+      "notes": "در فارسی حرکت به سمت راوی و نشستن در یک جمله ادغام شده؛ تطبیق دقیق دو passage انگلیسی نیازمند تصمیم ویراستاری است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089614": {
+      "text": "و مثل همیشه شروع به گذروندن وقت کردیم.",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "ادامهٔ روایت صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089624": {
+      "text": "کار دیگه‌ای نبود که انجام بدیم. کاری نبود که بتونیم انجام بدیم.",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "پایان بند صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089632": {
+      "text": "آه...",
+      "status": "verified",
+      "pdf_page": 17,
+      "notes": "دیالوگ کوتاه پایین صفحهٔ ۱۷.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089637": {
+      "text": "تا حالا ندیده بودم که به تلویزیون واکنشی نشون بده...",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "ابتدای صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089640": {
+      "text": "چیزی شده؟!",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "دیالوگ صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089653": {
+      "text": "نه، واقعاً...",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "پاسخ صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089659": {
+      "text": "کلمات همیشگیش بودن، اما لحنش مثل همیشه نبود. یه چیزی بود که توجهشو جلب کرده بود.",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "روایت صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089663": {
+      "text": "برگشتم و به تلویزیون نگاه کردم تا ببینم چی باعث همچین واکنشی شده.",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "ادامهٔ روایت صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089670": {
+      "text": "تلویزیون صحنه‌هایی از طبیعت رو نشون می‌داد. تپه‌های زیبا که با درختا و گلا پوشیده شده بودن.",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "توصیف تصویر تلویزیون در صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089674": {
+      "text": "یه عالمه گلای سفید...",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "ادامهٔ توصیف صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089679": {
+      "text": "یادم یه جایی دیده بودمشون.",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "روایت صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089683": {
+      "text": "خیلی شبیه گلای پشت پنجره بودن.",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "ادامهٔ روایت صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089686": {
+      "text": "اونا می‌تونن از همین گلا باشن؟...",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "دیالوگ صفحهٔ ۱۸؛ توضیح در passage بعدی آمده است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089698": {
+      "text": "منظورم گلایی که اونجان.",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "ادامهٔ دیالوگ صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089703": {
+      "text": "و به گلای پشت پنجره اشاره کردم.",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "روایت صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089708": {
+      "text": "نه.",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "دیالوگ صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089713": {
+      "text": "عه، واقعاً؟!",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "دیالوگ صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089720": {
+      "text": "اونا از یک نوعن، اما دقیقاً یکی نیستن.",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "دیالوگ صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089726": {
+      "text": "و برای یه لحظه، قبل از اینکه دوباره به تلویزیون خیره بشه، به گلای پشت پنجره نگاه کرد.",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "روایت صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089731": {
+      "text": "من که فرقی بین اون گلا نمی‌دیدم.",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "روایت صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089736": {
+      "text": "البته برام اهمیتی هم نداشت یکی باشن یا فرق بکنن.",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "ادامهٔ روایت صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089739": {
+      "text": "ولی چیز عجیب این بود که این دختر که معمولاً توضیح نمی‌داد و حرف اضافه‌ای نمی‌زد، داشت جور دیگه‌ای حرف می‌زد که خیلی ازش بعید بود.",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "روایت صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089743": {
+      "text": "برای همین تصمیم گرفتم ادامه بدم.",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "پایان بند صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089749": {
+      "text": "به نظر میاد درموردشون زیاد می‌دونی!",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "دیالوگ صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089756": {
+      "text": "نه، واقعاً...",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "دیالوگ صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089761": {
+      "text": "واقعاً؟! ولی من تفاوتی ندیدم...",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "دیالوگ صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089772": {
+      "text": "خب، بگو که اینا ارکیده‌ان یا لاله؟",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "دیالوگ صفحهٔ ۱۸؛ توصیف میانی گل‌های روی صفحه و گلدان در PDF passage مستقل ندارد.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089782": {
+      "text": "هر دوشون سفیدند.",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "دیالوگ صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089792": {
+      "text": "با اینکه علاقه‌ای به دونستن نداشتم، ولی سعی کردم به حرف بیارمش،",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "بخش نخست روایت صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089797": {
+      "text": "اما جوابی نداد.",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "ادامهٔ روایت صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089802": {
+      "text": "و با چهرهٔ بی‌احساس همیشگیش به اون تلویزیون خسته‌کننده خیره شده بود.",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "روایت صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089807": {
+      "text": "دیگه چیزی نگفتم و رومو سمت تلویزیون کردم.",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "پایان بند صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089815": {
+      "text": "نرگس...",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "دیالوگ صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089820": {
+      "text": "چی؟!",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "دیالوگ صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089827": {
+      "text": "اونا نرگسن...",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "دیالوگ صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089841": {
+      "text": "اینو گفت و داشت برای اولین بار بهم نگاه می‌کرد.",
+      "status": "verified",
+      "pdf_page": 18,
+      "notes": "روایت صفحهٔ ۱۸.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089845": {
+      "text": "موهای بلندش تکون می‌خوردن...",
+      "status": "reviewed",
+      "pdf_page": 18,
+      "notes": "در متن فارسی به اشاره‌کردن به صفحهٔ تلویزیون اشارهٔ صریحی نشده است؛ جزئیات passage انگلیسی کامل منتقل نشده و نیازمند بررسی است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089850": {
+      "text": "پوستش مثل دستبند مشخصاتش سفید بود، درست مثل گلای تو تلویزیون.",
+      "status": "verified",
+      "pdf_page": 19,
+      "notes": "ابتدای صفحهٔ ۱۹.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089854": {
+      "text": "مطمئن بودم که یه لبخند خیلی کوچیک تو صورتش دیدم...",
+      "status": "verified",
+      "pdf_page": 19,
+      "notes": "جملهٔ صفحهٔ ۱۹؛ ادامه در passage بعدی.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen2:089857": {
+      "text": "که برای اولین بار داشت بهم نگاه می‌کرد.",
+      "status": "verified",
+      "pdf_page": 19,
+      "notes": "پایان فصل در صفحهٔ ۱۹.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:089906": {
+      "text": "چند روزی گذشت. داشتیم بیشتر و بیشتر وارد عمق زمستون می‌شدیم.",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "ابتدای فصل دوم در صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:089910": {
+      "text": "توی این مدت که بقیهٔ دنیا بهش می‌گفتن فصل امتحانات، ما مثل همیشه تلویزیون نگاه می‌کردیم.",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "جملهٔ صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:089916": {
+      "text": "خسته‌کننده‌اس.",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "دیالوگ صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:089920": {
+      "text": "همین‌طوره.",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "دیالوگ صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:089925": {
+      "text": "حرفایی که حتی نمی‌شد اسمشونو مکالمه گذاشت.",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "روایت صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:089928": {
+      "text": "تمام مدت روز رو اینطوری می‌گذروندیم. وقت‌کشی بدون هدف یا دلیل خاصی.",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:089932": {
+      "text": "وقتش کیه؟",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "دیالوگ صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:089936": {
+      "text": "امروز.",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "دیالوگ صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:089941": {
+      "text": "باشه، پس امروز...",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "دیالوگ صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:089945": {
+      "text": "اون کلمه، امروز... یعنی روزی که قرار بود مرخص بشه و بره خونه.",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "روایت صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:089950": {
+      "text": "خب... ممکنه دیگه همو نبینیم.",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "دیالوگ صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:089955": {
+      "text": "هممم... آره، فکر کنم اون‌طور باشه.",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "دیالوگ صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:089959": {
+      "text": "حتی اگه دوباره هم بستری می‌شد، آخرین بارش می‌بود.",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "روایت صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:089963": {
+      "text": "و اون موقع، احتمالاً من مرخص شده بودم.",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:089968": {
+      "text": "به نظر نمی‌رسید بتونیم دوباره همو ببینیم.",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "پایان بند صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:089972": {
+      "text": "تصمیمتو گرفتی؟",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "دیالوگ صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:089977": {
+      "text": "درمورد جایی که می‌خوام بمیرم؟",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "دیالوگ صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:089981": {
+      "text": "آره.",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "دیالوگ صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:089986": {
+      "text": "نه، هنوز نه.",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "دیالوگ صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:089990": {
+      "text": "باشه، یه‌جورایی با ناراحتی سرشو به نشونهٔ تأیید تکون داد...",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "روایت صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:089996": {
+      "text": "من هنوز هیچ حسی درمورد اوضاع نداشتم و دکترا هم درمورد اولین مرخصیم چیزی بهم نگفته بودن.",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "روایت صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090001": {
+      "text": "حالا که فکرشو می‌کنم...",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "عبارت مکث صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090005": {
+      "text": "شاید بالاخره تصمیم گرفته بود که جواب خودش رو به این دوراهی بده...",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090023": {
+      "text": "ستسومی، همه‌چی آماده‌اس.",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "دیالوگ مادر در صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090028": {
+      "text": "یه خانمی که وارد اتاق شد، اینو گفت.",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "روایت صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090033": {
+      "text": "به نظر می‌رسید مادرش باشه. یه نشونهٔ سلام به من تکون داد، ولی من بلند نشدم.",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "روایت صفحهٔ ۲۰ و ابتدای صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090038": {
+      "text": "به‌زودی می‌ریم، تو آماده‌ای؟",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "دیالوگ صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090044": {
+      "text": "آره...",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "پاسخ صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090050": {
+      "text": "خب، روز خوبی داشته باشین آقا.",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "دیالوگ مادر در صفحهٔ ۲۰.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090056": {
+      "text": "دستشو به سمت ستسومی دراز کرد و دوباره سرشو تکون داد.",
+      "status": "verified",
+      "pdf_page": 20,
+      "notes": "روایت صفحهٔ ۲۰؛ ادامهٔ کنش مادر در صفحهٔ بعد.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090059": {
+      "text": "دخترش رو دست گرفت...",
+      "status": "reviewed",
+      "pdf_page": 21,
+      "notes": "در PDF جملهٔ گرفتن دست و حرکت مادر با جملهٔ قبلی ادغام شده؛ نیازمند تطبیق دقیق مرز passage است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090068": {
+      "text": "اما... دختر اصلاً تکون نخورد.",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "روایت صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090072": {
+      "text": "حتی بعد از اینکه مادرش دستشو گرفت، همون‌طور روی صندلی خشک‌ش زده بود.",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090076": {
+      "text": "چیزی شده ستسومی؟!",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "دیالوگ مادر صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090082": {
+      "text": "درد می‌گیره... یکمی...",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "پاسخ ستسومی صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090088": {
+      "text": "چی؟ کجا؟ سینه‌ات؟ شکمت؟",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "دیالوگ مادر صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090094": {
+      "text": "سینه‌ام...",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "پاسخ ستسومی صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090100": {
+      "text": "همین‌جا بمون، من می‌رم دکتر بیارم.",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "دیالوگ مادر صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090112": {
+      "text": "و به سمت ایستگاه پرستاری دوید.",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "روایت صفحهٔ ۲۱؛ جزئیات دمپایی ملاقات‌کننده در متن فارسی نیامده است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090119": {
+      "text": "حالا فقط من و اون توی اتاق مونده بودیم. هر دو روی صندلی.",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "روایت صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090123": {
+      "text": "من چیزی درمورد بیماریش یا وضعیتش نمی‌دونستم.",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "روایت صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090127": {
+      "text": "تنها چیزایی که می‌دونستم به لطف دستبند سفیدش بود: اسمش ستسومی بود و گروه خونیش O.",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "روایت صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090132": {
+      "text": "ولی ما اعضای طبقهٔ هفتم بودیم و اون از من بزرگ‌تر بود، اگرچه فقط کمی.",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "پایان بند صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090135": {
+      "text": "می‌خوای تا وقتی دکتر میاد اینجا دراز بکشی؟",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "دیالوگ صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090139": {
+      "text": "به گوشهٔ اتاق، به سمت کاناپه اشاره کردم. چیزی که تا حالا ندیده بودم کسی ازش استفاده کنه.",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "روایت صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090143": {
+      "text": "بالاخره از کمرت حمایت می‌کنه.",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "ادامهٔ دیالوگ صفحهٔ ۲۱؛ در صفحهٔ بعد تکمیل می‌شود.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090153": {
+      "text": "چیزی نیست... الان خوبم.",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "دیالوگ صفحهٔ ۲۱؛ متن کوتاه در پاسخ ستسومی.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090159": {
+      "text": "و بعد اون جواب کوتاه، بلند شد و ایستاد.",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "روایت صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090189": {
+      "text": "شب بعد از خاموشی،",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "عبارت زمانی در صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090193": {
+      "text": "مثل همیشه از مانگا خسته شده بودم و توی راهروهای تاریک بیمارستان قدم می‌زدم.",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "روایت صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090198": {
+      "text": "توی تاریکی سالن همیشگی بود،",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "بخش نخست جملهٔ صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090201": {
+      "text": "که پیداش کردم.",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "بخش پایانی جملهٔ صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090209": {
+      "text": "اممم... هنوز اینجایی...",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "دیالوگ صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090213": {
+      "text": "آره...",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "پاسخ صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090218": {
+      "text": "اوضاع چطوره؟ بازم حالت خوب نیست؟",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "دیالوگ صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090222": {
+      "text": "نه، واقعاً...",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "پاسخ صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090227": {
+      "text": "تنها چیزی بود که گفت، درحالی که به پنجره خیره شده بود.",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "روایت صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090230": {
+      "text": "به هر حال مرخص شدنش به تعویق افتاده بود.",
+      "status": "verified",
+      "pdf_page": 21,
+      "notes": "روایت صفحهٔ ۲۱.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090234": {
+      "text": "کسی نمی‌دونست دفعهٔ بعدی چه زمانیه، ولی احتمالاً چند روز بعد نبود، شاید چند هفتهٔ دیگه.",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "ادامهٔ روایت در ابتدای صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090238": {
+      "text": "اممم... به نظرم امروز...",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "دیالوگ صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090241": {
+      "text": "نقش بازی می‌کردی؟!",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "ادامهٔ دیالوگ صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090252": {
+      "text": "منظورم این نیست که اصلاً مریض نیستی؛ می‌خوام بگم که...",
+      "status": "reviewed",
+      "pdf_page": 22,
+      "notes": "در متن فارسی جملهٔ انگلیسی دربارهٔ «همیشه بیمار بودن» به پرسش دربارهٔ ترک‌نکردن بیمارستان تبدیل شده؛ اختلاف معنایی نیازمند بررسی مترجم است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090256": {
+      "text": "نمی‌خواستی بیمارستانو ترک کنی، درسته؟",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "ادامهٔ پرسش صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090260": {
+      "text": "نمی‌دونم از چی حرف می‌زنی...",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "پاسخ صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090276": {
+      "text": "جواب سوالمو تو سکوتش پیدا نکردم.",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "روایت صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090280": {
+      "text": "قبلاً چند دفعه ازم پرسیده بود کجا می‌خوام بمیرم.",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "روایت صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090284": {
+      "text": "و منم همیشه می‌گفتم نمی‌دونم. اونم نمی‌خواست تو خونه یا اینجا تو طبقهٔ هفتم بمیره.",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090287": {
+      "text": "پس تو...",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "دیالوگ صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090290": {
+      "text": "هیچ جای دیگه‌ای رو نداری که بری.",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "ادامهٔ دیالوگ صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090294": {
+      "text": "خب... که چی؟",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "پاسخ صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090299": {
+      "text": "نه، هیچی...",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "پاسخ صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090304": {
+      "text": "توی اون سالن آشنا که در تاریکی فرو رفته بود،",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "آغاز توصیف صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090308": {
+      "text": "با اون حالت همیشگیش وایساده بود و بیرون پنجره رو تماشا می‌کرد.",
+      "status": "reviewed",
+      "pdf_page": 22,
+      "notes": "بخش «بدون اینکه حتی وجود من را به رسمیت بشناسد» در فارسی صریح نیست؛ برای حفظ تطبیق دقیق نیازمند بررسی است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090312": {
+      "text": "با اینکه ساعت تازه ۱۱ شده بود، اما بیمارستان تاریک بود.",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "روایت صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090317": {
+      "text": "اینجا نقطهٔ عطف روزای عادی و غیرعادی بود.",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "روایت صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090321": {
+      "text": "علاوه بر همهٔ اینا، ما اعضای طبقهٔ هفتم بودیم که انتخاب دیگه‌ای به‌جز مردن تو خونه یا تو طبقهٔ هفتم نداشتیم.",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "روایت صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090326": {
+      "text": "از پنجرهٔ سالن تاریک طبقهٔ هفتم داشت بیرونو نگاه می‌کرد... دنیای عادی رو.",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "روایت صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090330": {
+      "text": "ساختمونا و خونه‌هایی که هنوز روشن بودن و خیابونای شلوغ از آدمایی که به خونه‌هاشون می‌رفتن.",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "روایت صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090333": {
+      "text": "با اینکه هنوزم برام مبهم و گنگ بود،",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "بخش نخست جملهٔ صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090336": {
+      "text": "اما منم یکی از اعضای طبقهٔ هفتم بودم؛ یه موجود غیرعادی.",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "ادامهٔ جملهٔ صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090340": {
+      "text": "هیچ برگشتی هم به اون دنیا نداشتم.",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "پایان بند صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090352": {
+      "text": "... زمان برای من متوقف شده بود...",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "آغاز مونولوگ صفحهٔ ۲۲.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090362": {
+      "text": "فصل‌های زیادی رو گذروندم، آسمونای سفیدپوش زیادی رو دیدم، بدون اینکه بخوام یا نیاز داشته باشم تا با کسی حرف بزنم...",
+      "status": "verified",
+      "pdf_page": 22,
+      "notes": "ادامهٔ مونولوگ در صفحهٔ ۲۲ و ۲۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090367": {
+      "text": "اوایل از پنجره، بچه‌های سالم رو تماشا می‌کردم که می‌رفتن مدرسه و مردمی که تو خیابونا رفت‌وآمد می‌کردن؛",
+      "status": "verified",
+      "pdf_page": 23,
+      "notes": "ابتدای صفحهٔ ۲۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090371": {
+      "text": "هر وقت خسته می‌شدم، می‌رفتم سراغ تلویزیون. کار دیگه‌ای نبود بکنم، کار دیگه‌ای نبود که بتونم انجام بدم.",
+      "status": "verified",
+      "pdf_page": 23,
+      "notes": "روایت صفحهٔ ۲۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090375": {
+      "text": "حتی وقتی بیرون پنجره برف می‌بارید و ابری بود، پشت صفحهٔ تلویزیون همیشه آفتابی و روشن بود.",
+      "status": "verified",
+      "pdf_page": 23,
+      "notes": "روایت صفحهٔ ۲۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090379": {
+      "text": "یه دنیای رویایی پشت چشمام نقش می‌بست... بدون گرما، سرما و حتی درد...",
+      "status": "verified",
+      "pdf_page": 23,
+      "notes": "روایت صفحهٔ ۲۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090384": {
+      "text": "توی تخیلاتم دنبال راحتی می‌گشتم.",
+      "status": "verified",
+      "pdf_page": 23,
+      "notes": "روایت صفحهٔ ۲۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090389": {
+      "text": "اطلاعاتمو افزایش دادم. اطلاعات بی‌معنی بیشتر و بیشتری جمع کردم...",
+      "status": "verified",
+      "pdf_page": 23,
+      "notes": "روایت صفحهٔ ۲۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090393": {
+      "text": "قبل اینکه بفهمم، چیزایی که تلویزیون نشون می‌داد دیگه واقعی به نظر نمی‌اومدن.",
+      "status": "verified",
+      "pdf_page": 23,
+      "notes": "ابتدای بند صفحهٔ ۲۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090397": {
+      "text": "بعد از اون رفتم سراغ کتابا، بازیا و خانواده...",
+      "status": "verified",
+      "pdf_page": 23,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090402": {
+      "text": "آخرش حتی خودمو هم واقعی نمی‌دونستم. انگار داشتم به زندگی یکی دیگه نگاه می‌کردم.",
+      "status": "verified",
+      "pdf_page": 23,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090406": {
+      "text": "برای همین وقتی آوردنم طبقهٔ هفتم، خیلی متعجب نشدم.",
+      "status": "verified",
+      "pdf_page": 23,
+      "notes": "روایت صفحهٔ ۲۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090410": {
+      "text": "همیشه وقتی چشمامو می‌بستم، دنیا محو می‌شد.",
+      "status": "verified",
+      "pdf_page": 23,
+      "notes": "روایت صفحهٔ ۲۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090411": {
+      "text": "پس با خودم می‌گفتم که حالم خوبه و خودمو مجبور به باور کردنش کردم.",
+      "status": "verified",
+      "pdf_page": 23,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090414": {
+      "text": "و خیلی زود، دومین ترخیصم از بیمارستان رسیده بود.",
+      "status": "verified",
+      "pdf_page": 23,
+      "notes": "روایت صفحهٔ ۲۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090417": {
+      "text": "احتمالاً دفعهٔ بعد اون‌قدر ضعیف خواهم بود که نتونم رو پاهای خودم بایستم.",
+      "status": "verified",
+      "pdf_page": 23,
+      "notes": "روایت صفحهٔ ۲۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090422": {
+      "text": "با اینکه اینارو می‌دونستم، این منی که کاری ازش برنمی‌اومد، ترحم‌انگیز بود؛",
+      "status": "verified",
+      "pdf_page": 23,
+      "notes": "روایت صفحهٔ ۲۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090425": {
+      "text": "این منِ بی‌هدف، به نظرم خنده‌دار می‌اومد.",
+      "status": "verified",
+      "pdf_page": 23,
+      "notes": "پایان بند صفحهٔ ۲۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090432": {
+      "text": "زمان برای من متوقف شده بود. قلبم هم همین‌طور. سینه‌ام زخم‌های عمیق و بزرگی داشت...",
+      "status": "verified",
+      "pdf_page": 23,
+      "notes": "دیالوگ/مونولوگ صفحهٔ ۲۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090441": {
+      "text": "تا حالا ۲۲ سال زندگی کرده بودم و خودمو کاملاً درمانده می‌دیدم.",
+      "status": "verified",
+      "pdf_page": 23,
+      "notes": "پایان صفحهٔ ۲۳.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090461": {
+      "text": "چند روز بعد...",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "آغاز صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090465": {
+      "text": "ابرهای آویزون کنار رفته بودن و جاشونو یه آسمون زمستونی صاف و بی‌انتها گرفته بود.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090472": {
+      "text": "عجیب بود که پدرم اومده بود بیمارستان. تمام مدت چهره‌ش حالت دیگه‌ای داشت.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090476": {
+      "text": "و درمورد بیمه‌ام یه چیزایی می‌گفت.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090479": {
+      "text": "تو اون حال، چشم‌هاش خیلی ناراحت به نظر نمی‌رسیدن.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090482": {
+      "text": "باید کمی با دکتر صحبت کنم...",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "دیالوگ پدر در صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090485": {
+      "text": "این رو گفت و رفت سمت انتهای سالن.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090489": {
+      "text": "طرف همون سالن کنفرانس کم‌نوری که همه‌چی ازش شروع شده بود، یا حداقل این‌طور به نظر می‌رسید.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090497": {
+      "text": "اتاق بیمارستانم خالی شده بود.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090501": {
+      "text": "کاری نداشتم، مجله‌های هفتگی رو که برام خریده بودن برداشتم.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090505": {
+      "text": "و مثل همیشه، یه سبد میوه و نوشیدنی هم به‌عنوان هدیهٔ ترخیص بود.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090509": {
+      "text": "کنار سبدی که میوه‌ها توش جمع شده بودن،",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "بخش نخست جملهٔ صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090512": {
+      "text": "درست جلوی خربزه‌هایی که ازشون متنفر بودم...",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "ادامهٔ جملهٔ صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090527": {
+      "text": "چیزی که دیدم... یه دسته کلید ماشین بود.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090537": {
+      "text": "کلیدها نقره‌ای می‌درخشیدن.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090540": {
+      "text": "این کلیدها مال ماشین پدرم بود؛ همون کوپه‌ای که بهش افتخار می‌کرد و براش خیلی زحمت کشیده بود.",
+      "status": "reviewed",
+      "pdf_page": 24,
+      "notes": "توصیف فارسی دربارهٔ افتخار/زحمت با جزئیات «از روکش صندلی به بعد» در gp32 یکسان نیست؛ متن PDF حفظ شده و نیازمند بررسی است.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090545": {
+      "text": "همون کوپه‌ای که خیلی وقت پیش ازش خواسته بودم قرض بگیرم و بدون لحظه‌ای مکث بهم گفته بود نه.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090549": {
+      "text": "و گواهینامهٔ رانندگی که هنوز استفاده نشده بود، توی جیب سینه‌ای لباس خوابم.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090554": {
+      "text": "با اینکه اون روز فرصت استفاده ازش از دست رفته بود، اما همچنان همراهم بود... انگار همین مدرک زنده بودنش بود.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090565": {
+      "text": "در سکوت کلیدها رو برداشتم.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090569": {
+      "text": "این اتفاق انگار از روی غریزه بود. خودمم نمی‌دونستم چرا.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090574": {
+      "text": "بدون فکر کردن کلیدها رو برداشتم، انگار داشتم صحنه‌ای از تلویزیون رو نگاه می‌کردم.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090579": {
+      "text": "و چند روز دارویی که بهم داده بودن رو توی یه کیف گذاشتم و...",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090583": {
+      "text": "به سمت راهرو رفتم.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "پایان بند صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090592": {
+      "text": "... یواشکی از ایستگاه پرستاری رد شدم...",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090595": {
+      "text": "و سریع به سمت آسانسور رفتم.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090599": {
+      "text": "کیف تو دست راستم بود، کلیدها تو دست چپم، گواهینامه تو جیب سینه‌ایم.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090606": {
+      "text": "جلوی سالن نشیمن.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "عبارت کوتاه صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090610": {
+      "text": "و بعدش دیدم دختر نشسته و مثل همیشه تلویزیون تماشا می‌کرد.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090614": {
+      "text": "خیره به صفحهٔ تلویزیون، روی یه صندلی کوچیک تاشو نشسته بود.",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090622": {
+      "text": "امم، جالبه؟",
+      "status": "verified",
+      "pdf_page": 24,
+      "notes": "دیالوگ صفحهٔ ۲۴.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090629": {
+      "text": "اون‌طوری به نظر میاد؟",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "دیالوگ صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090634": {
+      "text": "نه، اصلاً.",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "دیالوگ صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090639": {
+      "text": "گفت‌وگوی کاملاً قابل پیش‌بینی.",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "روایت صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090642": {
+      "text": "چشماش مثل همیشه به یه جای دور خیره بود.",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "روایت صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090647": {
+      "text": "خب، می‌خوای با هم بریم؟",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "دیالوگ صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090654": {
+      "text": "چی؟!",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "دیالوگ صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090659": {
+      "text": "درحالی که کلیدها رو نشونش می‌دادم، به حرفم ادامه دادم.",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "روایت صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090662": {
+      "text": "ببین... نمی‌خوام تو خونه باشه.",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "دیالوگ صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090676": {
+      "text": "منم... نمی‌خوام اینجا تو طبقهٔ هفتم هم باشه...",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "ادامهٔ دیالوگ صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090681": {
+      "text": "خب پس... می‌خوای با هم بریم؟",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "دیالوگ صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090690": {
+      "text": "... باشه.",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "پاسخ صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090699": {
+      "text": "با این حرف، از صندلیش بلند شد. موهای بلندش تکون خورد و نوک بینیمو لمس کرد.",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "روایت صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090706": {
+      "text": "و بعد اونم چند روز دارو رو توی کیفش گذاشت...",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "روایت صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090710": {
+      "text": "و با هم آماده شدیم که طبقهٔ هفتم رو ترک کنیم.",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090714": {
+      "text": "تلویزیون خسته‌کننده رو خاموش کردم. خنده‌های آزاردهندهٔ مجری برای همیشه قطع شد.",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "روایت صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090723": {
+      "text": "هردومون با لباس خواب سوار آسانسور شدیم. از طبقهٔ بالا به سمت طبقهٔ اول رفتیم.",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "روایت صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090728": {
+      "text": "در طبقهٔ اول، به سمت ورودی اورژانس نرفتیم، بلکه به سمت ورودی درمانگاه رفتیم.",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090742": {
+      "text": "هوای سرد زمستون به صورتمون خورد. تو فضای باز و بزرگی مثل پارکینگ، شدیدتر بود.",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "روایت صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090747": {
+      "text": "هر دومون تو فضای بزرگ پرسه می‌زدیم و با نگرانی اطرافمونو نگاه می‌کردیم.",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090752": {
+      "text": "و بعد از یه مدت... ماشین پدرمو پیدا کردیم.",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "روایت صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090761": {
+      "text": "کوپهٔ نقره‌ای. ماشین پدرم که خیلی خوب نگهداری شده بود.",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "توصیف ماشین در صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090765": {
+      "text": "فوراً کلید رو توی قفل گذاشتم و در رو باز کردم.",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "روایت صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090773": {
+      "text": "بفرما، سوار شو.",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "دیالوگ صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090780": {
+      "text": "بسیار خوب...",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "پاسخ صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090793": {
+      "text": "روی صندلی راننده نشستم.",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "روایت صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090797": {
+      "text": "اون روی صندلی شاگرد بود، اما اون‌قدر کوتاه بود که به‌سختی می‌تونست جاده رو ببینه.",
+      "status": "verified",
+      "pdf_page": 25,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۵.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090805": {
+      "text": "سوئیچو چرخوندم و استارت زدم و آروم گاز دادم، درست همون‌طوری که بهم آموزش داده بودن.",
+      "status": "verified",
+      "pdf_page": 26,
+      "notes": "ابتدای صفحهٔ ۲۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090809": {
+      "text": "درست همون‌طوری که بهم آموزش داده بودن.",
+      "status": "verified",
+      "pdf_page": 26,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090819": {
+      "text": "صدای مطمئن موتور به داخل ماشین پیچید.",
+      "status": "verified",
+      "pdf_page": 26,
+      "notes": "روایت صفحهٔ ۲۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090822": {
+      "text": "ترمز دستی رو آزاد کردم و بعد کلاچ رو فشار دادم.",
+      "status": "verified",
+      "pdf_page": 26,
+      "notes": "ادامهٔ روایت صفحهٔ ۲۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090825": {
+      "text": "... حالا می‌تونستیم هرجا که می‌خواستیم بریم. نقشمون این بود.",
+      "status": "verified",
+      "pdf_page": 26,
+      "notes": "پایان بند صفحهٔ ۲۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090828": {
+      "text": "خیلی خب، بریم دیگه...",
+      "status": "verified",
+      "pdf_page": 26,
+      "notes": "دیالوگ صفحهٔ ۲۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090835": {
+      "text": "... باشه.",
+      "status": "verified",
+      "pdf_page": 26,
+      "notes": "پاسخ صفحهٔ ۲۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090841": {
+      "text": "آروم سرشو به نشونهٔ تأیید تکون داد. به‌جای جواب دادن، دنده رو روی دندهٔ دو گذاشتم.",
+      "status": "verified",
+      "pdf_page": 26,
+      "notes": "روایت صفحهٔ ۲۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090845": {
+      "text": "و ماشین به نرمی سرعت گرفت.",
+      "status": "verified",
+      "pdf_page": 26,
+      "notes": "روایت صفحهٔ ۲۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090855": {
+      "text": "چون به کلاچ عادت نداشتم و کمی ماشین رو کج می‌کردم، آهسته حرکت کردم.",
+      "status": "verified",
+      "pdf_page": 26,
+      "notes": "روایت صفحهٔ ۲۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090861": {
+      "text": "... داری می‌لرزی.",
+      "status": "verified",
+      "pdf_page": 26,
+      "notes": "دیالوگ صفحهٔ ۲۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090866": {
+      "text": "آره، اولین بارمه که تو ماشین...",
+      "status": "verified",
+      "pdf_page": 26,
+      "notes": "دیالوگ صفحهٔ ۲۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090871": {
+      "text": "درواقع از وقتی گواهینامه گرفتم، اولین باره که رانندگی می‌کنم.",
+      "status": "verified",
+      "pdf_page": 26,
+      "notes": "ادامهٔ دیالوگ صفحهٔ ۲۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    },
+    "gp32_honpen3:090882": {
+      "text": "می‌فهمم...",
+      "status": "verified",
+      "pdf_page": 26,
+      "notes": "دیالوگ صفحهٔ ۲۶.",
+      "source": "2016 Persian PDF, manually transcribed from page image"
+    }
+  },
+  "note": "Only entries marked verified are displayed. 499 passages are verified; 17 are reviewed but pending editorial decisions. All other passages remain unaligned."
+}
