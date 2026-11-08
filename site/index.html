@@ -47,11 +47,13 @@
             <button class="primary-button" id="newGameButton" type="button">New Game</button>
             <button class="menu-button" id="continueButton" type="button" disabled>Continue</button>
             <button class="menu-button" id="chaptersButton" type="button">Chapter Select</button>
+            <button class="menu-button" id="musicRoomButton" type="button">Music Room</button>
             <button class="menu-button" id="loadButton" type="button">Load Game</button>
+            <button class="menu-button install-app-button" id="installAppButton" type="button">Install App ↗</button>
           </div>
           <div class="home-footer">
             <span>English source: gp32 / Insani 2005</span>
-            <span class="build-label">Version 0.41</span>
+            <span class="build-label">Version 0.42</span>
           </div>
         </div>
         <div class="chapter-select-panel" id="chapterSelectPanel" hidden>
@@ -105,6 +107,13 @@
         </div>
       </section>
 
+      <div class="orientation-prompt" id="orientationPrompt" hidden>
+        <div class="orientation-prompt-card">
+          <div class="orientation-symbol" aria-hidden="true">↻</div>
+          <h2>Turn your device sideways</h2>
+          <p>Narcissu is designed to be read in landscape orientation.</p>
+        </div>
+      </div>
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
     </main>
 
@@ -117,7 +126,7 @@
   <dialog class="app-dialog" id="settingsDialog">
     <form method="dialog" class="dialog-inner" id="settingsForm">
       <div class="dialog-heading"><div><p class="eyebrow">Preferences</p><h2>Settings</h2></div><button class="close-button" value="cancel" aria-label="Close">×</button></div>
-      <label class="setting-row"><span><strong>Visual style</strong><small>Choose the reader appearance.</small></span><select id="modeSetting"><option value="classic">Classic</option><option value="enhanced">Enhanced</option></select></label>
+      <label class="setting-row"><span><strong>Visual style</strong><small>Classic uses restrained fades; Enhanced adds cinematic dialogue and scene transitions.</small></span><select id="modeSetting"><option value="classic">Classic — minimal, original-style</option><option value="enhanced">Enhanced — cinematic transitions</option></select></label>
       <label class="setting-row"><span><strong>Text size</strong><small>Adjust reading comfort.</small></span><input id="textSizeSetting" type="range" min="16" max="24" step="1" value="18"></label>
       <label class="setting-row"><span><strong>Auto-advance delay</strong><small>Seconds before the next passage.</small></span><input id="autoDelaySetting" type="range" min="2" max="12" step="1" value="5"></label>
       <label class="setting-row"><span><strong>Music volume</strong></span><input id="musicVolumeSetting" type="range" min="0" max="1" step="0.05" value="0.55"></label>
@@ -125,6 +134,34 @@
       <label class="setting-row"><span><strong>Reduce motion</strong><small>Use simpler transitions.</small></span><input id="reduceMotionSetting" type="checkbox"></label>
       <div class="dialog-actions"><button class="primary-button" id="saveSettingsButton" type="button">Apply settings</button></div>
     </form>
+  </dialog>
+
+  <dialog class="app-dialog music-room-dialog" id="musicRoomDialog">
+    <div class="dialog-inner">
+      <div class="dialog-heading">
+        <div><p class="eyebrow">Narcissu soundtrack</p><h2>Music Room</h2></div>
+        <button class="close-button" id="closeMusicRoom" type="button" aria-label="Close">×</button>
+      </div>
+      <p class="dialog-copy">Listen to the background music independently of the story. Playback continues while this window is closed.</p>
+      <div class="music-room-now" id="musicRoomNow">Nothing is playing</div>
+      <div class="music-track-list" id="musicTrackList"></div>
+      <div class="dialog-actions music-room-actions">
+        <button class="menu-button" id="stopMusicRoomButton" type="button">Stop music</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="app-dialog" id="installHelpDialog">
+    <div class="dialog-inner">
+      <div class="dialog-heading"><div><p class="eyebrow">Install Narcissu</p><h2>Add to your device</h2></div><button class="close-button" id="closeInstallHelp" type="button" aria-label="Close">×</button></div>
+      <div class="install-help-copy" id="installHelpCopy">
+        <p>Install Narcissu for a standalone, landscape-first reading experience.</p>
+        <p><strong>Android / Chrome:</strong> choose Install app from the browser menu, or use the install prompt when it appears.</p>
+        <p><strong>iPhone / iPad:</strong> open the Share menu in Safari, choose Add to Home Screen, then launch Narcissu from the Home Screen.</p>
+        <p>On iOS, the browser may not enforce landscape orientation. If it opens in portrait, rotate your device to continue.</p>
+      </div>
+      <div class="dialog-actions"><button class="primary-button" id="closeInstallHelpButton" type="button">Got it</button></div>
+    </div>
   </dialog>
 
   <dialog class="app-dialog" id="slotsDialog">

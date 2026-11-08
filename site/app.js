@@ -10,13 +10,14 @@ let assetManifest = null;
 let faData = { translations: {} };
 let revisedOverlay = { translations: {} };
 let historicalEventAlignment = {};
+let deferredInstallPrompt = null;
 let state = {
   screen: 'home', chapterIndex: 0, eventIndex: 0, currentEvent: null,
   backgroundPath: null, currentMusic: null, language: DEFAULT_LANGUAGE,
   windowMode: 'main', auto: false, awaitingClick: false, waitingTimer: null,
   settings: { ...DEFAULT_SETTINGS }, audioChannels: new Map(), musicAudio: null, currentMusicLoop: false,
   centerNext: false, chapterComplete: false, pendingAdvance: false,
-  history: [], passageHistory: [], downloadBusy: false
+  history: [], passageHistory: [], downloadBusy: false, lastRenderedDialogueId: null
 };
 
 function safeJSONParse(value, fallback) { try { return value ? JSON.parse(value) : fallback; } catch { return fallback; } }
@@ -103,6 +104,13 @@ function renderCurrentDialogue() {
 
   $('dialoguePanel').classList.toggle('centered', ev.align === 'center');
   $('readerScreen').classList.toggle('caption-mode', ev.window === 'caption');
+  if (state.lastRenderedDialogueId !== ev.id) {
+    const textNode = $('dialogueText');
+    textNode.classList.remove('passage-enter');
+    void textNode.offsetWidth;
+    textNode.classList.add('passage-enter');
+    state.lastRenderedDialogueId = ev.id;
+  }
   $('dialogueStatus').textContent = state.auto ? `Auto · ${state.settings.autoDelay}s` : 'Tap to continue';
   updateProgress();
 }
@@ -155,6 +163,115 @@ function playMusic(path, loop) {
   state.musicAudio = audio; state.currentMusic = path; state.currentMusicLoop = !!loop;
   audio.play().catch(() => showToast('Music will start after your first interaction with the reader.'));
 }
+function getMusicRoomTracks() {
+  const seen = new Set();
+  const tracks = [];
+  for (const ch of (story?.chapters || [])) {
+    for (const ev of ch.events || []) {
+      if (ev.type !== 'music_play' || !ev.path || seen.has(ev.path)) continue;
+      if (!assetURL(ev.path)) continue;
+      seen.add(ev.path);
+      const fileName = ev.path.replaceAll('\\', '/').split('/').pop();
+      tracks.push({ path: ev.path, code: fileName.replace('.mp3', '').toUpperCase() });
+    }
+  }
+  return tracks;
+}
+function renderMusicRoom() {
+  const list = $('musicTrackList');
+  if (!list || !story) return;
+  const tracks = getMusicRoomTracks();
+  list.replaceChildren();
+  const selectedTrack = state.musicAudio ? state.currentMusic : null;
+  const isPlayingNow = !!(state.musicAudio && !state.musicAudio.paused);
+  const currentIndex = tracks.findIndex(t => t.path === selectedTrack);
+  $('musicRoomNow').textContent = currentIndex >= 0
+    ? `${isPlayingNow ? 'Now playing' : 'Paused'} · Track ${String(currentIndex + 1).padStart(2, '0')}`
+    : 'Nothing is playing';
+  tracks.forEach((track, index) => {
+    const row = document.createElement('div');
+    row.className = 'music-track-row';
+    const meta = document.createElement('div');
+    meta.className = 'music-track-meta';
+    const title = document.createElement('strong');
+    title.textContent = `Track ${String(index + 1).padStart(2, '0')}`;
+    const code = document.createElement('small');
+    code.textContent = track.code;
+    meta.append(title, code);
+    const button = document.createElement('button');
+    button.type = 'button';
+    const isCurrent = selectedTrack === track.path;
+    const isPlaying = isCurrent && isPlayingNow;
+    button.className = isCurrent ? 'music-track-play is-playing' : 'music-track-play';
+    button.textContent = isPlaying ? 'Pause' : isCurrent ? 'Resume' : 'Play';
+    button.setAttribute('aria-label', `${button.textContent} track ${index + 1}`);
+    button.addEventListener('click', () => {
+      if (isPlaying && state.musicAudio) {
+        state.musicAudio.pause();
+      } else if (isCurrent && state.musicAudio) {
+        const resumed = state.musicAudio.play();
+        if (resumed?.catch) resumed.catch(() => showToast('Music will resume after your next interaction.'));
+      } else {
+        playMusic(track.path, false);
+        const audio = state.musicAudio;
+        if (audio) audio.addEventListener('ended', () => {
+          if (state.musicAudio === audio) {
+            state.musicAudio = null; state.currentMusic = null; state.currentMusicLoop = false;
+          }
+          renderMusicRoom();
+        }, { once: true });
+      }
+      renderMusicRoom();
+    });
+    row.append(meta, button);
+    list.append(row);
+  });
+}
+function openMusicRoom() {
+  renderMusicRoom();
+  $('musicRoomDialog').showModal();
+}
+function stopMusicRoom() {
+  stopMusic();
+  renderMusicRoom();
+}
+function isStandaloneMode() {
+  return !!(window.matchMedia?.('(display-mode: standalone)').matches || navigator.standalone === true);
+}
+function requestLandscapeOrientation() {
+  if (!isStandaloneMode()) return;
+  try {
+    const lock = screen.orientation?.lock?.('landscape');
+    if (lock && typeof lock.catch === 'function') lock.catch(() => {});
+  } catch {}
+}
+function updateOrientationPrompt() {
+  const prompt = $('orientationPrompt');
+  if (!prompt) return;
+  const portrait = window.matchMedia?.('(orientation: portrait)').matches;
+  const touch = window.matchMedia?.('(pointer: coarse)').matches;
+  prompt.hidden = !(isStandaloneMode() && portrait && touch);
+}
+function updateInstallButton() {
+  const button = $('installAppButton');
+  if (button) button.hidden = isStandaloneMode();
+}
+async function installApp() {
+  if (deferredInstallPrompt) {
+    const promptEvent = deferredInstallPrompt;
+    deferredInstallPrompt = null;
+    try {
+      await promptEvent.prompt();
+      const choice = await promptEvent.userChoice;
+      if (choice?.outcome === 'accepted') showToast('Narcissu is being installed.');
+    } catch {
+      showToast('Use your browser menu to install Narcissu.');
+    }
+    updateInstallButton();
+    return;
+  }
+  $('installHelpDialog').showModal();
+}
 function fadeMusic(duration) {
   const audio = state.musicAudio;
   if (!audio) return;
@@ -192,6 +309,8 @@ function restoreProgress(payload) {
   $('autoButton').setAttribute('aria-pressed', 'false');
   state.pendingAdvance = false;
   state.awaitingClick = false;
+  state.lastRenderedDialogueId = null;
+  requestLandscapeOrientation();
   state.chapterIndex = Math.max(0, Math.min(story.chapters.length - 1, payload.chapterIndex || 0));
   const ch = chapter(); state.eventIndex = Math.max(0, Math.min(ch.events.length, payload.eventIndex || 0));
   state.currentEvent = payload.currentEventId ? ch.events.find(e => e.id === payload.currentEventId) || null : null;
@@ -230,11 +349,12 @@ function renderChapterHeading() {
   $('chapterTitle').textContent = ch.title_en;
 }
 function startChapter(index, eventIndex = 0, options = {}) {
+  requestLandscapeOrientation();
   clearWaitingTimer(); stopAllAudio();
   if (!options.preserveHistory) state.passageHistory = [];
   state.auto = false; $('autoButton').setAttribute('aria-pressed', 'false');
   state.chapterIndex = Math.max(0, Math.min(story.chapters.length - 1, index));
-  state.eventIndex = eventIndex; state.currentEvent = null; state.windowMode = 'main';
+  state.eventIndex = eventIndex; state.currentEvent = null; state.lastRenderedDialogueId = null; state.windowMode = 'main';
   state.awaitingClick = false; state.chapterComplete = false; state.centerNext = false;
   $('backgroundImage').src = '';
   state.backgroundPath = null;
@@ -301,7 +421,14 @@ function goPrevious() {
     return;
   }
 
-  stopAllAudio();
+  const chapterChanged = target.chapterIndex !== state.chapterIndex;
+  if (chapterChanged) {
+    stopAllAudio();
+  } else {
+    // Rewind within the same chapter must not restart or seek the background music.
+    for (const channel of [...state.audioChannels.keys()]) stopChannel(channel);
+  }
+  state.lastRenderedDialogueId = null;
   state.chapterIndex = Math.max(0, Math.min(story.chapters.length - 1, target.chapterIndex));
   const ch = chapter();
   state.eventIndex = Math.max(0, Math.min(ch.events.length, target.eventIndex));
@@ -315,7 +442,7 @@ function goPrevious() {
   renderChapterHeading();
   if (state.backgroundPath) setBackground(state.backgroundPath, 0, 0);
   setLanguage(state.language);
-  if (target.currentMusic) playMusic(target.currentMusic, !!target.currentMusicLoop);
+  if (chapterChanged && target.currentMusic) playMusic(target.currentMusic, !!target.currentMusicLoop);
   if (state.currentEvent) renderCurrentDialogue();
   updatePreviousButton();
   saveProgress();
@@ -327,7 +454,15 @@ function processNext() {
   while (state.eventIndex < ch.events.length) {
     const ev = ch.events[state.eventIndex++];
     switch (ev.type) {
-      case 'background': setBackground(ev.path, ev.effect, ev.duration_ms); break;
+      case 'background':
+        setBackground(ev.path, ev.effect, ev.duration_ms);
+        if (Number(ev.hold_ms) > 0) {
+          state.awaitingClick = true; state.pendingAdvance = true;
+          $('dialogueStatus').textContent = '…';
+          state.waitingTimer = setTimeout(() => { state.waitingTimer = null; processNext(); }, Number(ev.hold_ms));
+          updateProgress(); saveProgress(); return;
+        }
+        break;
       case 'audio_play': playChannel(ev); break;
       case 'audio_stop_channel': stopChannel(ev.channel); break;
       case 'music_play': playMusic(ev.path, ev.loop); break;
@@ -522,8 +657,9 @@ function applySettings() {
 }
 function toggleAuto() {
   state.auto=!state.auto;$('autoButton').setAttribute('aria-pressed',String(state.auto));
-  if(state.auto&&state.currentEvent){clearWaitingTimer();$('dialogueStatus').textContent=`Auto · ${state.settings.autoDelay}s`;state.waitingTimer=setTimeout(()=>{state.waitingTimer=null;processNext();},state.settings.autoDelay*1000);}
-  else {clearWaitingTimer();$('dialogueStatus').textContent='Tap to continue';}
+  // Do not replace a timeline wait (including the opening statistics cards) with the auto timer.
+  if(state.auto&&state.currentEvent&&!state.pendingAdvance){clearWaitingTimer();$('dialogueStatus').textContent=`Auto · ${state.settings.autoDelay}s`;state.waitingTimer=setTimeout(()=>{state.waitingTimer=null;processNext();},state.settings.autoDelay*1000);}
+  else if(!state.auto&&!state.pendingAdvance){clearWaitingTimer();$('dialogueStatus').textContent='Tap to continue';}
 }
 function toggleFullscreen() {
   if(!document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(()=>showToast('Fullscreen is not available here.'));
@@ -536,6 +672,12 @@ function bindUI() {
   $('chaptersButton').addEventListener('click',()=>{$('chapterSelectPanel').hidden=false;});
   $('closeChapters').addEventListener('click',()=>{$('chapterSelectPanel').hidden=true;});
   $('loadButton').addEventListener('click',()=>openSlots('load'));
+  $('musicRoomButton').addEventListener('click',openMusicRoom);
+  $('closeMusicRoom').addEventListener('click',()=>$('musicRoomDialog').close());
+  $('stopMusicRoomButton').addEventListener('click',stopMusicRoom);
+  $('installAppButton').addEventListener('click',installApp);
+  $('closeInstallHelp').addEventListener('click',()=>$('installHelpDialog').close());
+  $('closeInstallHelpButton').addEventListener('click',()=>$('installHelpDialog').close());
   $('settingsButton').addEventListener('click',setupSettings);
   $('saveSettingsButton').addEventListener('click',applySettings);
   $('fullscreenButton').addEventListener('click',toggleFullscreen);
@@ -553,6 +695,19 @@ function bindUI() {
   $('offlineDownloadButton').addEventListener('click',openOfflineDialog);
   $('startDownloadButton').addEventListener('click',downloadOfflineAssets);
   $('clearDownloadButton').addEventListener('click',clearOfflineAssets);
+  window.addEventListener('beforeinstallprompt',event=>{
+    event.preventDefault();
+    deferredInstallPrompt=event;
+    updateInstallButton();
+  });
+  window.addEventListener('appinstalled',()=>{
+    deferredInstallPrompt=null;
+    updateInstallButton();
+    showToast('Narcissu has been installed.');
+  });
+  window.addEventListener('resize',updateOrientationPrompt);
+  window.addEventListener('orientationchange',updateOrientationPrompt);
+  updateInstallButton(); updateOrientationPrompt();
   window.addEventListener('online',updateNetworkStatus);window.addEventListener('offline',updateNetworkStatus);
   window.addEventListener('beforeunload',saveProgress);
   document.addEventListener('visibilitychange',()=>{if(document.hidden)saveProgress();});

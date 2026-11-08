@@ -1,4 +1,4 @@
-const SHELL_CACHE = 'narcissu-shell-v37';
+const SHELL_CACHE = 'narcissu-shell-v38';
 const ASSET_CACHE = 'narcissu-assets-v3';
 const SHELL_FILES = [
   './', './index.html', './styles.css', './app.js', './manifest.webmanifest',
@@ -23,7 +23,7 @@ const SHELL_FILES = [
   './data/localization/fa-literary-proofread-increment34.json',
   './data/localization/fa-literary-proofread-increment35.json',
   './data/localization/fa-assistant-editorial-review-increment38.json',
-  './fonts/NotoSans-Regular.ttf', './fonts/NotoSansArabic-Regular.ttf',
+  './fonts/NotoSans-Regular.ttf', './fonts/NotoSansArabic-Regular.ttf', './fonts/NotoNaskhArabic-Regular.ttf', './fonts/NotoNaskhArabic-SemiBold.ttf', './fonts/Noto-Font-License.txt',
   './icons/narcissu-192.png', './icons/narcissu-512.png'
 ];
 self.addEventListener('install', event => {
