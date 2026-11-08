@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101316">
+  <meta name="description" content="Narcissu — a quiet visual novel experience, with a bilingual Persian/English reading interface in development.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Narcissu">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/narcissu-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="./icons/narcissu-192.png">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Narcissu — Persian Edition</title>
+</head>
+<body data-mode="classic">
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#home" id="brandHome" aria-label="Narcissu home">
+        <span class="brand-mark" aria-hidden="true">✳</span>
+        <span class="brand-copy"><strong>Narcissu</strong><small>Persian Edition</small></span>
+      </a>
+      <div class="topbar-actions">
+        <span class="offline-indicator" id="networkStatus"><i></i><span>Online</span></span>
+        <button class="icon-button" id="fullscreenButton" type="button" aria-label="Toggle fullscreen" title="Fullscreen">⛶</button>
+        <button class="icon-button" id="settingsButton" type="button" aria-label="Settings" title="Settings">⚙</button>
+      </div>
+    </header>
+
+    <main class="stage" id="stage">
+      <div class="background-frame" aria-hidden="true">
+        <img id="backgroundImage" alt="" draggable="false">
+        <div class="background-fade" id="backgroundFade"></div>
+      </div>
+      <div class="stage-vignette" aria-hidden="true"></div>
+
+      <section class="home-screen" id="homeScreen" aria-labelledby="homeTitle">
+        <div class="home-content">
+          <div class="home-emblem" aria-hidden="true">✳</div>
+          <p class="eyebrow">A visual novel by stage-nana</p>
+          <h1 id="homeTitle">Narcissu</h1>
+          <p class="home-subtitle">Persian Edition <span>·</span> Narcissu 1</p>
+          <p class="home-description">A quiet story about a journey, a summer that never came, and the things we carry with us.</p>
+          <div class="menu-actions">
+            <button class="primary-button" id="newGameButton" type="button">New Game</button>
+            <button class="menu-button" id="continueButton" type="button" disabled>Continue</button>
+            <button class="menu-button" id="chaptersButton" type="button">Chapter Select</button>
+            <button class="menu-button" id="loadButton" type="button">Load Game</button>
+          </div>
+          <div class="home-footer">
+            <span>English source: gp32 / Insani 2005</span>
+            <span class="build-label">Recovery QA build 0.40</span>
+          </div>
+        </div>
+        <div class="chapter-select-panel" id="chapterSelectPanel" hidden>
+          <div class="panel-heading"><div><p class="eyebrow">Story</p><h2>Choose a chapter</h2></div><button class="close-button" id="closeChapters" aria-label="Close chapter selection">×</button></div>
+          <div class="chapter-list" id="chapterList"></div>
+        </div>
+      </section>
+
+      <section class="reader-screen" id="readerScreen" hidden aria-label="Novel reader">
+        <div class="reader-topline">
+          <div class="chapter-heading"><span class="eyebrow" id="chapterNumber">PROLOGUE</span><h2 id="chapterTitle">Prologue</h2></div>
+          <div class="reader-top-actions">
+            <button class="language-switch" id="languageSwitch" type="button" aria-label="Switch to Persian" title="Switch language"><span class="switch-current">EN</span><span class="switch-arrow">↔</span><span>FA</span></button>
+          </div>
+        </div>
+
+        <button class="dialogue-panel" id="dialoguePanel" type="button" aria-label="Advance dialogue">
+          <span class="dialogue-language" id="dialogueLanguage">ENGLISH</span>
+          <span class="dialogue-text" id="dialogueText"></span>
+          <span class="dialogue-footer"><span id="dialogueStatus">Tap to continue</span><span class="advance-mark">⌄</span></span>
+        </button>
+
+        <div class="reader-toolbar">
+          <div class="toolbar-left">
+            <button class="toolbar-button" id="autoButton" type="button" aria-pressed="false"><span>▶</span> Auto</button>
+            <button class="toolbar-button" id="historyButton" type="button"><span>≡</span> History</button>
+          </div>
+          <div class="toolbar-right">
+            <button class="toolbar-button" id="saveButton" type="button">Save</button>
+            <button class="toolbar-button" id="readerLoadButton" type="button">Load</button>
+            <button class="toolbar-button" id="readerMenuButton" type="button">Menu</button>
+            <button class="next-button" id="nextButton" type="button" aria-label="Next">Continue <span>→</span></button>
+          </div>
+        </div>
+        <div class="reader-progress"><span id="progressFill"></span></div>
+        <div class="language-notice" id="languageNotice" hidden></div>
+      </section>
+
+      <section class="chapter-end-screen" id="chapterEndScreen" hidden aria-labelledby="chapterEndTitle">
+        <div class="chapter-end-card">
+          <p class="eyebrow" id="chapterEndKicker">CHAPTER COMPLETE</p>
+          <h2 id="chapterEndTitle">The Silver Coupe</h2>
+          <p id="chapterEndMessage">You have reached the end of this chapter.</p>
+          <div class="end-actions">
+            <button class="primary-button" id="nextChapterButton" type="button">Continue</button>
+            <button class="menu-button" id="endMenuButton" type="button">Main Menu</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </main>
+
+    <footer class="app-footer">
+      <span>Original story and assets remain credited to their respective rights holders.</span>
+      <button id="offlineDownloadButton" type="button">Download for offline <span>↓</span></button>
+    </footer>
+  </div>
+
+  <dialog class="app-dialog" id="settingsDialog">
+    <form method="dialog" class="dialog-inner" id="settingsForm">
+      <div class="dialog-heading"><div><p class="eyebrow">Preferences</p><h2>Settings</h2></div><button class="close-button" value="cancel" aria-label="Close">×</button></div>
+      <label class="setting-row"><span><strong>Presentation</strong><small>Change the visual treatment without changing story content.</small></span><select id="modeSetting"><option value="classic">Classic</option><option value="enhanced">Enhanced</option></select></label>
+      <label class="setting-row"><span><strong>Text size</strong><small>Adjust reading comfort.</small></span><input id="textSizeSetting" type="range" min="18" max="32" step="1" value="23"></label>
+      <label class="setting-row"><span><strong>Auto-advance delay</strong><small>Seconds before the next passage.</small></span><input id="autoDelaySetting" type="range" min="2" max="12" step="1" value="5"></label>
+      <label class="setting-row"><span><strong>Music volume</strong></span><input id="musicVolumeSetting" type="range" min="0" max="1" step="0.05" value="0.55"></label>
+      <label class="setting-row"><span><strong>Sound and voice volume</strong></span><input id="sfxVolumeSetting" type="range" min="0" max="1" step="0.05" value="0.8"></label>
+      <label class="setting-row"><span><strong>Reduce motion</strong><small>Use simpler transitions.</small></span><input id="reduceMotionSetting" type="checkbox"></label>
+      <label class="setting-row"><span><strong>Show reviewed 2016 passages</strong><small>QA only: displays source passages that still need editorial approval.</small></span><input id="showReviewedSourceSetting" type="checkbox"></label>
+      <label class="setting-row"><span><strong>Preview revised drafts</strong><small>QA only: displays additional Persian draft alternatives with a warning.</small></span><input id="showEditorialDraftsSetting" type="checkbox"></label>
+      <div class="dialog-actions"><button class="primary-button" id="saveSettingsButton" type="button">Apply settings</button></div>
+    </form>
+  </dialog>
+
+  <dialog class="app-dialog" id="slotsDialog">
+    <form method="dialog" class="dialog-inner">
+      <div class="dialog-heading"><div><p class="eyebrow" id="slotsEyebrow">Progress</p><h2 id="slotsTitle">Save Game</h2></div><button class="close-button" value="cancel" aria-label="Close">×</button></div>
+      <div class="slot-list" id="slotList"></div>
+    </form>
+  </dialog>
+
+  <dialog class="app-dialog" id="historyDialog">
+    <form method="dialog" class="dialog-inner">
+      <div class="dialog-heading"><div><p class="eyebrow">Recently read</p><h2>Reading History</h2></div><button class="close-button" value="cancel" aria-label="Close">×</button></div>
+      <div class="history-list" id="historyList"></div>
+    </form>
+  </dialog>
+
+  <dialog class="app-dialog" id="offlineDialog">
+    <form method="dialog" class="dialog-inner">
+      <div class="dialog-heading"><div><p class="eyebrow">Offline library</p><h2>Download game resources</h2></div><button class="close-button" value="cancel" aria-label="Close">×</button></div>
+      <p class="dialog-copy">The story interface is cached separately. This downloads the original referenced image and audio resources for offline play. Keep this page open until the download finishes.</p>
+      <div class="download-meter"><span id="downloadMeterFill"></span></div>
+      <div class="download-status"><span id="downloadStatus">Not downloaded</span><strong id="downloadPercent">0%</strong></div>
+      <p class="small-note" id="storageStatus"></p>
+      <div class="dialog-actions"><button class="primary-button" id="startDownloadButton" type="button">Start download</button><button class="menu-button" id="clearDownloadButton" type="button">Clear offline assets</button></div>
+    </form>
+  </dialog>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>

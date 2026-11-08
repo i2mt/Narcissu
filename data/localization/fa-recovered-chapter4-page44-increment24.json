@@ -1,0 +1,219 @@
+{
+  "schema_version": 1,
+  "language": "fa",
+  "layer": "recovered-chapter4-page44-increment24",
+  "based_on": "Original_2016.pdf page 44 image + gp32 Narcissu Side 2nd English event stream",
+  "source_pdf": "data/source/Original_2016.pdf",
+  "note": "Increment 24 recovers 19 historically verified Chapter 4 event passages from the page 44 image. The 19 IDs were not present in the surviving overlays; they are now transcribed from the source PDF. They are marked confirmed_no_change based on the historical Increment 16 verified classification, with independent second-editor sign-off still pending. Existing overlay entries are not overwritten.",
+  "translations": {
+    "gp32_honpen5:093828": {
+      "text": "زمان برای من متوقف شده بود... قلبم متوقف شده بود...",
+      "status": "confirmed_no_change",
+      "source_text_2016": "زمان برای من متوقف شده بود... قلبم متوقف شده بود...",
+      "pdf_page": 44,
+      "english_reference": "``My time at a standstill, my heart at a standstill ...''",
+      "rationale": "این عبارت در تصویر صفحهٔ ۴۴ PDF مقابله و از ترجمهٔ چاپی ۲۰۱۶ رونویسی شد. گزارش تاریخی Increment 16 این رویداد را در گروه verified قرار داده بود؛ متن در این بازیابی به‌صورت منبع اصلی حفظ شده و ویرایش ادبی تازه‌ای روی آن انجام نشده است. تأیید مستقل ویراستار دوم فارسی همچنان لازم است.",
+      "approval": "recovered_from_original_2016_pdf_page_image; historical_increment16_verified; independent_editor_signoff_pending",
+      "source_relation": "directly_recovered_from_2016_pdf_page_image",
+      "revision_kind": "confirmed_no_change"
+    },
+    "gp32_honpen5:093848": {
+      "text": "یه روز...",
+      "status": "confirmed_no_change",
+      "source_text_2016": "یه روز...",
+      "pdf_page": 44,
+      "english_reference": "One day.",
+      "rationale": "این عبارت در تصویر صفحهٔ ۴۴ PDF مقابله و از ترجمهٔ چاپی ۲۰۱۶ رونویسی شد. گزارش تاریخی Increment 16 این رویداد را در گروه verified قرار داده بود؛ متن در این بازیابی به‌صورت منبع اصلی حفظ شده و ویرایش ادبی تازه‌ای روی آن انجام نشده است. تأیید مستقل ویراستار دوم فارسی همچنان لازم است.",
+      "approval": "recovered_from_original_2016_pdf_page_image; historical_increment16_verified; independent_editor_signoff_pending",
+      "source_relation": "directly_recovered_from_2016_pdf_page_image",
+      "revision_kind": "confirmed_no_change"
+    },
+    "gp32_honpen5:093852": {
+      "text": "که مجله رو نگاه می‌کردم، عکس روی جلدش نظرم رو به خودش جلب کرد.",
+      "status": "confirmed_no_change",
+      "source_text_2016": "که مجله رو نگاه می‌کردم، عکس روی جلدش نظرم رو به خودش جلب کرد.",
+      "pdf_page": 44,
+      "english_reference": "The usual monthly magazines.\nA photograph on a front cover drew my eyes.",
+      "rationale": "این عبارت در تصویر صفحهٔ ۴۴ PDF مقابله و از ترجمهٔ چاپی ۲۰۱۶ رونویسی شد. گزارش تاریخی Increment 16 این رویداد را در گروه verified قرار داده بود؛ متن در این بازیابی به‌صورت منبع اصلی حفظ شده و ویرایش ادبی تازه‌ای روی آن انجام نشده است. تأیید مستقل ویراستار دوم فارسی همچنان لازم است.",
+      "approval": "recovered_from_original_2016_pdf_page_image; historical_increment16_verified; independent_editor_signoff_pending",
+      "source_relation": "directly_recovered_from_2016_pdf_page_image",
+      "revision_kind": "confirmed_no_change"
+    },
+    "gp32_honpen5:093859": {
+      "text": "یه مدل بود که لباس شنا تنش بود، تو ساحل، با یه ژست خاص.",
+      "status": "confirmed_no_change",
+      "source_text_2016": "یه مدل بود که لباس شنا تنش بود، تو ساحل، با یه ژست خاص.",
+      "pdf_page": 44,
+      "english_reference": "A female model in a showy swimsuit.\n\nProvocative poses on a sandy beach.",
+      "rationale": "این عبارت در تصویر صفحهٔ ۴۴ PDF مقابله و از ترجمهٔ چاپی ۲۰۱۶ رونویسی شد. گزارش تاریخی Increment 16 این رویداد را در گروه verified قرار داده بود؛ متن در این بازیابی به‌صورت منبع اصلی حفظ شده و ویرایش ادبی تازه‌ای روی آن انجام نشده است. تأیید مستقل ویراستار دوم فارسی همچنان لازم است.",
+      "approval": "recovered_from_original_2016_pdf_page_image; historical_increment16_verified; independent_editor_signoff_pending",
+      "source_relation": "directly_recovered_from_2016_pdf_page_image",
+      "revision_kind": "confirmed_no_change"
+    },
+    "gp32_honpen5:093864": {
+      "text": "لبخند زیبایی روی لباش بود؛ دریای زمردی، جایی که همیشه تو رویاها می‌دیدم.",
+      "status": "confirmed_no_change",
+      "source_text_2016": "لبخند زیبایی روی لباش بود؛ دریای زمردی، جایی که همیشه تو رویاها می‌دیدم.",
+      "pdf_page": 44,
+      "english_reference": "A smile captured right before the emerald sea that I had always dreamed about.",
+      "rationale": "این عبارت در تصویر صفحهٔ ۴۴ PDF مقابله و از ترجمهٔ چاپی ۲۰۱۶ رونویسی شد. گزارش تاریخی Increment 16 این رویداد را در گروه verified قرار داده بود؛ متن در این بازیابی به‌صورت منبع اصلی حفظ شده و ویرایش ادبی تازه‌ای روی آن انجام نشده است. تأیید مستقل ویراستار دوم فارسی همچنان لازم است.",
+      "approval": "recovered_from_original_2016_pdf_page_image; historical_increment16_verified; independent_editor_signoff_pending",
+      "source_relation": "directly_recovered_from_2016_pdf_page_image",
+      "revision_kind": "confirmed_no_change"
+    },
+    "gp32_honpen5:093871": {
+      "text": "با اون لبخند قشنگ و رضایتمندانه‌اش و ژست فوق‌العاده‌اش بهم نگاه می‌کرد.",
+      "status": "confirmed_no_change",
+      "source_text_2016": "با اون لبخند قشنگ و رضایتمندانه‌اش و ژست فوق‌العاده‌اش بهم نگاه می‌کرد.",
+      "pdf_page": 44,
+      "english_reference": "Smiling at me happily, cheerfully,\nwith her outstanding figure.",
+      "rationale": "این عبارت در تصویر صفحهٔ ۴۴ PDF مقابله و از ترجمهٔ چاپی ۲۰۱۶ رونویسی شد. گزارش تاریخی Increment 16 این رویداد را در گروه verified قرار داده بود؛ متن در این بازیابی به‌صورت منبع اصلی حفظ شده و ویرایش ادبی تازه‌ای روی آن انجام نشده است. تأیید مستقل ویراستار دوم فارسی همچنان لازم است.",
+      "approval": "recovered_from_original_2016_pdf_page_image; historical_increment16_verified; independent_editor_signoff_pending",
+      "source_relation": "directly_recovered_from_2016_pdf_page_image",
+      "revision_kind": "confirmed_no_change"
+    },
+    "gp32_honpen5:093877": {
+      "text": "حسادت یا چیز دیگه‌ای نبود...",
+      "status": "confirmed_no_change",
+      "source_text_2016": "حسادت یا چیز دیگه‌ای نبود...",
+      "pdf_page": 44,
+      "english_reference": "... it wasn't as if\nI was jealous or anything.",
+      "rationale": "این عبارت در تصویر صفحهٔ ۴۴ PDF مقابله و از ترجمهٔ چاپی ۲۰۱۶ رونویسی شد. گزارش تاریخی Increment 16 این رویداد را در گروه verified قرار داده بود؛ متن در این بازیابی به‌صورت منبع اصلی حفظ شده و ویرایش ادبی تازه‌ای روی آن انجام نشده است. تأیید مستقل ویراستار دوم فارسی همچنان لازم است.",
+      "approval": "recovered_from_original_2016_pdf_page_image; historical_increment16_verified; independent_editor_signoff_pending",
+      "source_relation": "directly_recovered_from_2016_pdf_page_image",
+      "revision_kind": "confirmed_no_change"
+    },
+    "gp32_honpen5:093882": {
+      "text": "من حتی لباس شنا هم نداشتم، احساس نمی‌کردم که یکی لازم دارم...",
+      "status": "confirmed_no_change",
+      "source_text_2016": "من حتی لباس شنا هم نداشتم، احساس نمی‌کردم که یکی لازم دارم...",
+      "pdf_page": 44,
+      "english_reference": "I didn't own any swimsuits to begin with and I didn't come close to having any need for them.",
+      "rationale": "این عبارت در تصویر صفحهٔ ۴۴ PDF مقابله و از ترجمهٔ چاپی ۲۰۱۶ رونویسی شد. گزارش تاریخی Increment 16 این رویداد را در گروه verified قرار داده بود؛ متن در این بازیابی به‌صورت منبع اصلی حفظ شده و ویرایش ادبی تازه‌ای روی آن انجام نشده است. تأیید مستقل ویراستار دوم فارسی همچنان لازم است.",
+      "approval": "recovered_from_original_2016_pdf_page_image; historical_increment16_verified; independent_editor_signoff_pending",
+      "source_relation": "directly_recovered_from_2016_pdf_page_image",
+      "revision_kind": "confirmed_no_change"
+    },
+    "gp32_honpen5:093885": {
+      "text": "لباس خواب‌هام برام کافی بودن...",
+      "status": "confirmed_no_change",
+      "source_text_2016": "لباس خواب‌هام برام کافی بودن...",
+      "pdf_page": 44,
+      "english_reference": "... my pajamas were quite enough for me.",
+      "rationale": "این عبارت در تصویر صفحهٔ ۴۴ PDF مقابله و از ترجمهٔ چاپی ۲۰۱۶ رونویسی شد. گزارش تاریخی Increment 16 این رویداد را در گروه verified قرار داده بود؛ متن در این بازیابی به‌صورت منبع اصلی حفظ شده و ویرایش ادبی تازه‌ای روی آن انجام نشده است. تأیید مستقل ویراستار دوم فارسی همچنان لازم است.",
+      "approval": "recovered_from_original_2016_pdf_page_image; historical_increment16_verified; independent_editor_signoff_pending",
+      "source_relation": "directly_recovered_from_2016_pdf_page_image",
+      "revision_kind": "confirmed_no_change"
+    },
+    "gp32_honpen5:093895": {
+      "text": "فصل‌های زیادی رو گذروندم، آسمونای سفیدپوش زیادی رو دیدم، بدون اینکه بخوام یا نیاز داشته باشم تا با کسی حرف بزنم.",
+      "status": "confirmed_no_change",
+      "source_text_2016": "فصل‌های زیادی رو گذروندم، آسمونای سفیدپوش زیادی رو دیدم، بدون اینکه بخوام یا نیاز داشته باشم تا با کسی حرف بزنم.",
+      "pdf_page": 44,
+      "english_reference": "``I'd spent so many seasons, so many white overcast skies ...\n without the want or need to converse with anybody ...''",
+      "rationale": "این عبارت در تصویر صفحهٔ ۴۴ PDF مقابله و از ترجمهٔ چاپی ۲۰۱۶ رونویسی شد. گزارش تاریخی Increment 16 این رویداد را در گروه verified قرار داده بود؛ متن در این بازیابی به‌صورت منبع اصلی حفظ شده و ویرایش ادبی تازه‌ای روی آن انجام نشده است. تأیید مستقل ویراستار دوم فارسی همچنان لازم است.",
+      "approval": "recovered_from_original_2016_pdf_page_image; historical_increment16_verified; independent_editor_signoff_pending",
+      "source_relation": "directly_recovered_from_2016_pdf_page_image",
+      "revision_kind": "confirmed_no_change"
+    },
+    "gp32_honpen5:093907": {
+      "text": "یادمه یه لباس شنا سفارش داده بودم.",
+      "status": "confirmed_no_change",
+      "source_text_2016": "یادمه یه لباس شنا سفارش داده بودم.",
+      "pdf_page": 44,
+      "english_reference": "I remembered: having ordered a swimsuit.\nI remembered having done so several years ago now.",
+      "rationale": "این عبارت در تصویر صفحهٔ ۴۴ PDF مقابله و از ترجمهٔ چاپی ۲۰۱۶ رونویسی شد. گزارش تاریخی Increment 16 این رویداد را در گروه verified قرار داده بود؛ متن در این بازیابی به‌صورت منبع اصلی حفظ شده و ویرایش ادبی تازه‌ای روی آن انجام نشده است. تأیید مستقل ویراستار دوم فارسی همچنان لازم است.",
+      "approval": "recovered_from_original_2016_pdf_page_image; historical_increment16_verified; independent_editor_signoff_pending",
+      "source_relation": "directly_recovered_from_2016_pdf_page_image",
+      "revision_kind": "confirmed_no_change"
+    },
+    "gp32_honpen5:093915": {
+      "text": "لباس شنا رو از کشوم درآوردم، انگار همین الان خریده باشمش.",
+      "status": "confirmed_no_change",
+      "source_text_2016": "لباس شنا رو از کشوم درآوردم، انگار همین الان خریده باشمش.",
+      "pdf_page": 44,
+      "english_reference": "I took that school swimsuit, new as the day I bought it,\nout of drawer where it had patiently waited for years.",
+      "rationale": "این عبارت در تصویر صفحهٔ ۴۴ PDF مقابله و از ترجمهٔ چاپی ۲۰۱۶ رونویسی شد. گزارش تاریخی Increment 16 این رویداد را در گروه verified قرار داده بود؛ متن در این بازیابی به‌صورت منبع اصلی حفظ شده و ویرایش ادبی تازه‌ای روی آن انجام نشده است. تأیید مستقل ویراستار دوم فارسی همچنان لازم است.",
+      "approval": "recovered_from_original_2016_pdf_page_image; historical_increment16_verified; independent_editor_signoff_pending",
+      "source_relation": "directly_recovered_from_2016_pdf_page_image",
+      "revision_kind": "confirmed_no_change"
+    },
+    "gp32_honpen5:093920": {
+      "text": "لباس خواب‌هامو درآوردم و آروم، لباس شنای سرمه‌ای رو پوشیدم.",
+      "status": "confirmed_no_change",
+      "source_text_2016": "لباس خواب‌هامو درآوردم و آروم، لباس شنای سرمه‌ای رو پوشیدم.",
+      "pdf_page": 44,
+      "english_reference": "I took off my usual pajamas and timidly put on that navy-blue swimsuit.",
+      "rationale": "این عبارت در تصویر صفحهٔ ۴۴ PDF مقابله و از ترجمهٔ چاپی ۲۰۱۶ رونویسی شد. گزارش تاریخی Increment 16 این رویداد را در گروه verified قرار داده بود؛ متن در این بازیابی به‌صورت منبع اصلی حفظ شده و ویرایش ادبی تازه‌ای روی آن انجام نشده است. تأیید مستقل ویراستار دوم فارسی همچنان لازم است.",
+      "approval": "recovered_from_original_2016_pdf_page_image; historical_increment16_verified; independent_editor_signoff_pending",
+      "source_relation": "directly_recovered_from_2016_pdf_page_image",
+      "revision_kind": "confirmed_no_change"
+    },
+    "gp32_honpen5:093925": {
+      "text": "تعجب کرده بودم.",
+      "status": "confirmed_no_change",
+      "source_text_2016": "تعجب کرده بودم.",
+      "pdf_page": 44,
+      "english_reference": "... I was shocked.",
+      "rationale": "این عبارت در تصویر صفحهٔ ۴۴ PDF مقابله و از ترجمهٔ چاپی ۲۰۱۶ رونویسی شد. گزارش تاریخی Increment 16 این رویداد را در گروه verified قرار داده بود؛ متن در این بازیابی به‌صورت منبع اصلی حفظ شده و ویرایش ادبی تازه‌ای روی آن انجام نشده است. تأیید مستقل ویراستار دوم فارسی همچنان لازم است.",
+      "approval": "recovered_from_original_2016_pdf_page_image; historical_increment16_verified; independent_editor_signoff_pending",
+      "source_relation": "directly_recovered_from_2016_pdf_page_image",
+      "revision_kind": "confirmed_no_change"
+    },
+    "gp32_honpen5:093931": {
+      "text": "اما جوری اندازه‌ام بود که انگار برای سایز من درست شده بود.",
+      "status": "confirmed_no_change",
+      "source_text_2016": "اما جوری اندازه‌ام بود که انگار برای سایز من درست شده بود.",
+      "pdf_page": 44,
+      "english_reference": "... and yet ...\nit fit me as if it had been made for me that very day.",
+      "rationale": "این عبارت در تصویر صفحهٔ ۴۴ PDF مقابله و از ترجمهٔ چاپی ۲۰۱۶ رونویسی شد. گزارش تاریخی Increment 16 این رویداد را در گروه verified قرار داده بود؛ متن در این بازیابی به‌صورت منبع اصلی حفظ شده و ویرایش ادبی تازه‌ای روی آن انجام نشده است. تأیید مستقل ویراستار دوم فارسی همچنان لازم است.",
+      "approval": "recovered_from_original_2016_pdf_page_image; historical_increment16_verified; independent_editor_signoff_pending",
+      "source_relation": "directly_recovered_from_2016_pdf_page_image",
+      "revision_kind": "confirmed_no_change"
+    },
+    "gp32_honpen5:093936": {
+      "text": "اون مدل رو مجله هم داشت، از کنار دریای زمردی...",
+      "status": "confirmed_no_change",
+      "source_text_2016": "اون مدل رو مجله هم داشت، از کنار دریای زمردی...",
+      "pdf_page": 44,
+      "english_reference": "And that swimsuit model was smiling at me warmly,\nsmiling at me from the midst of the emerald sea.",
+      "rationale": "این عبارت در تصویر صفحهٔ ۴۴ PDF مقابله و از ترجمهٔ چاپی ۲۰۱۶ رونویسی شد. گزارش تاریخی Increment 16 این رویداد را در گروه verified قرار داده بود؛ متن در این بازیابی به‌صورت منبع اصلی حفظ شده و ویرایش ادبی تازه‌ای روی آن انجام نشده است. تأیید مستقل ویراستار دوم فارسی همچنان لازم است.",
+      "approval": "recovered_from_original_2016_pdf_page_image; historical_increment16_verified; independent_editor_signoff_pending",
+      "source_relation": "directly_recovered_from_2016_pdf_page_image",
+      "revision_kind": "confirmed_no_change"
+    },
+    "gp32_honpen5:093944": {
+      "text": "... ناراحت‌کننده بود...",
+      "status": "confirmed_no_change",
+      "source_text_2016": "... ناراحت‌کننده بود...",
+      "pdf_page": 44,
+      "english_reference": "... it was ...\n saddening.",
+      "rationale": "این عبارت در تصویر صفحهٔ ۴۴ PDF مقابله و از ترجمهٔ چاپی ۲۰۱۶ رونویسی شد. گزارش تاریخی Increment 16 این رویداد را در گروه verified قرار داده بود؛ متن در این بازیابی به‌صورت منبع اصلی حفظ شده و ویرایش ادبی تازه‌ای روی آن انجام نشده است. تأیید مستقل ویراستار دوم فارسی همچنان لازم است.",
+      "approval": "recovered_from_original_2016_pdf_page_image; historical_increment16_verified; independent_editor_signoff_pending",
+      "source_relation": "directly_recovered_from_2016_pdf_page_image",
+      "revision_kind": "confirmed_no_change"
+    },
+    "gp32_honpen5:093948": {
+      "text": "حسودیم نشده بود، نه... راستش، مشتاقش بودم...",
+      "status": "confirmed_no_change",
+      "source_text_2016": "حسودیم نشده بود، نه... راستش، مشتاقش بودم...",
+      "pdf_page": 44,
+      "english_reference": "It wasn't as if I was jealous, no ...\n... the truth was that I was probably yearning for it.",
+      "rationale": "این عبارت در تصویر صفحهٔ ۴۴ PDF مقابله و از ترجمهٔ چاپی ۲۰۱۶ رونویسی شد. گزارش تاریخی Increment 16 این رویداد را در گروه verified قرار داده بود؛ متن در این بازیابی به‌صورت منبع اصلی حفظ شده و ویرایش ادبی تازه‌ای روی آن انجام نشده است. تأیید مستقل ویراستار دوم فارسی همچنان لازم است.",
+      "approval": "recovered_from_original_2016_pdf_page_image; historical_increment16_verified; independent_editor_signoff_pending",
+      "source_relation": "directly_recovered_from_2016_pdf_page_image",
+      "revision_kind": "confirmed_no_change"
+    },
+    "gp32_honpen5:093953": {
+      "text": "می‌دونستم غیرممکنه... یه شوق بی‌معنی و سرسخت بود...",
+      "status": "confirmed_no_change",
+      "source_text_2016": "می‌دونستم غیرممکنه... یه شوق بی‌معنی و سرسخت بود...",
+      "pdf_page": 44,
+      "english_reference": "Yearning for it impossibly, stubbornly,\nbecause I knew that it was absolutely impossible.",
+      "rationale": "این عبارت در تصویر صفحهٔ ۴۴ PDF مقابله و از ترجمهٔ چاپی ۲۰۱۶ رونویسی شد. گزارش تاریخی Increment 16 این رویداد را در گروه verified قرار داده بود؛ متن در این بازیابی به‌صورت منبع اصلی حفظ شده و ویرایش ادبی تازه‌ای روی آن انجام نشده است. تأیید مستقل ویراستار دوم فارسی همچنان لازم است.",
+      "approval": "recovered_from_original_2016_pdf_page_image; historical_increment16_verified; independent_editor_signoff_pending",
+      "source_relation": "directly_recovered_from_2016_pdf_page_image",
+      "revision_kind": "confirmed_no_change"
+    }
+  }
+}
