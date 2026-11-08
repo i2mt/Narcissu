@@ -122,7 +122,8 @@
           "source_line": 87716,
           "path": "english\\1\\c001a.jpg",
           "effect": 1,
-          "duration_ms": 0
+          "duration_ms": 0,
+          "hold_ms": 650
         },
         {
           "id": "gp32_image:087718",
@@ -130,7 +131,8 @@
           "source_line": 87718,
           "path": "english\\1\\c001b.jpg",
           "effect": 3,
-          "duration_ms": 0
+          "duration_ms": 0,
+          "hold_ms": 650
         },
         {
           "id": "gp32_image:087720",
@@ -138,7 +140,8 @@
           "source_line": 87720,
           "path": "english\\1\\c001.jpg",
           "effect": 3,
-          "duration_ms": 0
+          "duration_ms": 0,
+          "hold_ms": 1800
         },
         {
           "id": "gp32_image:087722",
@@ -146,7 +149,8 @@
           "source_line": 87722,
           "path": "english\\1\\c002.jpg",
           "effect": 3,
-          "duration_ms": 0
+          "duration_ms": 0,
+          "hold_ms": 1800
         },
         {
           "id": "gp32_image:087724",
@@ -154,7 +158,8 @@
           "source_line": 87724,
           "path": "english\\1\\c003.jpg",
           "effect": 3,
-          "duration_ms": 0
+          "duration_ms": 0,
+          "hold_ms": 1800
         },
         {
           "id": "gp32_image:087726",
@@ -168,7 +173,8 @@
           "source_line": 87728,
           "path": "english\\1\\c004.jpg",
           "effect": 5,
-          "duration_ms": 0
+          "duration_ms": 0,
+          "hold_ms": 2000
         },
         {
           "id": "gp32_image:087730",
