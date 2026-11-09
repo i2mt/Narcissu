@@ -21,7 +21,20 @@ def build(destination: Path, project_root: Path = PROJECT_ROOT) -> tuple[int, in
         shutil.rmtree(destination)
     destination.mkdir(parents=True)
     copied = 0
-    # The worker script itself is registered by the page but is not part of its own shell list.
+
+    # Some repository checkouts keep the data and media payload under `site/`
+    # while the editable app shell and deployment tools live at the repository
+    # root. Support both layouts instead of assuming root-level data/public.
+    payload_root = project_root
+    if not (payload_root / "data/asset-manifest.json").is_file() or not (payload_root / "public").is_dir():
+        nested_payload = project_root / "site"
+        if (nested_payload / "data/asset-manifest.json").is_file() and (nested_payload / "public").is_dir():
+            payload_root = nested_payload
+        else:
+            raise SystemExit("Could not find data/asset-manifest.json and public/ in the repository root or site/.")
+
+    # The worker script and editable app shell come from the repository root.
+    # Payload-only files fall back to the existing site/ tree when necessary.
     runtime_files = ["service-worker.js", *shell_files(project_root)]
     for item in runtime_files:
         relative = item.removeprefix("./")
@@ -29,12 +42,14 @@ def build(destination: Path, project_root: Path = PROJECT_ROOT) -> tuple[int, in
             continue
         source = project_root / relative
         if not source.is_file():
+            source = payload_root / relative
+        if not source.is_file():
             raise SystemExit(f"Missing shell resource: {relative}")
         target = destination / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, target)
         copied += 1
-    manifest = json.loads((project_root / "data/asset-manifest.json").read_text(encoding="utf-8"))
+    manifest = json.loads((payload_root / "data/asset-manifest.json").read_text(encoding="utf-8"))
     for metadata in manifest["assets"].values():
         # Original media plus device-specific, letterbox-cropped mobile artwork.
         for asset_url in dict.fromkeys(
@@ -45,7 +60,7 @@ def build(destination: Path, project_root: Path = PROJECT_ROOT) -> tuple[int, in
             ) if value
         ):
             relative = Path("public") / asset_url
-            source = project_root / relative
+            source = payload_root / relative
             if not source.is_file():
                 raise SystemExit(f"Missing game asset: {relative.as_posix()}")
             target = destination / relative
