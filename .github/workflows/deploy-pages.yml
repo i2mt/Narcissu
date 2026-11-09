@@ -36,38 +36,47 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      # Recover the Increment 47 mobile derivatives from either the intended source
-      # path or the two misplaced paths encountered during earlier uploads.
-      - name: Ensure mobile artwork is in the source tree
+      # Normalize mobile artwork in whichever payload layout this repository uses.
+      # Supported layouts: root data/public, or the existing site/data/public tree.
+      - name: Ensure mobile artwork is in the payload tree
         shell: bash
         run: |
           set -euo pipefail
-          correct="public/mobile-assets"
 
+          if [ -f "data/asset-manifest.json" ] && [ -d "public" ]; then
+            payload_root="."
+          elif [ -f "site/data/asset-manifest.json" ] && [ -d "site/public" ]; then
+            payload_root="site"
+          else
+            echo "::error::Could not find data/asset-manifest.json and public/ in the repository root or site/."
+            exit 1
+          fi
+
+          correct="$payload_root/public/mobile-assets"
           if [ -d "$correct/portrait" ] && [ -d "$correct/landscape" ]; then
-            echo "Mobile artwork is already in the correct source location."
+            echo "Mobile artwork is already in the correct location: $correct"
           else
             mkdir -p "$correct"
-            recovered=false
             for candidate in \
               "public/assets/mobile-assets" \
+              "public/mobile-assets" \
               "site/public/assets/mobile-assets" \
               "site/public/mobile-assets"; do
-              if [ -d "$candidate" ]; then
+              if [ -d "$candidate" ] && [ "$candidate" != "$correct" ]; then
                 cp -a "$candidate/." "$correct/"
-                recovered=true
                 echo "Recovered mobile artwork from $candidate"
+                break
               fi
             done
-            if [ "$recovered" != true ]; then
-              echo "::error::Could not find the mobile artwork folder in the repository."
+            if [ ! -d "$correct/portrait" ] || [ ! -d "$correct/landscape" ]; then
+              echo "::error::Could not recover both portrait and landscape mobile artwork folders."
               exit 1
             fi
           fi
 
           test -d "$correct/portrait"
           test -d "$correct/landscape"
-          echo "Portrait and landscape artwork are ready for the build."
+          echo "Portrait and landscape artwork are ready in $correct."
 
       # Build outside the checked-out repository because the builder intentionally
       # refuses to write its output inside the source tree.
