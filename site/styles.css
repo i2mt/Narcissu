@@ -628,3 +628,13 @@ html[data-persian-font="noto"] .reader-screen.is-fa.caption-mode .dialogue-text{
     height:100%;max-height:100%;min-height:0
   }
 }
+
+
+/* Increment 51 — exact Settings size, inline-enforced, with live preview. */
+.app-shell.is-reading #dialogueText{
+  font-size:var(--text-size)!important;
+}
+#textSizeValue{
+  display:inline!important;color:var(--accent-strong);font-size:inherit;font-weight:600
+}
+.setting-row input[type=range]#textSizeSetting{accent-color:#d5d0bd}

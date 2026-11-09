@@ -2,7 +2,7 @@
 
 const $ = (id) => document.getElementById(id);
 const STORAGE_KEYS = { progress: 'narcissu-progress-v1', settings: 'narcissu-settings-v1', history: 'narcissu-history-v1' };
-const DEFAULT_SETTINGS = { mode: 'enhanced', persianFont: 'parastoo', textSize: 14, textSizeVersion: 2, autoDelay: 5, musicVolume: 0.55, sfxVolume: 0.8, reduceMotion: false };
+const DEFAULT_SETTINGS = { mode: 'enhanced', persianFont: 'parastoo', textSize: 13, textSizeVersion: 3, autoDelay: 5, musicVolume: 0.55, sfxVolume: 0.8, reduceMotion: false };
 const DEFAULT_LANGUAGE = 'en';
 const PERSIAN_FONT_SOURCES = {
   parastoo: {
@@ -35,7 +35,7 @@ let state = {
   centerNext: false, chapterComplete: false, pendingAdvance: false,
   history: [], passageHistory: [], downloadBusy: false,
   revealActive: false, revealTimer: null, revealDurationMs: 0, revealEndsAt: 0,
-  dialogueSourceText: '', dialoguePages: [], dialoguePageIndex: 0
+  dialogueSourceText: '', dialoguePages: [], dialoguePageIndex: 0, previewTextSize: null
 };
 
 function safeJSONParse(value, fallback) { try { return value ? JSON.parse(value) : fallback; } catch { return fallback; } }
@@ -43,15 +43,19 @@ function normalizeSettings(raw, fallback = DEFAULT_SETTINGS) {
   const source = raw && typeof raw === 'object' ? raw : {};
   const merged = { ...fallback, ...source };
   const version = Number(source.textSizeVersion) || 1;
+  const oldSize = Number(source.textSize);
   if (version < 2) {
-    const oldSize = Number(source.textSize);
-    // The previous 16–24 scale rendered too large on compact landscape screens.
-    // Migrate it once to the new 12–20 scale while retaining the user's relative choice.
+    // Migrate Increment 49's 16–24 range to the smaller Increment 50 range.
     merged.textSize = Number.isFinite(oldSize) && oldSize > 0
-      ? Math.round(13 + (oldSize - 16) * 0.625) : 14;
+      ? Math.round(13 + (oldSize - 16) * 0.625) : 13;
+  } else if (version < 3) {
+    // Increment 51 reduces the default by one pixel without losing the user's
+    // selected relative size from Increment 50.
+    merged.textSize = Number.isFinite(oldSize) && oldSize > 0
+      ? oldSize - 1 : 13;
   }
-  merged.textSize = Math.min(18, Math.max(12, Number(merged.textSize) || 14));
-  merged.textSizeVersion = 2;
+  merged.textSize = Math.min(18, Math.max(11, Number(merged.textSize) || 13));
+  merged.textSizeVersion = 3;
   return merged;
 }
 function normalizePath(path) { return String(path || '').replace(/\\/g, '/').replace(/^\/+/, '').toLocaleLowerCase('en-US'); }
@@ -126,13 +130,25 @@ function startDedicationSequence() {
   // It advances automatically after 4.8 seconds; no click is required.
   dedicationTimer = setTimeout(dismissDedication, 4800);
 }
+function getEffectiveDialogueFontSize() {
+  const candidate = state.previewTextSize ?? state.settings.textSize;
+  return Math.min(18, Math.max(11, Number(candidate) || 13));
+}
+function applyDialogueTypography(size = getEffectiveDialogueFontSize()) {
+  const px = `${Math.min(18, Math.max(11, Number(size) || 13))}px`;
+  document.documentElement.style.setProperty('--text-size', px);
+  const textNode = $('dialogueText');
+  if (textNode) {
+    textNode.style.setProperty('font-size', px, 'important');
+  }
+}
 function applyVisualPreferences() {
   state.settings.mode = 'enhanced';
   state.settings.persianFont = ['parastoo', 'vazirmatn', 'noto'].includes(state.settings.persianFont)
     ? state.settings.persianFont : 'parastoo';
   document.body.dataset.mode = state.settings.mode;
   document.documentElement.dataset.persianFont = state.settings.persianFont;
-  document.documentElement.style.setProperty('--text-size', `${state.settings.textSize}px`);
+  applyDialogueTypography();
   document.body.classList.toggle('reduce-motion', !!state.settings.reduceMotion);
   scheduleDialogueFit();
 }
@@ -333,7 +349,7 @@ function makeDialogueMeasureProbe(textNode) {
     margin: '0', padding: '0', border: '0', flex: 'none',
     overflow: 'visible', boxSizing: 'border-box',
     fontFamily: style.fontFamily,
-    fontSize: `${state.settings.textSize}px`,
+    fontSize: `${getEffectiveDialogueFontSize()}px`,
     fontWeight: style.fontWeight,
     fontStyle: style.fontStyle,
     lineHeight: style.lineHeight,
@@ -387,6 +403,7 @@ function dialogueStatusLabel(action = 'continue') {
 function renderDialoguePage({ animate = false } = {}) {
   const textNode = $('dialogueText');
   if (!textNode) return 0;
+  applyDialogueTypography();
   textNode.innerHTML = state.dialoguePages[state.dialoguePageIndex] || '';
   const revealDuration = prepareWordReveal(textNode, animate);
   $('dialogueStatus').textContent = dialogueStatusLabel(revealDuration > 0 ? 'reveal' : 'continue');
@@ -424,6 +441,7 @@ function renderCurrentDialogue({ animate = false } = {}) {
 
   const sourceText = isPersian ? translated : ev.text_en;
   state.dialogueSourceText = sourceText || '';
+  applyDialogueTypography();
   $('dialogueText').setAttribute('lang', isPersian ? 'fa' : 'en');
   $('dialogueText').setAttribute('dir', isPersian ? 'rtl' : 'ltr');
   $('dialoguePanel').classList.toggle('centered', ev.align === 'center');
@@ -1085,15 +1103,39 @@ async function downloadOfflineAssets() {
 async function clearOfflineAssets() {
   await caches.delete('narcissu-assets-v4');$('downloadMeterFill').style.width='0%';$('downloadPercent').textContent='0%';$('downloadStatus').textContent='Offline assets cleared.';showToast('Offline assets cleared.');
 }
+function updateTextSizeReadout(size) {
+  const value = Math.min(18, Math.max(11, Number(size) || 13));
+  const output = $('textSizeValue');
+  if (output) output.textContent = `${value} px`;
+}
+function previewTextSize(size) {
+  state.previewTextSize = Math.min(18, Math.max(11, Number(size) || 13));
+  updateTextSizeReadout(state.previewTextSize);
+  applyDialogueTypography(state.previewTextSize);
+  scheduleDialogueFit();
+}
+function cancelTextSizePreview() {
+  state.previewTextSize = null;
+  applyDialogueTypography(state.settings.textSize);
+  updateTextSizeReadout(state.settings.textSize);
+  scheduleDialogueFit();
+}
 function setupSettings() {
-$('persianFontSetting').value=state.settings.persianFont;$('textSizeSetting').value=state.settings.textSize;$('autoDelaySetting').value=state.settings.autoDelay;
-  $('musicVolumeSetting').value=state.settings.musicVolume;$('sfxVolumeSetting').value=state.settings.sfxVolume;$('reduceMotionSetting').checked=state.settings.reduceMotion;
+  $('persianFontSetting').value=state.settings.persianFont;
+  $('textSizeSetting').value=state.settings.textSize;
+  updateTextSizeReadout(state.settings.textSize);
+  state.previewTextSize = null;
+  $('autoDelaySetting').value=state.settings.autoDelay;
+  $('musicVolumeSetting').value=state.settings.musicVolume;
+  $('sfxVolumeSetting').value=state.settings.sfxVolume;
+  $('reduceMotionSetting').checked=state.settings.reduceMotion;
   $('settingsDialog').showModal();
 }
 function applySettings() {
-  state.settings.mode='enhanced';state.settings.persianFont=$('persianFontSetting').value;state.settings.textSize=Number($('textSizeSetting').value);state.settings.textSizeVersion=2;state.settings.autoDelay=Number($('autoDelaySetting').value);
+  state.settings.mode='enhanced';state.settings.persianFont=$('persianFontSetting').value;state.settings.textSize=Number($('textSizeSetting').value);state.settings.textSizeVersion=3;state.previewTextSize=null;state.settings.autoDelay=Number($('autoDelaySetting').value);
   state.settings.musicVolume=Number($('musicVolumeSetting').value);state.settings.sfxVolume=Number($('sfxVolumeSetting').value);state.settings.reduceMotion=$('reduceMotionSetting').checked;
   applyVisualPreferences();
+  updateTextSizeReadout(state.settings.textSize);
   if(state.settings.reduceMotion && state.revealActive){
     finishDialogueReveal();
     if(state.auto&&!state.pendingAdvance)scheduleAutoAdvance();
@@ -1132,6 +1174,8 @@ function bindUI() {
   $('closeInstallHelp').addEventListener('click',()=>$('installHelpDialog').close());
   $('closeInstallHelpButton').addEventListener('click',()=>$('installHelpDialog').close());
   $('settingsButton').addEventListener('click',setupSettings);
+  $('textSizeSetting').addEventListener('input', event => previewTextSize(event.target.value));
+  $('settingsDialog').addEventListener('close', cancelTextSizePreview);
   $('saveSettingsButton').addEventListener('click',applySettings);
   $('fullscreenButton').addEventListener('click',toggleFullscreen);
   $('languageSwitch').addEventListener('click',()=>setLanguage(state.language==='en'?'fa':'en'));
