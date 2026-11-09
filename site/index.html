@@ -24,6 +24,7 @@
       </a>
       <div class="topbar-actions">
         <span class="offline-indicator" id="networkStatus"><i></i><span>Online</span></span>
+        <button class="icon-button offline-download-button" id="offlineDownloadButton" type="button" aria-label="Download for offline" title="Download for offline">↓</button>
         <button class="icon-button" id="fullscreenButton" type="button" aria-label="Toggle fullscreen" title="Fullscreen">⛶</button>
         <button class="icon-button" id="settingsButton" type="button" aria-label="Settings" title="Settings">⚙</button>
       </div>
@@ -39,13 +40,7 @@
       <section class="home-screen" id="homeScreen" aria-labelledby="homeTitle">
         <div class="home-content">
           <div class="home-emblem" aria-hidden="true">
-            <svg class="fox-seal" viewBox="0 0 64 64" role="img" aria-label="Fox publisher's seal" focusable="false">
-              <circle class="fox-seal-ring" cx="32" cy="32" r="28" />
-              <path class="fox-head" d="M12.5 12.5 25 21.5Q32 17 39 21.5L51.5 12.5 48 35Q45.5 47 32 54.5 18.5 47 16 35Z" />
-              <path class="fox-ear-detail" d="m17 17.5 8.2 9 4-3.1m17.8-5.9-8.2 9-4-3.1" />
-              <path class="fox-eyes" d="M20.5 32 28.5 33.5m15-1.5-8 1.5" />
-              <path class="fox-muzzle" d="m27.5 38 4.5 3.2 4.5-3.2-4.5-2.2Zm4.5 5.2v2.2m0 0q-3.2 2.8-6.2 0m6.2 0q3.2 2.8 6.2 0" />
-            </svg>
+            <img class="fox-seal-image" src="./icons/fox-emblem-white.png" alt="" width="512" height="512" draggable="false">
           </div>
           <p class="eyebrow">A visual novel by stage-nana</p>
           <h1 id="homeTitle">Narcissu</h1>
@@ -62,7 +57,8 @@
           </div>
           <div class="home-footer">
             <span>English source: gp32 / Insani 2005</span>
-            <span class="build-label">Version 0.47</span>
+            <span>Original story and assets remain credited to their respective rights holders.</span>
+            <span class="build-label">Version 0.48</span>
           </div>
         </div>
         <div class="chapter-select-panel" id="chapterSelectPanel" hidden>
@@ -134,10 +130,6 @@
       </div>
     </section>
 
-    <footer class="app-footer">
-      <div class="footer-credits"><span class="developer-credit">Designed and developed by <strong>Mohammad Mahdi Taghavi</strong></span><span>Original story and assets remain credited to their respective rights holders.</span></div>
-      <button id="offlineDownloadButton" type="button">Download for offline <span>↓</span></button>
-    </footer>
   </div>
 
   <dialog class="app-dialog" id="settingsDialog">

@@ -18,6 +18,7 @@ const loadedPersianFonts = new Set();
 const pendingPersianFonts = new Map();
 let dedicationTimer = null;
 let dedicationDismissed = false;
+let dialogueFitFrame = 0;
 
 let story = null;
 let assetManifest = null;
@@ -84,6 +85,7 @@ function setScreen(name) {
   updateReaderChrome();
   $('languageNotice').hidden = true;
   updateOrientationPrompt();
+  if (name === 'reader') scheduleDialogueFit();
 }
 function dismissDedication() {
   if (dedicationDismissed) return;
@@ -115,6 +117,7 @@ function applyVisualPreferences() {
   document.documentElement.dataset.persianFont = state.settings.persianFont;
   document.documentElement.style.setProperty('--text-size', `${state.settings.textSize}px`);
   document.body.classList.toggle('reduce-motion', !!state.settings.reduceMotion);
+  scheduleDialogueFit();
 }
 
 function extractArabicFontFaces(cssText, targetFamily) {
@@ -274,6 +277,45 @@ function prepareWordReveal(textNode, animate = false) {
   state.revealTimer = setTimeout(finishDialogueReveal, state.revealDurationMs + 30);
   return state.revealDurationMs;
 }
+function fitDialogueText() {
+  const textNode = $('dialogueText');
+  const panel = $('dialoguePanel');
+  if (!textNode || !panel || state.screen !== 'reader' || panel.getBoundingClientRect().height < 1) return;
+
+  // The setting is the preferred size. Only unusually long passages are reduced,
+  // and the saved preference itself is never changed.
+  const preferred = Math.max(16, Math.min(24, Number(state.settings.textSize) || 18));
+  const minimum = 11.5;
+  textNode.style.lineHeight = '';
+  textNode.style.fontSize = `${preferred}px`;
+  if (textNode.clientHeight < 1) return;
+
+  const fits = () => textNode.scrollHeight <= textNode.clientHeight + 1;
+  let fitted = preferred;
+  while (fitted > minimum && !fits()) {
+    fitted = Math.max(minimum, fitted - 0.5);
+    textNode.style.fontSize = `${fitted}px`;
+  }
+
+  // Very long passages get a little tighter leading before the type is reduced
+  // below a comfortable reading size. This is a visual fallback, not scrolling.
+  if (!fits()) {
+    textNode.style.lineHeight = state.language === 'fa' ? '1.34' : '1.25';
+    while (fitted > 10.5 && !fits()) {
+      fitted = Math.max(10.5, fitted - 0.5);
+      textNode.style.fontSize = `${fitted}px`;
+    }
+  }
+  textNode.dataset.fittedSize = fitted.toFixed(1);
+}
+function scheduleDialogueFit() {
+  if (dialogueFitFrame) window.cancelAnimationFrame(dialogueFitFrame);
+  dialogueFitFrame = window.requestAnimationFrame(() => {
+    dialogueFitFrame = 0;
+    fitDialogueText();
+  });
+}
+
 function renderCurrentDialogue({ animate = false } = {}) {
   const ev = state.currentEvent;
   if (!ev || ev.type !== 'say') return 0;
@@ -300,6 +342,7 @@ function renderCurrentDialogue({ animate = false } = {}) {
   $('dialoguePanel').classList.toggle('centered', ev.align === 'center');
   $('readerScreen').classList.toggle('caption-mode', ev.window === 'caption');
   const revealDuration = prepareWordReveal($('dialogueText'), animate);
+  scheduleDialogueFit();
   $('dialogueStatus').textContent = state.auto
     ? `Auto · ${state.settings.autoDelay}s`
     : revealDuration > 0 ? 'Tap to reveal' : 'Tap to continue';
@@ -889,7 +932,7 @@ function applySettings() {
   if(state.musicAudio)setAudioVolume(state.musicAudio,state.settings.musicVolume);for(const [channel,audio] of state.audioChannels)setAudioVolume(audio,state.settings.sfxVolume);
   persistSettings();
   if (state.settings.persianFont !== 'noto') {
-    ensurePersianFontLoaded(state.settings.persianFont).catch(error => {
+    ensurePersianFontLoaded(state.settings.persianFont).then(scheduleDialogueFit).catch(error => {
       console.warn('Selected Persian font is not available yet; the bundled Noto fallback remains active.', error);
       showToast('Persian font unavailable offline; using the original font for now.');
     });
@@ -946,8 +989,9 @@ function bindUI() {
     updateInstallButton();
     showToast('Narcissu has been installed.');
   });
-  window.addEventListener('resize',refreshBackgroundForViewport);
-  window.addEventListener('orientationchange',refreshBackgroundForViewport);
+  window.addEventListener('resize',()=>{refreshBackgroundForViewport();scheduleDialogueFit();},{passive:true});
+  window.addEventListener('orientationchange',()=>{refreshBackgroundForViewport();scheduleDialogueFit();},{passive:true});
+  if (document.fonts?.ready) document.fonts.ready.then(scheduleDialogueFit);
   updateInstallButton(); refreshBackgroundForViewport();
   window.addEventListener('online',updateNetworkStatus);window.addEventListener('offline',updateNetworkStatus);
   window.addEventListener('beforeunload',saveProgress);

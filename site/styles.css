@@ -401,3 +401,179 @@ html[data-persian-font="noto"] .reader-screen.is-fa.caption-mode .dialogue-text{
   .app-shell.is-reading .stage.is-reading.is-panorama .dialogue-footer{margin-top:3px;font-size:7px}
   .app-shell.is-reading .stage.is-reading.is-panorama .reader-toolbar{margin-top:6px}
 }
+
+/* Increment 48 — refined publisher mark, no-scroll dialogue fitting, and a stable main menu. */
+.app-shell{
+  height:100svh;height:100dvh;min-height:100svh;min-height:100dvh;
+  padding:0 18px;overflow:hidden
+}
+.topbar{
+  height:56px;min-height:56px;flex:0 0 56px;
+  padding:0 2px
+}
+.topbar-actions{gap:7px}
+.icon-button{width:30px;height:30px;min-width:30px;font-size:15px;line-height:1}
+.offline-download-button{font-size:17px;padding-bottom:2px}
+.stage{
+  flex:1 1 auto;min-height:0;height:auto;max-height:none;aspect-ratio:auto;
+  margin:10px auto 0;width:100%;max-width:1200px
+}
+
+/* Main menu: a single vertical rhythm, with a two-column action grid. */
+.home-screen{
+  overflow-y:auto;overscroll-behavior:contain;
+  align-items:center;justify-content:flex-start;
+  padding:clamp(18px,3.5vh,38px) 0
+}
+.home-content{
+  width:min(560px,calc(100% - 40px));padding:0;margin:0 auto;
+  display:flex;flex:0 0 auto;flex-direction:column;align-items:stretch
+}
+.home-emblem{width:42px;height:42px;margin:0 0 13px;opacity:.9}
+.fox-seal-image{display:block;width:100%;height:100%;object-fit:contain;user-select:none}
+.home-content>.eyebrow{margin:0 0 5px;font-size:9px;letter-spacing:.2em;line-height:1.4}
+.home-content h1{font-size:clamp(48px,6.4vw,68px);line-height:1.02;margin:0}
+.home-subtitle{font-size:11px;line-height:1.4;margin:8px 0 15px;letter-spacing:.18em}
+.home-credit{gap:3px;margin:0 0 12px;font-size:9px;line-height:1.4}
+.home-credit strong{font-size:11px;line-height:1.35}
+.home-description{max-width:440px;font-size:14px;line-height:1.55;margin:0 0 17px}
+.menu-actions{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  align-items:stretch;gap:8px;width:100%
+}
+.primary-button,.menu-button{
+  width:100%;min-width:0;min-height:42px;padding:10px 13px;
+  font-size:11px;line-height:1.25;letter-spacing:.055em
+}
+.home-footer{
+  width:100%;justify-content:space-between;align-items:center;
+  gap:6px 14px;margin-top:16px;font-size:8px;line-height:1.35
+}
+.home-footer span{min-width:0}
+.chapter-select-panel{max-height:calc(100% - 32px)}
+
+/* Reading text uses the selected size as its starting point; JS only reduces it
+   when necessary to keep the complete passage visible without an inner scrollbar. */
+.app-shell.is-reading .dialogue-panel{
+  height:clamp(150px,25svh,220px);min-height:0;max-height:38svh;
+  padding:14px 24px 11px;justify-content:flex-start;gap:0;overflow:hidden
+}
+.app-shell.is-reading .dialogue-text{
+  display:block;flex:1 1 auto;min-height:0;max-height:none;
+  overflow:hidden;overscroll-behavior:auto;
+  font-size:var(--text-size);line-height:1.42;
+  overflow-wrap:anywhere;word-break:normal
+}
+.app-shell.is-reading.is-fa .dialogue-text,
+.app-shell.is-reading .reader-screen.is-fa .dialogue-text{line-height:1.52}
+.app-shell.is-reading .dialogue-footer{flex:0 0 auto;margin-top:8px}
+.app-shell.is-reading .dialogue-language{display:none!important}
+.app-shell.is-reading .reader-screen.caption-mode .dialogue-panel{
+  height:clamp(150px,25svh,220px);min-height:0;max-height:38svh;
+  margin:0 auto;padding:14px 24px 11px;overflow:hidden
+}
+
+@media(max-width:760px){
+  .app-shell{padding:0;height:100svh;height:100dvh}
+  .topbar{height:48px;min-height:48px;flex-basis:48px;padding:0 11px}
+  .topbar-actions{gap:5px}
+  .brand{gap:8px}
+  .brand-mark{width:27px;height:27px;font-size:16px}
+  .brand-copy strong{font-size:13px;letter-spacing:.13em}
+  .brand-copy small{font-size:8px;margin-top:2px}
+  .icon-button{width:28px;height:28px;min-width:28px;font-size:14px}
+  .stage{margin:0;min-height:0;max-height:none;border:0;box-shadow:none}
+  .home-screen{padding:16px 0}
+  .home-content{width:calc(100% - 32px)}
+  .home-emblem{width:38px;height:38px;margin-bottom:10px}
+  .home-content h1{font-size:clamp(43px,13vw,54px)}
+  .home-subtitle{font-size:10px;margin:7px 0 12px}
+  .home-credit{font-size:8px;margin-bottom:10px}
+  .home-credit strong{font-size:10px}
+  .home-description{font-size:13px;line-height:1.48;margin-bottom:14px}
+  .menu-actions{gap:6px}
+  .primary-button,.menu-button{min-height:40px;padding:9px 9px;font-size:10px;letter-spacing:.035em}
+  .home-footer{margin-top:12px;font-size:7px;gap:5px 9px}
+  .chapter-select-panel{inset:10px;width:auto;padding:15px}
+  .app-shell.is-reading .dialogue-panel{
+    height:clamp(154px,26svh,184px);min-height:0;max-height:none;
+    padding:9px 12px 8px
+  }
+  .app-shell.is-reading .dialogue-text{font-size:var(--text-size);line-height:1.4}
+  .app-shell.is-reading .reader-screen.is-fa .dialogue-text{line-height:1.48}
+  .app-shell.is-reading .dialogue-footer{margin-top:5px;font-size:7px}
+}
+
+@media(max-width:390px){
+  .home-content{width:calc(100% - 28px)}
+  .home-content h1{font-size:46px}
+  .menu-actions{gap:5px}
+  .primary-button,.menu-button{min-height:38px;padding:8px 7px;font-size:9px}
+  .home-footer{font-size:6.5px}
+}
+
+/* Short landscape viewports: identity on the left, menu actions on the right. */
+@media(max-height:500px) and (orientation:landscape){
+  .app-shell{padding:0;height:100svh;height:100dvh}
+  .topbar{height:42px;min-height:42px;flex-basis:42px;padding:0 12px}
+  .brand-mark{width:25px;height:25px;font-size:14px}
+  .brand-copy strong{font-size:12px}
+  .brand-copy small{font-size:7px;margin-top:1px}
+  .icon-button{width:26px;height:26px;min-width:26px;font-size:13px}
+  .stage{margin:0;min-height:0;max-height:none}
+  .home-screen{padding:8px 0;align-items:center}
+  .home-content{
+    width:min(700px,calc(100% - 28px));padding:0;margin:0 auto;
+    display:grid;grid-template-columns:minmax(0,1.08fr) minmax(205px,.92fr);
+    grid-template-areas:
+      "emblem actions"
+      "eyebrow actions"
+      "title actions"
+      "subtitle actions"
+      "credit actions"
+      "description actions"
+      "meta meta";
+    column-gap:24px;row-gap:0;align-content:center;align-items:center
+  }
+  .home-emblem{grid-area:emblem;width:29px;height:29px;margin:0 0 4px}
+  .home-content>.eyebrow{grid-area:eyebrow;font-size:7px;margin:0 0 2px;letter-spacing:.17em}
+  .home-content h1{grid-area:title;font-size:36px;line-height:1;margin:0}
+  .home-subtitle{grid-area:subtitle;font-size:8px;letter-spacing:.13em;margin:4px 0 6px}
+  .home-credit{grid-area:credit;font-size:7px;gap:1px;margin:0 0 5px;line-height:1.25}
+  .home-credit strong{font-size:8px;letter-spacing:.08em}
+  .home-description{grid-area:description;font-size:9px;line-height:1.3;max-width:100%;margin:0}
+  .menu-actions{grid-area:actions;grid-template-columns:1fr;gap:5px;align-self:center}
+  .primary-button,.menu-button{min-height:29px;padding:6px 10px;font-size:9px;line-height:1.15}
+  .home-footer{grid-area:meta;margin-top:7px;font-size:6.5px;gap:4px 10px}
+  .app-shell.is-reading .reader-screen{
+    padding:calc(env(safe-area-inset-top) + 40px) max(8px,env(safe-area-inset-right))
+      calc(env(safe-area-inset-bottom) + 5px) max(8px,env(safe-area-inset-left))
+  }
+  .app-shell.is-reading .dialogue-panel{padding:8px 11px 7px}
+  .app-shell.is-reading .dialogue-text{font-size:var(--text-size);line-height:1.34}
+  .app-shell.is-reading .reader-screen.is-fa .dialogue-text{line-height:1.42}
+  .app-shell.is-reading .dialogue-footer{margin-top:5px;font-size:7px}
+  .app-shell.is-reading .stage.is-reading:not(.is-panorama) .dialogue-panel{
+    height:100%;min-height:0;max-height:100%;align-self:stretch
+  }
+  .app-shell.is-reading .stage.is-reading:not(.is-panorama) .dialogue-text{line-height:1.35}
+}
+
+@media(max-width:350px) and (orientation:portrait){
+  .app-shell.is-reading .dialogue-panel{height:clamp(148px,25svh,172px);padding:8px 9px}
+}
+
+/* Keep panoramic art large while giving the dialogue a little more vertical room. */
+@media(max-height:500px) and (orientation:landscape){
+  .app-shell.is-reading .stage.is-reading.is-panorama .background-frame{
+    height:min(24vw,calc(100svh - 190px))
+  }
+  .app-shell.is-reading .stage.is-reading.is-panorama .dialogue-panel{
+    height:clamp(98px,27svh,112px);min-height:96px;max-height:112px;
+    padding:7px 11px 6px
+  }
+  .app-shell.is-reading .stage.is-reading.is-panorama .dialogue-text{
+    font-size:var(--text-size);line-height:1.32;max-height:none;overflow:hidden
+  }
+  .app-shell.is-reading .stage.is-reading.is-panorama .reader-screen.is-fa .dialogue-text{line-height:1.4}
+}
