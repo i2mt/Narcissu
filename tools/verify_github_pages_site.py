@@ -20,7 +20,7 @@ def verify(site: Path) -> dict:
         "index.html", "styles.css", "app.js", "service-worker.js", "manifest.webmanifest",
         "data/story-gp32.json", "data/asset-manifest.json",
         "fonts/NotoSans-Regular.ttf", "fonts/NotoSansArabic-Regular.ttf",
-        "icons/narcissu-192.png", "icons/narcissu-512.png", ".nojekyll",
+        "icons/narcissu-192.png", "icons/narcissu-512.png", "icons/fox-emblem-white.png", ".nojekyll",
     ]
     missing = [name for name in required if not (site / name).is_file()]
     if missing:
