@@ -36,44 +36,54 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      # The current repository has mobile artwork at:
-      # site/public/assets/mobile-assets/
-      # The app and verifier expect it at:
-      # site/public/mobile-assets/
-      - name: Normalize mobile artwork directory
+      # Recover the Increment 47 mobile derivatives from either the intended source
+      # path or the two misplaced paths encountered during earlier uploads.
+      - name: Ensure mobile artwork is in the source tree
         shell: bash
         run: |
           set -euo pipefail
+          correct="public/mobile-assets"
 
-          misplaced="site/public/assets/mobile-assets"
-          correct="site/public/mobile-assets"
-
-          if [ -d "$misplaced" ]; then
-            mkdir -p "$correct"
-            cp -a "$misplaced/." "$correct/"
-            rm -rf "$misplaced"
-            echo "Moved mobile artwork into $correct"
-          elif [ -d "$correct" ]; then
-            echo "Mobile artwork is already in the correct location."
+          if [ -d "$correct/portrait" ] && [ -d "$correct/landscape" ]; then
+            echo "Mobile artwork is already in the correct source location."
           else
-            echo "::error::Mobile artwork folder was not found at either $misplaced or $correct"
-            exit 1
+            mkdir -p "$correct"
+            recovered=false
+            for candidate in \
+              "public/assets/mobile-assets" \
+              "site/public/assets/mobile-assets" \
+              "site/public/mobile-assets"; do
+              if [ -d "$candidate" ]; then
+                cp -a "$candidate/." "$correct/"
+                recovered=true
+                echo "Recovered mobile artwork from $candidate"
+              fi
+            done
+            if [ "$recovered" != true ]; then
+              echo "::error::Could not find the mobile artwork folder in the repository."
+              exit 1
+            fi
           fi
 
           test -d "$correct/portrait"
           test -d "$correct/landscape"
-          echo "Portrait and landscape folders are present."
+          echo "Portrait and landscape artwork are ready for the build."
 
-      - name: Verify the static payload
+      # Build outside the checked-out repository because the builder intentionally
+      # refuses to write its output inside the source tree.
+      - name: Build GitHub Pages payload
+        run: python tools/build_github_pages_site.py --output "${{ runner.temp }}/narcissu-pages-site"
+
+      - name: Verify the built static payload
         run: |
-          python tools/verify_github_pages_site.py site
-          node --check site/app.js
-          node --check site/service-worker.js
+          python tools/verify_github_pages_site.py "${{ runner.temp }}/narcissu-pages-site"
+          node --check "${{ runner.temp }}/narcissu-pages-site/app.js"
+          node --check "${{ runner.temp }}/narcissu-pages-site/service-worker.js"
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: site
+          path: ${{ runner.temp }}/narcissu-pages-site
           include-hidden-files: true
 
       - name: Deploy to GitHub Pages
