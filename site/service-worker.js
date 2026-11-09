@@ -1,4 +1,4 @@
-const SHELL_CACHE = 'narcissu-shell-v45';
+const SHELL_CACHE = 'narcissu-shell-v46';
 const ASSET_CACHE = 'narcissu-assets-v4';
 const FONT_CACHE = 'narcissu-fonts-v1';
 const FONT_HOSTS = new Set(['fonts.googleapis.com', 'fonts.gstatic.com']);

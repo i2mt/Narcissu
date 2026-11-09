@@ -31,6 +31,7 @@ let state = {
   backgroundPath: null, currentMusic: null, language: DEFAULT_LANGUAGE,
   windowMode: 'main', auto: false, awaitingClick: false, waitingTimer: null,
   settings: { ...DEFAULT_SETTINGS }, audioChannels: new Map(), musicAudio: null, currentMusicLoop: false,
+  musicFadeTimer: null,
   centerNext: false, chapterComplete: false, pendingAdvance: false,
   history: [], passageHistory: [], downloadBusy: false,
   revealActive: false, revealTimer: null, revealDurationMs: 0, revealEndsAt: 0
@@ -402,17 +403,61 @@ function playChannel(ev) {
   state.audioChannels.set(ev.channel, audio);
   audio.play().catch(() => showToast('Audio will start after your first interaction with the reader.'));
 }
+function clearMusicFade() {
+  if (state.musicFadeTimer !== null) {
+    clearInterval(state.musicFadeTimer);
+    state.musicFadeTimer = null;
+  }
+}
 function stopMusic() {
-  if (state.musicAudio) { state.musicAudio.pause(); state.musicAudio.currentTime = 0; state.musicAudio = null; }
-  state.currentMusic = null; state.currentMusicLoop = false;
+  // A pending fade belongs to the track that was active when it began. Always
+  // cancel it before changing or stopping the current track.
+  clearMusicFade();
+  const audio = state.musicAudio;
+  state.musicAudio = null;
+  state.currentMusic = null;
+  state.currentMusicLoop = false;
+  if (audio) {
+    audio.pause();
+    try { audio.currentTime = 0; } catch {}
+  }
 }
 function playMusic(path, loop) {
   const url = assetURL(path);
   if (!url) { showToast(`Missing music resource: ${path}`); return; }
+  // stopMusic also cancels any fade timer for the previous track. This prevents
+  // an old fade-out from stopping the newly-started track a few seconds later.
   stopMusic();
-  const audio = new Audio(url); audio.loop = !!loop; setAudioVolume(audio, state.settings.musicVolume);
-  state.musicAudio = audio; state.currentMusic = path; state.currentMusicLoop = !!loop;
-  audio.play().catch(() => showToast('Music will start after your first interaction with the reader.'));
+  const audio = new Audio(url);
+  audio.preload = 'auto';
+  audio.loop = !!loop;
+  setAudioVolume(audio, state.settings.musicVolume);
+  state.musicAudio = audio;
+  state.currentMusic = path;
+  state.currentMusicLoop = !!loop;
+  audio.addEventListener('ended', () => {
+    if (state.musicAudio !== audio) return;
+    if (!state.currentMusicLoop) {
+      state.musicAudio = null;
+      state.currentMusic = null;
+      state.currentMusicLoop = false;
+      return;
+    }
+    // Browsers normally handle loop=true natively. This is a guarded fallback
+    // for engines that still dispatch ended for a looping background track.
+    try {
+      audio.currentTime = 0;
+      const restarted = audio.play();
+      if (restarted?.catch) restarted.catch(() => {});
+    } catch {}
+  });
+  audio.addEventListener('error', () => {
+    if (state.musicAudio === audio) showToast('Background music could not be loaded.');
+  });
+  const playback = audio.play();
+  if (playback?.catch) playback.catch(() => {
+    if (state.musicAudio === audio) showToast('Music will start after your first interaction with the reader.');
+  });
 }
 function getMusicRoomTracks() {
   const seen = new Set();
@@ -527,12 +572,31 @@ async function installApp() {
 function fadeMusic(duration) {
   const audio = state.musicAudio;
   if (!audio) return;
-  const steps = 12, start = audio.volume, interval = Math.max(20, duration / steps);
+  clearMusicFade();
+  const totalDuration = Math.max(0, Number(duration) || 0);
+  if (totalDuration === 0) {
+    if (state.musicAudio === audio) stopMusic();
+    return;
+  }
+  const steps = 12, start = audio.volume, interval = Math.max(20, totalDuration / steps);
   let step = 0;
   const timer = setInterval(() => {
-    step++; setAudioVolume(audio, start * (1 - step / steps));
-    if (step >= steps) { clearInterval(timer); stopMusic(); }
+    // A newer track may have replaced this one. A stale fade must never touch
+    // or stop that newer track, even if its callback was already queued.
+    if (state.musicAudio !== audio) {
+      clearInterval(timer);
+      if (state.musicFadeTimer === timer) state.musicFadeTimer = null;
+      return;
+    }
+    step++;
+    setAudioVolume(audio, start * (1 - Math.min(1, step / steps)));
+    if (step >= steps) {
+      clearInterval(timer);
+      if (state.musicFadeTimer === timer) state.musicFadeTimer = null;
+      if (state.musicAudio === audio) stopMusic();
+    }
   }, interval);
+  state.musicFadeTimer = timer;
 }
 function stopAllAudio() {
   for (const channel of [...state.audioChannels.keys()]) stopChannel(channel);
