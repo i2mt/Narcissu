@@ -577,3 +577,54 @@ html[data-persian-font="noto"] .reader-screen.is-fa.caption-mode .dialogue-text{
   }
   .app-shell.is-reading .stage.is-reading.is-panorama .reader-screen.is-fa .dialogue-text{line-height:1.4}
 }
+
+
+/* Increment 50 — fixed-size dialogue typography with word-boundary pagination. */
+.app-shell.is-reading .dialogue-panel{
+  height:clamp(176px,32svh,260px);
+  min-height:0;max-height:44svh;
+  padding:12px 20px 9px;gap:0;overflow:hidden
+}
+.app-shell.is-reading .dialogue-text,
+.app-shell.is-reading.is-fa .dialogue-text,
+.app-shell.is-reading .reader-screen.is-fa .dialogue-text{
+  display:block;flex:1 1 auto;min-height:0;max-height:none;
+  font-size:var(--text-size)!important;
+  line-height:1.45!important;
+  overflow:hidden!important;overflow-y:hidden!important;
+  white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal
+}
+.app-shell.is-reading .dialogue-footer{flex:0 0 auto;margin-top:5px}
+.dialogue-measure-probe{font-kerning:normal}
+
+/* The fixed font size is honored on all phone layouts. Extra long passages
+   are paginated by the reader rather than shrunk or placed in a scroll area. */
+@media(max-width:760px){
+  .app-shell.is-reading .dialogue-panel{
+    height:clamp(132px,31svh,176px);min-height:0;max-height:40svh;
+    padding:9px 11px 7px
+  }
+  .app-shell.is-reading .dialogue-text,
+  .app-shell.is-reading.is-fa .dialogue-text,
+  .app-shell.is-reading .reader-screen.is-fa .dialogue-text{
+    font-size:var(--text-size)!important;line-height:1.43!important;
+    overflow:hidden!important;overflow-y:hidden!important
+  }
+}
+@media(max-height:500px) and (orientation:landscape){
+  .app-shell.is-reading .stage.is-reading.is-panorama .background-frame{
+    height:min(23vw,calc(100svh - 195px))
+  }
+  .app-shell.is-reading .stage.is-reading.is-panorama .dialogue-panel{
+    height:clamp(102px,29svh,124px);min-height:100px;max-height:124px;
+    padding:8px 10px 6px
+  }
+  .app-shell.is-reading .stage.is-reading.is-panorama .dialogue-text,
+  .app-shell.is-reading .stage.is-reading.is-panorama .reader-screen.is-fa .dialogue-text{
+    font-size:var(--text-size)!important;line-height:1.42!important;
+    max-height:none;overflow:hidden!important;overflow-y:hidden!important
+  }
+  .app-shell.is-reading .stage.is-reading:not(.is-panorama) .dialogue-panel{
+    height:100%;max-height:100%;min-height:0
+  }
+}

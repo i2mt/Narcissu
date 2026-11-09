@@ -2,7 +2,7 @@
 
 const $ = (id) => document.getElementById(id);
 const STORAGE_KEYS = { progress: 'narcissu-progress-v1', settings: 'narcissu-settings-v1', history: 'narcissu-history-v1' };
-const DEFAULT_SETTINGS = { mode: 'enhanced', persianFont: 'parastoo', textSize: 18, autoDelay: 5, musicVolume: 0.55, sfxVolume: 0.8, reduceMotion: false };
+const DEFAULT_SETTINGS = { mode: 'enhanced', persianFont: 'parastoo', textSize: 14, textSizeVersion: 2, autoDelay: 5, musicVolume: 0.55, sfxVolume: 0.8, reduceMotion: false };
 const DEFAULT_LANGUAGE = 'en';
 const PERSIAN_FONT_SOURCES = {
   parastoo: {
@@ -34,10 +34,26 @@ let state = {
   musicFadeTimer: null,
   centerNext: false, chapterComplete: false, pendingAdvance: false,
   history: [], passageHistory: [], downloadBusy: false,
-  revealActive: false, revealTimer: null, revealDurationMs: 0, revealEndsAt: 0
+  revealActive: false, revealTimer: null, revealDurationMs: 0, revealEndsAt: 0,
+  dialogueSourceText: '', dialoguePages: [], dialoguePageIndex: 0
 };
 
 function safeJSONParse(value, fallback) { try { return value ? JSON.parse(value) : fallback; } catch { return fallback; } }
+function normalizeSettings(raw, fallback = DEFAULT_SETTINGS) {
+  const source = raw && typeof raw === 'object' ? raw : {};
+  const merged = { ...fallback, ...source };
+  const version = Number(source.textSizeVersion) || 1;
+  if (version < 2) {
+    const oldSize = Number(source.textSize);
+    // The previous 16–24 scale rendered too large on compact landscape screens.
+    // Migrate it once to the new 12–20 scale while retaining the user's relative choice.
+    merged.textSize = Number.isFinite(oldSize) && oldSize > 0
+      ? Math.round(13 + (oldSize - 16) * 0.625) : 14;
+  }
+  merged.textSize = Math.min(18, Math.max(12, Number(merged.textSize) || 14));
+  merged.textSizeVersion = 2;
+  return merged;
+}
 function normalizePath(path) { return String(path || '').replace(/\\/g, '/').replace(/^\/+/, '').toLocaleLowerCase('en-US'); }
 function isMobileArtworkViewport() {
   return !!window.matchMedia?.('(max-width: 760px), (max-height: 500px) and (orientation: landscape)').matches;
@@ -175,10 +191,11 @@ function setMode() {
 }
 function persistSettings() { localStorage.setItem(STORAGE_KEYS.settings, JSON.stringify(state.settings)); }
 function loadSettings() {
-  state.settings = { ...DEFAULT_SETTINGS, ...safeJSONParse(localStorage.getItem(STORAGE_KEYS.settings), {}) };
+  const saved = safeJSONParse(localStorage.getItem(STORAGE_KEYS.settings), {});
+  state.settings = normalizeSettings(saved, DEFAULT_SETTINGS);
   delete state.settings.showReviewedSource;
   delete state.settings.showEditorialDrafts;
-  state.settings.textSize = Math.min(24, Math.max(16, Number(state.settings.textSize) || 18));
+  persistSettings();
   applyVisualPreferences();
 }
 function setLanguage(language, { render = true } = {}) {
@@ -222,9 +239,7 @@ function clearDialogueReveal() {
 function finishDialogueReveal() {
   clearDialogueReveal();
   if (state.currentEvent && state.screen === 'reader') {
-    $('dialogueStatus').textContent = state.auto
-      ? `Auto · ${state.settings.autoDelay}s`
-      : 'Tap to continue';
+    $('dialogueStatus').textContent = dialogueStatusLabel('continue');
   }
 }
 function remainingDialogueRevealMs() {
@@ -278,42 +293,119 @@ function prepareWordReveal(textNode, animate = false) {
   state.revealTimer = setTimeout(finishDialogueReveal, state.revealDurationMs + 30);
   return state.revealDurationMs;
 }
-function fitDialogueText() {
-  const textNode = $('dialogueText');
-  const panel = $('dialoguePanel');
-  if (!textNode || !panel || state.screen !== 'reader' || panel.getBoundingClientRect().height < 1) return;
-
-  // The setting is the preferred size. Only unusually long passages are reduced,
-  // and the saved preference itself is never changed.
-  const preferred = Math.max(16, Math.min(24, Number(state.settings.textSize) || 18));
-  const minimum = 11.5;
-  textNode.style.lineHeight = '';
-  textNode.style.fontSize = `${preferred}px`;
-  if (textNode.clientHeight < 1) return;
-
-  const fits = () => textNode.scrollHeight <= textNode.clientHeight + 1;
-  let fitted = preferred;
-  while (fitted > minimum && !fits()) {
-    fitted = Math.max(minimum, fitted - 0.5);
-    textNode.style.fontSize = `${fitted}px`;
+function tokenizeMarkedDialogue(value) {
+  const tokens = [];
+  const source = String(value || '');
+  const marked = /~i~([\s\S]*?)~i~|~s~([\s\S]*?)~s~/g;
+  let cursor = 0;
+  const addSegment = (text, style = '') => {
+    const parts = text.match(/\S+(?:\s+|$)|\s+/gu) || [];
+    for (const part of parts) {
+      if (part) tokens.push({ text: part, style });
+    }
+  };
+  let match;
+  while ((match = marked.exec(source))) {
+    addSegment(source.slice(cursor, match.index));
+    addSegment(match[1] ?? match[2] ?? '', match[1] !== undefined ? 'italic' : 'small');
+    cursor = marked.lastIndex;
   }
+  addSegment(source.slice(cursor));
+  return tokens.length ? tokens : [{ text: source, style: '' }];
+}
+function dialogueTokensHTML(tokens) {
+  return tokens.map(token => {
+    const safe = escapeHTML(token.text);
+    if (token.style === 'italic') return `<em>${safe}</em>`;
+    if (token.style === 'small') return `<span class="small">${safe}</span>`;
+    return safe;
+  }).join('');
+}
+function makeDialogueMeasureProbe(textNode) {
+  const style = getComputedStyle(textNode);
+  const probe = document.createElement('div');
+  probe.setAttribute('aria-hidden', 'true');
+  Object.assign(probe.style, {
+    position: 'fixed', left: '-10000px', top: '0', visibility: 'hidden',
+    pointerEvents: 'none', zIndex: '-1', display: 'block',
+    width: `${Math.max(1, textNode.clientWidth)}px`,
+    height: 'auto', minHeight: '0', maxHeight: 'none',
+    margin: '0', padding: '0', border: '0', flex: 'none',
+    overflow: 'visible', boxSizing: 'border-box',
+    fontFamily: style.fontFamily,
+    fontSize: `${state.settings.textSize}px`,
+    fontWeight: style.fontWeight,
+    fontStyle: style.fontStyle,
+    lineHeight: style.lineHeight,
+    letterSpacing: style.letterSpacing,
+    textAlign: style.textAlign,
+    direction: style.direction,
+    whiteSpace: style.whiteSpace,
+    overflowWrap: 'anywhere',
+    wordBreak: 'normal'
+  });
+  document.body.append(probe);
+  return probe;
+}
+function paginateDialogueText(value) {
+  const textNode = $('dialogueText');
+  if (!textNode) return [renderMarkedText(value)];
+  const availableHeight = textNode.clientHeight;
+  if (availableHeight < 8 || !textNode.clientWidth) return [renderMarkedText(value)];
 
-  // Very long passages get a little tighter leading before the type is reduced
-  // below a comfortable reading size. This is a visual fallback, not scrolling.
-  if (!fits()) {
-    textNode.style.lineHeight = state.language === 'fa' ? '1.34' : '1.25';
-    while (fitted > 10.5 && !fits()) {
-      fitted = Math.max(10.5, fitted - 0.5);
-      textNode.style.fontSize = `${fitted}px`;
+  const tokens = tokenizeMarkedDialogue(value);
+  const probe = makeDialogueMeasureProbe(textNode);
+  const pages = [];
+  let current = [];
+  const fits = candidate => {
+    probe.innerHTML = dialogueTokensHTML(candidate);
+    return probe.scrollHeight <= availableHeight + 1;
+  };
+  for (const token of tokens) {
+    current.push(token);
+    if (!fits(current) && current.length > 1) {
+      const overflow = current.pop();
+      while (current.length && /^\s+$/u.test(current[current.length - 1].text)) current.pop();
+      if (current.length) pages.push(dialogueTokensHTML(current));
+      const firstToken = { ...overflow, text: overflow.text.trimStart() };
+      current = firstToken.text ? [firstToken] : [];
     }
   }
-  textNode.dataset.fittedSize = fitted.toFixed(1);
+  while (current.length && /^\s+$/u.test(current[current.length - 1].text)) current.pop();
+  if (current.length) pages.push(dialogueTokensHTML(current));
+  probe.remove();
+
+  return pages.length ? pages : [renderMarkedText(value)];
+}
+function dialogueStatusLabel(action = 'continue') {
+  const pagePrefix = state.dialoguePages.length > 1
+    ? `Part ${state.dialoguePageIndex + 1}/${state.dialoguePages.length} · `
+    : '';
+  if (state.auto) return `${pagePrefix}Auto · ${state.settings.autoDelay}s`;
+  return `${pagePrefix}${action === 'reveal' ? 'Tap to reveal' : 'Tap to continue'}`;
+}
+function renderDialoguePage({ animate = false } = {}) {
+  const textNode = $('dialogueText');
+  if (!textNode) return 0;
+  textNode.innerHTML = state.dialoguePages[state.dialoguePageIndex] || '';
+  const revealDuration = prepareWordReveal(textNode, animate);
+  $('dialogueStatus').textContent = dialogueStatusLabel(revealDuration > 0 ? 'reveal' : 'continue');
+  return revealDuration;
+}
+function rebuildDialoguePages({ preservePage = true } = {}) {
+  if (state.screen !== 'reader' || !state.currentEvent || state.currentEvent.type !== 'say') return;
+  const previousPage = preservePage ? state.dialoguePageIndex : 0;
+  const textNode = $('dialogueText');
+  textNode.innerHTML = renderMarkedText(state.dialogueSourceText);
+  state.dialoguePages = paginateDialogueText(state.dialogueSourceText);
+  state.dialoguePageIndex = Math.max(0, Math.min(previousPage, state.dialoguePages.length - 1));
+  renderDialoguePage({ animate: false });
 }
 function scheduleDialogueFit() {
   if (dialogueFitFrame) window.cancelAnimationFrame(dialogueFitFrame);
   dialogueFitFrame = window.requestAnimationFrame(() => {
     dialogueFitFrame = 0;
-    fitDialogueText();
+    rebuildDialoguePages({ preservePage: true });
   });
 }
 
@@ -330,23 +422,19 @@ function renderCurrentDialogue({ animate = false } = {}) {
   $('languageNotice').hidden = true;
   $('languageNotice').textContent = '';
 
-  if (isPersian) {
-    $('dialogueText').innerHTML = renderMarkedText(translated);
-    $('dialogueText').setAttribute('lang', 'fa');
-    $('dialogueText').setAttribute('dir', 'rtl');
-  } else {
-    $('dialogueText').innerHTML = renderMarkedText(ev.text_en);
-    $('dialogueText').setAttribute('lang', 'en');
-    $('dialogueText').setAttribute('dir', 'ltr');
-  }
-
+  const sourceText = isPersian ? translated : ev.text_en;
+  state.dialogueSourceText = sourceText || '';
+  $('dialogueText').setAttribute('lang', isPersian ? 'fa' : 'en');
+  $('dialogueText').setAttribute('dir', isPersian ? 'rtl' : 'ltr');
   $('dialoguePanel').classList.toggle('centered', ev.align === 'center');
   $('readerScreen').classList.toggle('caption-mode', ev.window === 'caption');
-  const revealDuration = prepareWordReveal($('dialogueText'), animate);
-  scheduleDialogueFit();
-  $('dialogueStatus').textContent = state.auto
-    ? `Auto · ${state.settings.autoDelay}s`
-    : revealDuration > 0 ? 'Tap to reveal' : 'Tap to continue';
+
+  // Measure at the exact selected size, then split long passages into pages.
+  // The typeface and font size are never silently changed to force a fit.
+  $('dialogueText').innerHTML = renderMarkedText(state.dialogueSourceText);
+  state.dialoguePages = paginateDialogueText(state.dialogueSourceText);
+  state.dialoguePageIndex = 0;
+  const revealDuration = renderDialoguePage({ animate });
   updateProgress();
   return revealDuration;
 }
@@ -610,6 +698,7 @@ function saveProgress() {
     language: state.language, windowMode: state.windowMode, settings: state.settings,
     screen: state.screen, chapterComplete: !!state.chapterComplete,
     currentMusic: state.currentMusic, currentMusicLoop: !!state.currentMusicLoop,
+    dialoguePageIndex: state.dialoguePageIndex,
     passageHistory: state.passageHistory.slice(-500),
     savedAt: new Date().toISOString()
   };
@@ -632,10 +721,9 @@ function restoreProgress(payload) {
   state.backgroundPath = payload.backgroundPath || null; state.windowMode = payload.windowMode || 'main';
   state.chapterComplete = !!payload.chapterComplete || payload.screen === 'chapterEnd';
   state.passageHistory = Array.isArray(payload.passageHistory) ? payload.passageHistory.slice(-500) : [];
-  if (payload.settings) state.settings = { ...DEFAULT_SETTINGS, ...state.settings, ...payload.settings };
+  if (payload.settings) state.settings = normalizeSettings(payload.settings, state.settings);
   delete state.settings.showReviewedSource;
   delete state.settings.showEditorialDrafts;
-  state.settings.textSize = Math.min(24, Math.max(16, Number(state.settings.textSize) || 18));
   applyVisualPreferences();
   setAudioVolume(state.musicAudio, state.settings.musicVolume);
   setLanguage(payload.language || state.language, { render: false });
@@ -646,7 +734,13 @@ function restoreProgress(payload) {
     renderChapterEndScreen();
   } else {
     setScreen('reader');
-    if (state.currentEvent) renderCurrentDialogue(); else { $('dialogueText').textContent = ''; processNext(); }
+    if (state.currentEvent) {
+      renderCurrentDialogue();
+      if (Number(payload.dialoguePageIndex) > 0 && state.dialoguePages.length > 1) {
+        state.dialoguePageIndex = Math.min(state.dialoguePages.length - 1, Number(payload.dialoguePageIndex));
+        renderDialoguePage({ animate: false });
+      }
+    } else { $('dialogueText').textContent = ''; processNext(); }
   }
   if (payload.currentMusic) playMusic(payload.currentMusic, !!payload.currentMusicLoop);
   persistSettings();
@@ -765,7 +859,7 @@ function scheduleAutoAdvance(extraDelayMs = 0) {
   clearWaitingTimer();
   state.waitingTimer = setTimeout(() => {
     state.waitingTimer = null;
-    processNext();
+    advance();
   }, Math.max(0, extraDelayMs) + state.settings.autoDelay * 1000);
 }
 function processNext() {
@@ -790,7 +884,7 @@ function processNext() {
       case 'music_fadeout': fadeMusic(ev.duration_ms); break;
       case 'window_mode': state.windowMode = ev.window; break;
       case 'alignment_hint': state.centerNext = true; break;
-      case 'clear_text': state.currentEvent = null; $('dialogueText').textContent = ''; break;
+      case 'clear_text': state.currentEvent = null; state.dialogueSourceText = ''; state.dialoguePages = []; state.dialoguePageIndex = 0; $('dialogueText').textContent = ''; break;
       case 'text_speed': break;
       case 'state_flag': break;
       case 'engine_stop_hint': break;
@@ -830,6 +924,17 @@ function advance() {
     return;
   }
   if (state.waitingTimer) { clearWaitingTimer(); state.waitingTimer = null; }
+
+  // A long dialogue event may span multiple fixed-size pages. Each tap advances
+  // within the same event first; only the final page advances the story timeline.
+  if (state.currentEvent?.type === 'say' &&
+      state.dialoguePageIndex < state.dialoguePages.length - 1) {
+    state.dialoguePageIndex += 1;
+    const revealDuration = renderDialoguePage({ animate: true });
+    saveProgress();
+    if (state.auto) scheduleAutoAdvance(revealDuration);
+    return;
+  }
   if (state.awaitingClick || state.pendingAdvance) { processNext(); return; }
   processNext();
 }
@@ -986,7 +1091,7 @@ $('persianFontSetting').value=state.settings.persianFont;$('textSizeSetting').va
   $('settingsDialog').showModal();
 }
 function applySettings() {
-  state.settings.mode='enhanced';state.settings.persianFont=$('persianFontSetting').value;state.settings.textSize=Number($('textSizeSetting').value);state.settings.autoDelay=Number($('autoDelaySetting').value);
+  state.settings.mode='enhanced';state.settings.persianFont=$('persianFontSetting').value;state.settings.textSize=Number($('textSizeSetting').value);state.settings.textSizeVersion=2;state.settings.autoDelay=Number($('autoDelaySetting').value);
   state.settings.musicVolume=Number($('musicVolumeSetting').value);state.settings.sfxVolume=Number($('sfxVolumeSetting').value);state.settings.reduceMotion=$('reduceMotionSetting').checked;
   applyVisualPreferences();
   if(state.settings.reduceMotion && state.revealActive){
@@ -1006,8 +1111,8 @@ function applySettings() {
 function toggleAuto() {
   state.auto=!state.auto;$('autoButton').setAttribute('aria-pressed',String(state.auto));
   // Do not replace a timeline wait (including the opening statistics cards) with the auto timer.
-  if(state.auto&&state.currentEvent&&!state.pendingAdvance){$('dialogueStatus').textContent=`Auto · ${state.settings.autoDelay}s`;scheduleAutoAdvance(remainingDialogueRevealMs());}
-  else if(!state.auto&&!state.pendingAdvance){clearWaitingTimer();$('dialogueStatus').textContent=state.revealActive?'Tap to reveal':'Tap to continue';}
+  if(state.auto&&state.currentEvent&&!state.pendingAdvance){$('dialogueStatus').textContent=dialogueStatusLabel(state.revealActive?'reveal':'continue');scheduleAutoAdvance(remainingDialogueRevealMs());}
+  else if(!state.auto&&!state.pendingAdvance){clearWaitingTimer();$('dialogueStatus').textContent=dialogueStatusLabel(state.revealActive?'reveal':'continue');}
 }
 function toggleFullscreen() {
   if(!document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(()=>showToast('Fullscreen is not available here.'));
