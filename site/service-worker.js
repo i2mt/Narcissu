@@ -1,4 +1,4 @@
-const SHELL_CACHE = 'narcissu-shell-v48';
+const SHELL_CACHE = 'narcissu-shell-v49';
 const ASSET_CACHE = 'narcissu-assets-v4';
 const FONT_CACHE = 'narcissu-fonts-v1';
 const FONT_HOSTS = new Set(['fonts.googleapis.com', 'fonts.gstatic.com']);
@@ -25,6 +25,7 @@ const SHELL_FILES = [
   './data/localization/fa-literary-proofread-increment34.json',
   './data/localization/fa-literary-proofread-increment35.json',
   './data/localization/fa-assistant-editorial-review-increment38.json',
+  './data/localization/fa-conversational-tone-increment52.json',
   './fonts/NotoSans-Regular.ttf', './fonts/NotoSansArabic-Regular.ttf', './fonts/NotoNaskhArabic-Regular.ttf', './fonts/NotoNaskhArabic-SemiBold.ttf', './fonts/Noto-Font-License.txt',
   './icons/narcissu-192.png', './icons/narcissu-512.png', './icons/fox-emblem-white.png'
 ];
@@ -32,7 +33,28 @@ self.addEventListener('install', event => {
   event.waitUntil(caches.open(SHELL_CACHE).then(cache => cache.addAll(SHELL_FILES)).then(() => self.skipWaiting()));
 });
 self.addEventListener('activate', event => {
-  event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith('narcissu-') && ![SHELL_CACHE, ASSET_CACHE, FONT_CACHE].includes(k)).map(k => caches.delete(k)))).then(() => self.clients.claim()));
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    const hasPreviousShell = keys.some(key => key.startsWith('narcissu-shell-') && key !== SHELL_CACHE);
+    await Promise.all(keys
+      .filter(key => key.startsWith('narcissu-') && ![SHELL_CACHE, ASSET_CACHE, FONT_CACHE].includes(key))
+      .map(key => caches.delete(key)));
+    await self.clients.claim();
+    if (hasPreviousShell) {
+      const scope = new URL(self.registration.scope);
+      const clients = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+      await Promise.all(clients.map(async client => {
+        try {
+          const clientUrl = new URL(client.url);
+          if (clientUrl.origin !== scope.origin || !clientUrl.pathname.startsWith(scope.pathname)) return;
+          clientUrl.searchParams.set('narcissu-updated', '1');
+          await client.navigate(clientUrl.href);
+        } catch (error) {
+          console.warn('Could not reload an app window after update:', error);
+        }
+      }));
+    }
+  })());
 });
 async function makeRangeResponse(fullResponse, rangeHeader) {
   const match = /^bytes=(\d*)-(\d*)$/i.exec(rangeHeader || '');
@@ -118,6 +140,34 @@ async function handleAssetRequest(request) {
   }
 }
 
+async function handleCoreShellRequest(request) {
+  const cache = await caches.open(SHELL_CACHE);
+  try {
+    // Bypass the browser's HTTP cache for the app shell. GitHub Pages and
+    // installed PWAs can otherwise keep serving an old index/app bundle.
+    const response = await fetch(request, { cache: 'no-store' });
+    if (response.ok && response.status === 200) {
+      try { await cache.put(request, response.clone()); }
+      catch (cacheError) { console.warn('Could not refresh app-shell cache:', request.url, cacheError); }
+      return response;
+    }
+    const cached = await cache.match(request);
+    if (cached) return cached;
+    return response;
+  } catch (error) {
+    const cached = await cache.match(request);
+    if (cached) return cached;
+    const indexFallback = await cache.match(new URL('./index.html', self.registration.scope).href);
+    return indexFallback || new Response('Narcissu is offline and its app shell is not cached yet.', {
+      status: 503, statusText: 'Offline'
+    });
+  }
+}
+
+self.addEventListener('message', event => {
+  if (event.data?.type === 'NARCISSU_SKIP_WAITING') self.skipWaiting();
+});
+
 self.addEventListener('fetch', event => {
   const req = event.request;
   if (req.method !== 'GET') return;
@@ -131,19 +181,31 @@ self.addEventListener('fetch', event => {
     event.respondWith(handleAssetRequest(req));
     return;
   }
+  const scopePath = new URL(self.registration.scope).pathname;
+  const relativePath = url.pathname.startsWith(scopePath)
+    ? url.pathname.slice(scopePath.length)
+    : url.pathname.replace(/^\//, '');
+  const isCoreShell = req.mode === 'navigate' ||
+    ['index.html', 'app.js', 'styles.css', 'manifest.webmanifest'].includes(relativePath);
+  if (isCoreShell) {
+    event.respondWith(handleCoreShellRequest(req));
+    return;
+  }
   event.respondWith(caches.match(req).then(async cached => {
     if (cached) return cached;
     try {
       const response = await fetch(req);
-      if (response.ok && response.status === 200 && url.origin === self.location.origin) {
+      if (response.ok && response.status === 200) {
         const cache = await caches.open(SHELL_CACHE);
-        try { await cache.put(req, response.clone()); } catch (cacheError) {
-          console.warn('Could not cache shell response:', req.url, cacheError);
-        }
+        try { await cache.put(req, response.clone()); }
+        catch (cacheError) { console.warn('Could not cache shell response:', req.url, cacheError); }
       }
       return response;
     } catch (err) {
-      return caches.match('./index.html');
+      const fallback = await caches.match('./index.html');
+      return fallback || new Response('Narcissu is offline and this resource is not cached yet.', {
+        status: 503, statusText: 'Offline'
+      });
     }
   }));
 });

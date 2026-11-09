@@ -19,6 +19,14 @@ const pendingPersianFonts = new Map();
 let dedicationTimer = null;
 let dedicationDismissed = false;
 let dialogueFitFrame = 0;
+let appServiceWorkerRegistration = null;
+let appUpdateCheckPromise = null;
+let lastAppUpdateCheckAt = 0;
+let appUpdateInterval = null;
+let serviceWorkerHadController = false;
+let serviceWorkerUpdateReloading = false;
+const APP_UPDATE_CHECK_INTERVAL_MS = 20 * 60 * 1000;
+const SERVICE_WORKER_RESUME_KEY = 'narcissu-resume-after-sw-update';
 
 let story = null;
 let assetManifest = null;
@@ -99,6 +107,7 @@ function updateReaderChrome() {
 }
 function setScreen(name) {
   state.screen = name;
+  try { localStorage.setItem('narcissu-active-screen', name); } catch {}
   $('homeScreen').hidden = name !== 'home';
   $('readerScreen').hidden = name !== 'reader';
   $('chapterEndScreen').hidden = name !== 'chapterEnd';
@@ -426,14 +435,44 @@ function scheduleDialogueFit() {
   });
 }
 
+function applyPersianSourceQuoteStyle(ev, value) {
+  const source = String(ev?.text_en || '').trim();
+  if (!/^``[\s\S]*''$/.test(source)) return String(value || '');
+  const match = /^(\s*)([\s\S]*?)(\s*)$/.exec(String(value || ''));
+  if (!match || !match[2]) return String(value || '');
+  const leading = match[1], content = match[2], trailing = match[3];
+  if ((content.startsWith('«') && content.endsWith('»')) ||
+      (content.startsWith('“') && content.endsWith('”')) ||
+      (content.startsWith('"') && content.endsWith('"'))) return String(value || '');
+  if (content.includes('«') || content.includes('»')) {
+    // Keep an attribution such as «زیر لب گفتم: «... »» intact; otherwise
+    // make any embedded quotation secondary to the source-level dialogue quote.
+    const firstQuote = Math.min(
+      ...['«', '»'].map(mark => {
+        const index = content.indexOf(mark);
+        return index < 0 ? Number.POSITIVE_INFINITY : index;
+      })
+    );
+    const prefix = content.slice(0, firstQuote);
+    if (/گفتم\s*[:،]|گفتیم\s*[:،]/u.test(prefix)) return String(value || '');
+    const nested = content.replace(/«([^»]*)»/gu, '“$1”');
+    return `${leading}«${nested}»${trailing}`;
+  }
+  if (content.includes('“') || content.includes('”')) {
+    return `${leading}«${content}»${trailing}`;
+  }
+  return `${leading}«${content}»${trailing}`;
+}
+
 function renderCurrentDialogue({ animate = false } = {}) {
   const ev = state.currentEvent;
   if (!ev || ev.type !== 'say') return 0;
   const sourceEntry = faData?.translations?.[ev.id] || ev.text_fa || null;
   const overlayEntry = revisedOverlay?.translations?.[ev.id] || null;
-  const translated = overlayEntry?.text ||
+  const rawTranslated = overlayEntry?.text ||
     (typeof sourceEntry === 'string' ? sourceEntry : sourceEntry?.text) || '';
   const isPersian = state.language === 'fa';
+  const translated = isPersian ? applyPersianSourceQuoteStyle(ev, rawTranslated) : rawTranslated;
 
   $('dialogueLanguage').textContent = isPersian ? 'فارسی' : 'ENGLISH';
   $('languageNotice').hidden = true;
@@ -716,6 +755,7 @@ function saveProgress() {
     language: state.language, windowMode: state.windowMode, settings: state.settings,
     screen: state.screen, chapterComplete: !!state.chapterComplete,
     currentMusic: state.currentMusic, currentMusicLoop: !!state.currentMusicLoop,
+    currentMusicTime: state.musicAudio && Number.isFinite(state.musicAudio.currentTime) ? state.musicAudio.currentTime : 0,
     dialoguePageIndex: state.dialoguePageIndex,
     passageHistory: state.passageHistory.slice(-500),
     savedAt: new Date().toISOString()
@@ -760,7 +800,19 @@ function restoreProgress(payload) {
       }
     } else { $('dialogueText').textContent = ''; processNext(); }
   }
-  if (payload.currentMusic) playMusic(payload.currentMusic, !!payload.currentMusicLoop);
+  if (payload.currentMusic) {
+    playMusic(payload.currentMusic, !!payload.currentMusicLoop);
+    const resumeTime = Math.max(0, Number(payload.currentMusicTime) || 0);
+    const audio = state.musicAudio;
+    if (audio && resumeTime > 0) {
+      const restoreMusicTime = () => {
+        if (state.musicAudio !== audio) return;
+        try { audio.currentTime = resumeTime; } catch {}
+      };
+      if (audio.readyState >= 1) restoreMusicTime();
+      else audio.addEventListener('loadedmetadata', restoreMusicTime, { once: true });
+    }
+  }
   persistSettings();
   return true;
 }
@@ -1025,15 +1077,67 @@ function openHistory() {
 function updateNetworkStatus() {
   const online=navigator.onLine;const el=$('networkStatus');el.classList.toggle('offline',!online);el.querySelector('span').textContent=online?'Online':'Offline';
 }
+async function checkForAppUpdate(force = false) {
+  const registration = appServiceWorkerRegistration;
+  if (!registration || !navigator.onLine || document.visibilityState === 'hidden') return;
+  const now = Date.now();
+  if (!force && now - lastAppUpdateCheckAt < APP_UPDATE_CHECK_INTERVAL_MS) return;
+  if (appUpdateCheckPromise) return appUpdateCheckPromise;
+  lastAppUpdateCheckAt = now;
+  appUpdateCheckPromise = registration.update().catch(error => {
+    console.debug('Narcissu update check deferred:', error);
+  }).finally(() => {
+    appUpdateCheckPromise = null;
+  });
+  return appUpdateCheckPromise;
+}
+function handleServiceWorkerControllerChange() {
+  const controller = navigator.serviceWorker?.controller;
+  if (!controller) return;
+  // The first controller on a fresh installation should not cause a reload.
+  if (!serviceWorkerHadController) {
+    serviceWorkerHadController = true;
+    return;
+  }
+  if (serviceWorkerUpdateReloading) return;
+  serviceWorkerUpdateReloading = true;
+  if (state.screen !== 'home') {
+    saveProgress();
+    try { sessionStorage.setItem(SERVICE_WORKER_RESUME_KEY, '1'); } catch {}
+  }
+  // The activating worker normally navigates this client with a one-time
+  // resume marker. Keep a delayed fallback in case a browser blocks client.navigate.
+  window.setTimeout(() => {
+    if (serviceWorkerUpdateReloading && !document.hidden) window.location.reload();
+  }, 2500);
+}
+function watchServiceWorkerRegistration(registration) {
+  appServiceWorkerRegistration = registration;
+  registration.addEventListener('updatefound', () => {
+    const installing = registration.installing;
+    if (!installing) return;
+    installing.addEventListener('statechange', () => {
+      if (installing.state === 'installed' && navigator.serviceWorker.controller) {
+        showToast('A new Narcissu version is ready. Updating…');
+      }
+    });
+  });
+  if (!appUpdateInterval) {
+    appUpdateInterval = setInterval(() => checkForAppUpdate(false), APP_UPDATE_CHECK_INTERVAL_MS);
+  }
+}
 async function registerServiceWorker() {
   if (!('serviceWorker' in navigator)) return null;
   try {
+    serviceWorkerHadController = Boolean(navigator.serviceWorker.controller);
+    navigator.serviceWorker.removeEventListener('controllerchange', handleServiceWorkerControllerChange);
+    navigator.serviceWorker.addEventListener('controllerchange', handleServiceWorkerControllerChange);
     const registration = await navigator.serviceWorker.register('./service-worker.js', { updateViaCache: 'none' });
-    // Ask GitHub Pages for the newest worker script instead of relying on a stale HTTP cache.
-    if (typeof registration.update === 'function') registration.update().catch(() => {});
-    // Wait briefly for the worker to take control so the first font downloads
-    // can be cached; do not block font loading if activation is delayed.
+    watchServiceWorkerRegistration(registration);
+    // Wait briefly for the worker to take control; update checks continue when
+    // the PWA is reopened, foregrounded, or comes back online.
     await Promise.race([navigator.serviceWorker.ready, new Promise(resolve => setTimeout(resolve, 2500))]);
+    await checkForAppUpdate(true);
     return registration;
   } catch (e) {
     console.warn('Service worker registration failed', e);
@@ -1206,14 +1310,37 @@ function bindUI() {
   window.addEventListener('orientationchange',()=>{refreshBackgroundForViewport();scheduleDialogueFit();},{passive:true});
   if (document.fonts?.ready) document.fonts.ready.then(scheduleDialogueFit);
   updateInstallButton(); refreshBackgroundForViewport();
-  window.addEventListener('online',updateNetworkStatus);window.addEventListener('offline',updateNetworkStatus);
+  window.addEventListener('online',()=>{updateNetworkStatus();checkForAppUpdate(true);});
+  window.addEventListener('offline',updateNetworkStatus);
+  window.addEventListener('pageshow',()=>checkForAppUpdate(true));
+  window.addEventListener('focus',()=>checkForAppUpdate(true));
   window.addEventListener('beforeunload',saveProgress);
-  document.addEventListener('visibilitychange',()=>{if(document.hidden)saveProgress();});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)saveProgress();else checkForAppUpdate(true);});
 }
 
 async function boot() {
+  let resumeAfterServiceWorkerUpdate = false;
+  let serviceWorkerNavigation = false;
+  let previousScreenAtBoot = null;
   try {
-    const [storyResponse, assetsResponse, faResponse, historicalAlignmentResponse, overlayResponse, increment20Response, chapter2RecoveryResponse, chapter3RecoveryResponse, chapter4RecoveryResponse, chapter4Page44RecoveryResponse, chapter4Page45RecoveryResponse, chapter4Pages46to50RecoveryResponse, chapter1Chapter3RecoveryResponse, literaryProofreadResponse, finalProofreadResponse, increment31ProofreadResponse, increment32ProofreadResponse, increment33ProofreadResponse, increment34ProofreadResponse, increment35ProofreadResponse, increment38AssistantReviewResponse] = await Promise.all([
+    previousScreenAtBoot = localStorage.getItem('narcissu-active-screen');
+    localStorage.setItem('narcissu-active-screen', 'home');
+  } catch {}
+  try {
+    resumeAfterServiceWorkerUpdate = sessionStorage.getItem(SERVICE_WORKER_RESUME_KEY) === '1';
+    if (resumeAfterServiceWorkerUpdate) sessionStorage.removeItem(SERVICE_WORKER_RESUME_KEY);
+  } catch {}
+  try {
+    const updateUrl = new URL(window.location.href);
+    if (updateUrl.searchParams.get('narcissu-updated') === '1') {
+      serviceWorkerNavigation = true;
+      resumeAfterServiceWorkerUpdate = true;
+      updateUrl.searchParams.delete('narcissu-updated');
+      history.replaceState(null, '', `${updateUrl.pathname}${updateUrl.search}${updateUrl.hash}`);
+    }
+  } catch {}
+  try {
+    const [storyResponse, assetsResponse, faResponse, historicalAlignmentResponse, overlayResponse, increment20Response, chapter2RecoveryResponse, chapter3RecoveryResponse, chapter4RecoveryResponse, chapter4Page44RecoveryResponse, chapter4Page45RecoveryResponse, chapter4Pages46to50RecoveryResponse, chapter1Chapter3RecoveryResponse, literaryProofreadResponse, finalProofreadResponse, increment31ProofreadResponse, increment32ProofreadResponse, increment33ProofreadResponse, increment34ProofreadResponse, increment35ProofreadResponse, increment38AssistantReviewResponse, conversationalToneResponse] = await Promise.all([
       fetch('./data/story-gp32.json'), fetch('./data/asset-manifest.json'), fetch('./data/localization/fa.json'),
       fetch('./data/localization/fa-historical-alignment-increment28.json'),
       fetch('./data/localization/fa-revised-overlay-recovery.json'),
@@ -1232,7 +1359,8 @@ async function boot() {
       fetch('./data/localization/fa-literary-proofread-increment33.json'),
       fetch('./data/localization/fa-literary-proofread-increment34.json'),
       fetch('./data/localization/fa-literary-proofread-increment35.json'),
-      fetch('./data/localization/fa-assistant-editorial-review-increment38.json')
+      fetch('./data/localization/fa-assistant-editorial-review-increment38.json'),
+      fetch('./data/localization/fa-conversational-tone-increment52.json')
     ]);
     if(!storyResponse.ok||!assetsResponse.ok)throw new Error('Could not load game data.');
     story=await storyResponse.json();assetManifest=await assetsResponse.json();
@@ -1240,7 +1368,7 @@ async function boot() {
     const historicalAlignmentData=historicalAlignmentResponse.ok?await historicalAlignmentResponse.json():{translations:{},event_alignment:{}};
     historicalEventAlignment=historicalAlignmentData.event_alignment||{};
     // Precedence: historical alignment data supersedes the archival fa.json where IDs collide;
-    // Increment 17–32 overlays are applied afterwards; the newest proofread layer has final precedence.
+    // Recovery and literary-proofread overlays are applied next; Increment 52's conversational tone layer has final precedence.
     faData={...archivalFaData,translations:{...(archivalFaData.translations||{}),...(historicalAlignmentData.translations||{})}};
     const recoveredOverlay=overlayResponse.ok?await overlayResponse.json():{translations:{}};
     const increment20Overlay=increment20Response.ok?await increment20Response.json():{translations:{}};
@@ -1259,13 +1387,24 @@ async function boot() {
     const increment34ProofreadOverlay=increment34ProofreadResponse.ok?await increment34ProofreadResponse.json():{translations:{}};
     const increment35ProofreadOverlay=increment35ProofreadResponse.ok?await increment35ProofreadResponse.json():{translations:{}};
     const increment38AssistantReviewOverlay=increment38AssistantReviewResponse.ok?await increment38AssistantReviewResponse.json():{translations:{}};
-    revisedOverlay={...recoveredOverlay,translations:{...(recoveredOverlay.translations||{}),...(increment20Overlay.translations||{}),...(chapter2RecoveryOverlay.translations||{}),...(chapter3RecoveryOverlay.translations||{}),...(chapter4RecoveryOverlay.translations||{}),...(chapter4Page44RecoveryOverlay.translations||{}),...(chapter4Page45RecoveryOverlay.translations||{}),...(chapter4Pages46to50RecoveryOverlay.translations||{}),...(chapter1Chapter3RecoveryOverlay.translations||{}),...(literaryProofreadOverlay.translations||{}),...(finalProofreadOverlay.translations||{}),...(increment31ProofreadOverlay.translations||{}),...(increment32ProofreadOverlay.translations||{}),...(increment33ProofreadOverlay.translations||{}),...(increment34ProofreadOverlay.translations||{}),...(increment35ProofreadOverlay.translations||{}),...(increment38AssistantReviewOverlay.translations||{})}};
+    const conversationalToneOverlay=conversationalToneResponse.ok?await conversationalToneResponse.json():{translations:{}};
+    revisedOverlay={...recoveredOverlay,translations:{...(recoveredOverlay.translations||{}),...(increment20Overlay.translations||{}),...(chapter2RecoveryOverlay.translations||{}),...(chapter3RecoveryOverlay.translations||{}),...(chapter4RecoveryOverlay.translations||{}),...(chapter4Page44RecoveryOverlay.translations||{}),...(chapter4Page45RecoveryOverlay.translations||{}),...(chapter4Pages46to50RecoveryOverlay.translations||{}),...(chapter1Chapter3RecoveryOverlay.translations||{}),...(literaryProofreadOverlay.translations||{}),...(finalProofreadOverlay.translations||{}),...(increment31ProofreadOverlay.translations||{}),...(increment32ProofreadOverlay.translations||{}),...(increment33ProofreadOverlay.translations||{}),...(increment34ProofreadOverlay.translations||{}),...(increment35ProofreadOverlay.translations||{}),...(increment38AssistantReviewOverlay.translations||{}),...(conversationalToneOverlay.translations||{})}};
     state.history=safeJSONParse(localStorage.getItem(STORAGE_KEYS.history),[]);
     state.language=localStorage.getItem('narcissu-language-v1')||DEFAULT_LANGUAGE;
     loadSettings();bindUI();renderChapters();setLanguage(state.language);updateNetworkStatus();
     $('continueButton').disabled=!getProgress();
     registerServiceWorker().then(preloadPersianFonts);
-    if(location.hash==='#play') {const p=getProgress();if(p)restoreProgress(p);}
+    if (resumeAfterServiceWorkerUpdate) {
+      const saved = getProgress();
+      const savedAt = Date.parse(saved?.savedAt || '');
+      const recentlySaved = Number.isFinite(savedAt) && Date.now() - savedAt < 30000;
+      const wasReadingBeforeUpdate = previousScreenAtBoot === 'reader' || previousScreenAtBoot === 'chapterEnd';
+      const canSafelyResume = saved && saved.screen !== 'home' &&
+        (!serviceWorkerNavigation || wasReadingBeforeUpdate || (!previousScreenAtBoot && recentlySaved));
+      if (canSafelyResume) restoreProgress(saved);
+    } else if(location.hash==='#play') {
+      const p=getProgress();if(p)restoreProgress(p);
+    }
     startDedicationSequence();
   } catch(e) {
     console.error(e);document.body.innerHTML=`<main style="max-width:720px;margin:12vh auto;padding:24px;font:16px sans-serif;color:#eee;background:#111"> <h1>Narcissu could not start</h1><p>${escapeHTML(e.message)}</p><p>Serve this folder through a local web server or HTTPS. Opening index.html directly as a file will not load the game data.</p></main>`;
