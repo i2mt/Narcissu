@@ -1,13 +1,13 @@
 # Narcissu — Persian Edition | GitHub Pages deployment kit
 
 **Build:** 0.40  
-**Status:** An initial GitHub Pages deployment completed on 2026-11-10 from `main` commit `1a18aeb`. The completed Persian editorial stack (Increments 55–65) is being integrated into `main` in PR #17; merge that PR and run the manual deployment workflow again to publish those revisions. Public distribution remains gated by the workflow's explicit written-rights confirmation.
+**Status:** The completed Persian editorial stack (Increments 55–65) was deployed successfully to GitHub Pages on 2026-11-10 from `main` commit `e0a5498` (workflow run #25). The deployment workflow's written-rights confirmation was supplied for that run.
 
 This is a *deployment-only* repository layout. It contains the browser application and the story/media data required to run it. It intentionally excludes the archival Persian PDF, original Ponscripter source script, OCR files, private working documents, editorial workbooks and internal QA files.
 
 ## Important: do not publish before rights clearance
 
-GitHub Pages websites are publicly accessible, including sites deployed from eligible private repositories. The deployed application necessarily exposes the story data, Persian text, artwork, music and sound files that it serves to visitors. Written permission for public distribution of the modified bilingual game and all included copyrighted material has not yet been documented.
+GitHub Pages websites are publicly accessible, including sites deployed from eligible private repositories. The deployed application necessarily exposes the story data, Persian text, artwork, music and sound files that it serves to visitors. Before each public deployment, obtain written permission for public distribution of the modified bilingual game and all included copyrighted material. The workflow records the operator's confirmation; it does not independently verify the permission or assess copyright ownership.
 
 The workflow in `.github/workflows/deploy-pages.yml` is therefore manual-only and has a required `distribution_rights_confirmed` checkbox. Leave it unchecked unless written permission has actually been obtained. If unchecked, the deploy job is skipped.
 
