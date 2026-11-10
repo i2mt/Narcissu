@@ -5,7 +5,7 @@
   "increment": 54,
   "layer": "assistant_led_source_alignment_followup_draft",
   "title": "Source-alignment follow-up — targeted Persian revisions",
-  "description": "A source-aligned follow-up to Increment 53. The remaining historical alignment cases, and all voiced say-events in Chapters 4, 5, 6, 7, 8, and 9, were checked against the gp32 English event text and the actual active Persian runtime layers. One hundred ninety targeted revisions are proposed in total; ambiguous event-boundary cases are retained without speculative rewriting. Independent native-Persian sign-off remains pending.",
+  "description": "A source-aligned follow-up to Increment 53. The remaining historical alignment cases, and all voiced say-events in Chapters 4, 5, 6, 7, 8, and 9, were checked against the gp32 English event text and the actual active Persian runtime layers. One hundred seventy-nine targeted revisions are proposed in total; ambiguous event-boundary cases are retained without speculative rewriting. Independent native-Persian sign-off remains pending.",
   "style_guide": [
     "Narration uses contemporary literary-conversational Persian: intimate, restrained, natural, and never uniformly formal or slang-heavy.",
     "Dialogue remains spoken and character-specific; preserve hesitation, pauses, and unfinished phrases.",
