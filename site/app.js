@@ -436,7 +436,11 @@ function scheduleDialogueFit() {
 }
 
 function applyPersianSourceQuoteStyle(ev, value) {
-  const source = String(ev?.text_en || '').trim();
+  let source = String(ev?.text_en || '').trim();
+  // Some source events prefix the quoted line with a speaker label
+  // (e.g. "Pharmacist" or "Boyfriend"). Ignore that label when detecting
+  // the source dialogue delimiters; do not strip narrative lead-ins ending in ":".
+  source = source.replace(/^[^\n:]{1,40}\n(?=``)/u, '');
   if (!/^``[\s\S]*''$/.test(source)) return String(value || '');
   const match = /^(\s*)([\s\S]*?)(\s*)$/.exec(String(value || ''));
   if (!match || !match[2]) return String(value || '');
