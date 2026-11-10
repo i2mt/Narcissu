@@ -16,7 +16,7 @@
       "Chapter 2",
       "Chapter 3"
     ],
-    "targeted_revisions": 42,
+    "targeted_revisions": 44,
     "focus": [
       "source meaning and omitted details",
       "event-boundary alignment and duplicate text",
@@ -26,8 +26,8 @@
     "external_human_signoff": "pending",
     "chapter_revisions": {
       "prologue": 5,
-      "chapter1": 16,
-      "chapter2": 9,
+      "chapter1": 17,
+      "chapter2": 10,
       "chapter3": 12
     }
   },
@@ -448,6 +448,26 @@
       "source_text_before": "و خیلی زود، دومین ترخیصم از بیمارستان رسیده بود.",
       "english_reference": "And soon enough, my second discharge from the hospital.",
       "editorial_note": "«دومین ترخیصم از بیمارستان رسیده بود» ترکیبی نامأنوس و بیش از حد اسمی است؛ «برای بار دوم از بیمارستان مرخص شدم» هم طبیعی‌تر است و هم با کاربرد ثابتِ «مرخص شدن» در روایت هماهنگ می‌ماند.",
+      "approval": "assistant_led_source_alignment_revision; independent_native_Persian_signoff_pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    },
+    "gp32_honpen2:089158": {
+      "text": "اِ... انگار قرار نیست اینجا نگهبانی باشه...",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "به نظر نمی‌اومد نگهبانی داشته باشه.",
+      "english_reference": "``Eh, it's not as if there's going to be a guard on duty ...''",
+      "editorial_note": "ترجمهٔ قبلی جمله را به روایت غیرمستقیم تبدیل کرده بود، درحالی‌که رویداد انگلیسی گفت‌وگوی مستقیم است. این نسخه لحن مردد و محاوره‌ای راوی را برمی‌گرداند؛ نشانه‌های گفت‌وگو در زمان نمایش به‌صورت خودکار افزوده می‌شوند.",
+      "approval": "assistant_led_source_alignment_revision; independent_native_Persian_signoff_pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    },
+    "gp32_honpen3:089990": {
+      "text": "آها...",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "باشه، یه‌جورایی با ناراحتی سرشو به نشونهٔ تأیید تکون داد...",
+      "english_reference": "``... I see ...''",
+      "editorial_note": "ترجمهٔ قبلی کنشِ رویداد بعدی را تکرار می‌کرد و پاسخ کوتاه ستسومی را حذف کرده بود. «آها...» واکنش موجز و خویشتن‌دار او را حفظ می‌کند و اجازه می‌دهد حرکت سر در رویداد بعدی جداگانه روایت شود.",
       "approval": "assistant_led_source_alignment_revision; independent_native_Persian_signoff_pending",
       "source_relation": "aligned_to_gp32_english_event",
       "revision_kind": "source_aligned_revision"
