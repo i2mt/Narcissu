@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "language": "fa",
+  "project": "Narcissu Persian Edition",
+  "increment": 54,
+  "layer": "assistant_led_source_alignment_followup_draft",
+  "title": "Source-alignment follow-up — targeted Persian revisions",
+  "description": "A focused follow-up on the 48 historical alignment entries not revised in Increment 53. The original gp32 English script was checked directly against the existing Persian text. Eight targeted revisions are proposed; ambiguous event-boundary cases are retained without speculative rewriting. Independent native-Persian sign-off remains pending.",
+  "style_guide": [
+    "Narration uses contemporary literary-conversational Persian: intimate, restrained, natural, and never uniformly formal or slang-heavy.",
+    "Dialogue remains spoken and character-specific; preserve hesitation, pauses, and unfinished phrases.",
+    "Preserve source meaning and emotional understatement; do not add explanations or actions not present in the English.",
+    "Correct translationese, semantic drift, awkward collocations, and lost nuances without over-editing faithful existing Persian."
+  ],
+  "review_scope": {
+    "historical_alignment_entries_reexamined": 48,
+    "revised_entries": 8,
+    "retained_without_change": 40,
+    "method": "The remaining 48 historical alignment entries were compared with the English gp32 event text and their active Persian source in the earlier recovery layer. Eight clear semantic or idiomatic improvements are proposed. Other entries were left unchanged where the Persian was already adequate or where the issue concerned uncertain event boundaries rather than a demonstrable translation error.",
+    "source": "gp32 / Insani 2005 English localization, represented by the repository's story-gp32.json events",
+    "external_human_signoff": "pending"
+  },
+  "translations": {
+    "gp32_honpen4:093757": {
+      "text": "پس... باید چی‌کار کنم؟",
+      "status": "literary_revision_draft",
+      "source_text_before": "چی‌کار باید بکنم؟",
+      "english_reference": "``Then ... what should I do?''",
+      "editorial_note": "«پس» و مکث آغازین، Then ... را بازمی‌گردانند و تردیدِ جملهٔ پرسشی را حفظ می‌کنند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen5:094639": {
+      "text": "احتمالاً اونجا بود تا پول رو بگیره و بقیه‌ش رو پس بده.",
+      "status": "literary_revision_draft",
+      "source_text_before": "احتمالاً برای گرفتن پول و پس دادن باقی‌پول اونجا بود.",
+      "english_reference": "... probably there to get payment and give back change.",
+      "editorial_note": "ترکیب نامأنوس «پس دادن باقی‌پول» به بیان طبیعی‌ترِ گرفتن پول و پس دادن بقیه تبدیل شد؛ نقش متصدی از بافت جایگاه سوخت‌گیری روشن است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen5:094826": {
+      "text": "ها؟ آ... نه، خب...",
+      "status": "literary_revision_draft",
+      "source_text_before": "امم، خب... نه، چون...",
+      "english_reference": "``Huh?  Oh, uh, no, well ...''",
+      "editorial_note": "«چون» در متن انگلیسی وجود ندارد و جمله را به سمت توضیح علّی می‌برد؛ واکنش متعجب و لکنت گفتار حفظ شد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095701": {
+      "text": "شاید...",
+      "status": "literary_revision_draft",
+      "source_text_before": "به‌نظر می‌رسید...",
+      "english_reference": "It might well have been ...",
+      "editorial_note": "«به‌نظر می‌رسید» معنای ادراکیِ It seemed را القا می‌کند؛ «شاید» با وجه احتمالیِ might well have been و ادامهٔ جمله سازگارتر است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:096096": {
+      "text": "اما... شاید، فقط شاید، یه حسی داشتم. یه کم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "اما شاید... فقط یه ذره همچین حسی داشتم.",
+      "english_reference": "But ... maybe, just maybe,\nI did feel something.  A little.",
+      "editorial_note": "تکرار تأکیدیِ maybe, just maybe و مکث میان «یه حسی داشتم» و «یه کم» حفظ شد؛ این تردید و کم‌بودنِ احساس در این بخش مهم است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen7:097708": {
+      "text": "... از اول نه برنامه‌ای داشتیم، نه مقصدی.",
+      "status": "literary_revision_draft",
+      "source_text_before": "وقتی مقصد خاصی نداشتیم...",
+      "english_reference": "... we originally had no plan or destination.",
+      "editorial_note": "«برنامه» و «از اول» در متن فعلی حذف شده‌اند؛ ساختار تازه هر دو جزء معناییِ originally had no plan or destination را بازمی‌گرداند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen8:099664": {
+      "text": "... اشکالی نداره.",
+      "status": "literary_revision_draft",
+      "source_text_before": "... خوبم.",
+      "english_reference": "``... it's okay.''",
+      "editorial_note": "در این بافت، Setsumi با صدای ضعیفش راوی را از رفتن بازمی‌دارد؛ «خوبم» معنای I'm okay می‌دهد، درحالی‌که متن می‌گوید it's okay. «اشکالی نداره» این تفاوت را حفظ می‌کند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100581": {
+      "text": "این همون گواهینامه‌ای بود که بهش داده بودم؛ گواهینامه‌ای که قرار نبود هیچ‌وقت فرصتی برای استفاده ازش پیدا کنم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "این گواهینامه‌ای بود که بهش داده بودم. چیزی که نباید هیچ‌وقت فرصتی برای استفاده ازش پیدا می‌کردم.",
+      "english_reference": "That was the license that I'd given her.\nThe was one that I should never have had the chance to use.",
+      "editorial_note": "مرجع جملهٔ دوم صریحاً همان گواهینامه است؛ تکرار اسم، ابهامِ «چیزی که» را برطرف می‌کند. متن انگلیسی در این رویداد ظاهراً خطای تایپی «The was one» دارد؛ ترجمه بر اساس معنای روشنِ جمله و پیوستگی با جملهٔ قبل تنظیم شد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    }
+  }
+}
