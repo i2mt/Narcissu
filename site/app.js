@@ -1340,7 +1340,7 @@ async function boot() {
     }
   } catch {}
   try {
-    const [storyResponse, assetsResponse, faResponse, historicalAlignmentResponse, overlayResponse, increment20Response, chapter2RecoveryResponse, chapter3RecoveryResponse, chapter4RecoveryResponse, chapter4Page44RecoveryResponse, chapter4Page45RecoveryResponse, chapter4Pages46to50RecoveryResponse, chapter1Chapter3RecoveryResponse, literaryProofreadResponse, finalProofreadResponse, increment31ProofreadResponse, increment32ProofreadResponse, increment33ProofreadResponse, increment34ProofreadResponse, increment35ProofreadResponse, increment38AssistantReviewResponse, conversationalToneResponse, literaryRevisionResponse] = await Promise.all([
+    const [storyResponse, assetsResponse, faResponse, historicalAlignmentResponse, overlayResponse, increment20Response, chapter2RecoveryResponse, chapter3RecoveryResponse, chapter4RecoveryResponse, chapter4Page44RecoveryResponse, chapter4Page45RecoveryResponse, chapter4Pages46to50RecoveryResponse, chapter1Chapter3RecoveryResponse, literaryProofreadResponse, finalProofreadResponse, increment31ProofreadResponse, increment32ProofreadResponse, increment33ProofreadResponse, increment34ProofreadResponse, increment35ProofreadResponse, increment38AssistantReviewResponse, conversationalToneResponse, literaryRevisionResponse, increment54Response] = await Promise.all([
       fetch('./data/story-gp32.json'), fetch('./data/asset-manifest.json'), fetch('./data/localization/fa.json'),
       fetch('./data/localization/fa-historical-alignment-increment28.json'),
       fetch('./data/localization/fa-revised-overlay-recovery.json'),
@@ -1361,7 +1361,8 @@ async function boot() {
       fetch('./data/localization/fa-literary-proofread-increment35.json'),
       fetch('./data/localization/fa-assistant-editorial-review-increment38.json'),
       fetch('./data/localization/fa-conversational-tone-increment52.json'),
-      fetch('./data/localization/fa-literary-revision-increment53.json')
+      fetch('./data/localization/fa-literary-revision-increment53.json'),
+      fetch('./data/localization/fa-literary-revision-increment54.json')
     ]);
     if(!storyResponse.ok||!assetsResponse.ok)throw new Error('Could not load game data.');
     story=await storyResponse.json();assetManifest=await assetsResponse.json();
@@ -1390,7 +1391,8 @@ async function boot() {
     const increment38AssistantReviewOverlay=increment38AssistantReviewResponse.ok?await increment38AssistantReviewResponse.json():{translations:{}};
     const conversationalToneOverlay=conversationalToneResponse.ok?await conversationalToneResponse.json():{translations:{}};
     const literaryRevisionOverlay=literaryRevisionResponse.ok?await literaryRevisionResponse.json():{translations:{}};
-    revisedOverlay={...recoveredOverlay,translations:{...(recoveredOverlay.translations||{}),...(increment20Overlay.translations||{}),...(chapter2RecoveryOverlay.translations||{}),...(chapter3RecoveryOverlay.translations||{}),...(chapter4RecoveryOverlay.translations||{}),...(chapter4Page44RecoveryOverlay.translations||{}),...(chapter4Page45RecoveryOverlay.translations||{}),...(chapter4Pages46to50RecoveryOverlay.translations||{}),...(chapter1Chapter3RecoveryOverlay.translations||{}),...(literaryProofreadOverlay.translations||{}),...(finalProofreadOverlay.translations||{}),...(increment31ProofreadOverlay.translations||{}),...(increment32ProofreadOverlay.translations||{}),...(increment33ProofreadOverlay.translations||{}),...(increment34ProofreadOverlay.translations||{}),...(increment35ProofreadOverlay.translations||{}),...(increment38AssistantReviewOverlay.translations||{}),...(conversationalToneOverlay.translations||{}),...(literaryRevisionOverlay.translations||{})}};
+    const increment54Overlay=increment54Response.ok?await increment54Response.json():{translations:{}};
+    revisedOverlay={...recoveredOverlay,translations:{...(recoveredOverlay.translations||{}),...(increment20Overlay.translations||{}),...(chapter2RecoveryOverlay.translations||{}),...(chapter3RecoveryOverlay.translations||{}),...(chapter4RecoveryOverlay.translations||{}),...(chapter4Page44RecoveryOverlay.translations||{}),...(chapter4Page45RecoveryOverlay.translations||{}),...(chapter4Pages46to50RecoveryOverlay.translations||{}),...(chapter1Chapter3RecoveryOverlay.translations||{}),...(literaryProofreadOverlay.translations||{}),...(finalProofreadOverlay.translations||{}),...(increment31ProofreadOverlay.translations||{}),...(increment32ProofreadOverlay.translations||{}),...(increment33ProofreadOverlay.translations||{}),...(increment34ProofreadOverlay.translations||{}),...(increment35ProofreadOverlay.translations||{}),...(increment38AssistantReviewOverlay.translations||{}),...(conversationalToneOverlay.translations||{}),...(literaryRevisionOverlay.translations||{}),...(increment54Overlay.translations||{})}};
     state.history=safeJSONParse(localStorage.getItem(STORAGE_KEYS.history),[]);
     state.language=localStorage.getItem('narcissu-language-v1')||DEFAULT_LANGUAGE;
     loadSettings();bindUI();renderChapters();setLanguage(state.language);updateNetworkStatus();
