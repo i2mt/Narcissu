@@ -299,7 +299,7 @@
     "gp32_honpen4:092989": {
       "text": "این نگرانم می‌کرد، اما چیز دیگه‌ای خیلی بیشتر ذهنم رو مشغول کرده بود.",
       "status": "assistant_reviewed_revision",
-      "source_text_before": "از طرف دیگه، حالا فقط حدود ۲۰۰۰ ین داشتیم و این نگرانم می‌کرد.",
+      "source_text_before": "این نگرانم می‌کرد، اما چیز دیگه‌ای بود که خیلی بیشتر ذهنم رو مشغول کرده بود.",
       "english_reference": "This worried me,\nbut there was something that preoccupied me much more.",
       "editorial_note": "ترجمهٔ قبلی دربارهٔ باقی‌ماندن ۲۰۰۰ ین بود و با متن انگلیسی این رویداد هیچ تطابقی نداشت؛ این نسخه معنای دقیق منبع را بازمی‌گرداند.",
       "approval": "assistant_led_source_alignment_revision; independent_native_Persian_signoff_pending",
@@ -309,7 +309,7 @@
     "gp32_honpen4:093120": {
       "text": "اما درست جلوی چشمم، همهٔ مشخصات رو دقیق و بی‌کم‌وکاست درست گفت.",
       "status": "assistant_reviewed_revision",
-      "source_text_before": "باورم نمی‌شد! همه‌ی مشخصات رو ریزبه‌ریز درست گفته بود.",
+      "source_text_before": "... اما درست جلوی چشمم، تک‌تک مشخصات رو درست گفته بود.",
       "english_reference": "... but right before my eyes she had gotten every single spec correct.",
       "editorial_note": "ترجمهٔ قبلی یک واکنشِ «باورم نمی‌شد» اضافه کرده بود؛ این نسخه خودِ مشاهدهٔ راوی را منتقل می‌کند.",
       "approval": "assistant_led_source_alignment_revision; independent_native_Persian_signoff_pending",
@@ -329,7 +329,7 @@
     "gp32_honpen4:093396": {
       "text": "نقشه‌ام رو نه برای اینکه کمکش رو بخوام، بلکه طوری براش تعریف کرده بودم که انگار تصمیمم از قبل قطعی شده بود.",
       "status": "assistant_reviewed_revision",
-      "source_text_before": "حرفام بیشتر شبیه یه اعتراف بودن.",
+      "source_text_before": "نقشه‌ام رو طوری بهش گفته بودم که انگار تصمیمش قطعی شده بود، نه اینکه بخوام توی اجرای اون کمکم کنه.",
       "english_reference": "And I'd told her about my plan as a fait accompli,\nnot because I wanted her aid in it.",
       "editorial_note": "معنای fait accompli در ترجمهٔ قبلی به «اعتراف» تغییر کرده بود؛ این نسخه تفاوت میان اعلام تصمیم قطعی و درخواست کمک را حفظ می‌کند.",
       "approval": "assistant_led_source_alignment_revision; independent_native_Persian_signoff_pending",
@@ -339,7 +339,7 @@
     "gp32_honpen4:093412": {
       "text": "تنها از ماشین پیاده شدم و با قدم‌های تند وارد مرکز بازی شدم.",
       "status": "assistant_reviewed_revision",
-      "source_text_before": "از ماشین پیاده شدم و رفتم سمت اون مرکز بازی.",
+      "source_text_before": "از ماشین پیاده شدم و تنها وارد سالن پاچینکو شدم.",
       "english_reference": "I got out of the car and strode into the pachinko parlor alone.",
       "editorial_note": "تنها بودن و حرکت سریع narrator که در ترجمهٔ قبلی حذف شده بود، بازگردانده شده است.",
       "approval": "assistant_led_source_alignment_revision; independent_native_Persian_signoff_pending",
@@ -349,7 +349,7 @@
     "gp32_honpen4:093539": {
       "text": "همه به طرفم برگشتن تا ببینن این سروصدا برای چیه.",
       "status": "assistant_reviewed_revision",
-      "source_text_before": "همه برگشته بودن به سمت من تا ببینن چه اتفاقی افتاده.",
+      "source_text_before": "همه به طرفم برگشته بودن تا ببینن این سروصدا برای چیه.",
       "english_reference": "Everyone turned in my direction to see what the commotion was all about.",
       "editorial_note": "جملهٔ افزودهٔ مربوط به احساس دویدن کسی به سمت راوی حذف شده و فقط رویداد منبع باقی می‌ماند.",
       "approval": "assistant_led_source_alignment_revision; independent_native_Persian_signoff_pending",
@@ -369,7 +369,7 @@
     "gp32_honpen4:093606": {
       "text": "هنگام پیچیدن برای فرار، به جدول کنار خیابون یا چیزی شبیه اون زده بودم.",
       "status": "assistant_reviewed_revision",
-      "source_text_before": "انقدر عجله کردم که جدول کنارمونو ندیدم و از روش رد شدم.",
+      "source_text_before": "هنگام پیچیدن برای فرار، به جدول کنار خیابون یا چیزی شبیه اون برخورد کرده بودم.",
       "english_reference": "I'd run against the curb or something as I turned to make my getaway.",
       "editorial_note": "ترجمهٔ قبلی عبور از روی جدول را قطعی می‌کرد؛ متن انگلیسی برخورد با جدول یا چیزی شبیه آن را بیان می‌کند.",
       "approval": "assistant_led_source_alignment_revision; independent_native_Persian_signoff_pending",
@@ -379,7 +379,7 @@
     "gp32_honpen4:093631": {
       "text": "نگران تصادفی بودم که چند لحظه پیش کرده بودم، اما حالا باید هرچه زودتر از اونجا دور می‌شدم.",
       "status": "assistant_reviewed_revision",
-      "source_text_before": "نگران تصادفی که کرده بودیم بودم، اما اون موقع باید از اونجا دور می‌شدیم.",
+      "source_text_before": "نگران تصادفی بودم که چند لحظه پیش کرده بودم، اما حالا باید از اونجا دور می‌شدم.",
       "english_reference": "I was concerned about the crash a little while ago,\nbut I had to distance myself from that place ~i~now~i~.",
       "editorial_note": "زمان‌مندی now و فاعل اول‌شخص در جملهٔ قبلی مبهم شده بود؛ این نسخه آن‌ها را روشن می‌کند.",
       "approval": "assistant_led_source_alignment_revision; independent_native_Persian_signoff_pending",
@@ -389,7 +389,7 @@
     "gp32_honpen4:093702": {
       "text": "و دلیل اینکه نتونستم اون صندوق پول رو نگه دارم، این بود که مدت‌ها بود چیز سنگینی بلند نکرده بودم.",
       "status": "assistant_reviewed_revision",
-      "source_text_before": "احتمالاً چون چند وقت بود چیز سنگینی بلند نکرده بودم، نتونستم اون بستهٔ پولو نگه دارم.",
+      "source_text_before": "و دلیل اینکه نتونستم صندوق پول رو نگه دارم، این بود که مدت‌ها بود چیز سنگینی بلند نکرده بودم.",
       "english_reference": "And the reason I wasn't able to hold onto that cashbox was because it had been a while since I'd lifted something heavy.",
       "editorial_note": "cashbox به‌اشتباه «بستهٔ پول» ترجمه شده بود؛ «صندوق پول» با شیء توصیف‌شده سازگارتر است.",
       "approval": "assistant_led_source_alignment_revision; independent_native_Persian_signoff_pending",
@@ -399,7 +399,7 @@
     "gp32_honpen4:093723": {
       "text": "توِ الان دیگه نمی‌تونی کارهایی رو انجام بدی که توِ گذشته ازت برمی‌اومد...",
       "status": "assistant_reviewed_revision",
-      "source_text_before": "تو الان نمی‌تونی خیلی از کارایی رو که قبلاً می‌تونستی انجام بدی.",
+      "source_text_before": "«توِ الان نمی‌تونی کارهایی رو انجام بدی که خودِ قبلیت از پسشون برمی‌اومد...»",
       "english_reference": "``The current you can't do what the former you could have ...''",
       "editorial_note": "تقابل current you / former you که در ترجمهٔ قبلی با عبارت‌های نامأنوس «توی الان/توی قبل» آمده بود، طبیعی‌تر و همچنان صریح بیان شده است.",
       "approval": "assistant_led_source_alignment_revision; independent_native_Persian_signoff_pending",
@@ -409,7 +409,7 @@
     "gp32_honpen4:093773": {
       "text": "در سکوت، نگاهش رو به پنجره دوخت و به آسمون تاریک شب خیره شد.",
       "status": "assistant_reviewed_revision",
-      "source_text_before": "با سکوت، چشم‌هاشو از پنجره به آسمون تاریک شب دوخت.",
+      "source_text_before": "در سکوت، چشم‌هاش رو به پنجره و آسمون تاریک شب دوخت.",
       "english_reference": "Eyes turned in silence toward the window to stare into the dark night sky.",
       "editorial_note": "ترجمهٔ قبلی «جوابی نداد» را که در رویداد بلافاصله قبل آمده بود تکرار می‌کرد؛ این نسخه فقط حرکت نگاه را توصیف می‌کند.",
       "approval": "assistant_led_source_alignment_revision; independent_native_Persian_signoff_pending",
