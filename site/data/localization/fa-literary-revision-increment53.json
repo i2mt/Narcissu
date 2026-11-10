@@ -1,0 +1,609 @@
+{
+  "schema_version": 1,
+  "language": "fa",
+  "project": "Narcissu Persian Edition",
+  "increment": 53,
+  "layer": "assistant_led_story_wide_literary_revision_draft",
+  "title": "Literary narration and dialogue revision — first story-wide pass",
+  "description": "Selected source-checked literary revisions across Chapters 2–9, prioritizing narration, natural Persian syntax, tense consistency, dialogue register, and preservation of emotional restraint. This is a draft editorial layer, not a complete line-by-line certification.",
+  "style_guide": [
+    "Narration uses contemporary literary-conversational Persian: intimate, restrained, natural, and never uniformly formal or slang-heavy.",
+    "Dialogue remains spoken and character-specific; avoid making every character sound like the narrator.",
+    "Preserve fragments, repetition, pauses, imagery, emotional distance, and deliberate understatement.",
+    "Correct translationese, tense drift, awkward collocations, omissions, and source misalignment without embellishing the source.",
+    "Keep proper names and terminology consistent; compare every substantive change against the English source."
+  ],
+  "review_scope": {
+    "chapters_covered": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "revised_entries": 64,
+    "method": "Targeted review of the active Increment 52 layer against its English references. Only entries with a defensible literary, grammatical, or semantic improvement are included; unchanged entries remain untouched.",
+    "external_human_signoff": "pending"
+  },
+  "translations": {
+    "gp32_image:087805": {
+      "text": "و وقتی مرخص شدم، آخر هفته‌ها حتی به خونه‌مون می‌اومدن تا با من بازی کنن.",
+      "status": "literary_revision_draft",
+      "source_text_before": "و وقتی مرخص شدم، آخر هفته‌ها حتی به خونه‌مون می‌اومدن تا با من بازی کنند.",
+      "english_reference": "And when I was released,\nthey even came to my house on weekends to play.",
+      "editorial_note": "هماهنگ‌کردن فعل با لحن محاوره‌ای جمله؛ جلوگیری از ترکیب «می‌اومدن» و «بازی کنند».",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_image:087821": {
+      "text": "پاییز به زمستون، زمستون به بهار... چرخه‌ای بی‌رحم و عذاب‌آور: بستری شدن، مرخص شدن، رفتن به درمانگاه... و دوباره بستری شدن...",
+      "status": "literary_revision_draft",
+      "source_text_before": "پاییز به زمستون، زمستون به بهار... چرخه‌ای شوم و عذاب‌آور: بستری شدن، مرخص شدن، رفتن به درمانگاه... و دوباره بستری شدن...",
+      "english_reference": "Autumn into winter, winter into spring, a vicious cycle:\nhospitalization, release, clinics ... and hospitalization again ...",
+      "editorial_note": "«بی‌رحم» به vicious نزدیک‌تر از «شوم» است و از بار پیش‌گویانهٔ اضافی جلوگیری می‌کند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_image:088099": {
+      "text": "با اینکه هنوز نمی‌دونستم PET یا ایرسا مخفف چی‌ان، چند ماه هم به‌سرعت گذشته بود...",
+      "status": "literary_revision_draft",
+      "source_text_before": "با همهٔ اینا، من هنوز نمی‌دونستم چیزایی مثل PET چه معنی‌ای دارن. توی این کشمکش‌ها چند ماه گذشت...",
+      "english_reference": "While I still had no clue what `PET' or `Iressa' stood for,\nin no time at all, several months had already passed.",
+      "editorial_note": "بازگرداندن نام Iressa که در متن انگلیسی صریحاً آمده و در ترجمهٔ فعلی حذف شده است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen2:088689": {
+      "text": "این‌ها حرف‌های معمولی دربارهٔ ساعت خاموشی و جای آشپزخونه و چیزهایی که به تازه‌واردهای بیمارستان می‌گن نبود...",
+      "status": "literary_revision_draft",
+      "source_text_before": "حرفاش یه‌سری حرف معمولی راجع به ساعت خاموشی و محل آشپزخونه و چیزای دیگه که به تازه‌واردای بیمارستان می‌گن نبودن...",
+      "english_reference": "This wasn't idle chit-chat about when lights-out was or where the kitchen was or anything like that.",
+      "editorial_note": "رفع تکرار «حرفاش... حرف» و طبیعی‌تر کردن ساختار جمله.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen2:088743": {
+      "text": "بعد از گفتن این حرف‌ها، آروم از جاش بلند شد، موهای بلندش رو با بی‌خیالی تکون داد و موهاش به بینیم خورد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "بعد از گفتن این حرف‌ها، آروم از جاش بلند شد، موهای بلندش رو بی‌خیال تکون داد و موهاش به بینیم خورد.",
+      "english_reference": "With those words, she slowly stood up.\nShe casually tossed her long hair, and it grazed my nose.",
+      "editorial_note": "«موها را بی‌خیال تکان داد» در فارسی طبیعی‌تر از «موها را بی‌خیال تکان داد» با ساختار فعلی نیست؛ بازچینی برای روانی.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen2:089001": {
+      "text": "این رو در حالی پرسیدم که به دستبند شناساییِ سفید و وینیلیِ دور مچش و اسم و گروه خونی‌ای که روش نوشته شده بود نگاه می‌کردم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "این رو در حالی پرسیدم که به دستبند شناسایی سفیدش، از جنس وینیل، و نام و گروه خونیِ ثبت‌شده روی اون نگاه می‌کردم.",
+      "english_reference": "I asked this as I stared at her white vinyl ID bracelet,\nand at the blood type and the name written therein.",
+      "editorial_note": "کاهش ساختار سنگین «ثبت‌شده روی آن» و طبیعی‌سازی توصیف دستبند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen2:089581": {
+      "text": "گاهی برف و بارون با هم می‌بارید، گاهی فقط برف. بارش هیچ‌وقت بند نمی‌اومد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "گاهی باران و برفِ آمیخته می‌بارید، گاهی برف. بارش هیچ‌وقت بند نمی‌اومد.",
+      "english_reference": "Sometimes sleet, sometimes snow.\nAlways coming down.",
+      "editorial_note": "«باران و برف آمیخته» ترجمه‌ای نامأنوس برای sleet است؛ جملهٔ پیشنهادی طبیعی‌تر و تصویری‌تر است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen3:090056": {
+      "text": "دوباره برام سر تکون داد و برگشت تا از اونجا بره.",
+      "status": "literary_revision_draft",
+      "source_text_before": "دوباره برام سر تکان داد و برگشت تا از آنجا بره.",
+      "english_reference": "She nodded slightly at me again and then turned to leave this place.",
+      "editorial_note": "یکدست‌کردن فعل و واژگان با لحن محاوره‌ای روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen3:090308": {
+      "text": "با همون حالت آشنای همیشگی‌اش رو به پنجره ایستاده بود و بی‌اعتنا به حضور من، بیرون رو تماشا می‌کرد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "در اون حالت آشنایش، رو به پنجره ایستاده بود و بی‌آنکه کوچک‌ترین اعتنایی به حضور من کند، بیرون رو تماشا می‌کرد.",
+      "english_reference": "Her familiar stance, looking out the window without so much as acknowledging my existence.",
+      "editorial_note": "حذف ترکیب رسمی و سنگین «بی‌آنکه کوچک‌ترین اعتنایی... کند» بدون تغییر معنای صحنه.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen3:091313": {
+      "text": "داخل لباس‌شویی هم مثل نمای بیرونش فرسوده بود؛ ماشین‌های لباس‌شویی و خشک‌کن‌ها هم قدیمی و فرسوده بودن.",
+      "status": "literary_revision_draft",
+      "source_text_before": "ظاهر بیرونی لباس‌شویی بی‌راه نمی‌گفت؛ دستگاه‌های لباس‌شویی و خشک‌کن هم قدیمی و فرسوده بودن.",
+      "english_reference": "The exterior of the laundromat had told no lie:\nthe washers and dryers were old and run-down as well.",
+      "editorial_note": "ساختار «ظاهر بیرونی ... بی‌راه نمی‌گفت» در این بافت ترجمه‌زده است؛ بازنویسی مستقیم‌تر.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen3:091331": {
+      "text": "فقط یکی از خشک‌کن‌ها روشن بود و صدای وزوزِ مخصوص خودش رو درمی‌آورد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "فقط یکی از خشک‌کن‌ها روشن بود و صدای وزوزِ مخصوص خودش رو درمیاره.",
+      "english_reference": "Only a single dryer was in operation,\nmaking its characteristic humming noises.",
+      "editorial_note": "هماهنگی زمان روایت؛ متن فعلی در انتهای جمله ناخواسته به زمان حال می‌رود.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen3:091352": {
+      "text": "درحالی‌که به این فکر می‌کردم، یه بار دیگه اطراف رو نگاه کردم تا مطمئن شم کسی اون دوروبر نیست.",
+      "status": "literary_revision_draft",
+      "source_text_before": "درحالی‌که به این فکر می‌کردم، یک بار دیگه اطراف رو نگاه کردم تا مطمئن شوم کسی اون دوروبر نیست.",
+      "english_reference": "Ruminating over this, I looked around just one more time to reassure myself that no one was around.",
+      "editorial_note": "هماهنگی «مطمئن شوم» با لحن محاوره‌ای و زمان روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen3:091383": {
+      "text": "بعد از اینکه یه بار دیگه اطراف رو نگاه کردم و مطمئن شدم کسی نیست، بی‌معطلی از لباس‌شویی زدم بیرون.",
+      "status": "literary_revision_draft",
+      "source_text_before": "یک بار دیگه اطراف رو نگاه کردم تا مطمئن شوم کسی نیست؛ بعد همون‌طور از لباس‌شویی بیرون زدم.",
+      "english_reference": "And after looking around once more to make sure no one was around,\nI walked out of the laundromat just like that.",
+      "editorial_note": "طبیعی‌سازی «همان‌طور از لباس‌شویی بیرون زدم» که در فارسی معنای روشنی ندارد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen3:091706": {
+      "text": "مطمئن بودم از پیراهن گشادش خوشش نمیاد، اما خیلی زود دوباره همون چهرهٔ بی‌احساس همیشگی‌ش رو به خودش گرفت.",
+      "status": "literary_revision_draft",
+      "source_text_before": "مطمئن بودم از پیراهن گشادش راضی نیست، اما خیلی زود دوباره همون چهرهٔ بی‌احساس همیشگی‌ش رو به خودش گرفت.",
+      "english_reference": "I was sure that she was unhappy with her baggy shirt,\nbut she soon returned to her usual lack of expression.",
+      "editorial_note": "رفع ناهماهنگی زمانی و رسمی «ناراضی است» در روایت گذشته و محاوره‌ای.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen3:091941": {
+      "text": "تازه رانندگی رو شروع کرده بودم و هنوز درست‌وحسابی بهش مسلط نبودم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "تازه رانندگی رو شروع کرده بودم و هنوز حتی نصفه‌نیمه هم به اون مسلط نبودم.",
+      "english_reference": "I'd just started driving a car,\nso I wasn't even halfway proficient yet.",
+      "editorial_note": "«حتی نصفه‌نیمه هم به آن مسلط نبودم» ساختاری سنگین دارد؛ این صورت طبیعی‌تر است و معنای ناآزمودگی را حفظ می‌کند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen4:092320": {
+      "text": "خب، ببین... شاید بتونیم از جاده‌های معمولی بریم و لازم نباشه وارد آزادراه‌های عوارضی بشیم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "«خب، ببین... شاید بتونیم از جاده‌های معمولی بریم و لازم نباشه وارد آزادراه‌های عوارضی شویم.»",
+      "english_reference": "``Well, see, we might be able to get there on normal highways without having to get on the tollways.''",
+      "editorial_note": "یکدست‌کردن «شویم» با گفت‌وگوی محاوره‌ای.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen4:092554": {
+      "text": "وقتی این رو گفت، سرش رو برگردوند و بهم نگاه کرد؛ ماه پشت سرش، توی آسمون تاریک، بالا می‌اومد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "وقتی این رو گفت، سرش رو برگرداند و بهم نگاه کرد؛ ماه در آسمان تاریک پشت سرش بالا می‌اومد.",
+      "english_reference": "She turned her head to look at me as she said this.\nWith the moon rising in the dark heavens as her backdrop.",
+      "editorial_note": "رفع ترکیب زمانیِ ناهمگون «برگرداند / بالا می‌اومد» و روان‌سازی جمله.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen4:092674": {
+      "text": "آسمون آبی و اون‌قدر صاف بود که دل آدم می‌گرفت. بادهای شمالیِ شدیدی به سیم‌های برقِ بالای سرمون می‌کوبیدن.",
+      "status": "literary_revision_draft",
+      "source_text_before": "آبی و اون‌قدر صاف که غمی در دل می‌انداخت. بادهای نیرومند شمالی به سیم‌های برقِ بالای سرمان می‌کوبیدند.",
+      "english_reference": "Blue and clear almost to the point of mourning.\nStrong north winds beating against the electric wires overhead.",
+      "editorial_note": "بازسازی جملهٔ قطعه‌قطعهٔ انگلیسی و طبیعی‌سازی تصویر «clear almost to the point of mourning».",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen4:092716": {
+      "text": "هنوز مقصد مشخصی نداشتیم، اما اگه بنزین نمی‌زدیم، دیگه نمی‌تونستیم به راهمون ادامه بدیم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "هنوز مقصد مشخصی نداشتیم، اما اگر بنزین نمی‌زدیم، دیگه نمی‌تونستیم به راه ادامه بدهیم.",
+      "english_reference": "We still didn't really have a destination or anything,\nbut if we didn't fill up we could not go anywhere anymore.",
+      "editorial_note": "هماهنگی «ادامه بدهیم» با لحن محاوره‌ای و اول‌شخص جمع.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen4:093171": {
+      "text": "از هیچ‌چیزش نمی‌شد فهمید که از من بزرگ‌تره.",
+      "status": "literary_revision_draft",
+      "source_text_before": "هیچ‌چیزی وجود نداشت که بهم نشون بده اون ازم بزرگ‌تره.",
+      "english_reference": "There was very little indication to show me that she was older than me at all.",
+      "editorial_note": "جایگزینی ساختار انتزاعی و طولانی «هیچ‌چیزی وجود نداشت که...» با فارسی روان‌تر.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen4:093253": {
+      "text": "این حرف‌ها رو در حالی می‌زدیم که کوفته‌برنجی‌هایی رو می‌خوردیم که کمی قبل از فروشگاه شبانه‌روزی خریده بودیم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "و این گفت‌وگو رو درحالی ردوبدل می‌کردیم که کوفته‌برنجی‌هایی رو می‌خوردیم که کمی قبل از فروشگاه شبانه‌روزی خریده بودیم.",
+      "english_reference": "And this conversation we were having while eating riceballs bought at a convenience store not long ago.",
+      "editorial_note": "«گفت‌وگو را ردوبدل کردن» در این بافت طبیعی نیست؛ فعل ساده‌تر و دقیق‌تر است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen4:093266": {
+      "text": "اما... برام غیرممکن بود یه‌جا بی‌حرکت بمونم، بی‌اینکه کاری بکنم یا هدفی داشته باشم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "اما... برام غیرممکن بود بی‌هیچ کاری و بی‌هیچ هدفی یک‌جا بمانم.",
+      "english_reference": "But ... it was impossible for me to stay still without doing anything, without shooting for anything.",
+      "editorial_note": "یکدست‌سازی فعل پایانی و طبیعی‌تر کردن جملهٔ محاوره‌ای.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen5:093911": {
+      "text": "... همون لباس شنایی که از اون روز به بعد دیگه هیچ‌وقت فرصت نکردم بپوشمش.",
+      "status": "literary_revision_draft",
+      "source_text_before": "... همون لباس شنایی که از اون روز به بعد دیگه فرصتی برای پوشیده‌شدن پیدا نکرده بود.",
+      "english_reference": "... that day, I remembered: that swimsuit that had lost its opportunity to be used.",
+      "editorial_note": "حذف ساختار مجهول و سنگین «فرصتی برای پوشیده‌شدن پیدا نکرده بود»؛ حفظ حسرتِ استفاده‌نشدن.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen5:094326": {
+      "text": "برخلاف من، فقط دست‌هاش رو می‌برد زیر لباسش و خودش رو تمیز می‌کرد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "برخلاف من، فقط دستاشو می‌بره لای لباسش و خودشو تمیز می‌کرد.",
+      "english_reference": "Unlike me, she simply washed herself by retracting her hands into the shirt.",
+      "editorial_note": "رفع ناهماهنگی زمان فعل‌ها («می‌بره» در کنار «می‌کرد»).",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen5:094432": {
+      "text": "پشتش به من بود و از توی انعکاسش در شیشه باهام حرف می‌زد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "پشتش بهم بود و از توی انعکاسش در شیشه با من حرف می‌زد.",
+      "english_reference": "Her back turned to me.\nSpeaking to me.  Reflected in the window.",
+      "editorial_note": "روان‌سازی جمله و حذف «با من» رسمی در کنار ساختار محاوره‌ای.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen5:094506": {
+      "text": "این حرف‌ها رو در حالی می‌زدیم که کوفته‌برنجی‌هایی رو می‌خوردیم که کمی قبل از فروشگاه شبانه‌روزی خریده بودیم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "این حرف‌ها رو درحالی ردوبدل کردیم که کوفته‌برنجی‌هایی رو می‌خوردیم که کمی قبل از فروشگاه شبانه‌روزی خریده بودیم.",
+      "english_reference": "We exchanged these words while eating convenience store-bought riceballs.",
+      "editorial_note": "رفع ساختار نامأنوس «حرف‌ها را ردوبدل کردیم» و یکدست‌سازی زمان روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen5:094586": {
+      "text": "ماشین رو کنار نزدیک‌ترین نازل بنزین متوقف کردم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "ماشین رو کنار نزدیک‌ترین تلمبهٔ سوخت‌گیری متوقف کردم.",
+      "english_reference": "Having found one,\nI stopped the car next to the nearest pump.",
+      "editorial_note": "«تلمبهٔ سوخت‌گیری» برای فارسی امروز نامأنوس است؛ «نازل بنزین» دقیق‌تر و طبیعی‌تر است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen5:095083": {
+      "text": "دست‌کم من دلم می‌خواست یه راهی برای دنبال کردن داشته باشم. هرچی بود، فقط می‌خواستم مسیری جلوم باشه.",
+      "status": "literary_revision_draft",
+      "source_text_before": "دست‌کم من دلم می‌خواست راهی برای دنبال‌کردن داشته باشم. هر چیزی قبول بود، به شرط اون‌که مسیری پیش رویم باشه.",
+      "english_reference": "At least for me, I wanted a path to follow.\nI was fine with anything.  As long as it was a path.",
+      "editorial_note": "کاهش ساختار رسمی «راهی برای دنبال‌کردن» و حفظ تکرار تأکیدیِ path در متن اصلی.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen5:095090": {
+      "text": "اممم، نظرت دربارهٔ جزیرهٔ آواجی چیه؟ همون که قبلاً ازش گفته بودی.",
+      "status": "literary_revision_draft",
+      "source_text_before": "اممم، نظرت راجع به اون جزیرهٔ آواجی که قبلاً راجع بهش گفته بودی چیه؟",
+      "english_reference": "``Hey, how about that Awaji Island you were talking about?''",
+      "editorial_note": "حذف تکرار «راجع به اون... راجع بهش» و حفظ لحن مکث‌دار گفت‌وگو.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen5:095119": {
+      "text": "... نظرت چیه امتحان کنیم بریم اونجا؟",
+      "status": "literary_revision_draft",
+      "source_text_before": "«... نظرت چیست امتحان کنیم به آنجا بریم؟»",
+      "english_reference": "``... what about you?  Want to try going there?''",
+      "editorial_note": "یکدست‌سازی دیالوگ با لحن محاوره‌ای؛ «نظرت چیست» بیش از حد رسمی است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095584": {
+      "text": "از پشت پنجره، مناظر و صداهای شهری رو می‌دیدم و می‌شنیدم؛ شهری که تا شمال گسترده شده بود و قبلاً هیچ‌وقت ندیده بودمش...",
+      "status": "literary_revision_draft",
+      "source_text_before": "مناظر و صداهای شهری رو که تا شمال گسترده شده بود و قبل از اون هیچ‌وقت ندیده بودم، از پشت پنجره می‌دیدم و می‌شنیدم...",
+      "english_reference": "The scenery streaming past the window.  The sights and sounds of a city that I'd never seen before, spreading to the north.",
+      "editorial_note": "بازچینی جمله برای روشن‌شدن مرجع «شهری» و روان‌تر شدن ترتیب اطلاعات.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095960": {
+      "text": "انگار جنبه‌های جذاب و بامزه‌ای هم داشت...",
+      "status": "literary_revision_draft",
+      "source_text_before": "انگار چیزای جذاب و بانمکی هم راجع بهش وجود داشتن...",
+      "english_reference": "... so there were awfully cute things about her as well ...",
+      "editorial_note": "«چیزای جذاب و بانمکی هم راجع بهش وجود داشتن» در فارسی طبیعی نیست.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:096383": {
+      "text": "با لحنی عجیب و غمگین جواب داد؛ طوری که حس کردم یه جای کار می‌لنگه.",
+      "status": "literary_revision_draft",
+      "source_text_before": "با لحنی عجیب و اندوهگین جواب داد؛ و این پاسخ در من این حس رو ایجاد کرد که چیزی در این میان جور درنمیاد.",
+      "english_reference": "She answered, somehow desolate.\n\nAnd it made me feel that there was something incongruous here.",
+      "editorial_note": "حذف ترجمه‌زدگیِ «این پاسخ در من این حس را ایجاد کرد که چیزی در این میان جور درنمی‌آید» و حفظ حس ناهماهنگی.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:096458": {
+      "text": "منظورت اینه که می‌خوای بدونی فکر می‌کنم اگه همین‌طوری بری توی آب، با درد کمی می‌میری؟",
+      "status": "literary_revision_draft",
+      "source_text_before": "منظورت نظرم راجع به اینه که اگه همین‌طوری بری جلوتر، آیا با درد کمی می‌میری؟",
+      "english_reference": "``Are you asking me whether I think you would die without much pain if you walked in?''",
+      "editorial_note": "بازنویسی پرسش برای رفع ساختار بسیار سنگین «منظورت نظرم راجع به اینه که...»؛ معنای سؤال حفظ شده است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:096670": {
+      "text": "و به راهنمایی اون، از تقاطع سِتا وارد بزرگراه مِیشین شدم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "به راهنمایی اون، از تقاطع سِتا وارد آزادراه میشین شدم.",
+      "english_reference": "Under her direction,\nI went from the Seta Interchange to the Meishin Expressway.",
+      "editorial_note": "رفع ابهام نوشتاری در «آزادراه میشین شدم»؛ نام بزرگراه به‌صورت مِیشین جدا و روشن نوشته می‌شود.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen7:097150": {
+      "text": "تا اون موقع حتی به ذهنم هم نرسیده بود؛ اصلاً حواسم نبود که باید بهش فکر کنم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "تا اون موقع اصلاً به این موضوع فکر نکرده بودم؛ حتی حواسم هم نبود که باید به اون فکر کنم.",
+      "english_reference": "But I hadn't even thought about it up until now ...\nI hadn't even had the ~i~senses~i~ to think about it.",
+      "editorial_note": "جملهٔ فعلی تکرار «فکر» دارد و عبارت «حواسم نبود که باید به آن فکر کنم» را کمی سنگین می‌کند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen7:097292": {
+      "text": "یه بیمارستان دانشگاهی سر یه تقاطع بزرگ، با چند داروخونه که کنارش جمع شده بودن.",
+      "status": "literary_revision_draft",
+      "source_text_before": "بیمارستانی دانشگاهی در تقاطعی بزرگ، با چند داروخونه که کنار اون جمع شده بودن.",
+      "english_reference": "A university hospital at a major intersection.\nand a couple pharmacies clustered next to it.",
+      "editorial_note": "طبیعی‌سازی عبارت اسمیِ تلگرافی و حفظ ضرباهنگ توصیف صحنه.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen7:097563": {
+      "text": "سرم گیج می‌رفت و نزدیک بود از حال برم؛ با دست‌هام درِ نیمه‌بسته رو به زور باز کردم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "سرم گیج می‌رفت و چیزی نمانده بود از حال برم؛ با دست‌هایم درِ نیمه‌بسته رو به زور باز کردم.",
+      "english_reference": "Dizzy, almost syncopal,\nI forced open the half-closed door with my hands.",
+      "editorial_note": "«چیزی نمانده بود از حال برم» رسمی‌تر از بافت روایی است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen7:097799": {
+      "text": "حالا هر از گاهی، اسم «جزیرهٔ آواجی» روی تابلوهای اعلام فاصلهٔ کنار جاده به چشم می‌خورد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "حالا هر از گاهی، روی تابلوهای نشانگرِ فاصله در کنار جاده، نام «جزیرهٔ آواجی» به چشم می‌خوره.",
+      "english_reference": "By now, on the roadside distance indicators,\nevery so often the words ``Awaji Island'' were appearing.",
+      "editorial_note": "«تابلوهای نشانگرِ فاصله» بیش از حد فنی و نامأنوس است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen7:098099": {
+      "text": "از توی منظره‌یاب دوربین، اون دو نفر رو وسط کادر آوردم و عکس گرفتم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "ازت لنز دیدمشون و بعد از اینکه تنظیم کردم، عکس گرفتم.",
+      "english_reference": "I centered those two in the viewfinder and snapped a photo.",
+      "editorial_note": "«از لنز دیدمشون» اصطلاح دقیقی برای قاب‌بندی با دوربین نیست.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen7:098136": {
+      "text": "احتمالاً می‌خواست هرچه زودتر کار رو تموم کنه؛ برای همین دوربین رو گرفت و بی‌اعتنا به تردید ما شد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "احتمالاً می‌خواست هرچه زودتر کار رو تمام کند؛ برای همین دوربین رو برداشت و بی‌اعتنا به تردید ما شد.",
+      "english_reference": "Probably wanted to get it over with as soon as possible.\nWhich is why he took the camera and ignored our hesitation.",
+      "editorial_note": "هماهنگی فعل پایانی با لحن محاوره‌ای و زمان روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen8:098432": {
+      "text": "ماشین رو کنار ساحل متوقف کردم و از پشت فرمان بلند شدم تا جاش رو به اون بدم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "ماشین رو کنار ساحل متوقف کردم و جایم رو پشت فرمان بهش دادم.",
+      "english_reference": "I stopped the car at this beach and turned over the driver's seat to her.",
+      "editorial_note": "روان‌سازی کنش؛ «جایم را پشت فرمان به او دادم» ترکیبی نامأنوس است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen8:098607": {
+      "text": "پاش روی کلاچ نرم و مطمئن بود و در تمام طول ساحل باریک و شنی راحت رانندگی می‌کرد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "کلاچ رو نرم و مطمئن کنترل می‌کرد و در تمام طول ساحل باریک و شنی آزادانه می‌راند.",
+      "english_reference": "Her foot on the clutch was smooth and sure,\nand she had free run of the entire narrow sandy beach.",
+      "editorial_note": "حفظ تصویر مهارت در کنترل کلاچ بدون استفاده از ترکیب نامأنوس «کلاچ را کنترل می‌کرد».",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen8:098794": {
+      "text": "فقط نور کم‌جان پنل داشبورد، نیم‌رخ‌های رنگ‌پریده و یکسانمون رو توی شیشه منعکس می‌کرد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "فقط نور کم‌جان پنل داشبورد، نیم‌رخ‌های رنگ‌پریده و یکسانِ ما رو بازمی‌تاباند.",
+      "english_reference": "Only the dim panel lights to reflect our wan selfsame profiles.",
+      "editorial_note": "«بازمی‌تاباند» در این جمله رسمی و نامأنوس است؛ ساختار پیشنهادی طبیعی‌تر است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen8:098807": {
+      "text": "چون پتو نداشتیم، چندتاشون رو برداشتیم و روی خودمون کشیدیم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "چون پتو نداشتیم، چندتایی از اونا رو برداشتیم و روی خودمان کشیدیم.",
+      "english_reference": "We had grabbed a bunch of those things and spread them on top of ourselves since we had no blankets.",
+      "editorial_note": "یکدست‌سازی ضمیرها با لحن محاوره‌ای.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen8:099290": {
+      "text": "اکو، نیمفِ جوان، یکی از کسانی بود که عاشق اون شده بودن.",
+      "status": "literary_revision_draft",
+      "source_text_before": "Echo، نیمفِ جوان، یکی از کسانی بود که عاشق اون شده بودن.",
+      "english_reference": "``The young nymph Echo was one of those who loved him.''",
+      "editorial_note": "یکدست‌سازی نام Echo با آوانویسی فارسیِ رایج در متن و پرهیز از جابه‌جایی خط.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen8:099327": {
+      "text": "اون هیچ‌وقت نمی‌تونست در جواب، احساسش رو بهش بگه...",
+      "status": "literary_revision_draft",
+      "source_text_before": "«اون هیچ‌وقت نمی‌تونست در پاسخ، احساسش رو بهش بگوید...»",
+      "english_reference": "``She could never tell him her feelings in return ...''",
+      "editorial_note": "رفع ناهماهنگی «بگوید» در دیالوگ محاوره‌ای.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen8:099402": {
+      "text": "اکو که هیچ‌وقت به آرزوش نمی‌رسید... خیلی هم با ما فرق نداشت.",
+      "status": "literary_revision_draft",
+      "source_text_before": "Echo که هیچ‌وقت به آرزویش نمی‌رسید... چندان با ما تفاوتی نداشت.",
+      "english_reference": "... Echo, who could never fulfill her wish.\nShe didn't seem all that different from us.",
+      "editorial_note": "یکدست‌سازی نام Echo و طبیعی‌تر کردن «چندان با ما تفاوتی نداشت».",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen8:099592": {
+      "text": "اما اگه قرار بود اون مدت طولانی رو صبورانه منتظر بمونم، یعنی باید از هر امیدی به بهبود محروم می‌شدم؟",
+      "status": "literary_revision_draft",
+      "source_text_before": "اما اگر قرار بود اون مدت طولانی رو صبورانه منتظر بمانم، آیا اون‌وقت باید از هر امیدی به بهبود محروم می‌شدم؟",
+      "english_reference": "``But if I were to wait patiently for that long time, was I then to be denied any hope of recovery?''",
+      "editorial_note": "یکدست‌سازی فعل‌ها با لحن محاوره‌ای در جملهٔ پرسشی.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen8:099682": {
+      "text": "... دیگه نمی‌تونن بهم کمک کنن.",
+      "status": "literary_revision_draft",
+      "source_text_before": "... دیگه نمی‌تونن بهم کمک کنند.",
+      "english_reference": "``... they can't help me now.''",
+      "editorial_note": "هماهنگی فعل با لحن محاوره‌ای.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen8:099717": {
+      "text": "خب؟ بیا مقصد بعدی‌مون رو انتخاب کنیم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "خب؟ مقصد بعدی‌مان رو انتخاب کنیم.",
+      "english_reference": "``Okay?  Let's decide on our next destination.''",
+      "editorial_note": "طبیعی‌سازی خطاب و یکدست‌سازی «مقصد بعدی‌مان» با لحن محاوره‌ای.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen8:099900": {
+      "text": "ماشین توی تاریکی فرو رفته بود. یه‌دفعه صدای آرومش به گوش رسید.",
+      "status": "literary_revision_draft",
+      "source_text_before": "ماشین در تاریکی فرو رفته بود. یه‌دفعه صدای آروم اون به گوش رسید.",
+      "english_reference": "The darkened car.\nHer sudden, quiet voice.",
+      "editorial_note": "بازنویسی قطعهٔ اسمی انگلیسی به فارسی روان، بدون افزودن کنش تازه.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen8:099925": {
+      "text": "وقتی اون زمان برسه، اون‌قدر قوی نیستم که لبخند بزنم و بگم دست‌کم همهٔ اون تلاش‌ها بیهوده نبودن...",
+      "status": "literary_revision_draft",
+      "source_text_before": "«وقتی اون زمان برسد، اون‌قدر قوی نیستم که لبخند بزنم و بگویم دست‌کم همهٔ اون تلاش‌ها بیهوده نبوده...»",
+      "english_reference": "``When that time comes, I'm not so strong that I can smile and say that it wasn't for nothing ...''",
+      "editorial_note": "هماهنگی زمان و لحن در دیالوگ؛ «برسد» و «بگویم» رسمی‌اند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100114": {
+      "text": "حوله‌ای رو که روش نوشته شده بود «شرکت ساختمانی شیرایشی» بهش دادم؛ همون حوله‌ای که خیلی قبل‌تر باهاش خودمون رو خشک کرده بودیم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "حوله‌ای رو که رویش «شرکت ساختمانی شیرایشی» نوشته شده بود بهش دادم؛ همون حوله‌ای که خیلی قبل‌تر با اون خودمان رو خشک کرده بودیم.",
+      "english_reference": "I handed her a towel that said ``Shiraishi Construction'' on it.\nThe one we'd used way earlier to sponge ourselves off.",
+      "editorial_note": "روان‌سازی ضمیر و حذف ساختار رسمی «روی آن».",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100149": {
+      "text": "چاره‌ای نداشتم؛ ماشین رو زیرورو کردم تا شاید چیزی به درد بخور پیدا کنم، اما جز اون حولهٔ سفید چیزی پیدا نکردم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "ناچار، ماشین رو زیرورو کردم تا شاید چیزی به درد بخور پیدا کنم؛ اما جز اون حولهٔ سفید چیزی پیدا نکردم.",
+      "english_reference": "Having no other course of action, I'd rummaged through the car,\nbut I never found anything other than that white towel.",
+      "editorial_note": "«ناچار» با بافت محاوره‌ای جمله هماهنگ نیست.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100213": {
+      "text": "موج‌ها می‌شکستن و عقب می‌نشستن؛ موهای بلندش توی نسیم سرد دریا آروم تکون می‌خورد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "موج‌ها می‌شکستند و عقب می‌نشستن؛ موهای بلندش در نسیم سرد دریا به نرمی تکان می‌خوره.",
+      "english_reference": "The breaking and ebbing waves.\nHer long hair wafting in the cold sea breeze.",
+      "editorial_note": "هماهنگ‌کردن زمان افعال؛ متن فعلی از گذشته به حال می‌لغزد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100344": {
+      "text": "با خجالت یه دستش رو روی کمرش گذاشت و دست دیگه‌ش رو بالای سرش، رو به آسمون، کشید.",
+      "status": "literary_revision_draft",
+      "source_text_before": "با خجالت، یک دستش رو روی کمر گذاشت و دست دیگرش رو بالای سرش، رو به آسمان، کشید.",
+      "english_reference": "She bashfully lowered one hand to her hip,\nand stretched out the other one high overhead.",
+      "editorial_note": "یکدست‌سازی صورت‌های رسمی و محاوره‌ای در یک جمله.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100502": {
+      "text": "با اینکه باد شدید به بدن کوچیکش می‌کوبید، هنوز داشت بهم لبخند می‌زد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "با اینکه باد شدید به بدن کوچیکش می‌خوره، هنوز داشت بهم لبخند می‌زد.",
+      "english_reference": "Continuing to remember to smile for me even as her little body was battered at by the winds ...",
+      "editorial_note": "هماهنگ‌کردن زمان فعل‌ها در توصیف صحنه.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100586": {
+      "text": "بعد دستبند شناساییِ وینیلی و سفیدرنگی رو که دور مچش بسته بود باز کرد...",
+      "status": "literary_revision_draft",
+      "source_text_before": "بعد، دستبند شناساییِ سفیدِ وینیلیِ دور مچش رو باز کرد...",
+      "english_reference": "And then, she unfastened that white vinyl ID bracelet that had been wrapped around her wrist ...",
+      "editorial_note": "بازچینی صفت‌ها و موصول برای طبیعی‌تر شدن توصیف.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100620": {
+      "text": "دستبندی رو که همتاش دور مچم بود، توی جیبم گذاشتم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "دستبندی رو که جفتش دور مچم بود، در جیبم گذاشتم.",
+      "english_reference": "I stuffed that bracelet, whose twin hung on my wrist,\ninto my pocket.",
+      "editorial_note": "«جفتش» در این ساختار ممکن است به‌اشتباه به خود دستبند برگردد؛ «همتاش» مرجع را روشن‌تر می‌کند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100627": {
+      "text": "در حالی که ازم دور می‌شد، آخرین حرف‌هام رو زدم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "به قامتش که دور می‌شد... آخرین حرف‌هایم رو زدم.",
+      "english_reference": "... toward her retreating figure ...\n... I said my last words.",
+      "editorial_note": "بازنویسی «به قامتش که دور می‌شد» که در فارسی طبیعی نیست.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100677": {
+      "text": "باد شدیدی موجی خروشان رو به ساحل راند و موج با سرمایی گزنده بهش کوبید.",
+      "status": "literary_revision_draft",
+      "source_text_before": "باد شدیدی موجی خروشان پیش راند و موج با سرمایی گزنده بهش کوبید.",
+      "english_reference": "A strong wind brought in a rolling wave,\nwhich crashed against her with chilly fury.",
+      "editorial_note": "اصلاح ساختار نحویِ «باد شدیدی موجی خروشان پیش راند» و روشن‌کردن مسیر موج.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100706": {
+      "text": "حتی وقتی موج‌های سرد بهش می‌کوبیدن و اشک از صورتش سرازیر می‌شد، باز هم بهم لبخند می‌زد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "حتی وقتی موج‌های سرد بهش می‌کوبیدند و اشک از صورتش سرازیر بود، باز هم برام لبخند می‌زد.",
+      "english_reference": "Even as the cold waves battered at her, even with tears streaming down her face, she still smiled for me.",
+      "editorial_note": "هماهنگ‌کردن زمان افعال و یکدست‌سازی لحن.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100759": {
+      "text": "اون تونسته بود جایی غیر از خونه یا طبقهٔ هفتم بمیره؛ یکی از حدود ۳۵ هزار نفری که در سال ۲۰۰۵ خودکشی کردن.",
+      "status": "literary_revision_draft",
+      "source_text_before": "اون توانسته بود جایی غیر از خونه یا طبقهٔ هفتم جان بدهد؛ یکی از حدود ۳۵ هزار نفری که در سال ۲۰۰۵ دست به خودکشی زدند.",
+      "english_reference": "She, who succeeded in perishing not on ７F or at home.\n\nShe, who was one of 35000-odd people to suicide in 2005.",
+      "editorial_note": "حذف ترکیب رسمی «جان بدهد» و حفظ صراحت معنای انگلیسی دربارهٔ خودکشی.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    }
+  }
+}
