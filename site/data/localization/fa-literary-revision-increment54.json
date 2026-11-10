@@ -5,7 +5,7 @@
   "increment": 54,
   "layer": "assistant_led_source_alignment_followup_draft",
   "title": "Source-alignment follow-up — targeted Persian revisions",
-  "description": "A focused follow-up on the 48 historical alignment entries not revised in Increment 53. The original gp32 English script was checked directly against the existing Persian text. Eight targeted revisions are proposed; ambiguous event-boundary cases are retained without speculative rewriting. Independent native-Persian sign-off remains pending.",
+  "description": "A focused source-aligned follow-up to Increment 53. The remaining historical alignment cases and the 63 Chapter 9 say-events not covered by Increments 38, 52, or 53 were checked against the gp32 English event text and the active Persian source. Twenty-three targeted revisions are proposed in total; ambiguous event-boundary cases are retained without speculative rewriting. Independent native-Persian sign-off remains pending.",
   "style_guide": [
     "Narration uses contemporary literary-conversational Persian: intimate, restrained, natural, and never uniformly formal or slang-heavy.",
     "Dialogue remains spoken and character-specific; preserve hesitation, pauses, and unfinished phrases.",
@@ -14,11 +14,14 @@
   ],
   "review_scope": {
     "historical_alignment_entries_reexamined": 48,
-    "revised_entries": 8,
+    "revised_entries": 23,
     "retained_without_change": 40,
-    "method": "The remaining 48 historical alignment entries were compared with the English gp32 event text and their active Persian source in the earlier recovery layer. Eight clear semantic or idiomatic improvements are proposed. Other entries were left unchanged where the Persian was already adequate or where the issue concerned uncertain event boundaries rather than a demonstrable translation error.",
+    "method": "The 48 remaining historical alignment entries were re-examined against the English gp32 source and active Persian recovery text; eight clear revisions were proposed. In addition, all 63 Chapter 9 say-events not present in Increments 38, 52, or 53 were checked against the English source; 15 further targeted revisions were proposed, while faithful lines and ambiguous event boundaries were retained. Together with the earlier proofread coverage, this completes the first source-aligned assistant review of all 117 Chapter 9 say-events. This is not a complete line-by-line review of the full 2,228 voiced say-events.",
     "source": "gp32 / Insani 2005 English localization, represented by the repository's story-gp32.json events",
-    "external_human_signoff": "pending"
+    "external_human_signoff": "pending",
+    "chapter9_say_events_reviewed": 117,
+    "chapter9_events_outside_increments_38_52_53": 63,
+    "chapter9_additional_revisions": 15
   },
   "translations": {
     "gp32_honpen4:093757": {
@@ -90,6 +93,141 @@
       "source_text_before": "این گواهینامه‌ای بود که بهش داده بودم. چیزی که نباید هیچ‌وقت فرصتی برای استفاده ازش پیدا می‌کردم.",
       "english_reference": "That was the license that I'd given her.\nThe was one that I should never have had the chance to use.",
       "editorial_note": "مرجع جملهٔ دوم صریحاً همان گواهینامه است؛ تکرار اسم، ابهامِ «چیزی که» را برطرف می‌کند. متن انگلیسی در این رویداد ظاهراً خطای تایپی «The was one» دارد؛ ترجمه بر اساس معنای روشنِ جمله و پیوستگی با جملهٔ قبل تنظیم شد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100206": {
+      "text": "بعد، آروم‌آروم شروع کرد توی ساحل قدم‌زدن.",
+      "status": "literary_revision_draft",
+      "source_text_before": "و به‌آرومی شروع به قدم‌زدن تو ساحل نزدیک موج‌های دریا کرد.",
+      "english_reference": "And then she slowly started walking about the beach.",
+      "editorial_note": "عبارت «نزدیک موج‌های دریا» در متن انگلیسی پشتوانه‌ای ندارد؛ جمله به حرکت آرام او در امتداد ساحل محدود شد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100222": {
+      "text": "و در تمام این مدت، کفش‌هاش رو توی دستش گرفته بود...",
+      "status": "literary_revision_draft",
+      "source_text_before": "کفش‌هاشو تو دستش گرفته بود.",
+      "english_reference": "And amidst all of that,\nshe was holding her shoes in her hand ...",
+      "editorial_note": "رابط «در تمام این مدت» و مکث پایانی بازگردانده شد تا جمله فقط به گرفتن کفش‌ها تقلیل پیدا نکند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100236": {
+      "text": "هی... به نظرت این‌طوری خوبه؟",
+      "status": "literary_revision_draft",
+      "source_text_before": "به نظرت... خوب شدم؟",
+      "english_reference": "``Hey ... does it look about right?''",
+      "editorial_note": "پرسش انگلیسی دربارهٔ درست‌بودن حالت/ظاهر است، نه صرفاً خوب‌به‌نظررسیدن خودِ گوینده؛ «این‌طوری خوبه؟» طبیعی‌تر و دقیق‌تر است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100296": {
+      "text": "ساحل... دختر حالا توی منظره‌یاب دوربین بود.",
+      "status": "literary_revision_draft",
+      "source_text_before": "ساحل... حالا توی کادر دوربین بود.",
+      "english_reference": "The beach.\nThe girl, now in the viewfinder of the camera.",
+      "editorial_note": "فاعلِ عبارت دوم، یعنی دختر، در ترجمه افتاده بود؛ «منظره‌یاب» نیز معادل دقیق‌تری برای viewfinder است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100348": {
+      "text": "... همون دستی که به سمت آسمون صاف زمستونی دراز شده بود...",
+      "status": "literary_revision_draft",
+      "source_text_before": "... دستش رو به سمت آسمون زمستونی دراز کرد...",
+      "english_reference": "... that arm, stretched forth toward the clear winter sky ...",
+      "editorial_note": "ساختار اسمی و ناتمامِ عبارت انگلیسی حفظ شد؛ صفت clear نیز در «آسمون صاف» بازتاب پیدا کرد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100388": {
+      "text": "چی...؟",
+      "status": "literary_revision_draft",
+      "source_text_before": "چی؟",
+      "english_reference": "``Wha ...''",
+      "editorial_note": "سه‌نقطه، نیمه‌تمام‌ماندن واکنش و مکثِ موجود در دیالوگ انگلیسی را حفظ می‌کند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100440": {
+      "text": "اون دختر، با دامن موردعلاقه‌اش و اون حولهٔ سفید...",
+      "status": "literary_revision_draft",
+      "source_text_before": "با دامن مورد علاقه‌اش و اون حولهٔ سفید...",
+      "english_reference": "That girl, clad in her favorite skirt and that white towel ...",
+      "editorial_note": "فاعلِ صریحِ عبارت انگلیسی («اون دختر») در ترجمه حذف شده بود؛ با بازگرداندنش تصویر روایی کامل‌تر و مستقل‌تر می‌شود.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100458": {
+      "text": "خب، حالا نوبت بعدیه. این بار یه ژست پرتحرک‌تر بگیریم؟",
+      "status": "literary_revision_draft",
+      "source_text_before": "خب، حالا بعدی. چطوره یکم ژستت با تحرک‌تر باشه؟",
+      "english_reference": "``All right, then next, shall we try something more of an action pose?''",
+      "editorial_note": "ترکیب «ژستت با تحرک‌تر باشه» فارسی طبیعی‌ای نیست؛ پیشنهاد تازه لحن خودمانی و پیشنهادِ گرفتن یک ژست پرتحرک‌تر را حفظ می‌کند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100487": {
+      "text": "نـ... نه، اصلاً این‌طور نیست...",
+      "status": "literary_revision_draft",
+      "source_text_before": "نه... این‌طور نیست.",
+      "english_reference": "``Th-that's not it at all ...''",
+      "editorial_note": "لکنتِ آغازین و تأکیدِ not at all در ترجمهٔ قبلی منتقل نشده بود؛ هر دو بدون افزودن توضیح بازگردانده شدند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100614": {
+      "text": "آها... پس به‌عنوان یادگاری نگهش می‌دارم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "باشه... پس به‌عنوان یادگاری نگهش می‌دارم.",
+      "english_reference": "``I see ... in that case, I'll keep it in commemoration.''",
+      "editorial_note": "«باشه» به Okay نزدیک است؛ اینجا I see بیشتر نشان‌دهندهٔ فهمیدن و پذیرفتن حرف طرف مقابل است و «آها» طبیعی‌تر است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100648": {
+      "text": "می‌خوای... همین الان جلوتو بگیرم؟",
+      "status": "literary_revision_draft",
+      "source_text_before": "می‌خوای... جلوتو بگیرم؟",
+      "english_reference": "``Do you ...\n want to be stopped right now?''",
+      "editorial_note": "قید right now در متن قبلی حذف شده بود؛ در این لحظهٔ تعیین‌کننده، «همین الان» بخشی از پرسش است و باید حفظ شود.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100681": {
+      "text": "و وقتی بالاخره برگشت طرفم...",
+      "status": "literary_revision_draft",
+      "source_text_before": "بالاخره برگشت طرف من...",
+      "english_reference": "And when she at last turned toward me ...",
+      "editorial_note": "ساختار وابستهٔ «و وقتی» در متن انگلیسی به‌صورت عبارت مستقلِ خبری درآمده بود؛ با بازگرداندنش، پیوند نحوی با جملهٔ بعد حفظ می‌شود.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100701": {
+      "text": "این رو گفت و برای آخرین بار بهم لبخند زد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "و برای آخرین بار بهم لبخند زد.",
+      "english_reference": "As she said this,\nshe smiled for me one last time.",
+      "editorial_note": "رابط زمانی «As she said this» در ترجمه حذف شده بود؛ بازگرداندنش، لبخند را هم‌زمان با گفتن جمله نگه می‌دارد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100718": {
+      "text": "... برای همین فکر می‌کنم اون‌طور جواب داد...",
+      "status": "literary_revision_draft",
+      "source_text_before": "برای همین فکر می‌کنم...",
+      "english_reference": "... that's why I think she answered that way ...",
+      "editorial_note": "ترجمهٔ قبلی بخش اصلی گزاره، یعنی «اون‌طور جواب داد»، را حذف کرده بود؛ عبارت کامل شد و حالت ناتمامِ متن حفظ شد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen9:100768": {
+      "text": "همهٔ چیزهایی که ازش ثبت شده بود، همین بود.",
+      "status": "literary_revision_draft",
+      "source_text_before": "همهٔ چیزایی که ثبت شده بود.",
+      "english_reference": "That was all that was recorded of her.",
+      "editorial_note": "ترجمهٔ قبلی هم مرجع «از او» و هم ساختار «That was all» را ناقص منتقل می‌کرد؛ صورت تازه هم مرجع را روشن می‌کند و هم لحن روایت را حفظ می‌کند.",
       "revision_kind": "assistant_literary_revision",
       "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
     }
