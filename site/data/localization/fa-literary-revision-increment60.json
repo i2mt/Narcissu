@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "language": "fa",
+  "project": "Narcissu Persian Edition",
+  "increment": 60,
+  "layer": "literary-revision-increment60",
+  "title": "Chapter 4 — precision and conversational-voice corrections",
+  "description": "Four targeted source-aligned corrections to Chapter 4, preserving the culturally specific setting, improving spoken phrasing, and removing a redundant intensifier.",
+  "based_on": [
+    "Increment 59 runtime branch",
+    "gp32 English source events",
+    "active Persian runtime layers through Increment 58"
+  ],
+  "review_scope": {
+    "chapters": [
+      "Chapter 4 — The Emerald Sea"
+    ],
+    "targeted_revisions": 4,
+    "external_human_signoff": "pending",
+    "focus": [
+      "retain the specific pachinko-parlor setting while preserving the narrator's brisk movement",
+      "express the present-self/former-self contrast in natural spoken Persian",
+      "remove redundant intensification from the line about Setsumi's accurate answers",
+      "make the narrator's fait-accompli explanation syntactically natural"
+    ],
+    "chapter_revisions": {
+      "chapter4": 4
+    }
+  },
+  "translations": {
+    "gp32_honpen4:093412": {
+      "text": "تنها از ماشین پیاده شدم و با قدم‌های تند وارد سالن پاچینکو شدم.",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "تنها از ماشین پیاده شدم و با قدم‌های تند وارد مرکز بازی شدم.",
+      "english_reference": "I got out of the car and strode into the pachinko parlor alone.",
+      "editorial_note": "مرکز بازی بیش از حد کلی بود؛ سالن پاچینکو اصطلاح دقیق و مشخص این مکان است.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    },
+    "gp32_honpen4:093723": {
+      "text": "تو دیگه نمی‌تونی کارهایی رو انجام بدی که خودت قبلاً از پسشون برمی‌اومدی...",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "توِ الان دیگه نمی‌تونی کارهایی رو انجام بدی که توِ گذشته ازت برمی‌اومد...",
+      "english_reference": "The current you can't do what the former you could have ...",
+      "editorial_note": "توِ الان و توِ گذشته در فارسی نامأنوس‌اند. این نسخه تقابل وضعیت فعلی و توانایی گذشته را طبیعی و گفتاری منتقل می‌کند.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    },
+    "gp32_honpen4:093120": {
+      "text": "اما درست جلوی چشمم، تک‌تک مشخصات رو درست گفت.",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "اما درست جلوی چشمم، همهٔ مشخصات رو دقیق و بی‌کم‌وکاست درست گفت.",
+      "english_reference": "... but right before my eyes she had gotten every single spec correct.",
+      "editorial_note": "«همهٔ مشخصات»، «دقیق و بی‌کم‌وکاست» و «درست» هم‌پوشانی معنایی دارند. «تک‌تک مشخصات رو درست گفت» every single spec را مستقیم و طبیعی منتقل می‌کند و از تأکیدِ تکراری دور می‌ماند.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    },
+    "gp32_honpen4:093396": {
+      "text": "نقشه‌ام رو طوری براش تعریف کرده بودم که انگار تصمیمم از قبل قطعی شده بود؛ نه اینکه بخوام ازش کمک بگیرم.",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "نقشه‌ام رو نه برای اینکه کمکش رو بخوام، بلکه طوری براش تعریف کرده بودم که انگار تصمیمم از قبل قطعی شده بود.",
+      "english_reference": "And I'd told her about my plan as a fait accompli, not because I wanted her aid in it.",
+      "editorial_note": "ساخت «نه برای اینکه... بلکه طوری...» دو رابطهٔ نحوی متفاوت را به‌صورت موازی کنار هم می‌گذاشت و جمله را سنگین می‌کرد. جابه‌جاییِ بخشِ توضیحی به بعد از نقطه‌ویرگول، هم معنای fait accompli را حفظ می‌کند و هم توضیحِ «نه برای درخواست کمک» را طبیعی‌تر به جمله پیوند می‌دهد.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    }
+  },
+  "style_guide": [
+    "Narration uses contemporary literary-conversational Persian: intimate, restrained, natural, and never uniformly formal or slang-heavy.",
+    "Dialogue remains spoken and character-specific; preserve hesitation, pauses, and unfinished phrases.",
+    "Preserve source meaning and culturally specific references; do not generalize contextual terms.",
+    "Correct translationese and awkward syntax without over-editing faithful existing Persian."
+  ]
+}
