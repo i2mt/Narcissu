@@ -1,7 +1,7 @@
 # Narcissu — Persian Edition | GitHub Pages deployment kit
 
 **Build:** 0.40  
-**Status:** Prepared for GitHub Pages; not deployed. Public deployment is deliberately gated until written distribution permission is secured.
+**Status:** An initial GitHub Pages deployment completed on 2026-11-10 from `main` commit `1a18aeb`. The completed Persian editorial stack (Increments 55–65) is being integrated into `main` in PR #17; merge that PR and run the manual deployment workflow again to publish those revisions. Public distribution remains gated by the workflow's explicit written-rights confirmation.
 
 This is a *deployment-only* repository layout. It contains the browser application and the story/media data required to run it. It intentionally excludes the archival Persian PDF, original Ponscripter source script, OCR files, private working documents, editorial workbooks and internal QA files.
 

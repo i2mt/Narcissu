@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "language": "fa",
+  "project": "Narcissu Persian Edition",
+  "increment": 56,
+  "layer": "literary-revision-increment56",
+  "title": "Chapters 6–7 — character-voice and narrative-continuity refinements",
+  "description": "Four targeted Persian refinements in Chapters 6 and 7, focused on natural narrative phrasing, Setsumi's restrained spoken voice, and the syntax of a reflective line. This is a focused refinement, not a complete independent re-review of either chapter.",
+  "based_on": [
+    "Increment 55 runtime branch",
+    "gp32 English source events in story-gp32.json",
+    "active Persian runtime layers through Increment 55"
+  ],
+  "style_guide": [
+    "Narration uses contemporary literary-conversational Persian: intimate, restrained, natural, and never uniformly formal or slang-heavy.",
+    "Dialogue remains spoken and character-specific; preserve hesitation, pauses, and unfinished phrases.",
+    "Preserve source meaning and emotional understatement; do not add explanations or actions not present in the English.",
+    "Correct translationese and awkward syntax without over-editing faithful existing Persian."
+  ],
+  "review_scope": {
+    "chapters": [
+      "Chapter 6 — Echo",
+      "Chapter 7 — Narcissu"
+    ],
+    "targeted_revisions": 4,
+    "focus": [
+      "Setsumi's terse, restrained dialogue",
+      "natural Persian syntax in reflective dialogue",
+      "preservation of hesitation and emotional understatement"
+    ],
+    "external_human_signoff": "pending",
+    "chapter_revisions": {
+      "chapter6": 1,
+      "chapter7": 3
+    }
+  },
+  "translations": {
+    "gp32_honpen8:098860": {
+      "text": "نه واقعاً... خوبم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "نه، واقعاً... من راحتم.",
+      "english_reference": "``Not really ... I'm fine.''",
+      "editorial_note": "«من راحتم» در این موقعیت کمی نامأنوس است و می‌تواند به معنای احساس راحتی برداشت شود. «نه واقعاً... خوبم» پاسخ کوتاه و طفره‌آمیز ستسومی را طبیعی‌تر منتقل می‌کند؛ لرزیدن او در روایت بعدی، خلافِ ادعایش را روشن می‌کند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen8:099908": {
+      "text": "شاید آرزو کردن، امید داشتن و پافشاری کردن آسون باشه... اگه هنوز باور داشته باشی که یه روز پاداش می‌گیری...",
+      "status": "literary_revision_draft",
+      "source_text_before": "«شاید اگه باور داشته باشی یه روز نتیجه می‌گیری، مشتاق بودن، آرزو کردن و پافشاری کردن آسون باشه...»",
+      "english_reference": "``It might be easy if you can yearn, hope, persist ... if you can keep believing you'll be rewarded someday ...''",
+      "editorial_note": "ترتیب جملهٔ قبلی شرط را پیش از فهرست فعل‌ها می‌آورد و ساخت نحوی فارسی را سنگین می‌کند. بازنویسی، سه کنش موازی را کنار هم می‌نشاند و شرطِ باور به پاداش گرفتن در آینده را پس از مکث می‌آورد؛ به این ترتیب، معنای reward در متن انگلیسی حفظ می‌شود و لحن تأملی و محاوره‌ای ستسومی باقی می‌ماند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen7:097937": {
+      "text": "این همه سرما برامون زیادی بود؛ ما که عملاً هیچ‌وقت از ماشین پیاده نمی‌شدیم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "همه‌چیز برامون زیادی بود، چون عملاً هیچ‌وقت از ماشین پیاده نمی‌شدیم.",
+      "english_reference": "It was all to much for us,\nsince we'd never really gotten out of the car.",
+      "editorial_note": "«همه‌چیز برامون زیادی بود» ترجمه‌ای تحت‌اللفظی و مبهم از all too much است. با توجه به جملهٔ بلافاصله قبل دربارهٔ باد سرد روی پل، «این همه سرما» مرجع را روشن می‌کند و ساخت جمله را طبیعی‌تر می‌سازد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen8:099738": {
+      "text": "من با شور و شوق، یک‌تنه با دختری حرف می‌زدم که فقط به دوردست خیره شده بود...",
+      "status": "literary_revision_draft",
+      "source_text_before": "من، یک‌نفره و با شور و شوق، با دختری حرف می‌زدم که فقط به دوردست خیره شده بود...",
+      "english_reference": "Speaking so brightly all by myself to the girl who was just staring into the distance ...",
+      "editorial_note": "«یک‌نفره» در این بافت طبیعی نیست و ممکن است فقط تنها بودن را برساند. «یک‌تنه» یک‌طرفه بودن گفت‌وگو را منتقل می‌کند و با شور و شوقی که راوی در جملهٔ قبل از خودش نشان می‌دهد، پیوند معنایی روشن‌تری دارد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    }
+  }
+}

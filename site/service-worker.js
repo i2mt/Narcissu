@@ -1,4 +1,4 @@
-const SHELL_CACHE = 'narcissu-shell-v51';;
+const SHELL_CACHE = 'narcissu-shell-v63';
 const ASSET_CACHE = 'narcissu-assets-v4';
 const FONT_CACHE = 'narcissu-fonts-v1';
 const FONT_HOSTS = new Set(['fonts.googleapis.com', 'fonts.gstatic.com']);
@@ -28,6 +28,16 @@ const SHELL_FILES = [
   './data/localization/fa-conversational-tone-increment52.json',
   './data/localization/fa-literary-revision-increment53.json',
   './data/localization/fa-literary-revision-increment54.json',
+  './data/localization/fa-literary-revision-increment55.json',
+  './data/localization/fa-literary-revision-increment56.json',
+  './data/localization/fa-literary-revision-increment57.json',
+  './data/localization/fa-literary-revision-increment58.json',
+  './data/localization/fa-literary-revision-increment60.json',
+  './data/localization/fa-literary-revision-increment61.json',
+  './data/localization/fa-literary-revision-increment62.json',
+  './data/localization/fa-literary-revision-increment63.json',
+  './data/localization/fa-literary-revision-increment64.json',
+  './data/localization/fa-literary-revision-increment65.json',
   './fonts/NotoSans-Regular.ttf', './fonts/NotoSansArabic-Regular.ttf', './fonts/NotoNaskhArabic-Regular.ttf', './fonts/NotoNaskhArabic-SemiBold.ttf', './fonts/Noto-Font-License.txt',
   './icons/narcissu-192.png', './icons/narcissu-512.png', './icons/fox-emblem-white.png'
 ];

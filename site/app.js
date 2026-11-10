@@ -19,6 +19,8 @@ const pendingPersianFonts = new Map();
 let dedicationTimer = null;
 let dedicationDismissed = false;
 let dialogueFitFrame = 0;
+let backgroundTransitionTimer = null;
+let backgroundTransitionSequence = 0;
 let appServiceWorkerRegistration = null;
 let appUpdateCheckPromise = null;
 let lastAppUpdateCheckAt = 0;
@@ -436,32 +438,52 @@ function scheduleDialogueFit() {
 }
 
 function applyPersianSourceQuoteStyle(ev, value) {
-  const source = String(ev?.text_en || '').trim();
-  if (!/^``[\s\S]*''$/.test(source)) return String(value || '');
+  let source = String(ev?.text_en || '').trim();
+  // Ignore a standalone speaker label before source dialogue delimiters.
+  source = source.replace(/^(?:Pharmacist|Boyfriend|Couple)\n(?=``)/u, '');
+  // A few gp32 speech lines span adjacent events: preserve an opening
+  // guillemet on the first event and a closing guillemet on the next.
+  // Sound-effect annotations use paired backticks and must not be quoted.
+  const isSoundEffect = /^``\*[\s\S]*\*``$/.test(source);
+  const opensQuote = source.startsWith('``');
+  const closesQuote = source.endsWith("''");
+  const isCompleteQuote = opensQuote && closesQuote;
+  const isSplitQuoteStart = opensQuote && !closesQuote && !isSoundEffect;
+  const isSplitQuoteEnd = closesQuote && !opensQuote;
+  const isStandaloneUnclosedDialogue = ev?.id === 'gp32_honpen7:097550';
+  if (!isCompleteQuote && !isSplitQuoteStart && !isSplitQuoteEnd && !isStandaloneUnclosedDialogue) {
+    return String(value || '');
+  }
   const match = /^(\s*)([\s\S]*?)(\s*)$/.exec(String(value || ''));
   if (!match || !match[2]) return String(value || '');
   const leading = match[1], content = match[2], trailing = match[3];
+  if (isStandaloneUnclosedDialogue) {
+    if (content.startsWith('«') && content.endsWith('»')) return String(value || '');
+    return leading + '«' + content.replace(/^«/, '').replace(/»$/, '') + '»' + trailing;
+  }
+  if (isSplitQuoteStart) {
+    if (content.startsWith('«')) return String(value || '');
+    return leading + '«' + content + trailing;
+  }
+  if (isSplitQuoteEnd) {
+    if (content.endsWith('»')) return String(value || '');
+    return leading + content + '»' + trailing;
+  }
   if ((content.startsWith('«') && content.endsWith('»')) ||
       (content.startsWith('“') && content.endsWith('”')) ||
       (content.startsWith('"') && content.endsWith('"'))) return String(value || '');
   if (content.includes('«') || content.includes('»')) {
-    // Keep an attribution such as «زیر لب گفتم: «... »» intact; otherwise
-    // make any embedded quotation secondary to the source-level dialogue quote.
-    const firstQuote = Math.min(
-      ...['«', '»'].map(mark => {
-        const index = content.indexOf(mark);
-        return index < 0 ? Number.POSITIVE_INFINITY : index;
-      })
-    );
+    const firstQuote = Math.min(...['«', '»'].map(mark => {
+      const index = content.indexOf(mark);
+      return index < 0 ? Infinity : index;
+    }));
     const prefix = content.slice(0, firstQuote);
     if (/گفتم\s*[:،]|گفتیم\s*[:،]/u.test(prefix)) return String(value || '');
-    const nested = content.replace(/«([^»]*)»/gu, '“$1”');
-    return `${leading}«${nested}»${trailing}`;
+    const normalized = content.replace(/«([^»]*)»/gu, '“$1”');
+    return leading + '«' + normalized + '»' + trailing;
   }
-  if (content.includes('“') || content.includes('”')) {
-    return `${leading}«${content}»${trailing}`;
-  }
-  return `${leading}«${content}»${trailing}`;
+  if (content.includes('“') || content.includes('”')) return leading + '«' + content + '»' + trailing;
+  return leading + '«' + content + '»' + trailing;
 }
 
 function renderCurrentDialogue({ animate = false } = {}) {
@@ -509,16 +531,60 @@ function setBackground(path, effect = 0, duration = 0) {
     ? item?.mobile_landscape_aspect_ratio : item?.mobile_aspect_ratio;
   $('stage').classList.toggle('is-panorama', isMobileArtworkViewport() && Number(mobileRatio) >= 2.5);
   if (!url) { showToast(`Missing background resource: ${path}`); return; }
+
   const img = $('backgroundImage');
-  const ms = state.settings.reduceMotion ? 0 : (duration || ({1:300,3:600,5:1000,10:1000}[effect] || 450));
-  img.classList.add('fade-out');
-  const apply = () => {
-    img.onload = () => { img.classList.remove('fade-out'); img.onload = null; };
-    img.onerror = () => { img.classList.remove('fade-out'); showToast(`Could not load image: ${path}`); };
-    img.src = url;
-    if (img.complete) img.classList.remove('fade-out');
+  const transitionMs = state.settings.reduceMotion
+    ? 0
+    : Math.max(0, Number(duration) || ({1:300,3:600,5:1000,10:1000}[effect] || 450));
+  const sequence = ++backgroundTransitionSequence;
+
+  // A newer scene change supersedes any pending fade or delayed image swap.
+  // Split the source transition duration evenly between fade-out and fade-in.
+  if (backgroundTransitionTimer !== null) {
+    clearTimeout(backgroundTransitionTimer);
+    backgroundTransitionTimer = null;
+  }
+  const finishTransition = () => {
+    if (sequence !== backgroundTransitionSequence) return;
+    img.classList.remove('fade-out');
   };
-  setTimeout(apply, ms ? Math.min(ms, 220) : 0);
+  img.style.transitionDuration = `${transitionMs / 2}ms`;
+  img.classList.add('fade-out');
+
+  const apply = () => {
+    if (sequence !== backgroundTransitionSequence) return;
+    img.onload = () => {
+      if (sequence !== backgroundTransitionSequence) return;
+      img.onload = null;
+      img.onerror = null;
+      finishTransition();
+    };
+    img.onerror = () => {
+      if (sequence !== backgroundTransitionSequence) return;
+      img.onload = null;
+      img.onerror = null;
+      finishTransition();
+      showToast(`Could not load image: ${path}`);
+    };
+    img.src = url;
+    // Cached or unchanged images may already be complete without firing load.
+    if (img.complete && img.naturalWidth > 0) {
+      window.requestAnimationFrame(() => {
+        if (sequence !== backgroundTransitionSequence) return;
+        img.onload = null;
+        img.onerror = null;
+        finishTransition();
+      });
+    }
+  };
+
+  if (transitionMs === 0) apply();
+  else {
+    backgroundTransitionTimer = window.setTimeout(() => {
+      backgroundTransitionTimer = null;
+      apply();
+    }, transitionMs / 2);
+  }
 }
 function refreshBackgroundForViewport() {
   updateReaderChrome();
@@ -1340,7 +1406,7 @@ async function boot() {
     }
   } catch {}
   try {
-    const [storyResponse, assetsResponse, faResponse, historicalAlignmentResponse, overlayResponse, increment20Response, chapter2RecoveryResponse, chapter3RecoveryResponse, chapter4RecoveryResponse, chapter4Page44RecoveryResponse, chapter4Page45RecoveryResponse, chapter4Pages46to50RecoveryResponse, chapter1Chapter3RecoveryResponse, literaryProofreadResponse, finalProofreadResponse, increment31ProofreadResponse, increment32ProofreadResponse, increment33ProofreadResponse, increment34ProofreadResponse, increment35ProofreadResponse, increment38AssistantReviewResponse, conversationalToneResponse, literaryRevisionResponse, increment54Response] = await Promise.all([
+    const [storyResponse, assetsResponse, faResponse, historicalAlignmentResponse, overlayResponse, increment20Response, chapter2RecoveryResponse, chapter3RecoveryResponse, chapter4RecoveryResponse, chapter4Page44RecoveryResponse, chapter4Page45RecoveryResponse, chapter4Pages46to50RecoveryResponse, chapter1Chapter3RecoveryResponse, literaryProofreadResponse, finalProofreadResponse, increment31ProofreadResponse, increment32ProofreadResponse, increment33ProofreadResponse, increment34ProofreadResponse, increment35ProofreadResponse, increment38AssistantReviewResponse, conversationalToneResponse, literaryRevisionResponse, increment54Response, increment55Response, increment56Response, increment57Response, increment58Response, increment60Response, increment61Response, increment62Response, increment63Response, increment64Response, increment65Response] = await Promise.all([
       fetch('./data/story-gp32.json'), fetch('./data/asset-manifest.json'), fetch('./data/localization/fa.json'),
       fetch('./data/localization/fa-historical-alignment-increment28.json'),
       fetch('./data/localization/fa-revised-overlay-recovery.json'),
@@ -1362,7 +1428,17 @@ async function boot() {
       fetch('./data/localization/fa-assistant-editorial-review-increment38.json'),
       fetch('./data/localization/fa-conversational-tone-increment52.json'),
       fetch('./data/localization/fa-literary-revision-increment53.json'),
-      fetch('./data/localization/fa-literary-revision-increment54.json')
+      fetch('./data/localization/fa-literary-revision-increment54.json'),
+      fetch('./data/localization/fa-literary-revision-increment55.json'),
+      fetch('./data/localization/fa-literary-revision-increment56.json'),
+      fetch('./data/localization/fa-literary-revision-increment57.json'),
+      fetch('./data/localization/fa-literary-revision-increment58.json'),
+      fetch('./data/localization/fa-literary-revision-increment60.json'),
+      fetch('./data/localization/fa-literary-revision-increment61.json'),
+      fetch('./data/localization/fa-literary-revision-increment62.json'),
+      fetch('./data/localization/fa-literary-revision-increment63.json'),
+      fetch('./data/localization/fa-literary-revision-increment64.json'),
+      fetch('./data/localization/fa-literary-revision-increment65.json')
     ]);
     if(!storyResponse.ok||!assetsResponse.ok)throw new Error('Could not load game data.');
     story=await storyResponse.json();assetManifest=await assetsResponse.json();
@@ -1370,7 +1446,7 @@ async function boot() {
     const historicalAlignmentData=historicalAlignmentResponse.ok?await historicalAlignmentResponse.json():{translations:{},event_alignment:{}};
     historicalEventAlignment=historicalAlignmentData.event_alignment||{};
     // Precedence: historical alignment data supersedes the archival fa.json where IDs collide;
-    // Recovery and proofread overlays are applied next; Increment 52 sets conversational tone, and Increment 53 applies the latest literary revisions.
+    // Recovery and proofread overlays are applied next; Increment 52 sets conversational tone; later literary increments apply targeted revisions in order.
     faData={...archivalFaData,translations:{...(archivalFaData.translations||{}),...(historicalAlignmentData.translations||{})}};
     const recoveredOverlay=overlayResponse.ok?await overlayResponse.json():{translations:{}};
     const increment20Overlay=increment20Response.ok?await increment20Response.json():{translations:{}};
@@ -1392,7 +1468,17 @@ async function boot() {
     const conversationalToneOverlay=conversationalToneResponse.ok?await conversationalToneResponse.json():{translations:{}};
     const literaryRevisionOverlay=literaryRevisionResponse.ok?await literaryRevisionResponse.json():{translations:{}};
     const increment54Overlay=increment54Response.ok?await increment54Response.json():{translations:{}};
-    revisedOverlay={...recoveredOverlay,translations:{...(recoveredOverlay.translations||{}),...(increment20Overlay.translations||{}),...(chapter2RecoveryOverlay.translations||{}),...(chapter3RecoveryOverlay.translations||{}),...(chapter4RecoveryOverlay.translations||{}),...(chapter4Page44RecoveryOverlay.translations||{}),...(chapter4Page45RecoveryOverlay.translations||{}),...(chapter4Pages46to50RecoveryOverlay.translations||{}),...(chapter1Chapter3RecoveryOverlay.translations||{}),...(literaryProofreadOverlay.translations||{}),...(finalProofreadOverlay.translations||{}),...(increment31ProofreadOverlay.translations||{}),...(increment32ProofreadOverlay.translations||{}),...(increment33ProofreadOverlay.translations||{}),...(increment34ProofreadOverlay.translations||{}),...(increment35ProofreadOverlay.translations||{}),...(increment38AssistantReviewOverlay.translations||{}),...(conversationalToneOverlay.translations||{}),...(literaryRevisionOverlay.translations||{}),...(increment54Overlay.translations||{})}};
+    const increment55Overlay=increment55Response.ok?await increment55Response.json():{translations:{}};
+    const increment56Overlay=increment56Response.ok?await increment56Response.json():{translations:{}};
+    const increment57Overlay=increment57Response.ok?await increment57Response.json():{translations:{}};
+    const increment58Overlay=increment58Response.ok?await increment58Response.json():{translations:{}};
+    const increment60Overlay=increment60Response.ok?await increment60Response.json():{translations:{}};
+    const increment61Overlay=increment61Response.ok?await increment61Response.json():{translations:{}};
+    const increment62Overlay=increment62Response.ok?await increment62Response.json():{translations:{}};
+    const increment63Overlay=increment63Response.ok?await increment63Response.json():{translations:{}};
+    const increment64Overlay=increment64Response.ok?await increment64Response.json():{translations:{}};
+    const increment65Overlay=increment65Response.ok?await increment65Response.json():{translations:{}};
+    revisedOverlay={...recoveredOverlay,translations:{...(recoveredOverlay.translations||{}),...(increment20Overlay.translations||{}),...(chapter2RecoveryOverlay.translations||{}),...(chapter3RecoveryOverlay.translations||{}),...(chapter4RecoveryOverlay.translations||{}),...(chapter4Page44RecoveryOverlay.translations||{}),...(chapter4Page45RecoveryOverlay.translations||{}),...(chapter4Pages46to50RecoveryOverlay.translations||{}),...(chapter1Chapter3RecoveryOverlay.translations||{}),...(literaryProofreadOverlay.translations||{}),...(finalProofreadOverlay.translations||{}),...(increment31ProofreadOverlay.translations||{}),...(increment32ProofreadOverlay.translations||{}),...(increment33ProofreadOverlay.translations||{}),...(increment34ProofreadOverlay.translations||{}),...(increment35ProofreadOverlay.translations||{}),...(increment38AssistantReviewOverlay.translations||{}),...(conversationalToneOverlay.translations||{}),...(literaryRevisionOverlay.translations||{}),...(increment54Overlay.translations||{}),...(increment55Overlay.translations||{}),...(increment56Overlay.translations||{}),...(increment57Overlay.translations||{}),...(increment58Overlay.translations||{}),...(increment60Overlay.translations||{}),...(increment61Overlay.translations||{}),...(increment62Overlay.translations||{}),...(increment63Overlay.translations||{}),...(increment64Overlay.translations||{}),...(increment65Overlay.translations||{})}};
     state.history=safeJSONParse(localStorage.getItem(STORAGE_KEYS.history),[]);
     state.language=localStorage.getItem('narcissu-language-v1')||DEFAULT_LANGUAGE;
     loadSettings();bindUI();renderChapters();setLanguage(state.language);updateNetworkStatus();

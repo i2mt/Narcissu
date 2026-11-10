@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "language": "fa",
+  "project": "Narcissu Persian Edition",
+  "increment": 58,
+  "layer": "literary-revision-increment58",
+  "title": "Chapters 3 and 5 — seasonal transition and emotional continuity refinements",
+  "description": "Two targeted Persian revisions identified during a continuous chapter-boundary and narrative-voice review. The edits smooth an awkward seasonal transition and restore a direct, conversational question about what Setsumi hoped for when she joined the narrator.",
+  "based_on": [
+    "Increment 57 runtime branch",
+    "gp32 English source events in story-gp32.json",
+    "active Persian runtime layers through Increment 57"
+  ],
+  "style_guide": [
+    "Narration uses contemporary literary-conversational Persian: intimate, restrained, natural, and never uniformly formal or slang-heavy.",
+    "Dialogue remains spoken and character-specific; preserve hesitation, pauses, and unfinished phrases.",
+    "Preserve source meaning and emotional understatement; do not add explanations or actions not present in the English.",
+    "Correct translationese and awkward syntax without over-editing faithful existing Persian.",
+    "Preserve deliberate repetitions and chapter-opening echoes when they are present in the English source."
+  ],
+  "review_scope": {
+    "chapters": [
+      "Chapter 3 — The Silver Coupe",
+      "Chapter 5 — The Emerald Sea"
+    ],
+    "targeted_revisions": 2,
+    "focus": [
+      "natural Persian phrasing in the transition deeper into winter",
+      "restoration of the source's explicit question about Setsumi's hopes",
+      "register consistency in the narrator's intimate, reflective voice"
+    ],
+    "external_human_signoff": "pending",
+    "chapter_revisions": {
+      "chapter3": 1,
+      "chapter5": 1
+    }
+  },
+  "translations": {
+    "gp32_honpen3:089906": {
+      "text": "چند روز بعد، هرچه بیشتر به دل زمستون فرو می‌رفتیم.",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "چند روزی گذشت. داشتیم بیشتر و بیشتر وارد عمق زمستون می‌شدیم.",
+      "english_reference": "A few days later, plunging further into the depths of winter.",
+      "editorial_note": "«وارد عمق زمستون می‌شدیم» ساختی ترجمه‌وار و سنگین بود. «به دل زمستون فرو می‌رفتیم» تصویرِ plunging into the depths را طبیعی‌تر در فارسی نگه می‌دارد و گذر چند روز و عمیق‌تر شدن زمستان را بدون توضیح اضافه منتقل می‌کند.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    },
+    "gp32_honpen5:095147": {
+      "text": "واقعاً داشت به چی نگاه می‌کرد...؟\n\nوقتی باهام اومد، به چی امید داشت...؟",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "واقعاً به چه چیزی نگاه می‌کرد...؟ وقتی با من همراه شد، به چه امیدی دل بسته بود...؟",
+      "english_reference": "Just what could she be looking at ...?\n\nJust what was she hoping for when she came with me ...?",
+      "editorial_note": "لایهٔ ۳۸ معنای hope را به متن برگردانده بود، اما «با من همراه شد» و «به چه چیزی نگاه می‌کرد» نسبت به صدای محاوره‌ای-ادبی راوی رسمی‌اند. این نسخه پرسش دوم را مستقیم و بی‌تکلف نگه می‌دارد و سؤال دربارهٔ امیدِ ستسومی را از «چی تو سرش داشت؟» دقیق‌تر می‌کند؛ مکث میان دو پرسش و تردید راوی حفظ می‌شود.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "language": "fa",
+  "project": "Narcissu Persian Edition",
+  "increment": 62,
+  "layer": "literary-revision-increment62",
+  "title": "Chapters 7 and 8 — narrative flow and idiomatic Persian",
+  "description": "Five focused refinements to remove awkward phrasing while preserving the narrator's restrained, conversational voice and the source's imagery.",
+  "based_on": [
+    "Increment 61 runtime branch",
+    "gp32 English source events",
+    "active Persian runtime layers through Increment 61"
+  ],
+  "review_scope": {
+    "chapters": [
+      "Chapter 7 — The Emerald Sea",
+      "Chapter 8 — Narcissu"
+    ],
+    "targeted_revisions": 5,
+    "external_human_signoff": "pending",
+    "focus": [
+      "remove repetitive prepositions",
+      "correct plural agreement in descriptive narration",
+      "replace unnatural facial-expression wording",
+      "convey the one-sided quality of the narrator's speech",
+      "render the sea-and-silence image in idiomatic literary Persian"
+    ],
+    "chapter_revisions": {
+      "chapter7": 3,
+      "chapter8": 2
+    }
+  },
+  "translations": {
+    "gp32_honpen7:097229": {
+      "text": "بالاخره از خروجی بعدیِ آزادراه خارج شدم.",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "بالاخره از خروجی بعدی از آزادراه خارج شدم.",
+      "english_reference": "Eventually,\nI got off the tollway at the next exit.",
+      "editorial_note": "تکرارِ «از» در ترکیب «از خروجی بعدی از آزادراه» جمله را سنگین و ناهنجار کرده بود. اضافهٔ «خروجی بعدیِ آزادراه» رابطهٔ مکانی را روشن و جمله را روان می‌کند.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    },
+    "gp32_honpen7:097924": {
+      "text": "میان بادهای سرد و شدیدی که بالای پل می‌وزیدند...",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "در میان بادهای سرد و شدیدی که بالای پل می‌وزید...",
+      "english_reference": "In the midst of the strong cold winds atop the bridge.",
+      "editorial_note": "با فاعل جمعِ «بادها»، فعل جمعِ «می‌وزیدند» هماهنگی دستوری دقیق‌تری دارد؛ «میان» نیز تصویر را بدون سنگین‌کردن جمله حفظ می‌کند.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    },
+    "gp32_honpen7:098058": {
+      "text": "اما انگار خجالت می‌کشید؛ حتی وقتی رو به من برگشت، فقط کمی قیافه‌اش ترش بود و بس.",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "اما انگار خجالت می‌کشید؛ حتی وقتی رو به من برگشت، فقط یه حالت کمی ترش‌رو روی صورتش بود و بس.",
+      "english_reference": "But, as if she were embarrassed, even when she turned to me she had a little sour look on her face and nothing more.",
+      "editorial_note": "«یه حالت کمی ترش‌رو روی صورتش بود» ترکیبی نامأنوس و ترجمه‌زده است. «کمی قیافه‌اش ترش بود و بس» همان توصیف مختصر و کمی طنزآمیز را طبیعی‌تر نگه می‌دارد، بدون افزودن لبخند یا احساس تازه.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    },
+    "gp32_honpen8:099738": {
+      "text": "من با شور و شوق، یک‌طرفه با دختری حرف می‌زدم که فقط به دوردست خیره شده بود...",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "من، یک‌نفره و با شور و شوق، با دختری حرف می‌زدم که فقط به دوردست خیره شده بود...",
+      "english_reference": "Speaking so brightly all by myself to the girl who was just staring into the distance ...",
+      "editorial_note": "«یک‌نفره» در این ساخت طبیعی نیست. «یک‌طرفه» روشن می‌کند که راوی با شور و شوق حرف می‌زند، درحالی‌که دختر همچنان بی‌اعتنا به دوردست خیره مانده است؛ تضاد صحنه حفظ می‌شود.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    },
+    "gp32_honpen8:099874": {
+      "text": "تنها چیزی که بر سکوت اینجا چیره بود، صدای دورِ موج‌های دریا بود...",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "تنها صدایی که بر اون سکوت حاکم بود، صدای دورِ موج‌های دریا بود...",
+      "english_reference": "The distant sound of the sea waves was the only thing that held dominion here ...",
+      "editorial_note": "«تنها صدایی که بر سکوت حاکم بود» تکرارِ معناییِ صدا/صدای و ساختی کمی ترجمه‌زده دارد. «تنها چیزی که بر سکوت اینجا چیره بود» تصویر سلطهٔ صدای دور موج‌ها را طبیعی‌تر و با لحن رواییِ ادبی حفظ می‌کند.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    }
+  },
+  "style_guide": [
+    "Narration uses contemporary literary-conversational Persian: intimate, restrained, natural, and never uniformly formal or slang-heavy.",
+    "Dialogue remains spoken and character-specific; preserve hesitation, pauses, and unfinished phrases.",
+    "Preserve source imagery and emotional understatement; do not add actions or emotions absent from the source.",
+    "Correct translationese and awkward syntax without over-editing faithful existing Persian."
+  ]
+}
