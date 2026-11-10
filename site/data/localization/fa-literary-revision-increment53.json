@@ -5,7 +5,7 @@
   "increment": 53,
   "layer": "assistant_led_story_wide_literary_revision_draft",
   "title": "Literary narration and dialogue revision — first story-wide pass",
-  "description": "Selected source-checked literary revisions across the opening and Chapters 2–9, focusing on narration, natural Persian syntax, dialogue register, tense consistency, and preserving emotional restraint. Draft layer; independent native-Persian literary sign-off remains pending.",
+  "description": "Expanded selected source-checked literary revisions across the opening and Chapters 2–9. Narration, dialogue register, sentence flow, temporal consistency, and the restrained tone have been reviewed. Unchanged passages are intentionally retained where they already work. Draft layer; independent native-Persian literary sign-off remains pending.",
   "style_guide": [
     "Narration uses contemporary literary-conversational Persian: intimate, restrained, natural, and never uniformly formal or slang-heavy.",
     "Dialogue remains spoken and character-specific; avoid making every character sound like the narrator.",
@@ -24,8 +24,8 @@
       8,
       9
     ],
-    "revised_entries": 387,
-    "method": "Targeted source-checked literary revisions across the opening and Chapters 2–9. The additional pass revisits narrative voice, dialogue register, syntax, tense, and source fidelity. The Narcissus/Echo sequence and closing chapter are checked for terminology and tonal consistency. This is selective coverage of the existing Increment 52 alignment layer, not a complete line-by-line review of all story events.",
+    "revised_entries": 431,
+    "method": "Targeted source-checked literary revisions across the opening and Chapters 2–9. Most entries in the active Increment 52 layer have now been reviewed for whether a change is warranted; unchanged lines are retained where the existing Persian is already faithful and natural. This is selective coverage of the existing alignment layer, not a complete line-by-line review of all story events.",
     "external_human_signoff": "pending"
   },
   "translations": {
@@ -2352,11 +2352,11 @@
       "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
     },
     "gp32_image:088197": {
-      "text": "اون فکر رو هم، انگار به کس دیگه‌ای مربوط بود، با خونسردی و بی‌علاقگیِ محض توی ذهنم نگه داشتم؛ بی‌آنکه حتی خودم بدونم چه معنایی داره.",
+      "text": "اون فکر رو هم، انگار به کس دیگه‌ای مربوط بود، با خونسردی، ابهام و بی‌علاقگیِ محض توی ذهنم نگه داشتم.",
       "status": "literary_revision_draft",
       "source_text_before": "اون فکر رو، انگار به کس دیگری مربوط بود، با خونسردی، ابهام و بی‌علاقگیِ محض در ذهنم نگه داشتم.",
       "english_reference": "I kept that thought, as if it were someone else's business,\nwith dispassion, ambiguity, and total disinterest.",
-      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو، دقت معنایی و یکدستی لحن، با حفظ ریتم و خویشتن‌داری روایت.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
       "revision_kind": "assistant_literary_revision",
       "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
     },
@@ -3509,6 +3509,402 @@
       "source_text_before": "آره، می‌دمش بهت.",
       "english_reference": "``Yes, I am ...''",
       "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو، دقت معنایی و یکدستی لحن، با حفظ ریتم و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:092208": {
+      "text": "از همون اول هم جغرافی‌ام چندان خوب نبود و اسم مکان‌های جورواجوری به چشمم می‌خورد که نمی‌شناختم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "از همون اول هم در جغرافیا چندان وارد نبودم و اسم مکان‌های جورواجوری می‌دیدم که نمی‌شناختم.",
+      "english_reference": "I didn't know my geography very well to begin with,\nand I was seeing all sorts of place names I didn't recognize.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:092239": {
+      "text": "اون چیزی بهم گفته بود و من هم سرسری جواب داده بودم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "اون چیزی بهم گفته بود و من هم سرسری جوابش رو داده بودم.",
+      "english_reference": "She'd said something to me,\nand I'd given her a casual response.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:092351": {
+      "text": "«... پس دیگه درباره‌ش نپرس.»",
+      "status": "literary_revision_draft",
+      "source_text_before": "پس راجع بهش نپرس.",
+      "english_reference": "``... then don't ask me.''",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:092369": {
+      "text": "اون جمله‌ای که گفته بود، «پس دیگه درباره‌ش نپرس»...",
+      "status": "literary_revision_draft",
+      "source_text_before": "اون «پس راجع بهش نپرس» که گفت...",
+      "english_reference": "... her ... ``then don't ask me'' ...",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:092376": {
+      "text": "اگه بهش می‌گفتم که قصد دارم برم اونجا، چه جوابی می‌داد؟",
+      "status": "literary_revision_draft",
+      "source_text_before": "اگر بهش می‌گفتم که قصد دارم به آنجا برم، چه جوابی می‌داد؟",
+      "english_reference": "How would she have replied if I had told her that I was planning on going ...?",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:092396": {
+      "text": "دلم می‌خواست چیزی راه رو بهمون نشون بده؛ فرقی نمی‌کرد اون راه چی باشه...",
+      "status": "literary_revision_draft",
+      "source_text_before": "دلم می‌خواست چیزی راه رو نشانمان بدهد؛ فرقی نمی‌کرد اون راه چه باشه...",
+      "english_reference": "... must have wanted something to show us the way,\nno matter what that way might be.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:092472": {
+      "text": "آروم‌آروم به سمت ساحل رفت.",
+      "status": "literary_revision_draft",
+      "source_text_before": "آروم‌آروم به سمت ساحل راه افتاد.",
+      "english_reference": "She slowly started walking toward the beach.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:092519": {
+      "text": "این‌ها همون حرف‌هایی بود که خودش بهم زده بود.",
+      "status": "literary_revision_draft",
+      "source_text_before": "این‌ها همون حرف‌هایی بودن که خودش بهم گفته بود.",
+      "english_reference": "Those were the words that she herself had spoken to me.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:092581": {
+      "text": "بعد دوباره پشتش رو به من کرد و آروم به سمت دریا رفت.",
+      "status": "literary_revision_draft",
+      "source_text_before": "بعد دوباره پشت بهم کرد و آروم به سمت دریا راه افتاد.",
+      "english_reference": "She then turned her back to me and slowly started walking toward the sea once more.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:092689": {
+      "text": "مثل همیشه، من پشت فرمون بودم و اون روی صندلی شاگرد نشسته بود.",
+      "status": "literary_revision_draft",
+      "source_text_before": "مثل همیشه، من پشت فرمان بودم و اون روی صندلی کنارم نشسته بود.",
+      "english_reference": "With me at its wheel and with her in the passenger's seat as per usual.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:092731": {
+      "text": "این رو گفتم، فرمون رو چرخوندم و وارد پمپ‌بنزینی شدم که از دور پیدا بود.",
+      "status": "literary_revision_draft",
+      "source_text_before": "این رو گفتم و فرمان رو چرخاندم و وارد پمپ‌بنزینی شدم که از دور پیدا بود.",
+      "english_reference": "And with that I turned the steering wheel and drove into a gas station that was coming into view.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:092785": {
+      "text": "از روی صندلی شاگرد حرف زد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "اون از صندلیِ کنار راننده حرف زد.",
+      "english_reference": "She spoke from the passenger's seat.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:092845": {
+      "text": "درست متوجه نشدم، اما فکر نمی‌کردم اختلاف قیمت چندانی داشته باشه.",
+      "status": "literary_revision_draft",
+      "source_text_before": "درست متوجه نشدم، اما فکر نمی‌کردم تفاوت قیمت چندانی داشته باشه.",
+      "english_reference": "I didn't understand it very well,\nbut I didn't think there was that much difference in price.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:093148": {
+      "text": "با همین جواب کوتاه، دوباره ساکت شد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "با همون پاسخ کوتاه، دوباره به سکوت همیشگی‌اش برگشت.",
+      "english_reference": "And with that bare response,\nshe went back to her usual silence.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:093208": {
+      "text": "... فقط حدود دو هزار ین برامون مونده بود.",
+      "status": "literary_revision_draft",
+      "source_text_before": "... فقط حدود دو هزار ین برامون باقی مانده بود.",
+      "english_reference": "... only about 2000 yen left.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:093278": {
+      "text": "با اون دو هزار ین باقی‌مونده هم فقط می‌تونستیم سه‌چهار روز غذا بخریم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "با اون ۲۰۰۰ ینِ باقی‌مونده، فقط به اندازهٔ سه‌چهار روز غذا داشتیم.",
+      "english_reference": "Likewise, we only had enough for 3-4 days' worth of food with the 2000 yen we had left.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:093339": {
+      "text": "ماشین رو توی پارکینگ یه سالن پاچینکو نگه داشته بودم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "ماشین رو در پارکینگ یک سالن پاچینکو متوقف کرده بودم.",
+      "english_reference": "I had stopped the car in the parking lot of a pachinko parlor.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:093360": {
+      "text": "این حدس رو بر اساس دفعات زیادی که قبلاً به سالن‌های پاچینکو رفته بودم، زده بودم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "این حدسم رو بر اساس دفعات زیادی که قبلاً به سالن‌های پاچینکو رفته بودم، زده بودم.",
+      "english_reference": "That was my guess,\nbased on the many times I'd been to pachinko parlors in the past.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:093429": {
+      "text": "این‌جا هم به‌اندازهٔ هر جای دیگه‌ای برای این کار مناسب به نظر می‌رسید...",
+      "status": "literary_revision_draft",
+      "source_text_before": "اینجا هم به‌اندازهٔ هر جای دیگری برای این کار مناسب به نظر می‌اومد...",
+      "english_reference": "... as good a place as any ...",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:093450": {
+      "text": "مردهای میان‌سالِ کارمند کم نبودن؛ هرکدوم تا چهار صندوق جلوی پاشون و تا دو صندوق روی قفسه‌های بالای سرشون داشتن.",
+      "status": "literary_revision_draft",
+      "source_text_before": "مردهای میان‌سالِ کارمند کم نبودن؛ هرکدام تا چهار صندوق جلوی پایشان و تا دو صندوق روی قفسه‌های بالای سرشان داشتن.",
+      "english_reference": "Lots of middle-aged salarymen, all right.\nUp to 4 boxes at their feet and up to 2 on racks above them.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:093454": {
+      "text": "و بین هرکدوم از اون‌ها یه جایگاه خالی بود.",
+      "status": "literary_revision_draft",
+      "source_text_before": "و بین هرکدام از اونا یک جایگاه خالی بود.",
+      "english_reference": "And an empty stand separating each of them.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:093458": {
+      "text": "از چیزهایی که قبلاً دیده بودم، می‌دونستم این مردها با دوست یا آشنایی نیومده بودن.",
+      "status": "literary_revision_draft",
+      "source_text_before": "با توجه به چیزهایی که قبلاً دیده بودم، این مردها با دوست یا آشنایی نیومده بودن.",
+      "english_reference": "From what I'd seen before,\nthese men hadn't come with acquaintances or friends.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:093462": {
+      "text": "و این دقیقاً همون شرایطی بود که دنبالش می‌گشتم...",
+      "status": "literary_revision_draft",
+      "source_text_before": "و این دقیقاً همون شرایطی بود که دنبالش می‌گشتم...",
+      "english_reference": "... this satisfied the requirements ...",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:093466": {
+      "text": "شاید توی چنین جایی، اگه یکی از اون صندوق‌های پول رو برمی‌داشتم، کسی متوجه نمی‌شد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "شاید در چنین جایی، اگر یکی از اون صندوق‌های سکه رو برمی‌داشتم، کسی متوجه نمی‌شد.",
+      "english_reference": "Perhaps in a place like this, no one would notice if I swiped one of those cashboxes.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:093469": {
+      "text": "توی چنین سالنی، احتمالاً هرکدوم از اون صندوق‌ها حدود بیست‌هزار ین پول داشت.",
+      "status": "literary_revision_draft",
+      "source_text_before": "در چنین سالنی، هرکدام از اون صندوق‌ها احتمالاً حدود بیست‌هزار ین پول داشت.",
+      "english_reference": "And in a store like this,\neach one probably held 20000 yen or so.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:093485": {
+      "text": "بالاخره یکی از اون مردها بلند شد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "بالاخره یکی از اون مردها از جایش بلند شد.",
+      "english_reference": "A salaryman finally stood up from his seat.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:093489": {
+      "text": "کمی دنبالش رفتم تا مطمئن بشم واقعاً داره به سمت دستشویی می‌ره...",
+      "status": "literary_revision_draft",
+      "source_text_before": "کمی دنبالش رفتم تا مطمئن شوم واقعاً به سمت دستشویی می‌ره...",
+      "english_reference": "After I'd tailed him a bit to make sure he was going to the bathroom ...",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen5:094185": {
+      "text": "ماشین رو جلوی دروازه نگه داشتم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "ماشین رو جلوی دروازه متوقف کردم.",
+      "english_reference": "I stopped the car before the gates.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen5:095033": {
+      "text": "«من؟... نه، خب... نمی‌دونم...»",
+      "status": "literary_revision_draft",
+      "source_text_before": "«من؟... نه، خب... نمی‌دونم...»",
+      "english_reference": "``Me ...?  Not really, uh ...''",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen5:095041": {
+      "text": "«... ازم تقلید نکن.»",
+      "status": "literary_revision_draft",
+      "source_text_before": "«ازم تقلید نکن.»",
+      "english_reference": "``... don't imitate me.''",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen6:095437": {
+      "text": "«خب، منظورم همون جاییه که درباره‌ش حرف زده بودیم... جزیرهٔ آواجی.»",
+      "status": "literary_revision_draft",
+      "source_text_before": "خب، منظورم همون جاییه که راجع بهش حرف زده بودیم... جزیرهٔ آواجی.",
+      "english_reference": "``Well, you know.  To the place we talked about ... to Awaji Island.''",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen6:095803": {
+      "text": "اگه درست یادم باشه، قبلاً بهم گفته بود که از من بزرگ‌تره.",
+      "status": "literary_revision_draft",
+      "source_text_before": "اگه درست یادم باشه، بهم گفته بود ازم بزرگ‌تره.",
+      "english_reference": "Now, if memory served,\nshe'd told me in the past that she was older than me ...",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen6:095858": {
+      "text": "وقتی این حرف‌ها رو زد...",
+      "status": "literary_revision_draft",
+      "source_text_before": "وقتی این حرف‌ها رو زد...",
+      "english_reference": "When she spoke these words ...",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen6:095914": {
+      "text": "توی آینه خودش رو برانداز می‌کرد، انگار نمی‌خواست متوجه این کارش بشم...",
+      "status": "literary_revision_draft",
+      "source_text_before": "در آینه خودش رو برانداز می‌کرد، انگار نمی‌خواست متوجه این کارش بشم...",
+      "english_reference": "Checking herself in that mirror as if she didn't want me to catch her doing it ...",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen6:096191": {
+      "text": "شاید برای اون، راه دیگه‌ای وجود نداشت...",
+      "status": "literary_revision_draft",
+      "source_text_before": "شاید راجع به اون، هیچ راه دیگه‌ای وجود نداشت...",
+      "english_reference": "Or could it have been that in her case ...\n there was no other possible course of action ...?",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen6:096539": {
+      "text": "... احتمالاً برای اون هم همین‌طور بود.",
+      "status": "literary_revision_draft",
+      "source_text_before": "احتمالاً براش هم همین‌طور بود.",
+      "english_reference": "... Most likely,\nthat was the way it was for her, too.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen6:096726": {
+      "text": "... راستی، اون به دلایلی خیلی از ماشین‌ها سر درمی‌آره، نه؟",
+      "status": "literary_revision_draft",
+      "source_text_before": "راستی، اون به دلایلی خیلی از ماشین‌ها سر درمیاره، نه؟",
+      "english_reference": "... speaking of which, she knew a lot about cars  for some reason or another, didn't she?",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen6:096763": {
+      "text": "«و اون ماشینی که همین الان ازش سبقت گرفتیم؟»",
+      "status": "literary_revision_draft",
+      "source_text_before": "و ماشینی که همین الان از اون سبقت گرفتیم؟",
+      "english_reference": "``And the one we just overtook?''",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen6:096811": {
+      "text": "می‌خواستم ببینم نشونه‌ای از سردرگمی روی اون چهرهٔ بی‌حالتش می‌شینه یا نه.",
+      "status": "literary_revision_draft",
+      "source_text_before": "می‌خواستم ببینم ردی از سردرگمی روی اون چهرهٔ بی‌حالتش می‌شینه یا نه.",
+      "english_reference": "I wanted to see a little perplexity seep into that expressionless face of hers.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen6:096821": {
+      "text": "«پس همون‌طور که فکر می‌کردم، از کامیون‌ها زیاد سر درنمی‌آری، درسته؟»",
+      "status": "literary_revision_draft",
+      "source_text_before": "پس همون‌طور که فکر می‌کردم، راجع به کامیون‌ها نمی‌دونی، درسته؟",
+      "english_reference": "``So you don't know trucks that well, then?''",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen7:097960": {
+      "text": "«حالا که فکرش رو می‌کنم...»",
+      "status": "literary_revision_draft",
+      "source_text_before": "حالا که فکرش رو می‌کنم...",
+      "english_reference": "``Come to think of it ...''",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099298": {
+      "text": "«اما اکو جز تکرار حرف‌هایی که دیگران بهش می‌زدن، کاری از دستش برنمی‌اومد...»",
+      "status": "literary_revision_draft",
+      "source_text_before": "«اما اکو جز تکرار حرف‌هایی که دیگران بهش می‌گفتن، کاری از دستش برنمی‌اومد...»",
+      "english_reference": "``But Echo could do nothing but repeat the words that other people spoke to her ...''",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099490": {
+      "text": "«... زمان برای من متوقف شده بود...»",
+      "status": "literary_revision_draft",
+      "source_text_before": "زمان برام متوقف شده بود...",
+      "english_reference": "`... my time was at a standstill ...'",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099543": {
+      "text": "حتی اگه این زخم‌های بزرگ مدام یادآوری‌ام نمی‌کردن، حتی اگه من پژواکِ نارسیسِ این واقعیت بودم...",
+      "status": "literary_revision_draft",
+      "source_text_before": "حتی اگر این زخم‌های بزرگ مدام یادآوری‌ام نمی‌کردن، حتی اگر من پژواکِ نارسیسِ این واقعیت بودم...",
+      "english_reference": "Even if these huge scars weren't already constantly reminding me,\neven if I was the Echo to the Narcisse that was this reality ...",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
       "revision_kind": "assistant_literary_revision",
       "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
     }
