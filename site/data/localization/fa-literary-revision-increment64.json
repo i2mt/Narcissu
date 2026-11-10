@@ -1,0 +1,326 @@
+{
+  "schema_version": 1,
+  "language": "fa",
+  "project": "Narcissu Persian Edition",
+  "increment": 64,
+  "layer": "literary-revision-increment64",
+  "title": "Chapter 9 — final continuity and completeness pass",
+  "description": "Completes remaining untranslated events and regularizes dialogue punctuation across the final chapter, with a focus on the final beach sequence and closing reflection.",
+  "based_on": [
+    "Increment 63 runtime branch",
+    "gp32 English source events",
+    "active Persian runtime layers through Increment 63"
+  ],
+  "review_scope": {
+    "chapters": [
+      "Chapter 9 — Shiraishi Construction"
+    ],
+    "targeted_revisions": 32,
+    "external_human_signoff": "pending",
+    "focus": [
+      "complete Persian coverage for all narrative and dialogue events",
+      "preserve pauses, unfinished phrases, and line breaks",
+      "maintain continuity through the beach, farewell, and final reflection",
+      "standardize Persian dialogue quotation marks"
+    ],
+    "chapter_revisions": {
+      "chapter9": 32
+    }
+  },
+  "translations": {
+    "gp32_honpen9:100095": {
+      "text": "دریای یخ‌زدهٔ فوریه.\nبادی سرد که تا مغز استخوان نفوذ می‌کرد.",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "The frosted sea of February.\nA chilling, bone-piercing wind.",
+      "editorial_note": "تصویر آغازین با دو جملهٔ کوتاه و ضرباهنگ سرد و بی‌پیرایه حفظ شده است.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100120": {
+      "text": "«... ... ...»",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "``... ... ...''",
+      "editorial_note": "سکوتِ شخصیت به‌صورت مکث حفظ شده و به آن کلامی افزوده نشده است.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100125": {
+      "text": "«ای بابا، این‌قدر قیافه نگیر.»",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "``Oh, come on, don't make such a face.''",
+      "editorial_note": "سرزنش ملایم و خودمانیِ راوی، بدون تندیِ اضافه.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100153": {
+      "text": "کمی که گذشت...",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "And after I'd waited a little while ...",
+      "editorial_note": "گذار زمانی کوتاه و مکث روایی حفظ شده است.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100170": {
+      "text": "«خب، حالا اگه اینو ازم بپرسی...»",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "``Well, even if you ask me that ...''",
+      "editorial_note": "پاسخ مردد و نیمه‌تمام راوی با لحن گفتاری.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100189": {
+      "text": "«... ... ... ...»",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "``... ... ... ...''",
+      "editorial_note": "سکوت طولانی‌تر از مکث قبلی است؛ تعداد نقاط حفظ شده است.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100194": {
+      "text": "«نه، منظورم اینه که کاملاً خوب به نظر میای! اصلاً عجیب نیستی!»",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "``No, I meant you look completely fine! You don't look weird at all!''",
+      "editorial_note": "اصلاح فوری حرف راوی و تلاش برای دلگرم‌کردن Setsumi با لحن طبیعی منتقل شده است.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100279": {
+      "text": "«... ... ...»",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "``... ... ...''",
+      "editorial_note": "مکث پیش از تشویق دوباره حفظ شده است.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100284": {
+      "text": "«زود باش، دیگه ازم خجالت نکش، باشه؟»",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "``C'mon, don't get shy on me now, okay?''",
+      "editorial_note": "نشانه‌گذاری دیالوگ با الگوی ثابت گیومهٔ فارسی یکدست شد.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "dialogue_punctuation"
+    },
+    "gp32_honpen9:100301": {
+      "text": "نمی‌دونم از اضطراب بود یا خجالت... اما حالت صورتش پیچیده‌تر از همیشه به نظر می‌رسید.",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "Whether it was because she was tense or bashful ...\nshe had a facial expression that was far more complex than usual.",
+      "editorial_note": "دو احتمالِ متن مبدأ و توصیف ظریف چهره بدون تفسیر روان‌شناختی اضافه حفظ شده‌اند.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100319": {
+      "text": "«دیگه بهونه نیار؛ زود باش. هیچ مدل بیکینی‌ای این‌طور خشک و بی‌حرکت نمی‌ایسته.»",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "``No ifs, ands, or buts now.  Come on. No bikini model stands stock still like that.''",
+      "editorial_note": "گیومهٔ دیالوگ اضافه شد؛ متن و لحن قبلی حفظ شده‌اند.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "dialogue_punctuation"
+    },
+    "gp32_honpen9:100351": {
+      "text": "... انگار می‌خواست چیزی رو بگیره...\n\n... انگار دستش رو به سوی چیزی دراز کرده بود...",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "... as if it were grasping for something ...\n\n... as if it were reaching out for something ...",
+      "editorial_note": "دو تصویر موازیِ grasping و reaching با فاصلهٔ روایی متن مبدأ نگه داشته شده‌اند.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100388": {
+      "text": "«چی...؟»",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "``Wha ...''",
+      "editorial_note": "گیومهٔ دیالوگ برای یکدستی با سایر واکنش‌های کوتاه اضافه شد.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "dialogue_punctuation"
+    },
+    "gp32_honpen9:100403": {
+      "text": "«... ... ...»",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "``... ... ...''",
+      "editorial_note": "سکوت پیش از لبخند نهایی حفظ شده است.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100446": {
+      "text": "برای آخرین عکسی که دوربین می‌تونست بگیره، لبخند زد.\nدریای زمردی پس‌زمینه‌اش بود.",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "Smiled for the final shot that the camera had.\nSmiled with the emerald sea as her backdrop.",
+      "editorial_note": "تکرار ساختاری دو جمله حفظ شده و تصویر پس‌زمینه بدون ابهام بیان شده است.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100450": {
+      "text": "لبخندی زد، انگار واقعاً یک مدل بیکینی بود...",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "Smiled as if she were an honest-to-god bikini model ...",
+      "editorial_note": "لحن شگفت‌زده و تحسین‌آمیز راوی حفظ شده، بدون اغراق بیشتر.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100458": {
+      "text": "«خب، حالا نوبت بعدیه. این بار یه ژست پرتحرک‌تر بگیریم؟»",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "``All right, then next, shall we try something more of an action pose?''",
+      "editorial_note": "گیومهٔ دیالوگ اضافه شد؛ متن موجود تغییر معنایی نکرده است.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "dialogue_punctuation"
+    },
+    "gp32_honpen9:100479": {
+      "text": "«هی، انگار حسابی افتادی توی حال‌وهوای عکس گرفتن!»",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "``Hey, it looks like you've really gotten into the spirit of things!''",
+      "editorial_note": "شوخیِ تشویق‌آمیز راوی با اصطلاحی طبیعی‌تر از ترجمهٔ تحت‌اللفظی spirit of things.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100487": {
+      "text": "«نـ... نه، اصلاً این‌طور نیست...»",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "``Th-that's not it at all ...''",
+      "editorial_note": "لکنت و انکارِ خجالت‌آمیز Setsumi حفظ و گیومهٔ دیالوگ اضافه شد.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "dialogue_punctuation"
+    },
+    "gp32_honpen9:100492": {
+      "text": "گفت‌وگوی شادمانه‌مون.\nبرف هم انگار از سر لجبازی، تندتر و تندتر می‌بارید.",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "Our cheerful dialog.\nThe snow falling harder and harder as if in spite.",
+      "editorial_note": "تقابل شادی گفت‌وگو با شدت‌گرفتن برف در دو سطر حفظ شده است.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100497": {
+      "text": "و وسط همهٔ این‌ها، دختر توی منظره‌یاب دوربینِ ازکارافتاده، درخشان لبخند می‌زد.",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "And in the midst, the girl,\nsmiling brilliantly in the viewfinder of the spent camera.",
+      "editorial_note": "تصویر مرکزی صحنه و تضاد دوربین ازکارافتاده با لبخند زندهٔ دختر حفظ شده است.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100526": {
+      "text": "... خش‌خش... خش‌خش...",
+      "status": "assistant_reviewed_revision",
+      "english_reference": " *swish*swish* ...",
+      "editorial_note": "صدای تکرارشونده بدون نسبت‌دادن قطعی آن به منبعی که متن مشخص نکرده، منتقل شده است.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100614": {
+      "text": "«آها... پس به‌عنوان یادگاری نگهش می‌دارم.»",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "``I see ... in that case, I'll keep it in commemoration.''",
+      "editorial_note": "گیومهٔ دیالوگ برای یکدستی نشانه‌گذاری اضافه شد.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "dialogue_punctuation"
+    },
+    "gp32_honpen9:100624": {
+      "text": "و بعد، رو به دختری که بار دیگر به‌سوی دریا می‌رفت...",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "And then, to the girl who was walking once more toward the sea ...",
+      "editorial_note": "ساختار معلق جمله حفظ شده تا با دیالوگ بعدی پیوند بخورد.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100648": {
+      "text": "«می‌خوای...\nهمین الان جلوتو بگیرم؟»",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "``Do you ...\n want to be stopped right now?''",
+      "editorial_note": "گیومهٔ دیالوگ و شکست سطر مطابق مکث متن مبدأ تنظیم شد.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "dialogue_punctuation"
+    },
+    "gp32_honpen9:100655": {
+      "text": "«... ... ...»",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "``... ... ...''",
+      "editorial_note": "سکوتِ پاسخ‌ندادن پیش از پرسش دوم حفظ شده است.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100660": {
+      "text": "«یا می‌خوای... به سمت دریا هلت بدم؟»",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "``Or do you want ... to be pushed toward the sea?''",
+      "editorial_note": "پرسش دوم به‌صورت دیالوگ مستقیم و با مکثِ تأکیدی حفظ شده است.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100694": {
+      "text": "«هاها... واقعاً نمی‌دونم.»",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "``Ahaha, I really don't know.''",
+      "editorial_note": "خندهٔ کوتاه و ندانستنِ صادقانه، بدون تبدیل‌شدن به خنده‌ای پرشور.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100784": {
+      "text": "معمولاً بی‌حالت بود و توی چشم آدم نگاه نمی‌کرد...",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "She was usually expressionless,\nand would not meet your face ...",
+      "editorial_note": "توصیف رفتاری طبیعی و موجز است و معنای اجتناب از نگاه را دقیق‌تر منتقل می‌کند.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100793": {
+      "text": "و دریای زمردی پس‌زمینه‌اش بود...",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "And with the emerald sea as her backdrop ...",
+      "editorial_note": "عبارت ناتمام به جملهٔ قبلی دربارهٔ لبخند پیوند می‌خورد.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100805": {
+      "text": "تنها تصویری که از لبخندش ثبت شده بود، همین یک عکس با این دوربین یک‌بارمصرفِ ارزون‌قیمت بود.",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "There was only a single record of her smile captured in this cheap throwaway camera.",
+      "editorial_note": "single record به «تنها تصویر ثبت‌شده» ترجمه شده و cheap throwaway camera نیز حفظ شده است.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    },
+    "gp32_honpen9:100819": {
+      "text": "... این عکس گواهی بود بر اینکه ما زندگی کرده بودیم...",
+      "status": "assistant_reviewed_revision",
+      "english_reference": "... it was proof that we lived ...",
+      "editorial_note": "پایان‌بندیِ تأملی و معنای proof that we lived بدون توضیح اضافه منتقل شده است.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "translation_completion"
+    }
+  },
+  "style_guide": [
+    "Narration uses contemporary literary-conversational Persian: intimate, restrained, natural, and never uniformly formal or slang-heavy.",
+    "Dialogue remains spoken and character-specific; preserve hesitation, pauses, and unfinished phrases.",
+    "Preserve source meaning and emotional understatement; do not add explanations or actions absent from the English.",
+    "Use Persian guillemets consistently for spoken dialogue; preserve the source's ellipses and meaningful line breaks."
+  ]
+}
