@@ -463,11 +463,11 @@
       "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
     },
     "gp32_honpen8:099247": {
-      "text": "... Narcissu؟",
+      "text": "... نرگس؟",
       "status": "literary_revision_draft",
       "source_text_before": "هوم؟",
       "english_reference": "``... narcissu?''",
-      "editorial_note": "این تکرارِ نام Narcissu برای پیوند داستان گل نرگس با عنوان اثر اهمیت دارد؛ «هوم؟» بازی واژگانی و ارجاع را کاملاً حذف می‌کند.",
+      "editorial_note": "در این گفت‌وگو واژه به گل اشاره دارد، نه عنوان اثر؛ «نرگس» معادل طبیعی فارسیِ narcissu است و پیوند آن با افسانهٔ نارسیس در جملهٔ بعد حفظ می‌شود. عنوان فصل همچنان به‌صورت Narcissu باقی می‌ماند.",
       "revision_kind": "assistant_literary_revision",
       "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
     },
