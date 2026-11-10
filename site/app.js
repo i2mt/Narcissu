@@ -19,6 +19,8 @@ const pendingPersianFonts = new Map();
 let dedicationTimer = null;
 let dedicationDismissed = false;
 let dialogueFitFrame = 0;
+let backgroundTransitionTimer = null;
+let backgroundTransitionSequence = 0;
 let appServiceWorkerRegistration = null;
 let appUpdateCheckPromise = null;
 let lastAppUpdateCheckAt = 0;
@@ -529,16 +531,60 @@ function setBackground(path, effect = 0, duration = 0) {
     ? item?.mobile_landscape_aspect_ratio : item?.mobile_aspect_ratio;
   $('stage').classList.toggle('is-panorama', isMobileArtworkViewport() && Number(mobileRatio) >= 2.5);
   if (!url) { showToast(`Missing background resource: ${path}`); return; }
+
   const img = $('backgroundImage');
-  const ms = state.settings.reduceMotion ? 0 : (duration || ({1:300,3:600,5:1000,10:1000}[effect] || 450));
-  img.classList.add('fade-out');
-  const apply = () => {
-    img.onload = () => { img.classList.remove('fade-out'); img.onload = null; };
-    img.onerror = () => { img.classList.remove('fade-out'); showToast(`Could not load image: ${path}`); };
-    img.src = url;
-    if (img.complete) img.classList.remove('fade-out');
+  const transitionMs = state.settings.reduceMotion
+    ? 0
+    : Math.max(0, Number(duration) || ({1:300,3:600,5:1000,10:1000}[effect] || 450));
+  const sequence = ++backgroundTransitionSequence;
+
+  // A newer scene change supersedes any pending fade or delayed image swap.
+  // Split the source transition duration evenly between fade-out and fade-in.
+  if (backgroundTransitionTimer !== null) {
+    clearTimeout(backgroundTransitionTimer);
+    backgroundTransitionTimer = null;
+  }
+  const finishTransition = () => {
+    if (sequence !== backgroundTransitionSequence) return;
+    img.classList.remove('fade-out');
   };
-  setTimeout(apply, ms ? Math.min(ms, 220) : 0);
+  img.style.transitionDuration = `${transitionMs / 2}ms`;
+  img.classList.add('fade-out');
+
+  const apply = () => {
+    if (sequence !== backgroundTransitionSequence) return;
+    img.onload = () => {
+      if (sequence !== backgroundTransitionSequence) return;
+      img.onload = null;
+      img.onerror = null;
+      finishTransition();
+    };
+    img.onerror = () => {
+      if (sequence !== backgroundTransitionSequence) return;
+      img.onload = null;
+      img.onerror = null;
+      finishTransition();
+      showToast(`Could not load image: ${path}`);
+    };
+    img.src = url;
+    // Cached or unchanged images may already be complete without firing load.
+    if (img.complete && img.naturalWidth > 0) {
+      window.requestAnimationFrame(() => {
+        if (sequence !== backgroundTransitionSequence) return;
+        img.onload = null;
+        img.onerror = null;
+        finishTransition();
+      });
+    }
+  };
+
+  if (transitionMs === 0) apply();
+  else {
+    backgroundTransitionTimer = window.setTimeout(() => {
+      backgroundTransitionTimer = null;
+      apply();
+    }, transitionMs / 2);
+  }
 }
 function refreshBackgroundForViewport() {
   updateReaderChrome();
