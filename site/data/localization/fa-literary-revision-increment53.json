@@ -24,7 +24,7 @@
       8,
       9
     ],
-    "revised_entries": 441,
+    "revised_entries": 445,
     "method": "Targeted source-checked literary revisions across the opening and Chapters 2–9. Most entries in the active Increment 52 layer have now been reviewed for whether a change is warranted; unchanged lines are retained where the existing Persian is already faithful and natural. This is selective coverage of the existing alignment layer, not a complete line-by-line review of all story events.",
     "external_human_signoff": "pending",
     "additional_source_layer": "Increment 38 entries not superseded by Increment 52 were also reviewed. Revisions here use Increment 38 as the exact active pre-Increment-53 Persian text; hidden opt-in new-translation drafts, sound effects, and transition-only entries were not promoted or rewritten."
@@ -3996,6 +3996,42 @@
       "source_text_before": "... و به این ترتیب، سفرِ حدود ۹۶۰ کیلومتری‌مان به پایان رسید...",
       "english_reference": "... in this manner did our voyage of 960-odd kilometers come to its conclusion ...",
       "editorial_note": "بازبینی در برابر متن انگلیسی و لحن فصل؛ اصلاح نحو و یکدستی زمان و گفتار، بدون افزودن معنا.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen3:090505": {
+      "text": "و مثل همیشه، چند میوه و نوشیدنی هم برای آرزوی بهبودی آورده بودن.",
+      "status": "literary_revision_draft",
+      "source_text_before": "و مثل همیشه، کنارشان میوه و نوشیدنی‌هایی هم به‌عنوان هدیهٔ آرزوی بهبودی بود.",
+      "english_reference": "And accompanying them, just as ever, there were fruits and drinks as get-well gifts.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ طبیعی‌سازی عبارت و حفظ تصویر و لحن صحنه.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen4:092082": {
+      "text": "سدان‌ها، کوپه‌ها، کروکی‌ها... با ماشین‌های جورواجور سفر می‌کردم...",
+      "status": "literary_revision_draft",
+      "source_text_before": "سدان‌ها، کوپه‌ها، کروکی‌ها... با انواع‌واقسام ماشین‌ها سفر می‌کردم...",
+      "english_reference": "Sedans, coupes, convertibles ... rode on so many different kinds of cars ...",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ طبیعی‌سازی عبارت و حفظ تصویر و لحن صحنه.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen7:096993": {
+      "text": "کمی بعد به توقفگاه کاتسوراگاوا رسیدیم؛ توقفی کوتاه برای عوض‌کردن حال‌وهوا.",
+      "status": "literary_revision_draft",
+      "source_text_before": "کمی بعد به محوطهٔ توقفگاه کاتسوراگاوا رسیدیم؛ توقفی کوتاه برای عوض‌کردن حال‌وهوا.",
+      "english_reference": "Before long, the Katsuragawa Parking Area.\nA short break.  A change of pace.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ طبیعی‌سازی عبارت و حفظ تصویر و لحن صحنه.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen9:100227": {
+      "text": "لب آب قدم می‌زد و با هر قدم، انگار از شادی به پرواز درمی‌اومد...",
+      "status": "literary_revision_draft",
+      "source_text_before": "لب آب قدم می‌زد و با هر قدم، شادمانه انگار پرواز می‌کرد...",
+      "english_reference": "... and walking at the water's edge,\nexultantly, as if she was flying with every step.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی؛ طبیعی‌سازی عبارت و حفظ تصویر و لحن صحنه.",
       "revision_kind": "assistant_literary_revision",
       "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
     }
