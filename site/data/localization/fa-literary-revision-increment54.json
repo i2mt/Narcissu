@@ -5,7 +5,7 @@
   "increment": 54,
   "layer": "assistant_led_source_alignment_followup_draft",
   "title": "Source-alignment follow-up — targeted Persian revisions",
-  "description": "A source-aligned follow-up to Increment 53. The remaining historical alignment cases, and all voiced say-events in Chapters 3, 4, 5, 6, 7, and 8, were checked against the gp32 English event text and the actual active Persian runtime layers. One hundred eighty-two targeted revisions are proposed in total; ambiguous event-boundary cases are retained without speculative rewriting. Independent native-Persian sign-off remains pending.",
+  "description": "A source-aligned follow-up to Increment 53. The remaining historical alignment cases, and all voiced say-events in Chapters 3, 4, 5, 6, 7, and 8, were checked against the gp32 English event text and the actual active Persian runtime layers. One hundred eighty-three targeted revisions are proposed in total; ambiguous event-boundary cases are retained without speculative rewriting. Independent native-Persian sign-off remains pending.",
   "style_guide": [
     "Narration uses contemporary literary-conversational Persian: intimate, restrained, natural, and never uniformly formal or slang-heavy.",
     "Dialogue remains spoken and character-specific; preserve hesitation, pauses, and unfinished phrases.",
@@ -14,9 +14,9 @@
   ],
   "review_scope": {
     "historical_alignment_entries_reexamined": 48,
-    "revised_entries": 182,
+    "revised_entries": 183,
     "retained_without_change": 40,
-    "method": "The 48 remaining historical alignment entries were re-examined against the English gp32 source and actual active Persian runtime layers; eight clear revisions were proposed. In addition, all 54 Chapter 3, 63 Chapter 8, 167 Chapter 7, 186 Chapter 6, 160 Chapter 4, and 221 Chapter 5 say-events not present in Increments 38, 52, or 53 were checked against the English source. Twelve Chapter 3, fifteen Chapter 8, 45 Chapter 7, 34 Chapter 6, 28 Chapter 4, and 40 Chapter 5 targeted revisions were proposed, while faithful lines and ambiguous event boundaries were retained. Together with existing proofread coverage, this completes the first source-aligned assistant review of all 321 Chapter 3, 117 Chapter 8, 261 Chapter 7, 252 Chapter 6, 238 Chapter 4, and 290 Chapter 5 say-events. This is not a complete line-by-line review of the full 2,228 voiced say-events.",
+    "method": "The 48 remaining historical alignment entries were re-examined against the English gp32 source and actual active Persian runtime layers; eight clear revisions were proposed. In addition, all 54 Chapter 3, 63 Chapter 8, 167 Chapter 7, 186 Chapter 6, 160 Chapter 4, and 221 Chapter 5 say-events not present in Increments 38, 52, or 53 were checked against the English source. Twelve Chapter 3, fifteen Chapter 8, 45 Chapter 7, 34 Chapter 6, 28 Chapter 4, and 37 Chapter 5 targeted revisions were proposed, while faithful lines and ambiguous event boundaries were retained. Together with existing proofread coverage, this completes the first source-aligned assistant review of all 321 Chapter 3, 117 Chapter 8, 261 Chapter 7, 252 Chapter 6, 238 Chapter 4, and 290 Chapter 5 say-events. This is not a complete line-by-line review of the full 2,228 voiced say-events.",
     "source": "gp32 / Insani 2005 English localization, represented by the repository's story-gp32.json events",
     "external_human_signoff": "pending",
     "chapter5_say_events_reviewed": 290,
@@ -27,7 +27,7 @@
     "chapter3_additional_revisions": 12,
     "chapter4_say_events_reviewed": 238,
     "chapter4_events_outside_increments_38_52_53": 160,
-    "chapter4_additional_revisions": 28,
+    "chapter4_additional_revisions": 32,
     "chapter6_say_events_reviewed": 252,
     "chapter6_events_outside_increments_38_52_53": 186,
     "chapter6_additional_revisions": 34,
@@ -1673,6 +1673,15 @@
       "source_text_before": "پلیورم رو درآوردم و شروع کردم خودم رو شستن.",
       "english_reference": "And then I took off my sweater and started washing myself.",
       "editorial_note": "ساخت «شروع کردم خودم رو شستن» در فارسی طبیعی نیست. فعل محاوره‌ای «بشورم» ساخت جمله را روان می‌کند و با لحن روایی این بخش هماهنگ می‌ماند.",
+      "status": "literary_revision_draft",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen5:094501": {
+      "text": "نه واقعاً...",
+      "source_text_before": "«نه واقعاً.»",
+      "english_reference": "``Not really ...''",
+      "editorial_note": "سه‌نقطهٔ پایانی در پاسخ کوتاه ستسومی بخشی از مکث و طفره‌رفتن اوست. نسخهٔ قبلی آن را به جمله‌ای بسته تبدیل می‌کرد؛ این نسخه مکث را حفظ می‌کند و با الگوی تکرارشوندهٔ «نه واقعاً...» در گفت‌وگوهای بعدی هماهنگ است. نشانه‌های نقل‌قول در نمایش به‌صورت خودکار افزوده می‌شوند.",
       "status": "literary_revision_draft",
       "revision_kind": "assistant_literary_revision",
       "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
