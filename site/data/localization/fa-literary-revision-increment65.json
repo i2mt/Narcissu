@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "language": "fa",
+  "layer": "literary-revision-increment65",
+  "based_on": "active Persian localization through Increment 64",
+  "note": "Cross-chapter terminology audit. Corrects two Chapter 3 references to the same coin-operated laundromat, replacing خشکشویی (dry cleaner) with لباس‌شویی (laundromat), consistent with the English source and the established term in adjacent events. Independent native-Persian sign-off remains pending.",
+  "translations": {
+    "gp32_honpen3:091297": {
+      "text": "دختر با تعجب منو نگاه می‌کرد که از ماشین پیاده شدم و رفتم سمت لباس‌شویی.",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "دختر با تعجب منو نگاه می‌کرد که از ماشین پیاده شدم و رفتم سمت خشکشویی.",
+      "english_reference": "Leaving her and her confused face in the car,\nI walked into the laundromat.",
+      "rationale": "«خشکشویی» به معنای dry cleaner است؛ این مکان laundromat سکه‌ای است و در رویدادهای مجاور نیز «لباس‌شویی» نامیده شده است.",
+      "revision_kind": "cross_chapter_terminology_consistency_correction",
+      "approval": "user-authorized assistant-led editorial pass; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen3:091322": {
+      "text": "لباس‌شوییِ خالی، کلمات زیرلبی‌ام رو در خود فرو بلعید.",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "خشکشوییِ خالی، کلمات زیرلبی‌ام رو در خود فرو بلعید.",
+      "english_reference": "The empty laundromat swallowed whole my murmured words.",
+      "rationale": "همان مکانِ رویدادهای 091264 و 091297 است؛ برای جلوگیری از برداشت نادرستِ «خشکشویی»، اصطلاح یکدست شد.",
+      "revision_kind": "cross_chapter_terminology_consistency_correction",
+      "approval": "user-authorized assistant-led editorial pass; independent native-Persian sign-off pending"
+    }
+  }
+}
