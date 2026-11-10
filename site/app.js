@@ -438,7 +438,7 @@ function scheduleDialogueFit() {
 function applyPersianSourceQuoteStyle(ev, value) {
   let source = String(ev?.text_en || '').trim();
   // Ignore a standalone speaker label before source dialogue delimiters.
-  source = source.replace(/^[^\n:]{1,40}\n(?=``)/u, '');
+  source = source.replace(/^(?:Pharmacist|Boyfriend|Couple)\n(?=``)/u, '');
   // A few gp32 speech lines span adjacent events: preserve an opening
   // guillemet on the first event and a closing guillemet on the next.
   // Sound-effect annotations use paired backticks and must not be quoted.
