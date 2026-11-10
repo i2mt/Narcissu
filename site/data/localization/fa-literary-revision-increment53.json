@@ -5,7 +5,7 @@
   "increment": 53,
   "layer": "assistant_led_story_wide_literary_revision_draft",
   "title": "Literary narration and dialogue revision — first story-wide pass",
-  "description": "Expanded selected source-checked literary revisions across the opening and Chapters 2–9. Narration, dialogue register, sentence flow, temporal consistency, and the restrained tone have been reviewed. Unchanged passages are intentionally retained where they already work. Draft layer; independent native-Persian literary sign-off remains pending.",
+  "description": "Expanded source-checked literary revisions across the opening and Chapters 2–9, including selected active entries from both Increment 52 and Increment 38. Hidden opt-in translation drafts were not promoted. Draft layer; independent native-Persian literary sign-off remains pending.",
   "style_guide": [
     "Narration uses contemporary literary-conversational Persian: intimate, restrained, natural, and never uniformly formal or slang-heavy.",
     "Dialogue remains spoken and character-specific; avoid making every character sound like the narrator.",
@@ -24,9 +24,10 @@
       8,
       9
     ],
-    "revised_entries": 431,
+    "revised_entries": 441,
     "method": "Targeted source-checked literary revisions across the opening and Chapters 2–9. Most entries in the active Increment 52 layer have now been reviewed for whether a change is warranted; unchanged lines are retained where the existing Persian is already faithful and natural. This is selective coverage of the existing alignment layer, not a complete line-by-line review of all story events.",
-    "external_human_signoff": "pending"
+    "external_human_signoff": "pending",
+    "additional_source_layer": "Increment 38 entries not superseded by Increment 52 were also reviewed. Revisions here use Increment 38 as the exact active pre-Increment-53 Persian text; hidden opt-in new-translation drafts, sound effects, and transition-only entries were not promoted or rewritten."
   },
   "translations": {
     "gp32_image:087805": {
@@ -3905,6 +3906,96 @@
       "source_text_before": "حتی اگر این زخم‌های بزرگ مدام یادآوری‌ام نمی‌کردن، حتی اگر من پژواکِ نارسیسِ این واقعیت بودم...",
       "english_reference": "Even if these huge scars weren't already constantly reminding me,\neven if I was the Echo to the Narcisse that was this reality ...",
       "editorial_note": "بازبینی در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، بدون افزودن معنا یا تغییر صدای شخصیت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_image:087937": {
+      "text": "تابلوی الکترونیکیِ بزرگِ مرکز آزمون رانندگی یک‌باره روشن شد. من و بقیه چشم دوختیم به شماره‌هامون...",
+      "status": "literary_revision_draft",
+      "source_text_before": "تابلوی الکترونیکیِ عظیمِ مرکز آزمون رانندگی یک‌باره روشن شد. چشم‌های من و بقیه دنبال شماره‌های خودمان گشتند...",
+      "english_reference": "Lit up all at once.\nMy eyes and everyone else's looked for our respective numbers.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی و لحن فصل؛ اصلاح نحو و یکدستی زمان و گفتار، بدون افزودن معنا.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_image:088031": {
+      "text": "درست وقتی فکر کردم معاینه‌هام تموم شده، برام عکس‌برداری با اشعهٔ ایکس و چند آزمایش خون درخواست کردن. بعد هم رفتن.",
+      "status": "literary_revision_draft",
+      "source_text_before": "درست وقتی فکر کردم معاینه‌هام تموم شده، برام عکس‌برداری با اشعهٔ ایکس و چند تا آزمایش خون نوشتن. بعد هم رفتن.",
+      "english_reference": "And just when I thought they were through examining me, they ordered an X-ray and some blood tests. Then they left.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی و لحن فصل؛ اصلاح نحو و یکدستی زمان و گفتار، بدون افزودن معنا.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen2:088381": {
+      "text": "یه فضای شبیه سالن استراحت، یک طرف راهرو و روبه‌روی ایستگاه پرستاری بود.",
+      "status": "literary_revision_draft",
+      "source_text_before": "یه جای شبیه سالن استراحت، یک طرف راهرو و روبه‌روی ایستگاه پرستاری بود.",
+      "english_reference": "There was this place kind of like a lounge at one side of the corridor, across from the nurses' station.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی و لحن فصل؛ اصلاح نحو و یکدستی زمان و گفتار، بدون افزودن معنا.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen3:091373": {
+      "text": "وقتی درِ خشک‌کن حین کار باز شد، دستگاه به‌اجبار از چرخش ایستاد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "با بازشدن درِ دستگاه در حین کار، خشک‌کن به‌اجبار از چرخش ایستاد.",
+      "english_reference": "Its door opened during operation, the dryer spun down to a forced halt.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی و لحن فصل؛ اصلاح نحو و یکدستی زمان و گفتار، بدون افزودن معنا.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen3:091770": {
+      "text": "شاممون: دو اونیگیری، یه بطری ۵۰۰ میلی‌لیتری پوکاری سوئت و نصف بسته چیپس سیب‌زمینی.",
+      "status": "literary_revision_draft",
+      "source_text_before": "شاممان: دو اونیگیری، یک بطری ۵۰۰ میلی‌لیتری پوکاری سوئت و نصف بسته چیپس سیب‌زمینی.",
+      "english_reference": "The dinner menu: 2 riceballs, 500 ml Pocari Sweat, half a bag of potato chips.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی و لحن فصل؛ اصلاح نحو و یکدستی زمان و گفتار، بدون افزودن معنا.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen6:095531": {
+      "text": "از سراشیبی‌های تند و پیچ‌های تیز هاکونه گذشته بودیم و حالا به منطقه‌ای نسبتاً هموار رسیده بودیم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "از سراشیبی‌های تند و پیچ‌های تیز هاکونه گذشته بودیم و حالا به منطقه‌ای نسبتاً هموارتر رسیده بودیم.",
+      "english_reference": "We'd passed through the steep slopes and sharp curves of Hakone,\nand now were in a much more relatively flat area.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی و لحن فصل؛ اصلاح نحو و یکدستی زمان و گفتار، بدون افزودن معنا.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen7:097255": {
+      "text": "از خروجی خلوت آزادراه وارد محدودهٔ شهری شدم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "از خروجی خلوتِ آزادراه وارد محدوده‌ای شهری شدم.",
+      "english_reference": "I headed into an urban area from the wan tollway exit.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی و لحن فصل؛ اصلاح نحو و یکدستی زمان و گفتار، بدون افزودن معنا.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen7:097703": {
+      "text": "امروز به‌خوبی از پس کار برآمده بودم، اما معلوم بود که هر روز ضعیف‌تر می‌شدم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "امروز به‌خوبی از پس کار برآمده بودم، اما معلوم بود که هر روز ضعیف‌تر می‌شوم.",
+      "english_reference": "I'd managed to get by pretty well today,\nbut it was obvious that I was losing strength daily.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی و لحن فصل؛ اصلاح نحو و یکدستی زمان و گفتار، بدون افزودن معنا.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen7:097987": {
+      "text": "باید یه دوربین یه جایی همین اطراف باشه.",
+      "status": "literary_revision_draft",
+      "source_text_before": "باید یک جایی همین اطراف دوربینی می‌بود.",
+      "english_reference": "There was a camera in here somewhere.",
+      "editorial_note": "بازبینی در برابر متن انگلیسی و لحن فصل؛ اصلاح نحو و یکدستی زمان و گفتار، بدون افزودن معنا.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen9:100749": {
+      "text": "... و به این ترتیب، سفر حدود ۹۶۰ کیلومتری‌مون به پایان رسید...",
+      "status": "literary_revision_draft",
+      "source_text_before": "... و به این ترتیب، سفرِ حدود ۹۶۰ کیلومتری‌مان به پایان رسید...",
+      "english_reference": "... in this manner did our voyage of 960-odd kilometers come to its conclusion ...",
+      "editorial_note": "بازبینی در برابر متن انگلیسی و لحن فصل؛ اصلاح نحو و یکدستی زمان و گفتار، بدون افزودن معنا.",
       "revision_kind": "assistant_literary_revision",
       "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
     }
