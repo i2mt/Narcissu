@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "language": "fa",
+  "project": "Narcissu Persian Edition",
+  "increment": 60,
+  "layer": "literary-revision-increment60",
+  "title": "Chapter 4 — precision and conversational-voice corrections",
+  "description": "Two targeted source-aligned corrections in Chapter 4.",
+  "based_on": ["Increment 59 runtime branch", "gp32 English source events", "active Persian runtime layers through Increment 58"],
+  "review_scope": {
+    "chapters": ["Chapter 4 — The Emerald Sea"],
+    "targeted_revisions": 2,
+    "external_human_signoff": "pending"
+  },
+  "translations": {
+    "gp32_honpen4:093412": {
+      "text": "تنها از ماشین پیاده شدم و با قدم‌های تند وارد سالن پاچینکو شدم.",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "تنها از ماشین پیاده شدم و با قدم‌های تند وارد مرکز بازی شدم.",
+      "english_reference": "I got out of the car and strode into the pachinko parlor alone.",
+      "editorial_note": "مرکز بازی بیش از حد کلی بود؛ سالن پاچینکو اصطلاح دقیق و مشخص این مکان است.",
+      "approval": "assistant-led revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    },
+    "gp32_honpen4:093723": {
+      "text": "تو دیگه نمی‌تونی کارهایی رو انجام بدی که خودت قبلاً از پسشون برمی‌اومدی...",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "توِ الان دیگه نمی‌تونی کارهایی رو انجام بدی که توِ گذشته ازت برمی‌اومد...",
+      "english_reference": "The current you can't do what the former you could have ...",
+      "editorial_note": "توِ الان و توِ گذشته در فارسی نامأنوس‌اند. این نسخه تقابل وضعیت فعلی و توانایی گذشته را طبیعی و گفتاری منتقل می‌کند.",
+      "approval": "assistant-led revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    }
+  }
+}
