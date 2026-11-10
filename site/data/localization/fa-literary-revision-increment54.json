@@ -5,7 +5,7 @@
   "increment": 54,
   "layer": "assistant_led_source_alignment_followup_draft",
   "title": "Source-alignment follow-up — targeted Persian revisions",
-  "description": "A source-aligned follow-up to Increment 53. The remaining historical alignment cases, and all voiced say-events in Chapters 5, 6, 7, 8, and 9, were checked against the gp32 English event text and the active Persian source. One hundred sixty-seven targeted revisions are proposed in total; ambiguous event-boundary cases are retained without speculative rewriting. Independent native-Persian sign-off remains pending.",
+  "description": "A source-aligned follow-up to Increment 53. The remaining historical alignment cases, and all voiced say-events in Chapters 4, 5, 6, 7, 8, and 9, were checked against the gp32 English event text and the actual active Persian runtime layers. One hundred ninety targeted revisions are proposed in total; ambiguous event-boundary cases are retained without speculative rewriting. Independent native-Persian sign-off remains pending.",
   "style_guide": [
     "Narration uses contemporary literary-conversational Persian: intimate, restrained, natural, and never uniformly formal or slang-heavy.",
     "Dialogue remains spoken and character-specific; preserve hesitation, pauses, and unfinished phrases.",
@@ -14,9 +14,9 @@
   ],
   "review_scope": {
     "historical_alignment_entries_reexamined": 48,
-    "revised_entries": 167,
+    "revised_entries": 179,
     "retained_without_change": 40,
-    "method": "The 48 remaining historical alignment entries were re-examined against the English gp32 source and active Persian recovery text; eight clear revisions were proposed. In addition, all 63 Chapter 9, 167 Chapter 8, 186 Chapter 7, 160 Chapter 5, and 221 Chapter 6 say-events not present in Increments 38, 52, or 53 were checked against the English source. Fifteen Chapter 9, 45 Chapter 8, 34 Chapter 7, 28 Chapter 5, and 37 Chapter 6 targeted revisions were proposed, while faithful lines and ambiguous event boundaries were retained. Together with existing proofread coverage, this completes the first source-aligned assistant review of all 117 Chapter 9, 261 Chapter 8, 252 Chapter 7, 238 Chapter 5, and 290 Chapter 6 say-events. This is not a complete line-by-line review of the full 2,228 voiced say-events.",
+    "method": "The 48 remaining historical alignment entries were re-examined against the English gp32 source and actual active Persian runtime layers; eight clear revisions were proposed. In addition, all 54 Chapter 4, 63 Chapter 9, 167 Chapter 8, 186 Chapter 7, 160 Chapter 5, and 221 Chapter 6 say-events not present in Increments 38, 52, or 53 were checked against the English source. Twelve Chapter 4, fifteen Chapter 9, 45 Chapter 8, 34 Chapter 7, 28 Chapter 5, and 37 Chapter 6 targeted revisions were proposed, while faithful lines and ambiguous event boundaries were retained. Together with existing proofread coverage, this completes the first source-aligned assistant review of all 321 Chapter 4, 117 Chapter 9, 261 Chapter 8, 252 Chapter 7, 238 Chapter 5, and 290 Chapter 6 say-events. This is not a complete line-by-line review of the full 2,228 voiced say-events.",
     "source": "gp32 / Insani 2005 English localization, represented by the repository's story-gp32.json events",
     "external_human_signoff": "pending",
     "chapter9_say_events_reviewed": 117,
@@ -33,7 +33,10 @@
     "chapter5_additional_revisions": 28,
     "chapter6_say_events_reviewed": 290,
     "chapter6_events_outside_increments_38_52_53": 221,
-    "chapter6_additional_revisions": 37
+    "chapter6_additional_revisions": 37,
+    "chapter4_say_events_reviewed": 321,
+    "chapter4_events_outside_increments_38_52_53": 54,
+    "chapter4_additional_revisions": 12
   },
   "translations": {
     "gp32_honpen4:093757": {
@@ -1536,6 +1539,114 @@
       "source_text_before": "اگه می‌رفتیم به اون جزیره، حتماً جاهای زیادی پیدا می‌کردیم که کسی نباشه.",
       "english_reference": "If we went all the way to Awaji Island,\nthen there would be lots of places without any people.",
       "editorial_note": "all the way to Awaji Island در ترجمهٔ قبلی به «اون جزیره» تقلیل یافته بود؛ مقصد مشخص و تأکیدِ تا خود جزیره بازگردانده شد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen4:092989": {
+      "text": "این نگرانم می‌کرد، اما چیز دیگه‌ای بود که خیلی بیشتر ذهنم رو مشغول کرده بود.",
+      "status": "literary_revision_draft",
+      "source_text_before": "از طرف دیگه، حالا فقط حدود ۲۰۰۰ ین داشتیم و این نگرانم می‌کرد.",
+      "english_reference": "This worried me,\nbut there was something that preoccupied me much more.",
+      "editorial_note": "ترجمهٔ فعلی عیناً محتوای رویداد قبلی دربارهٔ ۲۰۰۰ ین را تکرار می‌کرد؛ این جمله باید نگرانیِ دیگری را که ذهن راوی را بیشتر مشغول کرده بود منتقل کند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen4:093120": {
+      "text": "... اما درست جلوی چشمم، تک‌تک مشخصات رو درست گفته بود.",
+      "status": "literary_revision_draft",
+      "source_text_before": "باورم نمی‌شد! همه‌ی مشخصات رو ریزبه‌ریز درست گفته بود.",
+      "english_reference": "... but right before my eyes she had gotten every single spec correct.",
+      "editorial_note": "«باورم نمی‌شد» در رویداد قبلی هم آمده بود و اینجا تکرار می‌شد؛ این خط باید بر درست‌گفتنِ تک‌تک مشخصات جلوی چشم راوی متمرکز بماند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen4:093396": {
+      "text": "نقشه‌ام رو طوری بهش گفته بودم که انگار تصمیمش قطعی شده بود، نه اینکه بخوام توی اجرای اون کمکم کنه.",
+      "status": "literary_revision_draft",
+      "source_text_before": "حرفام بیشتر شبیه یه اعتراف بودن.",
+      "english_reference": "And I'd told her about my plan as a fait accompli,\nnot because I wanted her aid in it.",
+      "editorial_note": "ترجمهٔ فعلی معنای fait accompli و اینکه راوی از او کمک نخواسته بود را حذف کرده و به‌جایش «اعتراف» افزوده بود؛ این دو نکته برای فهم رابطهٔ آن‌ها مهم‌اند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen4:093412": {
+      "text": "از ماشین پیاده شدم و تنها وارد سالن پاچینکو شدم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "از ماشین خارج شدم و رفتم سمت اون مرکز بازی.",
+      "english_reference": "I got out of the car and strode into the pachinko parlor alone.",
+      "editorial_note": "alone و ورودِ مستقیم به سالن در ترجمهٔ فعلی حذف شده بودند؛ pachinko parlor نیز مشخص‌تر از «مرکز بازی» است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen4:093539": {
+      "text": "همه به طرفم برگشته بودن تا ببینن این سروصدا برای چیه.",
+      "status": "literary_revision_draft",
+      "source_text_before": "همه برگشته بودن سمت من تا ببینن چه اتفاقی افتاده. احساس کردم یکی داشت می‌دوید طرفم...",
+      "english_reference": "Everyone turned in my direction to see what the commotion was all about.",
+      "editorial_note": "ترجمهٔ فعلی بخشِ مربوط به دویدنِ کسی به سمت راوی را هم در خود داشت، درحالی‌که همان مطلب در رویداد بعدی آمده بود؛ اینجا فقط واکنش جمعیت به سروصدا حفظ شد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen4:093606": {
+      "text": "هنگام پیچیدن برای فرار، به جدول کنار خیابون یا چیزی شبیه اون برخورد کرده بودم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "انقدر عجله کردم که جدول کنارمونو ندیدم و از روش رد شدم.",
+      "english_reference": "I'd run against the curb or something as I turned to make my getaway.",
+      "editorial_note": "متن انگلیسی از برخورد با جدول یا چیزی شبیه آن می‌گوید، نه ندیدنِ جدول و ردشدن از روی آن؛ کنش به متن نزدیک‌تر شد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen4:093631": {
+      "text": "نگران تصادفی بودم که چند لحظه پیش کرده بودم، اما حالا باید از اونجا دور می‌شدم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "نگران تصادفی که چند لحظه قبل کرده بودم، اما باید هرچه زودتر از اونجا دور می‌شدیم.",
+      "english_reference": "I was concerned about the crash a little while ago,\nbut I had to distance myself from that place ~i~now~i~.",
+      "editorial_note": "فاعلِ جمله در انگلیسی اول‌شخص مفرد است؛ ترجمهٔ فعلی ناگهان به «می‌شدیم» تغییر می‌کند. قید now نیز در جملهٔ تازه حفظ شده است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen4:093684": {
+      "text": "«آه...»",
+      "status": "literary_revision_draft",
+      "source_text_before": "با یه آه عمیق برگشتم تو ماشین.",
+      "english_reference": "``*sigh* ...''",
+      "editorial_note": "رویداد انگلیسی فقط یک آهِ کوتاه و مکث را نشان می‌دهد؛ «برگشتم تو ماشین» در متن وجود ندارد و آهِ بعدی نیز در رویداد مستقل بعدی آمده است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen4:093690": {
+      "text": "... واقعاً افتضاح بود.",
+      "status": "literary_revision_draft",
+      "source_text_before": "خیلی مسخره بود.",
+      "english_reference": "... that sucked.",
+      "editorial_note": "that sucked به بدبودن یا افتضاح‌بودن تجربه اشاره دارد، نه مسخره‌بودن آن؛ «افتضاح بود» معادل طبیعی‌تری است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen4:093702": {
+      "text": "و دلیل اینکه نتونستم صندوق پول رو نگه دارم، این بود که مدت‌ها بود چیز سنگینی بلند نکرده بودم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "احتمالاً چون چند وقت بود چیز سنگینی بلند نکرده بودم، نتونستم اون بسته‌ی پول رو نگه دارم.",
+      "english_reference": "And the reason I wasn't able to hold onto that cashbox was because it had been a while since I'd lifted something heavy.",
+      "editorial_note": "cashbox به «صندوق پول» اشاره دارد، نه صرفاً «بستهٔ پول»؛ ساختار علت و معلولیِ صریحِ جمله نیز بازگردانده شد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen4:093723": {
+      "text": "«توِ الان نمی‌تونی کارهایی رو انجام بدی که خودِ قبلیت از پسشون برمی‌اومد...»",
+      "status": "literary_revision_draft",
+      "source_text_before": "«توی الان نمی‌تونه خیلی از کارایی که توی قبل می‌تونست بکنه رو انجام بده.»",
+      "english_reference": "``The current you can't do what the former you could have ...''",
+      "editorial_note": "ترجمهٔ فعلی از نظر ضمیر، زمان و ساختار فارسی نامأنوس است؛ تقابل میان «خودِ الان» و «خودِ گذشته» در نسخهٔ تازه روشن و گفتاری شده است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen4:093773": {
+      "text": "در سکوت، چشم‌هاش رو به پنجره و آسمون تاریک شب دوخت.",
+      "status": "literary_revision_draft",
+      "source_text_before": "جوابی نداد. با سکوت، چشم‌هاشو از پنجره به آسمون تاریک شب دوخت.",
+      "english_reference": "Eyes turned in silence toward the window to stare into the dark night sky.",
+      "editorial_note": "«جوابی نداد» در رویداد قبلی آمده بود و اینجا تکرار می‌شد؛ این خط فقط حرکت چشم‌ها به سوی پنجره و آسمان شب را توصیف می‌کند.",
       "revision_kind": "assistant_literary_revision",
       "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
     }
