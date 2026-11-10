@@ -437,35 +437,51 @@ function scheduleDialogueFit() {
 
 function applyPersianSourceQuoteStyle(ev, value) {
   let source = String(ev?.text_en || '').trim();
-  // Some source events prefix the quoted line with a speaker label
-  // (e.g. "Pharmacist" or "Boyfriend"). Ignore that label when detecting
-  // the source dialogue delimiters; do not strip narrative lead-ins ending in ":".
+  // Ignore a standalone speaker label before source dialogue delimiters.
   source = source.replace(/^[^\n:]{1,40}\n(?=``)/u, '');
-  if (!/^``[\s\S]*''$/.test(source)) return String(value || '');
+  // A few gp32 speech lines span adjacent events: preserve an opening
+  // guillemet on the first event and a closing guillemet on the next.
+  // Sound-effect annotations use paired backticks and must not be quoted.
+  const isSoundEffect = /^``\*[\s\S]*\*``$/.test(source);
+  const opensQuote = source.startsWith('``');
+  const closesQuote = source.endsWith("''");
+  const isCompleteQuote = opensQuote && closesQuote;
+  const isSplitQuoteStart = opensQuote && !closesQuote && !isSoundEffect;
+  const isSplitQuoteEnd = closesQuote && !opensQuote;
+  const isStandaloneUnclosedDialogue = ev?.id === 'gp32_honpen7:097550';
+  if (!isCompleteQuote && !isSplitQuoteStart && !isSplitQuoteEnd && !isStandaloneUnclosedDialogue) {
+    return String(value || '');
+  }
   const match = /^(\s*)([\s\S]*?)(\s*)$/.exec(String(value || ''));
   if (!match || !match[2]) return String(value || '');
   const leading = match[1], content = match[2], trailing = match[3];
+  if (isStandaloneUnclosedDialogue) {
+    if (content.startsWith('«') && content.endsWith('»')) return String(value || '');
+    return leading + '«' + content.replace(/^«/, '').replace(/»$/, '') + '»' + trailing;
+  }
+  if (isSplitQuoteStart) {
+    if (content.startsWith('«')) return String(value || '');
+    return leading + '«' + content + trailing;
+  }
+  if (isSplitQuoteEnd) {
+    if (content.endsWith('»')) return String(value || '');
+    return leading + content + '»' + trailing;
+  }
   if ((content.startsWith('«') && content.endsWith('»')) ||
       (content.startsWith('“') && content.endsWith('”')) ||
       (content.startsWith('"') && content.endsWith('"'))) return String(value || '');
   if (content.includes('«') || content.includes('»')) {
-    // Keep an attribution such as «زیر لب گفتم: «... »» intact; otherwise
-    // make any embedded quotation secondary to the source-level dialogue quote.
-    const firstQuote = Math.min(
-      ...['«', '»'].map(mark => {
-        const index = content.indexOf(mark);
-        return index < 0 ? Number.POSITIVE_INFINITY : index;
-      })
-    );
+    const firstQuote = Math.min(...['«', '»'].map(mark => {
+      const index = content.indexOf(mark);
+      return index < 0 ? Infinity : index;
+    }));
     const prefix = content.slice(0, firstQuote);
     if (/گفتم\s*[:،]|گفتیم\s*[:،]/u.test(prefix)) return String(value || '');
-    const nested = content.replace(/«([^»]*)»/gu, '“$1”');
-    return `${leading}«${nested}»${trailing}`;
+    const normalized = content.replace(/«([^»]*)»/gu, '“$1”');
+    return leading + '«' + normalized + '»' + trailing;
   }
-  if (content.includes('“') || content.includes('”')) {
-    return `${leading}«${content}»${trailing}`;
-  }
-  return `${leading}«${content}»${trailing}`;
+  if (content.includes('“') || content.includes('”')) return leading + '«' + content + '»' + trailing;
+  return leading + '«' + content + '»' + trailing;
 }
 
 function renderCurrentDialogue({ animate = false } = {}) {
