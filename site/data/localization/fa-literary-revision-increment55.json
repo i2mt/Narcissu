@@ -435,7 +435,7 @@
     "gp32_honpen3:090001": {
       "text": "هنوز هیچ حسی نسبت به اوضاع نداشتم و دکترا هم چیزی دربارهٔ اولین بار مرخص‌شدنم بهم نگفته بودن.",
       "status": "assistant_reviewed_revision",
-      "source_text_before": "هنوز هیچ حسی نسبت به اوضاع نداشتم و دکترا هم چیزی دربارهٔ اولین مرخصی‌ام بهم نگفته بودن.",
+      "source_text_before": "من هنوز هیچ حسی درمورد اوضاع نداشتم و دکترا هم درمورد اولین مرخصیم چیزی بهم نگفته بودن.",
       "english_reference": "I still felt nothing about the situation,\nand I hadn't heard from the doctors about my ~i~first~i~ discharge.",
       "editorial_note": "«اولین مرخصی‌ام» ممکن است به مرخصی موقت تعبیر شود؛ «اولین بار مرخص‌شدنم» منظور پزشکیِ discharge را روشن‌تر می‌کند و با اصطلاحات دیگر این بخش هماهنگ است.",
       "approval": "assistant_led_source_alignment_revision; independent_native_Persian_signoff_pending",
