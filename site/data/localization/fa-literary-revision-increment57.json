@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "language": "fa",
+  "project": "Narcissu Persian Edition",
+  "increment": 57,
+  "layer": "literary-revision-increment57",
+  "title": "Chapter 8 — final character-portrait refinement",
+  "description": "One targeted Persian refinement in Chapter 8, making the narrator's description of Setsumi's navigation ability more natural and conversational while preserving the English meaning. This is a focused refinement, not a complete independent re-review of the chapter.",
+  "based_on": [
+    "Increment 56 runtime branch",
+    "gp32 English source events in story-gp32.json",
+    "active Persian runtime layers through Increment 56"
+  ],
+  "style_guide": [
+    "Narration uses contemporary literary-conversational Persian: intimate, restrained, natural, and never uniformly formal or slang-heavy.",
+    "Dialogue remains spoken and character-specific; preserve hesitation, pauses, and unfinished phrases.",
+    "Preserve source meaning and emotional understatement; do not add explanations or actions not present in the English.",
+    "Correct translationese and awkward syntax without over-editing faithful existing Persian."
+  ],
+  "review_scope": {
+    "chapters": [
+      "Chapter 8 — Shiraishi Construction"
+    ],
+    "targeted_revisions": 1,
+    "focus": [
+      "natural conversational phrasing in the narrator's final portrait of Setsumi",
+      "preservation of the source's factual, understated list of traits"
+    ],
+    "external_human_signoff": "pending",
+    "chapter_revisions": {
+      "chapter8": 1
+    }
+  },
+  "translations": {
+    "gp32_honpen9:100781": {
+      "text": "واقعیت این بود که عاشق بیکینی بود، از هر کامپیوتری بهتر مسیر رو پیدا می‌کرد، ماشین‌ها رو دوست داشت و حتی گواهینامهٔ رانندگی هم داشت.",
+      "status": "literary_revision_draft",
+      "source_text_before": "واقعیت این بود که عاشق بیکینی بود، در مسیریابی از هر کامپیوتری بهتر عمل می‌کرد، ماشین‌ها رو دوست داشت و حتی گواهینامهٔ رانندگی هم داشت.",
+      "english_reference": "The truth was: she loved bikinis, was better at navigation than any computer, loved cars, even held a driver's license.",
+      "editorial_note": "«در مسیریابی از هر کامپیوتری بهتر عمل می‌کرد» ساختی رسمی و ترجمه‌وار است. «از هر کامپیوتری بهتر مسیر رو پیدا می‌کرد» همان تواناییِ navigation را با فارسی طبیعی‌تر و محاوره‌ای‌تر منتقل می‌کند و با فهرست بی‌تکلف ویژگی‌های ستسومی هماهنگ می‌ماند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    }
+  }
+}
