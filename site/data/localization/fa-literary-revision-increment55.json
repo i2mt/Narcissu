@@ -16,14 +16,20 @@
       "Chapter 2",
       "Chapter 3"
     ],
-    "targeted_revisions": 39,
+    "targeted_revisions": 42,
     "focus": [
       "source meaning and omitted details",
       "event-boundary alignment and duplicate text",
       "natural Persian narration and dialogue",
       "consistency of point of view and tense"
     ],
-    "external_human_signoff": "pending"
+    "external_human_signoff": "pending",
+    "chapter_revisions": {
+      "prologue": 5,
+      "chapter1": 16,
+      "chapter2": 9,
+      "chapter3": 12
+    }
   },
   "translations": {
     "gp32_image:088227": {
@@ -412,6 +418,36 @@
       "source_text_before": "در سکوت، چشم‌هاش رو به پنجره و آسمون تاریک شب دوخت.",
       "english_reference": "Eyes turned in silence toward the window to stare into the dark night sky.",
       "editorial_note": "ترجمهٔ قبلی «جوابی نداد» را که در رویداد بلافاصله قبل آمده بود تکرار می‌کرد؛ این نسخه فقط حرکت نگاه را توصیف می‌کند. این نسخه بازنگریِ متنِ ثبت‌شده در Increment 54 است؛ snapshot متن قبلی با همان لایهٔ فعال پیش از Increment 55 همسان‌سازی شده است.",
+      "approval": "assistant_led_source_alignment_revision; independent_native_Persian_signoff_pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    },
+    "gp32_honpen2:089549": {
+      "text": "من تازه‌واردِ طبقهٔ هفتم بودم و تازه فهمیده بودم که سومین بار مرخص شدن، آخرین باره.",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "من یه تازه‌وارد بودم و تازه فهمیده بودم که سومین مرخصی آخرین باره.",
+      "english_reference": "I was a newcomer to ７F,\njust recently taught that the third discharge was the last.",
+      "editorial_note": "«مرخصی» در فارسی می‌تواند به leave از بیمارستان تعبیر شود؛ در این بافت منظور discharge است. عبارت «سومین بار مرخص شدن» با کاربرد فعلیِ «مرخص شدن» در سراسر روایت یکدست‌تر و دقیق‌تر است.",
+      "approval": "assistant_led_source_alignment_revision; independent_native_Persian_signoff_pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    },
+    "gp32_honpen3:090001": {
+      "text": "هنوز هیچ حسی نسبت به اوضاع نداشتم و دکترا هم چیزی دربارهٔ اولین بار مرخص‌شدنم بهم نگفته بودن.",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "هنوز هیچ حسی نسبت به اوضاع نداشتم و دکترا هم چیزی دربارهٔ اولین مرخصی‌ام بهم نگفته بودن.",
+      "english_reference": "I still felt nothing about the situation,\nand I hadn't heard from the doctors about my ~i~first~i~ discharge.",
+      "editorial_note": "«اولین مرخصی‌ام» ممکن است به مرخصی موقت تعبیر شود؛ «اولین بار مرخص‌شدنم» منظور پزشکیِ discharge را روشن‌تر می‌کند و با اصطلاحات دیگر این بخش هماهنگ است.",
+      "approval": "assistant_led_source_alignment_revision; independent_native_Persian_signoff_pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    },
+    "gp32_honpen3:090414": {
+      "text": "و خیلی زود، برای بار دوم از بیمارستان مرخص شدم.",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "و خیلی زود، دومین ترخیصم از بیمارستان رسیده بود.",
+      "english_reference": "And soon enough, my second discharge from the hospital.",
+      "editorial_note": "«دومین ترخیصم از بیمارستان رسیده بود» ترکیبی نامأنوس و بیش از حد اسمی است؛ «برای بار دوم از بیمارستان مرخص شدم» هم طبیعی‌تر است و هم با کاربرد ثابتِ «مرخص شدن» در روایت هماهنگ می‌ماند.",
       "approval": "assistant_led_source_alignment_revision; independent_native_Persian_signoff_pending",
       "source_relation": "aligned_to_gp32_english_event",
       "revision_kind": "source_aligned_revision"
