@@ -1363,11 +1363,11 @@
       "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
     },
     "gp32_honpen6:095778": {
-      "text": "حتی یک بار هم لبخند نزد و هیچ حالتی هم به چهره‌اش نداد، اما به‌نظرم به‌نحوی از این کار خوشحال بود.",
+      "text": "حتی یک بار هم لبخند نزد و هیچ احساسی در چهره‌اش بروز نداد، اما به‌نظرم به‌نحوی از این کار خوشحال بود.",
       "status": "literary_revision_draft",
       "source_text_before": "حتی یه بارم لبخند نزد یا هیچ حس خاصی نشون نداد، اما به‌نظرم واقعاً خوشحال بود.",
       "english_reference": "She did not once smile or let any facial expression out,\nbut it seemed to me that she was somehow happy about this.",
-      "editorial_note": "facial expression به حالت چهره اشاره دارد، نه احساس؛ somehow نیز قطعیتِ «واقعاً» را تعدیل می‌کند.",
+      "editorial_note": "facial expression به حالت چهره اشاره دارد؛ «هیچ حالتی به چهره‌اش نداد» کمی ترجمه‌زده بود. بازنویسی تازه طبیعی‌تر است و در عین حال تضاد میان چهرهٔ بی‌حالت و خوشحالیِ احتمالی راوی را حفظ می‌کند.",
       "revision_kind": "assistant_literary_revision",
       "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
     },
@@ -1426,11 +1426,11 @@
       "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
     },
     "gp32_honpen6:096187": {
-      "text": "اما نمی‌تونستم جلوی خودم رو بگیرم و احساس نکنم که این‌طوری خیلی غم‌انگیزه.",
+      "text": "اما نمی‌تونستم جلوی این حس رو بگیرم که این‌طوری خیلی غم‌انگیزه.",
       "status": "literary_revision_draft",
       "source_text_before": "ولی بازم به‌نظرم خیلی ناراحت‌کننده بود.",
       "english_reference": "But I couldn't help but feeling that it was just too sorrowful that way.",
-      "editorial_note": "couldn't help but feeling در ترجمهٔ قبلی به یک نظر ساده تبدیل شده بود؛ «این‌طوری» و شدتِ too sorrowful نیز بازگردانده شدند.",
+      "editorial_note": "ساختار «نمی‌تونستم جلوی خودم رو بگیرم و احساس نکنم» در فارسی طبیعی نیست؛ نسخهٔ تازه همان couldn't help but feeling را با ساختاری روان‌تر منتقل می‌کند.",
       "revision_kind": "assistant_literary_revision",
       "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
     },
