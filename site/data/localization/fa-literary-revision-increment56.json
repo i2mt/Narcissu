@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "language": "fa",
+  "project": "Narcissu Persian Edition",
+  "increment": 56,
+  "layer": "literary-revision-increment56",
+  "title": "Chapter 7 — Narcissu: character-voice refinements",
+  "description": "Two targeted revisions in Chapter 7, focused on Setsumi's restrained spoken voice and the natural syntax of a reflective line. This is a focused refinement, not a complete independent re-review of the chapter.",
+  "based_on": [
+    "Increment 55 runtime branch",
+    "gp32 English source events in story-gp32.json",
+    "active Persian runtime layers through Increment 55"
+  ],
+  "style_guide": [
+    "Narration uses contemporary literary-conversational Persian: intimate, restrained, natural, and never uniformly formal or slang-heavy.",
+    "Dialogue remains spoken and character-specific; preserve hesitation, pauses, and unfinished phrases.",
+    "Preserve source meaning and emotional understatement; do not add explanations or actions not present in the English.",
+    "Correct translationese and awkward syntax without over-editing faithful existing Persian."
+  ],
+  "review_scope": {
+    "chapters": [
+      "Chapter 7 — Narcissu"
+    ],
+    "targeted_revisions": 2,
+    "focus": [
+      "Setsumi's terse, restrained dialogue",
+      "natural Persian syntax in reflective dialogue",
+      "preservation of hesitation and emotional understatement"
+    ],
+    "external_human_signoff": "pending",
+    "chapter_revisions": {
+      "chapter7": 2
+    }
+  },
+  "translations": {
+    "gp32_honpen8:098860": {
+      "text": "نه واقعاً... خوبم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "نه، واقعاً... من راحتم.",
+      "english_reference": "``Not really ... I'm fine.''",
+      "editorial_note": "«من راحتم» در این موقعیت کمی نامأنوس است و می‌تواند به معنای احساس راحتی برداشت شود. «نه واقعاً... خوبم» پاسخ کوتاه و طفره‌آمیز ستسومی را طبیعی‌تر منتقل می‌کند؛ لرزیدن او در روایت بعدی، خلافِ ادعایش را روشن می‌کند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen8:099908": {
+      "text": "شاید آرزو کردن، امید داشتن و پافشاری کردن آسون باشه... اگه هنوز باور داشته باشی که یه روز نتیجه می‌گیری...",
+      "status": "literary_revision_draft",
+      "source_text_before": "«شاید اگه باور داشته باشی یه روز نتیجه می‌گیری، مشتاق بودن، آرزو کردن و پافشاری کردن آسون باشه...»",
+      "english_reference": "``It might be easy if you can yearn, hope, persist ... if you can keep believing you'll be rewarded someday ...''",
+      "editorial_note": "ترتیب جملهٔ قبلی شرط را پیش از فهرست فعل‌ها می‌آورد و ساخت نحوی فارسی را سنگین می‌کند. بازنویسی، سه کنش موازی را کنار هم می‌نشاند و شرطِ باور به نتیجه را پس از مکث می‌آورد؛ لحن تأملی و محاوره‌ای ستسومی حفظ می‌شود.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    }
+  }
+}
