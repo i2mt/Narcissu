@@ -436,32 +436,52 @@ function scheduleDialogueFit() {
 }
 
 function applyPersianSourceQuoteStyle(ev, value) {
-  const source = String(ev?.text_en || '').trim();
-  if (!/^``[\s\S]*''$/.test(source)) return String(value || '');
+  let source = String(ev?.text_en || '').trim();
+  // Ignore a standalone speaker label before source dialogue delimiters.
+  source = source.replace(/^(?:Pharmacist|Boyfriend|Couple)\n(?=``)/u, '');
+  // A few gp32 speech lines span adjacent events: preserve an opening
+  // guillemet on the first event and a closing guillemet on the next.
+  // Sound-effect annotations use paired backticks and must not be quoted.
+  const isSoundEffect = /^``\*[\s\S]*\*``$/.test(source);
+  const opensQuote = source.startsWith('``');
+  const closesQuote = source.endsWith("''");
+  const isCompleteQuote = opensQuote && closesQuote;
+  const isSplitQuoteStart = opensQuote && !closesQuote && !isSoundEffect;
+  const isSplitQuoteEnd = closesQuote && !opensQuote;
+  const isStandaloneUnclosedDialogue = ev?.id === 'gp32_honpen7:097550';
+  if (!isCompleteQuote && !isSplitQuoteStart && !isSplitQuoteEnd && !isStandaloneUnclosedDialogue) {
+    return String(value || '');
+  }
   const match = /^(\s*)([\s\S]*?)(\s*)$/.exec(String(value || ''));
   if (!match || !match[2]) return String(value || '');
   const leading = match[1], content = match[2], trailing = match[3];
+  if (isStandaloneUnclosedDialogue) {
+    if (content.startsWith('«') && content.endsWith('»')) return String(value || '');
+    return leading + '«' + content.replace(/^«/, '').replace(/»$/, '') + '»' + trailing;
+  }
+  if (isSplitQuoteStart) {
+    if (content.startsWith('«')) return String(value || '');
+    return leading + '«' + content + trailing;
+  }
+  if (isSplitQuoteEnd) {
+    if (content.endsWith('»')) return String(value || '');
+    return leading + content + '»' + trailing;
+  }
   if ((content.startsWith('«') && content.endsWith('»')) ||
       (content.startsWith('“') && content.endsWith('”')) ||
       (content.startsWith('"') && content.endsWith('"'))) return String(value || '');
   if (content.includes('«') || content.includes('»')) {
-    // Keep an attribution such as «زیر لب گفتم: «... »» intact; otherwise
-    // make any embedded quotation secondary to the source-level dialogue quote.
-    const firstQuote = Math.min(
-      ...['«', '»'].map(mark => {
-        const index = content.indexOf(mark);
-        return index < 0 ? Number.POSITIVE_INFINITY : index;
-      })
-    );
+    const firstQuote = Math.min(...['«', '»'].map(mark => {
+      const index = content.indexOf(mark);
+      return index < 0 ? Infinity : index;
+    }));
     const prefix = content.slice(0, firstQuote);
     if (/گفتم\s*[:،]|گفتیم\s*[:،]/u.test(prefix)) return String(value || '');
-    const nested = content.replace(/«([^»]*)»/gu, '“$1”');
-    return `${leading}«${nested}»${trailing}`;
+    const normalized = content.replace(/«([^»]*)»/gu, '“$1”');
+    return leading + '«' + normalized + '»' + trailing;
   }
-  if (content.includes('“') || content.includes('”')) {
-    return `${leading}«${content}»${trailing}`;
-  }
-  return `${leading}«${content}»${trailing}`;
+  if (content.includes('“') || content.includes('”')) return leading + '«' + content + '»' + trailing;
+  return leading + '«' + content + '»' + trailing;
 }
 
 function renderCurrentDialogue({ animate = false } = {}) {
@@ -1340,7 +1360,7 @@ async function boot() {
     }
   } catch {}
   try {
-    const [storyResponse, assetsResponse, faResponse, historicalAlignmentResponse, overlayResponse, increment20Response, chapter2RecoveryResponse, chapter3RecoveryResponse, chapter4RecoveryResponse, chapter4Page44RecoveryResponse, chapter4Page45RecoveryResponse, chapter4Pages46to50RecoveryResponse, chapter1Chapter3RecoveryResponse, literaryProofreadResponse, finalProofreadResponse, increment31ProofreadResponse, increment32ProofreadResponse, increment33ProofreadResponse, increment34ProofreadResponse, increment35ProofreadResponse, increment38AssistantReviewResponse, conversationalToneResponse, literaryRevisionResponse, increment54Response] = await Promise.all([
+    const [storyResponse, assetsResponse, faResponse, historicalAlignmentResponse, overlayResponse, increment20Response, chapter2RecoveryResponse, chapter3RecoveryResponse, chapter4RecoveryResponse, chapter4Page44RecoveryResponse, chapter4Page45RecoveryResponse, chapter4Pages46to50RecoveryResponse, chapter1Chapter3RecoveryResponse, literaryProofreadResponse, finalProofreadResponse, increment31ProofreadResponse, increment32ProofreadResponse, increment33ProofreadResponse, increment34ProofreadResponse, increment35ProofreadResponse, increment38AssistantReviewResponse, conversationalToneResponse, literaryRevisionResponse, increment54Response, increment55Response] = await Promise.all([
       fetch('./data/story-gp32.json'), fetch('./data/asset-manifest.json'), fetch('./data/localization/fa.json'),
       fetch('./data/localization/fa-historical-alignment-increment28.json'),
       fetch('./data/localization/fa-revised-overlay-recovery.json'),
@@ -1362,7 +1382,8 @@ async function boot() {
       fetch('./data/localization/fa-assistant-editorial-review-increment38.json'),
       fetch('./data/localization/fa-conversational-tone-increment52.json'),
       fetch('./data/localization/fa-literary-revision-increment53.json'),
-      fetch('./data/localization/fa-literary-revision-increment54.json')
+      fetch('./data/localization/fa-literary-revision-increment54.json'),
+      fetch('./data/localization/fa-literary-revision-increment55.json')
     ]);
     if(!storyResponse.ok||!assetsResponse.ok)throw new Error('Could not load game data.');
     story=await storyResponse.json();assetManifest=await assetsResponse.json();
@@ -1392,7 +1413,8 @@ async function boot() {
     const conversationalToneOverlay=conversationalToneResponse.ok?await conversationalToneResponse.json():{translations:{}};
     const literaryRevisionOverlay=literaryRevisionResponse.ok?await literaryRevisionResponse.json():{translations:{}};
     const increment54Overlay=increment54Response.ok?await increment54Response.json():{translations:{}};
-    revisedOverlay={...recoveredOverlay,translations:{...(recoveredOverlay.translations||{}),...(increment20Overlay.translations||{}),...(chapter2RecoveryOverlay.translations||{}),...(chapter3RecoveryOverlay.translations||{}),...(chapter4RecoveryOverlay.translations||{}),...(chapter4Page44RecoveryOverlay.translations||{}),...(chapter4Page45RecoveryOverlay.translations||{}),...(chapter4Pages46to50RecoveryOverlay.translations||{}),...(chapter1Chapter3RecoveryOverlay.translations||{}),...(literaryProofreadOverlay.translations||{}),...(finalProofreadOverlay.translations||{}),...(increment31ProofreadOverlay.translations||{}),...(increment32ProofreadOverlay.translations||{}),...(increment33ProofreadOverlay.translations||{}),...(increment34ProofreadOverlay.translations||{}),...(increment35ProofreadOverlay.translations||{}),...(increment38AssistantReviewOverlay.translations||{}),...(conversationalToneOverlay.translations||{}),...(literaryRevisionOverlay.translations||{}),...(increment54Overlay.translations||{})}};
+    const increment55Overlay=increment55Response.ok?await increment55Response.json():{translations:{}};
+    revisedOverlay={...recoveredOverlay,translations:{...(recoveredOverlay.translations||{}),...(increment20Overlay.translations||{}),...(chapter2RecoveryOverlay.translations||{}),...(chapter3RecoveryOverlay.translations||{}),...(chapter4RecoveryOverlay.translations||{}),...(chapter4Page44RecoveryOverlay.translations||{}),...(chapter4Page45RecoveryOverlay.translations||{}),...(chapter4Pages46to50RecoveryOverlay.translations||{}),...(chapter1Chapter3RecoveryOverlay.translations||{}),...(literaryProofreadOverlay.translations||{}),...(finalProofreadOverlay.translations||{}),...(increment31ProofreadOverlay.translations||{}),...(increment32ProofreadOverlay.translations||{}),...(increment33ProofreadOverlay.translations||{}),...(increment34ProofreadOverlay.translations||{}),...(increment35ProofreadOverlay.translations||{}),...(increment38AssistantReviewOverlay.translations||{}),...(conversationalToneOverlay.translations||{}),...(literaryRevisionOverlay.translations||{}),...(increment54Overlay.translations||{}),...(increment55Overlay.translations||{})}};
     state.history=safeJSONParse(localStorage.getItem(STORAGE_KEYS.history),[]);
     state.language=localStorage.getItem('narcissu-language-v1')||DEFAULT_LANGUAGE;
     loadSettings();bindUI();renderChapters();setLanguage(state.language);updateNetworkStatus();
