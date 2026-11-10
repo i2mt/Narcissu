@@ -48,7 +48,7 @@
       "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
     },
     "gp32_image:088099": {
-      "text": "با اینکه هنوز نمی‌دونستم PET یا ایرسا مخفف چی‌ان، چند ماه هم به‌سرعت گذشته بود...",
+      "text": "با اینکه هنوز نمی‌دونستم PET یا ایرسا چی هستن، چند ماه هم به‌سرعت گذشته بود...",
       "status": "literary_revision_draft",
       "source_text_before": "با همهٔ اینا، من هنوز نمی‌دونستم چیزایی مثل PET چه معنی‌ای دارن. توی این کشمکش‌ها چند ماه گذشت...",
       "english_reference": "While I still had no clue what `PET' or `Iressa' stood for,\nin no time at all, several months had already passed.",
@@ -111,7 +111,7 @@
       "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
     },
     "gp32_honpen3:091313": {
-      "text": "داخل لباس‌شویی هم مثل نمای بیرونش فرسوده بود؛ ماشین‌های لباس‌شویی و خشک‌کن‌ها هم قدیمی و فرسوده بودن.",
+      "text": "داخل لباس‌شویی هم مثل نمای بیرونش فرسوده بود؛ ماشین‌های لباس‌شویی و خشک‌کن‌ها هم قدیمی بودن.",
       "status": "literary_revision_draft",
       "source_text_before": "ظاهر بیرونی لباس‌شویی بی‌راه نمی‌گفت؛ دستگاه‌های لباس‌شویی و خشک‌کن هم قدیمی و فرسوده بودن.",
       "english_reference": "The exterior of the laundromat had told no lie:\nthe washers and dryers were old and run-down as well.",
@@ -327,7 +327,7 @@
       "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
     },
     "gp32_honpen6:096458": {
-      "text": "منظورت اینه که می‌خوای بدونی فکر می‌کنم اگه همین‌طوری بری توی آب، با درد کمی می‌میری؟",
+      "text": "منظورت اینه که می‌خوای بدونی فکر می‌کنم اگه همین‌طوری بری توی آب، بدون دردِ زیادی می‌میری؟",
       "status": "literary_revision_draft",
       "source_text_before": "منظورت نظرم راجع به اینه که اگه همین‌طوری بری جلوتر، آیا با درد کمی می‌میری؟",
       "english_reference": "``Are you asking me whether I think you would die without much pain if you walked in?''",
@@ -345,7 +345,7 @@
       "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
     },
     "gp32_honpen7:097150": {
-      "text": "تا اون موقع حتی به ذهنم هم نرسیده بود؛ اصلاً حواسم نبود که باید بهش فکر کنم.",
+      "text": "تا اون موقع اصلاً بهش فکر نکرده بودم... حتی حواسم هم بهش نبود.",
       "status": "literary_revision_draft",
       "source_text_before": "تا اون موقع اصلاً به این موضوع فکر نکرده بودم؛ حتی حواسم هم نبود که باید به اون فکر کنم.",
       "english_reference": "But I hadn't even thought about it up until now ...\nI hadn't even had the ~i~senses~i~ to think about it.",
@@ -390,7 +390,7 @@
       "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
     },
     "gp32_honpen7:098136": {
-      "text": "احتمالاً می‌خواست هرچه زودتر کار رو تموم کنه؛ برای همین دوربین رو گرفت و بی‌اعتنا به تردید ما شد.",
+      "text": "احتمالاً می‌خواست هرچه زودتر کار رو تموم کنه؛ برای همین دوربین رو گرفت و به تردید ما توجهی نکرد.",
       "status": "literary_revision_draft",
       "source_text_before": "احتمالاً می‌خواست هرچه زودتر کار رو تمام کند؛ برای همین دوربین رو برداشت و بی‌اعتنا به تردید ما شد.",
       "english_reference": "Probably wanted to get it over with as soon as possible.\nWhich is why he took the camera and ignored our hesitation.",
@@ -408,7 +408,7 @@
       "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
     },
     "gp32_honpen8:098607": {
-      "text": "پاش روی کلاچ نرم و مطمئن بود و در تمام طول ساحل باریک و شنی راحت رانندگی می‌کرد.",
+      "text": "با نرمی و اطمینان کلاچ رو می‌گرفت و در تمام طول ساحل باریک و شنی راحت رانندگی می‌کرد.",
       "status": "literary_revision_draft",
       "source_text_before": "کلاچ رو نرم و مطمئن کنترل می‌کرد و در تمام طول ساحل باریک و شنی آزادانه می‌راند.",
       "english_reference": "Her foot on the clutch was smooth and sure,\nand she had free run of the entire narrow sandy beach.",
