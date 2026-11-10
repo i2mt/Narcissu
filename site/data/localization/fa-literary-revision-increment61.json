@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "language": "fa",
+  "project": "Narcissu Persian Edition",
+  "increment": 61,
+  "layer": "literary-revision-increment61",
+  "title": "Chapters 5 and 6 — conversational flow and narrative continuity",
+  "description": "Five selective Persian refinements to reduce translationese and preserve the narrator's intimate, hesitant voice across the car and journey scenes.",
+  "based_on": [
+    "Increment 60 runtime branch",
+    "gp32 English source events",
+    "active Persian runtime layers through Increment 60"
+  ],
+  "review_scope": {
+    "chapters": [
+      "Chapter 5 — The Emerald Sea",
+      "Chapter 6 — The Silver Coupe"
+    ],
+    "targeted_revisions": 5,
+    "external_human_signoff": "pending",
+    "focus": [
+      "natural spoken phrasing in the car scene",
+      "retain the narrator's uneasy, ongoing thought",
+      "remove unnecessary repetition",
+      "preserve the source's present-perfect sense of continuing to live",
+      "keep the narrator's dry, self-correcting aside conversational"
+    ],
+    "chapter_revisions": {
+      "chapter5": 3,
+      "chapter6": 2
+    }
+  },
+  "translations": {
+    "gp32_honpen5:094365": {
+      "text": "داخل ماشین، پشت‌مون به هم بود.",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "داخل ماشین، پشت‌هامون به هم بود.",
+      "english_reference": "Inside the car.\nour backs turned to each other.",
+      "editorial_note": "«پشت‌هامون به هم بود» در فارسی کمی ناهنجار است. «پشت‌مون به هم بود» همان تصویرِ پشت‌کردن دو نفر به یکدیگر را بدون افزودن کنش یا جزئیات تازه، طبیعی‌تر منتقل می‌کند.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    },
+    "gp32_honpen5:094662": {
+      "text": "با دلشوره، مدام با خودم فکر می‌کردم کاش باک کمی زودتر پر بشه.",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "با دلشوره مدام منتظر بودم باک کمی زودتر پر بشه.",
+      "english_reference": "I kept wondering uneasily if it wouldn't fill up a little bit faster.",
+      "editorial_note": "متن انگلیسی بر فکر و انتظارِ مضطربانهٔ راوی تأکید دارد؛ «با خودم فکر می‌کردم کاش...» این حالت را طبیعی‌تر از «منتظر بودم» منتقل می‌کند و استمرارِ kept را نگه می‌دارد.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    },
+    "gp32_honpen5:094911": {
+      "text": "چند هزار ینی که با خودم آورده بودم، همون پولی بود که اون موقع دم دستم داشتم.",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "اون چند هزار ینی که با خودم آورده بودم، فقط همون پولی بود که همون موقع دم دستم داشتم.",
+      "english_reference": "The couple thousand yen that ~i~I'd~i~ brought with me were just whatever I'd had on hand at the time.",
+      "editorial_note": "تکرارِ «اون/همون» و تأکیدِ اضافیِ «فقط» جمله را سنگین می‌کرد. نسخهٔ تازه مقدار تقریبی پول و محدودبودن آن به پولِ دم‌دستِ راوی را حفظ می‌کند.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    },
+    "gp32_honpen6:095267": {
+      "text": "... اما ۲۲ ساله که همین‌طور به زندگی ادامه می‌دم...",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "... اما ۲۲ سال بود که همین‌طوری زندگی می‌کردم...",
+      "english_reference": "... but I've lived on for 22 years like this ...",
+      "editorial_note": "ساخت گذشتهٔ ساده در نسخهٔ قبلی، استمرارِ وضعیتی را که تا زمان روایت ادامه دارد کم‌رنگ می‌کرد. «۲۲ ساله که... ادامه می‌دم» زمان و امتدادِ معنای انگلیسی را طبیعی‌تر منتقل می‌کند.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    },
+    "gp32_honpen6:095705": {
+      "text": "... بهتر بود سکوتش رو جواب مثبت حساب کنم. یا یه چیزی تو همین مایه‌ها.",
+      "status": "assistant_reviewed_revision",
+      "source_text_before": "... بهتر بود سکوتش رو به‌منزلهٔ جواب مثبت در نظر بگیرم. یا یه چیزی تو همین مایه‌ها.",
+      "english_reference": "... that it would be better for me to think of her non-replies as answers to the affirmative. Or something.",
+      "editorial_note": "«به‌منزلهٔ جواب مثبت در نظر بگیرم» نسبت به صدای محاوره‌ای راوی بیش از حد رسمی است. «جواب مثبت حساب کنم» همان برداشتِ طنزآمیز و کمی مردد را با لحن طبیعی‌تری نگه می‌دارد.",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending",
+      "source_relation": "aligned_to_gp32_english_event",
+      "revision_kind": "source_aligned_revision"
+    }
+  },
+  "style_guide": [
+    "Narration uses contemporary literary-conversational Persian: intimate, restrained, natural, and never uniformly formal or slang-heavy.",
+    "Dialogue remains spoken and character-specific; preserve hesitation, pauses, and unfinished phrases.",
+    "Preserve source meaning and emotional understatement; do not add explanations or actions not present in the English.",
+    "Correct translationese and awkward syntax without over-editing faithful existing Persian."
+  ]
+}
