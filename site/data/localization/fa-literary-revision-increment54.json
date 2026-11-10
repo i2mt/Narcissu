@@ -14,9 +14,9 @@
   ],
   "review_scope": {
     "historical_alignment_entries_reexamined": 48,
-    "revised_entries": 100,
+    "revised_entries": 102,
     "retained_without_change": 40,
-    "method": "The 48 remaining historical alignment entries were re-examined against the English gp32 source and active Persian recovery text; eight clear revisions were proposed. In addition, all 63 Chapter 9, 167 Chapter 8, and 186 Chapter 7 say-events not present in Increments 38, 52, or 53 were checked against the English source. Fifteen Chapter 9, 45 Chapter 8, and 32 Chapter 7 targeted revisions were proposed, while faithful lines and ambiguous event boundaries were retained. Together with existing proofread coverage, this completes the first source-aligned assistant review of all 117 Chapter 9, 261 Chapter 8, and 252 Chapter 7 say-events. This is not a complete line-by-line review of the full 2,228 voiced say-events.",
+    "method": "The 48 remaining historical alignment entries were re-examined against the English gp32 source and active Persian recovery text; eight clear revisions were proposed. In addition, all 63 Chapter 9, 167 Chapter 8, and 186 Chapter 7 say-events not present in Increments 38, 52, or 53 were checked against the English source. Fifteen Chapter 9, 45 Chapter 8, and 34 Chapter 7 targeted revisions were proposed, while faithful lines and ambiguous event boundaries were retained. Together with existing proofread coverage, this completes the first source-aligned assistant review of all 117 Chapter 9, 261 Chapter 8, and 252 Chapter 7 say-events. This is not a complete line-by-line review of the full 2,228 voiced say-events.",
     "source": "gp32 / Insani 2005 English localization, represented by the repository's story-gp32.json events",
     "external_human_signoff": "pending",
     "chapter9_say_events_reviewed": 117,
@@ -27,7 +27,7 @@
     "chapter8_additional_revisions": 45,
     "chapter7_say_events_reviewed": 252,
     "chapter7_events_outside_increments_38_52_53": 186,
-    "chapter7_additional_revisions": 32
+    "chapter7_additional_revisions": 34
   },
   "translations": {
     "gp32_honpen4:093757": {
