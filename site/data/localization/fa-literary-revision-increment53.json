@@ -5,7 +5,7 @@
   "increment": 53,
   "layer": "assistant_led_story_wide_literary_revision_draft",
   "title": "Literary narration and dialogue revision — first story-wide pass",
-  "description": "Selected source-checked literary revisions across the opening and Chapters 2–9, prioritizing narration, natural Persian syntax, tense consistency, dialogue register, and preservation of emotional restraint. This remains a draft editorial layer, not a complete line-by-line certification.",
+  "description": "Selected source-checked literary revisions across the opening and Chapters 2–9, prioritizing narration, natural Persian syntax, tense consistency, dialogue register, and preservation of emotional restraint. The Narcissus/Echo sequence and closing chapter received an additional consistency pass. This remains a draft editorial layer, not a complete line-by-line certification.",
   "style_guide": [
     "Narration uses contemporary literary-conversational Persian: intimate, restrained, natural, and never uniformly formal or slang-heavy.",
     "Dialogue remains spoken and character-specific; avoid making every character sound like the narrator.",
@@ -24,8 +24,8 @@
       8,
       9
     ],
-    "revised_entries": 200,
-    "method": "Targeted source-checked revision of selected entries from the active Increment 52 layer, extended through the opening and Chapters 2–9. The pass prioritizes narrative syntax, dialogue naturalness, temporal clarity, and preservation of restrained tone. Unchanged entries remain untouched; this is not yet a complete line-by-line review of all story events.",
+    "revised_entries": 251,
+    "method": "Targeted source-checked revision of selected entries from the active Increment 52 layer across the opening and Chapters 2–9. The pass prioritizes narrative syntax, dialogue naturalness, temporal clarity, and preservation of restrained tone, with an additional consistency pass on the Narcissus/Echo sequence and the closing chapter. Unchanged entries remain untouched; this is not yet a complete line-by-line review of all story events.",
     "external_human_signoff": "pending"
   },
   "translations": {
@@ -1826,6 +1826,465 @@
       "source_text_before": "بالاخره به مقصدی رسیده بودیم که در آغاز اصلاً برامون مهم نبود.",
       "english_reference": "We'd arrived at last at a destination that we hadn't even cared about at the onset.",
       "editorial_note": "بازبینی جمله در برابر متن انگلیسی؛ اصلاح نحو، دقت معنایی و لحن برای فارسی طبیعی‌تر، بدون افزودن معنا یا تغییر لحن خویشتن‌دار روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:098427": {
+      "text": "ساحلی شنی در زمستون بود و هیچ‌کس اونجا نبود. درخت‌های کاج توی باد سرد زمستونی تکون می‌خوردن.",
+      "status": "literary_revision_draft",
+      "source_text_before": "ساحلی شنی در زمستان بود و هیچ‌کس آنجا نبود؛ درختان کاج در باد سرد زمستانی تکان می‌خوردن.",
+      "english_reference": "A sandy beach in winter, nobody in it.\nPine groves swaying in the cold winter wind.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:098488": {
+      "text": "با تمام توان پایش رو روی پدال کلاچ فشرد و هم‌زمان با تمرکز فرمان رو گرفت.",
+      "status": "literary_revision_draft",
+      "source_text_before": "با تمام توان پایش رو روی پدال کلاچ فشرد و هم‌زمان، با تمرکز فرمان رو در دست گرفت.",
+      "english_reference": "She stretched out with all her might to step on the clutch and grasped at the steering wheel with concentration.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:098581": {
+      "text": "همون حوالی که غروب جای خودش رو به شب می‌داد و نسیم دریا به باد خشکی تبدیل می‌شد...",
+      "status": "literary_revision_draft",
+      "source_text_before": "همون حوالی که غروب به شب می‌رسید و نسیم دریا به باد خشکی بدل می‌شد...",
+      "english_reference": "Around when the sunset had faded away into nightfall.\nAround when the sea breeze had changed into a land breeze ...",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:098639": {
+      "text": "نقشه رو داشتیم. داروهامون رو هم داشتیم. و با اینکه صداخفه‌کنش ترک برداشته بود، این کوپهٔ نقره‌ای رو هم داشتیم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "ما نقشه رو داشتیم، داروهایمان رو داشتیم؛ و با اینکه صداخفه‌کنش ترک برداشته بود، این کوپهٔ نقره‌ای رو هم داشتیم.",
+      "english_reference": "We had a map.  We had our meds.\nAnd though it had a broken muffler, we had this silver coupe.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:098697": {
+      "text": "بار سوم، پایان کار بود... اون برای بار دوم به اونجا برگشته بود و من برای بار اول...",
+      "status": "literary_revision_draft",
+      "source_text_before": "بار سوم، پایان کار بود... اون برای بار دوم آنجا بود و من برای بار اول...",
+      "english_reference": "... the third time was the end ...\n... she was on her second time, I was on my first ...",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:098721": {
+      "text": "می‌تونست هر ماشینی رو که می‌خواست برونه و به هرجا که دلش می‌خواست بره؛ نه فقط با کوپه، که با سدان یا حتی خودروی کروک...",
+      "status": "literary_revision_draft",
+      "source_text_before": "می‌تونست هر ماشینی رو که می‌خواست براند و به هرجا بره؛ نه فقط کوپه، بلکه سدان یا حتی خودروی کروک...",
+      "english_reference": "She could drive any car she wanted and go anywhere,\nnot just on a coupe but on a sedan or even on a convertible ...",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:098842": {
+      "text": "به دختر لرزونی که روی صندلی شاگرد نشسته بود نگاه کردم و پیشنهاد دادم روی پاهام بشینه.",
+      "status": "literary_revision_draft",
+      "source_text_before": "به دختر لرزونی که روی صندلی شاگرد نشسته بود نگاه کردم و بهش پیشنهاد دادم روی پاهام بشینه.",
+      "english_reference": "I looked at her shivering in the passenger's seat and offered her my empty lap.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:098866": {
+      "text": "حتی وقتی این رو می‌گفت هم می‌لرزید. بخار نفسمون توی هوای سرد پیدا بود. معلوم بود که داشت بلوف می‌زد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "حتی وقتی این رو می‌گفت هم می‌لرزید. بخار نفس‌هایمان در هوای سرد پیدا بود. معلوم بود که داشت بلوف می‌زد.",
+      "english_reference": "She was shivering even as she said this.\nOur breaths were frosting.  She was obviously bluffing.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:098901": {
+      "text": "کمی خودش رو وول داد و به طرفم اومد، بعد با تردید روی پاهام جمع شد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "با کمی وول‌خوردن خودش رو به طرفم کشاند و بعد با تردید روی پاهایم جمع شد.",
+      "english_reference": "She squirmed over to where I was,\nand then diffidently curled up on my lap.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:098919": {
+      "text": "شیشهٔ جلو از سرمای بیرون یخ زده بود؛ لایهٔ سفید یخ نمی‌ذاشت اون‌طرفش رو ببینیم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "شیشهٔ جلو از سرمای هوای بیرون یخ بسته بود؛ لایهٔ سفید یخ اجازه نمی‌داد اون‌سویش رو ببینیم.",
+      "english_reference": "The windshield, frosting over from the cold outside air.\nWe could now see nothing past its white icy overlay.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:098941": {
+      "text": "هم‌زمان با سپیده‌دم، انبوهی از گل‌های سفید پیش رومون گسترده شدن...",
+      "status": "literary_revision_draft",
+      "source_text_before": "همراه با سپیده‌دم، انبوهی از گل‌های سفید پیش رویمان گسترده شدن...",
+      "english_reference": "And along with the dawn,\nso many white flowers spread themselves out before us ...",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:098952": {
+      "text": "جایی که تا اون لحظه چیزی جز تاریکی نبود، سفیدی‌ها و زردی‌های درخشان پدیدار شدن.",
+      "status": "literary_revision_draft",
+      "source_text_before": "در جایی که تا اون لحظه فقط تاریکی بود، سفیدی‌ها و زردی‌های درخشان پدیدار شدن.",
+      "english_reference": "Radiant whites and yellows appearing where there had only been darkness before.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:098983": {
+      "text": "میون اون منظره با هم حرف می‌زدیم و نفسمون توی هوای سرد، سفیدرنگ بیرون می‌اومد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "در میان اون منظره، با هم حرف می‌زدیم و نفس‌هایمان در هوای سرد به شکل بخار سفید بیرون می‌اومد.",
+      "english_reference": "And in the midst, our exchange of words.\nAnd our breaths frosting white in the chilly air.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099054": {
+      "text": "و اینجا هم تکه‌هایی از همهٔ چیزهای نادیدنی، همه‌جا پراکنده بودن...",
+      "status": "literary_revision_draft",
+      "source_text_before": "و اینجا هم، تکه‌هایی از همهٔ چیزهای نادیدنی همه‌جا پراکنده بودن...",
+      "english_reference": "And right here as well,\nthe shards of all things unseeable were scattered everywhere ...",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099122": {
+      "text": "صندلی‌اش رو تا آخر خوابابونده بود و بیشتر وقت رو همون‌جا می‌گذروندیم تا استراحت کنه.",
+      "status": "literary_revision_draft",
+      "source_text_before": "صندلی‌اش رو تا آخر خوابانده بود و بیشتر وقت رو همون‌جا می‌گذراندیم تا استراحت کند.",
+      "english_reference": "She had tilted her seat back all the way down,\nand we were mainly staying one place to let her rest.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099251": {
+      "text": "واژهٔ دیگه‌ای به یادم اومد. عجیب بود؛ تا اون لحظه فکر می‌کردم این واژه منحصربه‌فرده...",
+      "status": "literary_revision_draft",
+      "source_text_before": "واژهٔ دیگه‌ای به یادم اومد. عجیب بود؛ تا اون لحظه فکر می‌کردم اون واژه منحصربه‌فرده...",
+      "english_reference": "There was another word I was reminded of.\nFunny, since I'd thought that it was unique up until now ...",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099282": {
+      "text": "«نارسیس محبوب همه بود...»",
+      "status": "literary_revision_draft",
+      "source_text_before": "«نارسیس رو همه دوست داشتن...»",
+      "english_reference": "``Narcisse was loved by all ...''",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099351": {
+      "text": "«آرزوی اکو هیچ‌وقت برآورده نمی‌شد، هرچقدر هم که خوابش رو می‌دید یا براش دعا می‌کرد...»",
+      "status": "literary_revision_draft",
+      "source_text_before": "آرزوی Echo هیچ‌وقت برآورده نمی‌شد...",
+      "english_reference": "``Echo's wish would never come true no matter how she dreamed or prayed for it ...''",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099389": {
+      "text": "«و این همون افسانه‌ایه که می‌گه این گل... نرگس... چطور به وجود اومد.»",
+      "status": "literary_revision_draft",
+      "source_text_before": "«و این همون افسانه‌ایه که می‌گه این گل... نرگس... چطور به وجود اومد.»",
+      "english_reference": "``And that is the legend of how this flower ... narcissus ... came to be.''",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099425": {
+      "text": "نفرینش هیچ نتیجه‌ای نداشت؟ ناپدید شد، بی‌آنکه کاری جز رنجوندن نارسیس کرده باشه...؟",
+      "status": "literary_revision_draft",
+      "source_text_before": "نفرینش هیچ نتیجه‌ای نداشت؟ ناپدید شد، بی‌آنکه جز رنجاندن نارسیس کاری کرده باشه...",
+      "english_reference": "She disappeared without the curse accomplishing anything?\nShe disappeared having caused only pain for Narcisse ...?",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099455": {
+      "text": "«اینکه آیا سرنوشت خودم رو نفرین می‌کردم؛ سرنوشتی که هیچ کاری برای تغییرش از دستم برنمی‌اومد...»",
+      "status": "literary_revision_draft",
+      "source_text_before": "اینکه آیا سرنوشت خودم رو نفرین می‌کردم؛ سرنوشتی که هیچ کاری از دستم برای تغییرش برنمی‌اومد...",
+      "english_reference": "``Whether I cursed my own fate, the one I couldn't do anything about ...''",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099525": {
+      "text": "حتی اگه گوش‌هام رو می‌گرفتم، صدای بارون قطع نمی‌شد. این رو خیلی خوب می‌دونستم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "حتی اگر گوش‌هایم رو می‌گرفتم، صدای باران قطع نمی‌شد. این رو خیلی خوب می‌دونستم.",
+      "english_reference": "Even if I covered my ears, the sound of the rain would not stop.\nI knew that all too well.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099553": {
+      "text": "«... هیچ‌وقت دلم براش تنگ نمی‌شد... هیچ‌وقت نفرینش نمی‌کردم...»",
+      "status": "literary_revision_draft",
+      "source_text_before": "هیچ‌وقت دلم برایش تنگ نمی‌شد... هیچ‌وقت نفرینش نمی‌کردم...",
+      "english_reference": "``... I'd never yearn for it ... I'd never curse it ...''",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099567": {
+      "text": "با اینکه می‌دونستم در این ساعتِ دیرهنگام پایان نزدیکه و دیگه کاری از دستم برنمیاد...",
+      "status": "literary_revision_draft",
+      "source_text_before": "با اینکه می‌دونستم در این ساعتِ دیرهنگام پایان نزدیک شده و دیگه هیچ کاری از دستم برنمی‌اومد...",
+      "english_reference": "Even though I knew that at this late hour the end was coming and that there was nothing to be done about it ...",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099586": {
+      "text": "«... تا جایی که می‌شد عمیق بودن و برای التیام کامل به زمان زیادی نیاز داشتن...»",
+      "status": "literary_revision_draft",
+      "source_text_before": "تا جایی که می‌شد عمیق بودن و برای التیام کامل به زمان زیادی نیاز داشتن...",
+      "english_reference": "``... were about as deep as they possibly could be, and that they required much time to be fully healed ...''",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099606": {
+      "text": "«... پس چه بلایی سر من و بیست‌ودو سال زندگیم می‌اومد؟...»",
+      "status": "literary_revision_draft",
+      "source_text_before": "... پس چه بر سر من و بیست‌ودو سال زندگی‌ام می‌اومد؟...",
+      "english_reference": "``... what was to become of me and my 22 years of life ...?''",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099641": {
+      "text": "هنوز سپیده نزده بود. دستم رو به سمت صندلی شاگرد بردم و پشتش رو نوازش کردم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "هنوز سپیده نزده بود. دستم رو به سمت صندلی شاگرد دراز کردم و پشتش رو نوازش کردم.",
+      "english_reference": "Before dawn.  I had reached over to the passenger seat and was stroking her back.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099734": {
+      "text": "با لحنی چنان شاد حرف می‌زدم که حتی خودم هم باورم نمی‌شد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "با لحنی اون‌قدر شاد حرف می‌زدم که حتی خودم هم باورم نمی‌شد.",
+      "english_reference": "I was speaking in a voice so cheerful that even I couldn't believe it.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099867": {
+      "text": "بیرون پنجره، گل‌های نرگسِ ژانویه در گرگ‌ومیشِ پیش از سپیده‌دم با باد تکون می‌خوردن.",
+      "status": "literary_revision_draft",
+      "source_text_before": "بیرون پنجره، گل‌های نرگسِ ژانویه در گرگ‌ومیشِ قبل از سپیده‌دم با باد تکان می‌خوردن.",
+      "english_reference": "Outside the window, the flowers of January, the narcissi ...\n were swaying in the morning twilight before dawn.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099891": {
+      "text": "«... برای من هم آسون نیست که رو به جلو نگاه کنم...»",
+      "status": "literary_revision_draft",
+      "source_text_before": "«... برام هم آسان نیست که رو به جلو نگاه کنم...»",
+      "english_reference": "``... it isn't so easy ... for me to face forward ...''",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099908": {
+      "text": "«شاید اگه باور داشته باشی یه روز نتیجه می‌گیری، مشتاق بودن، آرزو کردن و پافشاری کردن آسون باشه...»",
+      "status": "literary_revision_draft",
+      "source_text_before": "شاید برات آسون باشه که مشتاق باشی، آرزو کنی، مقاومت کنی... اگه باور داشته باشی که یه روزی نتیجه‌شونو می‌گیری...",
+      "english_reference": "``It might be easy if you can yearn, hope, persist ... if you can keep believing you'll be rewarded someday ...''",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099931": {
+      "text": "چشم‌هاش که تا اون لحظه به دوردست خیره بودن، حالا مستقیم از روی صندلی شاگرد بهم نگاه می‌کردن...",
+      "status": "literary_revision_draft",
+      "source_text_before": "چشم‌هاش که به یه جای دوری دوخته شده بودن، حالا مستقیم بهم نگاه می‌کردن...",
+      "english_reference": "Her eyes, which had been focused on the far distance,\nwere now staring straight at me from the passenger's seat.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099947": {
+      "text": "«... خودم رو سرد و بی‌طرفانه زیر نظر بگیرم... به خودم بگم همه‌چیز بی‌فایده‌ست... همین تنها کاریه که ازم برمیاد...»",
+      "status": "literary_revision_draft",
+      "source_text_before": "«... خودم رو با نگاهی سرد و بی‌طرفانه زیر نظر بگیرم... به خودم بگم همه‌چیز بی‌فایده‌ست... تمام کاری که از دستم برمیاد همینه...»",
+      "english_reference": "``... observe myself coldly ... tell myself it's all useless ... that's all I can do ...''",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:099986": {
+      "text": "«برای من... دیگه چیزی جز اون آخرین بهانه باقی نمونده...»",
+      "status": "literary_revision_draft",
+      "source_text_before": "برام... چیزی جز اون آخرین عذر وجود نداره...",
+      "english_reference": "``For me ... there's nothing left but that last excuse ...''",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:100022": {
+      "text": "آسمان شب از بالای شیشهٔ جلو پیدا بود؛ پیش از سپیده‌دم، جز ماه چیزی توی آسمون نبود.",
+      "status": "literary_revision_draft",
+      "source_text_before": "آسمان شب از بالای شیشهٔ جلو دیده می‌شد؛ قبل از سپیده‌دم، چیزی جز ماه در آسمان نبود.",
+      "english_reference": "The night sky, visible above the windshield.\n\nNothing but the moon showing its face in the sky before dawn.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:100037": {
+      "text": "تنها کاری که ازش برمی‌اومد این بود که همون یه جمله رو بارها و بارها تکرار کنه؛ نمی‌تونست چیزی بگه، چیزی بخواد یا چیزی رو برای خودش تصور کنه...",
+      "status": "literary_revision_draft",
+      "source_text_before": "تنها می‌تونست همون یه جمله رو بارها و بارها تکرار کنه؛ نمی‌تونست چیزی بگه، چیزی بخواد یا چیزی رو برای خودش تصور کنه...",
+      "english_reference": "Able only to say the same single thing over and over.\nAble to say nothing, wish nothing, and see nothing for herself ...",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen8:100046": {
+      "text": "رد کردن هر دو گزینهٔ طبقهٔ هفتم و خونه... احتمالاً اولین و آخرین بار بود که سرپیچی می‌کرد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "رد کردنِ هر دو گزینهٔ طبقهٔ هفتم و خونه‌ش... احتمالاً اولین و آخرین سرپیچیِ اون بود.",
+      "english_reference": "Her veto of both ７F ~i~and~i~ her home ...\n... was probably ... her first and last act of defiance ...",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen9:100104": {
+      "text": "خش‌خش گهگاهِ بیشه‌های کاج در باد و طنین آرومِ غرش دریا...",
+      "status": "literary_revision_draft",
+      "source_text_before": "خش‌خش گاه‌به‌گاهِ بیشه‌های کاج در باد، و طنین آرومِ غرش دریا...",
+      "english_reference": "The occasional rustle of the pine groves in the wind.\nThe peaceful timbre of the sea roar.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen9:100140": {
+      "text": "یه‌دفعه گفته بود لباس شنا می‌خواد؛ اما همین خواسته، خودش یه مشکل دیگه بود.",
+      "status": "literary_revision_draft",
+      "source_text_before": "یه‌دفعه گفته بود لباس شنا می‌خواد؛ اما همین خواسته خودش مسئلهٔ دیگه‌ای بود.",
+      "english_reference": "Out of the blue, she'd said that she wanted a swimsuit,\nbut that presented another problem in and of itself.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen9:100157": {
+      "text": "پیدا شد؛ دامن موردعلاقه‌اش رو پوشیده بود و حوله رو دور سینه‌اش پیچیده بود.",
+      "status": "literary_revision_draft",
+      "source_text_before": "از راه رسید؛ دامن موردعلاقه‌اش رو پوشیده بود و حوله رو دور سینه‌اش پیچیده بود.",
+      "english_reference": "She came into view, wearing her favorite skirt,\nwith that towel wrapped around her breasts.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen9:100218": {
+      "text": "انگار آسمون هم می‌خواست اذیتمون کنه؛ کم‌کم برف شروع به باریدن کرد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "انگار آسمان هم می‌خواست لجمان رو دربیاورد؛ کم‌کم برف شروع به باریدن کرد.",
+      "english_reference": "As if the sky wanted to spite us,\nit was beginning to snow little by little.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen9:100284": {
+      "text": "زود باش، دیگه ازم خجالت نکش، باشه؟",
+      "status": "literary_revision_draft",
+      "source_text_before": "زود باش، انقدر ازم خجالت نکش، باشه؟",
+      "english_reference": "``C'mon, don't get shy on me now, okay?''",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen9:100319": {
+      "text": "دیگه بهونه نیار؛ زود باش. هیچ مدل بیکینی‌ای این‌طور خشک و بی‌حرکت نمی‌ایسته.",
+      "status": "literary_revision_draft",
+      "source_text_before": "دیگه اما و اگر نداریم؛ زود باش. هیچ مدل بیکینی‌ای این‌طور خشک و بی‌حرکت نمی‌ایستد.",
+      "english_reference": "``No ifs, ands, or buts now.  Come on. No bikini model stands stock still like that.''",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen9:100356": {
+      "text": "دستش رو صاف رو به آسمون گرفته بود؛ دریای زمردی پس‌زمینه‌اش بود...",
+      "status": "literary_revision_draft",
+      "source_text_before": "دستش رو یک‌راست رو به آسمان گرفته بود؛ دریای زمردی پس‌زمینه‌اش بود...",
+      "english_reference": "Was being held straight up into the heavens.\nWith the emerald sea as its backdrop ...",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen9:100471": {
+      "text": "با شادی و شور و شوق توی آب جست‌وخیز می‌کرد و آب رو به اطراف می‌پاشید.",
+      "status": "literary_revision_draft",
+      "source_text_before": "با خوشحالی و شور و شوق، توی آب جست‌وخیز می‌کرد و آب رو به اطراف می‌پاشید.",
+      "english_reference": "Happily, exuburantly, she splashed around in the water.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen9:100475": {
+      "text": "با اینکه دوربین دیگه عملاً از کار افتاده بود، هنوز ازش عکس می‌گرفتم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "با اینکه دوربین دیگه از نفس افتاده بود، من هنوز ازش عکس می‌گرفتم.",
+      "english_reference": "And even though the camera was now utterly exhausted,\nI kept photographing her figure.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen9:100672": {
+      "text": "برای لحظه‌ای ایستاد. موج‌ها به پاهاش می‌رسیدن. تا آخر پشتش به من بود.",
+      "status": "literary_revision_draft",
+      "source_text_before": "برا یه لحظه ایستاد. موج‌های دریا به پاهاش می‌خوردن. پشتش بهم بود.",
+      "english_reference": "She stopped for a moment, the waves lapping at her feet.\nHer back remained to the last turned toward me.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen9:100755": {
+      "text": "سفر پانزده‌روزهٔ من و سفر بیست‌ودوسالهٔ اون، سرانجام به پایان رسید...",
+      "status": "literary_revision_draft",
+      "source_text_before": "سفر پانزده‌روزهٔ من و سفر بیست‌ودوسالهٔ اون بالاخره تموم شد...",
+      "english_reference": "My voyage of 15 days and her voyage of 22 years: finally at an end.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen9:100781": {
+      "text": "واقعیت این بود که بیکینی رو دوست داشت، از هر کامپیوتری بهتر مسیریابی می‌کرد، عاشق ماشین‌ها بود و حتی گواهینامهٔ رانندگی داشت.",
+      "status": "literary_revision_draft",
+      "source_text_before": "واقعیت این بود که عاشق بیکینی بود، در مسیریابی از هر کامپیوتری بهتر عمل می‌کرد، ماشین‌ها رو دوست داشت و حتی گواهینامهٔ رانندگی هم داشت.",
+      "english_reference": "The truth was: she loved bikinis, was better at navigation than any computer, loved cars, even held a driver's license.",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen9:100787": {
+      "text": "گاهی هم، خیلی به‌ندرت، با نگاهی خجالتی و کمی ترش‌رو به آدم نگاه می‌کرد...",
+      "status": "literary_revision_draft",
+      "source_text_before": "گاهی هم، اون هم خیلی کم، با حالتی خجالتی و کمی اخمو به آدم نگاه می‌کرد...",
+      "english_reference": "... but every so often ... she would grace you ...\n... with a bashful, sour-seeming expression ...",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
+    },
+    "gp32_honpen9:100797": {
+      "text": "برام لبخند می‌زد؛ انگار پرواز می‌کرد، انگار از شادی لبریز بود، انگار واقعاً یه مدل بیکینی بود...",
+      "status": "literary_revision_draft",
+      "source_text_before": "برام لبخند می‌زد؛ انگار پرواز می‌کرد، انگار از شادی سرشار بود، انگار واقعاً یک مدل بیکینی بود...",
+      "english_reference": "She smiled for me as if she were flying, as if she were delighted,\nas if she were an honest-to-god bikini model ...",
+      "editorial_note": "بازبینی نهاییِ این جمله در برابر متن انگلیسی؛ اصلاح نحو و یکدستی لحن، با حفظ مکث‌ها، تصاویر و خویشتن‌داری روایت.",
       "revision_kind": "assistant_literary_revision",
       "approval": "user_authorized_assistant_led_revision; independent_human_signoff_pending"
     }
