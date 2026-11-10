@@ -5,7 +5,7 @@
   "increment": 54,
   "layer": "assistant_led_source_alignment_followup_draft",
   "title": "Source-alignment follow-up — targeted Persian revisions",
-  "description": "A source-aligned follow-up to Increment 53. The remaining historical alignment cases, and all voiced say-events in Chapters 5, 7, 8, and 9, were checked against the gp32 English event text and the active Persian source. One hundred thirty targeted revisions are proposed in total; ambiguous event-boundary cases are retained without speculative rewriting. Independent native-Persian sign-off remains pending.",
+  "description": "A source-aligned follow-up to Increment 53. The remaining historical alignment cases, and all voiced say-events in Chapters 5, 6, 7, 8, and 9, were checked against the gp32 English event text and the active Persian source. One hundred sixty-seven targeted revisions are proposed in total; ambiguous event-boundary cases are retained without speculative rewriting. Independent native-Persian sign-off remains pending.",
   "style_guide": [
     "Narration uses contemporary literary-conversational Persian: intimate, restrained, natural, and never uniformly formal or slang-heavy.",
     "Dialogue remains spoken and character-specific; preserve hesitation, pauses, and unfinished phrases.",
@@ -14,9 +14,9 @@
   ],
   "review_scope": {
     "historical_alignment_entries_reexamined": 48,
-    "revised_entries": 130,
+    "revised_entries": 167,
     "retained_without_change": 40,
-    "method": "The 48 remaining historical alignment entries were re-examined against the English gp32 source and active Persian recovery text; eight clear revisions were proposed. In addition, all 63 Chapter 9, 167 Chapter 8, 186 Chapter 7, and 160 Chapter 5 say-events not present in Increments 38, 52, or 53 were checked against the English source. Fifteen Chapter 9, 45 Chapter 8, 34 Chapter 7, and 28 Chapter 5 targeted revisions were proposed, while faithful lines and ambiguous event boundaries were retained. Together with existing proofread coverage, this completes the first source-aligned assistant review of all 117 Chapter 9, 261 Chapter 8, 252 Chapter 7, and 238 Chapter 5 say-events. This is not a complete line-by-line review of the full 2,228 voiced say-events.",
+    "method": "The 48 remaining historical alignment entries were re-examined against the English gp32 source and active Persian recovery text; eight clear revisions were proposed. In addition, all 63 Chapter 9, 167 Chapter 8, 186 Chapter 7, 160 Chapter 5, and 221 Chapter 6 say-events not present in Increments 38, 52, or 53 were checked against the English source. Fifteen Chapter 9, 45 Chapter 8, 34 Chapter 7, 28 Chapter 5, and 37 Chapter 6 targeted revisions were proposed, while faithful lines and ambiguous event boundaries were retained. Together with existing proofread coverage, this completes the first source-aligned assistant review of all 117 Chapter 9, 261 Chapter 8, 252 Chapter 7, 238 Chapter 5, and 290 Chapter 6 say-events. This is not a complete line-by-line review of the full 2,228 voiced say-events.",
     "source": "gp32 / Insani 2005 English localization, represented by the repository's story-gp32.json events",
     "external_human_signoff": "pending",
     "chapter9_say_events_reviewed": 117,
@@ -30,7 +30,10 @@
     "chapter7_additional_revisions": 34,
     "chapter5_say_events_reviewed": 238,
     "chapter5_events_outside_increments_38_52_53": 160,
-    "chapter5_additional_revisions": 28
+    "chapter5_additional_revisions": 28,
+    "chapter6_say_events_reviewed": 290,
+    "chapter6_events_outside_increments_38_52_53": 221,
+    "chapter6_additional_revisions": 37
   },
   "translations": {
     "gp32_honpen4:093757": {
@@ -1200,6 +1203,339 @@
       "source_text_before": "ولی من نمی‌تونستم بی‌هدف همین‌طوری بچرخم...",
       "english_reference": "But we couldn't just wander around aimlessly ...",
       "editorial_note": "we در متن انگلیسی جمع است؛ ترجمهٔ قبلی آن را به اول‌شخص مفرد تبدیل کرده بود.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095223": {
+      "text": "همهٔ این‌ها رو می‌دونستم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "می‌دونستم.",
+      "english_reference": "I knew all of this.",
+      "editorial_note": "all of this در ترجمهٔ قبلی حذف شده بود؛ جمله بر دانستنِ تمام این موارد تأکید دارد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095233": {
+      "text": "اشتیاقم از حدِ آرزو فراتر نرفت. لباس شنا، دریای زمردی...",
+      "status": "literary_revision_draft",
+      "source_text_before": "ولی این اشتیاق به جایی نرسید؛ لباس شنا، دریای زمردی...",
+      "english_reference": "The yearning never progressed past yearning.\nThe bikini swimsuit, the emerald sea ...",
+      "editorial_note": "ترجمهٔ قبلی «به جایی نرسیدن» را به کار می‌برد، اما تکرارِ yearning never progressed past yearning دربارهٔ باقی‌ماندن اشتیاق در حد آرزوست؛ «ولی» نیز در متن انگلیسی نیست.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095267": {
+      "text": "... اما ۲۲ سال بود که همین‌طوری زندگی می‌کردم...",
+      "status": "literary_revision_draft",
+      "source_text_before": "با اینکه ۲۲ سال اون‌طوری زندگی کرده بودم...",
+      "english_reference": "... but I've lived on for 22 years like this ...",
+      "editorial_note": "but I've lived on در ترجمهٔ قبلی به «با اینکه زندگی کرده بودم» تبدیل شده بود؛ پیوستگی و استمرارِ ۲۲ سال زندگی بازگردانده شد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095281": {
+      "text": "وقتی اون کلمات رو زیر لب گفتم، احساس کردم زمان—که باید همچنان متوقف می‌موند—دوباره به حرکت افتاد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "وقتی اینارو گفتم، احساس کردم زمانی که برام متوقف شده بود، دوباره شروع به حرکت کرد.",
+      "english_reference": "When I murmured those words, I felt time --  which should have been standing still -- begin to move again.",
+      "editorial_note": "murmured به «زیر لب گفتن» اشاره دارد و عبارتِ which should have been standing still یک وجه فرضی/انتظاری است، نه صرفاً توقفی که قبلاً رخ داده باشد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095284": {
+      "text": "اون روز، قلبم—که باید از حرکت ایستاده می‌بود—عذاب می‌کشید...",
+      "status": "literary_revision_draft",
+      "source_text_before": "اون روز قلبم که مدت‌ها پیش متوقف شده بود، درد گرفت...",
+      "english_reference": "That day, my heart -- which should have been standing still -- was in torment ...",
+      "editorial_note": "ترجمهٔ قبلی «مدت‌ها پیش متوقف شده بود» را اضافه می‌کرد؛ متن انگلیسی از قلبی می‌گوید که باید همچنان بی‌حرکت می‌ماند اما در عذاب بود.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095352": {
+      "text": "بی‌اینکه حتی فکر کنم، داشتم مستقیم ادامه می‌دادم که...",
+      "status": "literary_revision_draft",
+      "source_text_before": "می‌خواستم مستقیم برم که...",
+      "english_reference": "I was about to continue heading straight without a single thought when ...",
+      "editorial_note": "without a single thought در ترجمهٔ قبلی حذف شده بود؛ بی‌فکری و ادامه‌دادن مستقیم، زمینهٔ تغییر ناگهانی مسیر است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095414": {
+      "text": "از اینکه یک‌دفعه شروع کرده بود مسیر رو بهم می‌گفت، جا خوردم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "خیلی تعجب کرده بودم.",
+      "english_reference": "I was surprised by her sudden direction-giving.",
+      "editorial_note": "علتِ تعجب، یعنی راهنماییِ ناگهانی او، در ترجمهٔ قبلی حذف شده بود؛ «جا خوردم» نیز لحن طبیعی‌تری دارد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095422": {
+      "text": "اما این اولین بار بود که خودش داوطلبانه مسیر رو بهم می‌گفت.",
+      "status": "literary_revision_draft",
+      "source_text_before": "اما این اولین باری بود که با خواستهٔ خودش داشت بهم می‌گفت کدوم سمت برم.",
+      "english_reference": "... but this was the first time that she'd voluntarily given me directions.",
+      "editorial_note": "«با خواستهٔ خودش» ساختاری نامأنوس است؛ voluntarily با «داوطلبانه» طبیعی‌تر و دقیق‌تر منتقل می‌شود.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095462": {
+      "text": "من برای پیدا کردن یه مقصد دست‌وپا می‌زدم و اون، مثل همیشه مرموز، به دوردست خیره بود.",
+      "status": "literary_revision_draft",
+      "source_text_before": "من همش دنبال یه مقصد می‌گشتم و در کنار دختری بودم که همیشه به دوردست‌ها خیره می‌شد و درک کردنش سخت بود.",
+      "english_reference": "I was floundering in search of some destination and, always enigmatic, she was ever looking into the distance.",
+      "editorial_note": "floundering و always enigmatic در ترجمهٔ قبلی به جست‌وجوی ساده و دشواریِ درک او تبدیل شده بودند؛ تصویر دست‌وپا زدن راوی و مرموزبودن او بازگردانده شد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095465": {
+      "text": "پس حرفی که همین الان از دهنش بیرون اومده بود، کاملاً غافلگیرم کرد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "حرفایی که داشت می‌زد برام تعجب‌آور بود.",
+      "english_reference": "So the words that had just come out of her mouth took me completely by surprise.",
+      "editorial_note": "ترجمهٔ قبلی از غافلگیریِ کامل راوی و تازگیِ حرفی که همین لحظه گفته شده بود، کم می‌کرد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095472": {
+      "text": "... نه اینکه انتظار خاصی داشته باشم...",
+      "status": "literary_revision_draft",
+      "source_text_before": "معنیش این نیست که توقع چیز خاصی دارم...",
+      "english_reference": "``... it's not that I have any expectations.''",
+      "editorial_note": "it's not that I have any expectations یک نفیِ ملایم است؛ «نه اینکه انتظار خاصی داشته باشم» طبیعی‌تر از «معنیش این نیست» است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095527": {
+      "text": "کوپهٔ نقره‌ای زیر آسمون صاف زمستونی، زیر نور آفتاب می‌درخشید.",
+      "status": "literary_revision_draft",
+      "source_text_before": "کوپهٔ نقره‌ای زیر نور آفتاب می‌درخشید.",
+      "english_reference": "The silver coupe shimmered with sunlight underneath the clear winter sky.",
+      "editorial_note": "clear winter sky در ترجمهٔ قبلی حذف شده بود؛ آسمان صاف زمستانی بخشی از تصویر صحنه است.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095535": {
+      "text": "راستی... الان حدوداً کجاییم؟",
+      "status": "literary_revision_draft",
+      "source_text_before": "بگو که... الان کجاییم؟",
+      "english_reference": "``Hey, around where are we, anyway?''",
+      "editorial_note": "around و anyway در پرسش انگلیسی لحن محاوره‌ایِ پرسیدن موقعیت را می‌سازند؛ «حدوداً» و «راستی» این لحن را بهتر منتقل می‌کنند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095561": {
+      "text": "نمی‌دونستم چرا چنین حسی دارم، اما می‌تونستم بفهمم که توی مسیر درستی هستیم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "نمی‌دونم چرا، ولی احساس می‌کردم واقعاً داشتیم درست پیش می‌رفتیم.",
+      "english_reference": "I didn't know why I felt this way,\nbut I could tell that we were on the right track.",
+      "editorial_note": "زمان گذشتهٔ didn't know در ترجمهٔ قبلی به حال تبدیل شده بود؛ could tell نیز از «احساس‌کردن» دقیق‌تر است و به دریافتِ راوی اشاره دارد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095591": {
+      "text": "می‌خوای یه سر به اونجا بزنیم؟",
+      "status": "literary_revision_draft",
+      "source_text_before": "می‌خوای اینجا نگه داریم؟",
+      "english_reference": "``Hey, wanna stop by there?''",
+      "editorial_note": "stop by there به معنی «یه سر به اونجا زدن» است، نه صرفاً متوقف‌کردن ماشین در همین‌جا.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095646": {
+      "text": "آها... راست می‌گفت. راستی، لباس‌ها واقعاً براش خیلی گشاد بودن...",
+      "status": "literary_revision_draft",
+      "source_text_before": "حق با اون بود. لباس‌ها براش بزرگ بودن.",
+      "english_reference": "Oh ... fair enough, speaking of which,\nthose clothes were way too big on her ...",
+      "editorial_note": "speaking of which و شدتِ way too در ترجمهٔ قبلی حذف شده بودند؛ جملهٔ تازه هر دو را بازمی‌گرداند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095705": {
+      "text": "... بهتر بود هر وقت جوابی نمی‌داد، سکوتش رو به‌عنوان جواب مثبت در نظر بگیرم. یا یه همچین چیزی.",
+      "status": "literary_revision_draft",
+      "source_text_before": "بهتر بود هر وقت جوابی نمی‌ده، سکوتشو به‌عنوان جواب مثبت در نظر بگیرم.",
+      "english_reference": "... that it would be better for me to think of her non-replies as answers to the affirmative.  Or something.",
+      "editorial_note": "زمان گذشتهٔ متن و عبارت پایانی Or something در ترجمهٔ قبلی حذف شده بود؛ هر دو برای لحن مردد راوی مهم‌اند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095778": {
+      "text": "حتی یک بار هم لبخند نزد و هیچ حالتی هم به چهره‌اش نداد، اما به‌نظرم به‌نحوی از این کار خوشحال بود.",
+      "status": "literary_revision_draft",
+      "source_text_before": "حتی یه بارم لبخند نزد یا هیچ حس خاصی نشون نداد، اما به‌نظرم واقعاً خوشحال بود.",
+      "english_reference": "She did not once smile or let any facial expression out,\nbut it seemed to me that she was somehow happy about this.",
+      "editorial_note": "facial expression به حالت چهره اشاره دارد، نه احساس؛ somehow نیز قطعیتِ «واقعاً» را تعدیل می‌کند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095795": {
+      "text": "این رو گفت و آخرین دست لباسش رو نشونم داد: یه پیراهن قشنگ و یه دامن کوتاه.",
+      "status": "literary_revision_draft",
+      "source_text_before": "لباسایی که آخرین بار پوشیده بود رو نشونم داد؛ یه پیراهن قشنگ با یه دامن کوتاه.",
+      "english_reference": "Saying this, she showed me her final outfit:\na pretty shirt and a short skirt.",
+      "editorial_note": "Saying this در ترجمهٔ قبلی حذف شده بود و «آخرین دست لباس» نیز به «لباس‌هایی که آخرین بار پوشیده بود» تغییر معنایی پیدا کرده بود.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095906": {
+      "text": "اما اگه همه‌چیز مثل همیشه بود، فقط از پنجره به هیچ‌جا خیره می‌شد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "معمولاً وقتی چیز خاصی نبود، از پنجره به بیرون خیره می‌شد.",
+      "english_reference": "But if this were ``as usual'',\nshe'd only be looking out the window at nothing.",
+      "editorial_note": "ساختار شرطیِ if this were as usual و تأکیدِ at nothing در ترجمهٔ قبلی از بین رفته بود.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095951": {
+      "text": "با این حرف، دیگه به آینهٔ بغل نگاه نکرد.",
+      "status": "literary_revision_draft",
+      "source_text_before": "و دیگه آینه رو نگاه نکرد.",
+      "english_reference": "With that,\nshe stopped looking at the sideview mirror.",
+      "editorial_note": "sideview mirror مشخصاً آینهٔ بغل است، نه هر آینه‌ای؛ رابط With that نیز بازگردانده شد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:095986": {
+      "text": "حدود همون وقتی که هوا تاریک شده بود...",
+      "status": "literary_revision_draft",
+      "source_text_before": "وقتی آسمون تاریک شده بود...",
+      "english_reference": "Around when the sun had darkened into night.",
+      "editorial_note": "around در ترجمهٔ قبلی حذف شده بود؛ «هوا تاریک شده بود» تصویر را طبیعی‌تر از تغییر فاعل به آسمان منتقل می‌کند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:096092": {
+      "text": "اولش نمی‌تونستم باور کنم که واقعاً داره اتفاق می‌افته؛ انگار اصلاً جزئی از واقعیت نبود.",
+      "status": "literary_revision_draft",
+      "source_text_before": "اولش اصلاً باورم نمی‌شد همچین اتفاقایی واقعی باشن. فکر نمی‌کردم واقعیت این‌طوری باشه.",
+      "english_reference": "At first, I couldn't believe that it was actually happening.\nAs if it weren't part of reality at all.",
+      "editorial_note": "جملهٔ دوم در متن انگلیسی تشبیهی و ناتمام است؛ ترجمهٔ قبلی آن را به گزارهٔ مستقلی دربارهٔ شکلِ واقعیت تبدیل کرده بود.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:096135": {
+      "text": "آره. گریه کردی... سرنوشتت رو نفرین کردی؟",
+      "status": "literary_revision_draft",
+      "source_text_before": "آره. گریه کردی... سرنوشت رو محکوم کردی؟",
+      "english_reference": "``Yeah. Did you cry ... or curse fate?''",
+      "editorial_note": "curse fate به «نفرین‌کردن سرنوشت» نزدیک‌تر از «محکوم‌کردن سرنوشت» است؛ خطاب مستقیم به مخاطب نیز در ترجمهٔ قبلی ناقص بود.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:096187": {
+      "text": "اما نمی‌تونستم جلوی خودم رو بگیرم و احساس نکنم که این‌طوری خیلی غم‌انگیزه.",
+      "status": "literary_revision_draft",
+      "source_text_before": "ولی بازم به‌نظرم خیلی ناراحت‌کننده بود.",
+      "english_reference": "But I couldn't help but feeling that it was just too sorrowful that way.",
+      "editorial_note": "couldn't help but feeling در ترجمهٔ قبلی به یک نظر ساده تبدیل شده بود؛ «این‌طوری» و شدتِ too sorrowful نیز بازگردانده شدند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:096239": {
+      "text": "... الاغ‌ها زنده می‌مونن... چون به درد می‌خورن.",
+      "status": "literary_revision_draft",
+      "source_text_before": "الاغ‌ها زنده می‌مونن... چون به درد بخورن. احتمالاً دلیلش اینه.",
+      "english_reference": "``... donkeys live on ... because they are useful.''",
+      "editorial_note": "«احتمالاً دلیلش اینه» در متن انگلیسی وجود ندارد و توضیح اضافه‌ای به دیالوگ می‌افزاید.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:096257": {
+      "text": "پس این همون چیزی بود که به خودش می‌گفت... ... تا خودش رو به سرنوشتش بسپره و تسلیمش بشه...؟",
+      "status": "literary_revision_draft",
+      "source_text_before": "این احتمالاً بهانه‌ای بود که باهاش خودش و شرایطش رو توجیه می‌کرد؛ چیزی که با کمکش تسلیم سرنوشتش شده بود.",
+      "english_reference": "So was this the thing that she told herself ...\n... to resign herself, to abandon herself to her fate ...?",
+      "editorial_note": "the thing that she told herself به «چیزی که به خودش می‌گفت» اشاره دارد، نه «بهانه‌ای برای توجیه‌کردن»؛ لحن پرسشیِ تردیدآمیز نیز بازگردانده شد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:096280": {
+      "text": "دونه‌های سفید و لرزون توی آسمون گرگ‌ومیش می‌رقصیدن. تازه داشت برف می‌بارید، اون هم شدید.",
+      "status": "literary_revision_draft",
+      "source_text_before": "دونه‌های برف تو هوا می‌رقصیدن؛ به‌نظر می‌رسید برف سنگینی در راه باشه.",
+      "english_reference": "The flickering white specks dancing in the twilight sky.\nIt was starting to snow, and snow hard.",
+      "editorial_note": "twilight sky و شروع‌شدنِ واقعی بارش در ترجمهٔ قبلی حذف شده بودند و به پیش‌بینیِ برفِ آینده تبدیل شده بود؛ تصویرِ flickering white specks نیز بازگردانده شد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:096318": {
+      "text": "اگه با برفی سنگین‌تر از این روبه‌رو می‌شدیم، احتمالاً به دردسر می‌افتادیم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "اگه برف بیشتری می‌بارید، به مشکل برمی‌خوردیم.",
+      "english_reference": "If we ran into any snow heavier than this,\nit was likely that we were going to be in trouble.",
+      "editorial_note": "متن انگلیسی از روبه‌روشدن با برفی سنگین‌تر از وضعیت فعلی می‌گوید، نه صرفاً باریدنِ مقدار بیشتری برف؛ احتمالِ دردسر نیز بازگردانده شد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:096470": {
+      "text": "نمی‌فهمم بر چه اساسی این حرف رو می‌زنی...",
+      "status": "literary_revision_draft",
+      "source_text_before": "من نظری ندارم؛ چرا این‌طور فکر می‌کنی؟",
+      "english_reference": "``I have no idea what your basis for that is ...''",
+      "editorial_note": "basis for that به مبنای استدلال طرف مقابل اشاره دارد؛ ترجمهٔ قبلی آن را به نداشتن نظر شخصی و پرسیدنِ دلیل تبدیل کرده بود.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:096499": {
+      "text": "... پس بالاخره نمی‌خوای جلوی منو بگیری؟",
+      "status": "literary_revision_draft",
+      "source_text_before": "هنوز... نمی‌خوای جلو مو بگیری؟",
+      "english_reference": "``... so you aren't going to stop me after all?''",
+      "editorial_note": "after all به «بالاخره» نزدیک‌تر است؛ «هنوز» زمان‌بندی و نتیجه‌گیریِ پرسش را تغییر می‌دهد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:096573": {
+      "text": "با راهنمایی‌های مسیریابیِ اون، حالا به سمت کوساتسو می‌رفتیم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "حالا داشتیم می‌رفتیم سمت کوساتسو.",
+      "english_reference": "Under the guidance of her navigation,\nwe were now heading toward Kusatsu.",
+      "editorial_note": "نقش راهنماییِ مسیریابی او در ترجمهٔ قبلی حذف شده بود؛ این جزئیات در ادامهٔ مضمونِ مسیریابی او اهمیت دارد.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:096638": {
+      "text": "آها، پس این‌طوری می‌رسیم به جزیرهٔ آواجی.",
+      "status": "literary_revision_draft",
+      "source_text_before": "متوجه شدم...",
+      "english_reference": "``I see, so that's how you get to Awaji Island.''",
+      "editorial_note": "مقصدِ مشخصِ جزیرهٔ آواجی و رابطهٔ نتیجه‌ایِ so در ترجمهٔ قبلی حذف شده بودند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:096775": {
+      "text": "وای، خیلی چیزا می‌دونی.",
+      "status": "literary_revision_draft",
+      "source_text_before": "خوب می‌شناسیشون.",
+      "english_reference": "``Wow, you know a lot.''",
+      "editorial_note": "you know a lot به دانستنِ اطلاعات زیاد اشاره دارد، نه شناختنِ خودروها؛ ترجمهٔ قبلی معنای جمله را محدود کرده بود.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:096789": {
+      "text": "... برای همین مدام سؤال‌های دیگه‌ای ازش می‌پرسیدم.",
+      "status": "literary_revision_draft",
+      "source_text_before": "برای همین بازم ازش پرسیدم.",
+      "english_reference": "... so I kept plying her with questions.",
+      "editorial_note": "kept plying her with questions بر تداومِ پرسیدن سؤال‌های پیاپی تأکید دارد؛ «بازم پرسیدم» این استمرار را منتقل نمی‌کند.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:096802": {
+      "text": "اما شرط می‌بندم این یکی رو دیگه نشناسی!",
+      "status": "literary_revision_draft",
+      "source_text_before": "احتمالاً دیگه ندونی اون چیه!",
+      "english_reference": "``But I'm willing to bet you won't know what ~i~that~i~ is!''",
+      "editorial_note": "I'm willing to bet لحنِ چالش‌آمیز و مطمئن دارد؛ «احتمالاً» آن را به حدسِ ساده تبدیل کرده بود.",
+      "revision_kind": "assistant_literary_revision",
+      "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
+    },
+    "gp32_honpen6:096903": {
+      "text": "اگه تا خود جزیرهٔ آواجی می‌رفتیم، جاهای زیادی پیدا می‌کردیم که هیچ‌کس اونجا نباشه.",
+      "status": "literary_revision_draft",
+      "source_text_before": "اگه می‌رفتیم به اون جزیره، حتماً جاهای زیادی پیدا می‌کردیم که کسی نباشه.",
+      "english_reference": "If we went all the way to Awaji Island,\nthen there would be lots of places without any people.",
+      "editorial_note": "all the way to Awaji Island در ترجمهٔ قبلی به «اون جزیره» تقلیل یافته بود؛ مقصد مشخص و تأکیدِ تا خود جزیره بازگردانده شد.",
       "revision_kind": "assistant_literary_revision",
       "approval": "user-authorized assistant-led literary revision; independent native-Persian sign-off pending"
     }
