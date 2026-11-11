@@ -29,6 +29,107 @@ let serviceWorkerHadController = false;
 let serviceWorkerUpdateReloading = false;
 const APP_UPDATE_CHECK_INTERVAL_MS = 20 * 60 * 1000;
 
+
+let ambientAudioContext = null;
+let ambientMasterGain = null;
+let ambientEnabled = false;
+function startAmbientSound() {
+  const button = $('ambientToggle');
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContextClass) {
+    if (button) button.textContent = 'Ambient sound unavailable';
+    return;
+  }
+  try {
+    if (!ambientAudioContext) {
+      const context = new AudioContextClass();
+      ambientAudioContext = context;
+      const master = context.createGain();
+      master.gain.value = 0;
+      master.connect(context.destination);
+      ambientMasterGain = master;
+
+      // A continuously looping, synthesized coastal wash. No external audio file.
+      const bufferSize = context.sampleRate * 5;
+      const noiseBuffer = context.createBuffer(1, bufferSize, context.sampleRate);
+      const channel = noiseBuffer.getChannelData(0);
+      let brown = 0;
+      for (let i = 0; i < bufferSize; i++) {
+        const white = Math.random() * 2 - 1;
+        brown = (brown + 0.025 * white) / 1.025;
+        channel[i] = brown * 3.5;
+      }
+      const noise = context.createBufferSource();
+      noise.buffer = noiseBuffer;
+      noise.loop = true;
+
+      const lowPass = context.createBiquadFilter();
+      lowPass.type = 'lowpass';
+      lowPass.frequency.value = 720;
+      lowPass.Q.value = 0.55;
+
+      const highPass = context.createBiquadFilter();
+      highPass.type = 'highpass';
+      highPass.frequency.value = 38;
+
+      const surfGain = context.createGain();
+      surfGain.gain.value = 0.22;
+
+      const swell = context.createOscillator();
+      const swellDepth = context.createGain();
+      swell.type = 'sine';
+      swell.frequency.value = 0.075;
+      swellDepth.gain.value = 0.12;
+      swell.connect(swellDepth);
+      swellDepth.connect(surfGain.gain);
+
+      const windFilter = context.createBiquadFilter();
+      windFilter.type = 'bandpass';
+      windFilter.frequency.value = 1150;
+      windFilter.Q.value = 0.45;
+      const windGain = context.createGain();
+      windGain.gain.value = 0.035;
+
+      noise.connect(highPass);
+      highPass.connect(lowPass);
+      lowPass.connect(surfGain);
+      surfGain.connect(master);
+      highPass.connect(windFilter);
+      windFilter.connect(windGain);
+      windGain.connect(master);
+
+      noise.start();
+      swell.start();
+    }
+    ambientAudioContext.resume().then(() => {
+      if (!ambientMasterGain) return;
+      ambientMasterGain.gain.cancelScheduledValues(ambientAudioContext.currentTime);
+      ambientMasterGain.gain.setTargetAtTime(0.72, ambientAudioContext.currentTime, 1.8);
+      ambientEnabled = true;
+      if (button) {
+        button.textContent = '♫ Sea ambience on';
+        button.setAttribute('aria-pressed', 'true');
+      }
+    }).catch(() => {
+      if (button) button.textContent = '♫ Enable sea ambience';
+    });
+  } catch (error) {
+    console.warn('Ambient audio could not be initialized.', error);
+    if (button) button.textContent = 'Ambient sound unavailable';
+  }
+}
+function stopAmbientSound() {
+  if (!ambientAudioContext || !ambientMasterGain) return;
+  ambientMasterGain.gain.cancelScheduledValues(ambientAudioContext.currentTime);
+  ambientMasterGain.gain.setTargetAtTime(0, ambientAudioContext.currentTime, 0.35);
+  ambientEnabled = false;
+  const button = $('ambientToggle');
+  if (button) {
+    button.textContent = '♫ Enable sea ambience';
+    button.setAttribute('aria-pressed', 'false');
+  }
+}
+
 const WELCOME_CACHE_NAME = 'narcissu-welcome-assets-v1';
 const WELCOME_ASSETS = [
   './public/assets/e/umibe_yoru.jpg',
@@ -59,6 +160,7 @@ async function prepareWelcomeAssets() {
     try { localStorage.setItem('narcissu-welcome-prepared-v1', '1'); } catch {}
     screen.hidden = true;
     screen.setAttribute('aria-hidden', 'true');
+    startAmbientSound();
     startDedicationSequence();
   };
   skipButton.addEventListener('click', enter, { once: true });
@@ -1403,6 +1505,7 @@ function toggleFullscreen() {
 function bindUI() {
   $('brandHome').addEventListener('click',e=>{e.preventDefault();returnHome();});
   $('newGameButton').addEventListener('click',startNewGame);
+  $('ambientToggle')?.addEventListener('click', () => ambientEnabled ? stopAmbientSound() : startAmbientSound());
   $('continueButton').addEventListener('click',()=>{const p=getProgress();if(p)restoreProgress(p);});
   $('chaptersButton').addEventListener('click',()=>{$('chapterSelectPanel').hidden=false;});
   $('closeChapters').addEventListener('click',()=>{$('chapterSelectPanel').hidden=true;});
