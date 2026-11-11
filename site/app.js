@@ -140,9 +140,7 @@ const HOME_VIDEO_URL = 'https://videos.pexels.com/video-files/39553425/16854775_
 const HOME_AMBIENCE_URL = 'https://wormersports.nl/files/uploads/2023/08/gentle-ocean-waves-birdsong-and-gull-7109.mp3';
 const WELCOME_ASSETS = [
   './public/assets/e/umibe_yoru.jpg',
-  './icons/fox-emblem-white.png',
-  HOME_VIDEO_URL,
-  HOME_AMBIENCE_URL
+  './icons/fox-emblem-white.png'
 ];
 async function setupHomeVideoLoop() {
   const video = $('homeVideo');
@@ -194,12 +192,15 @@ async function prepareWelcomeAssets() {
   try { if ('caches' in window) cache = await caches.open(WELCOME_CACHE_NAME); } catch {}
   let complete = 0, failed = 0;
   const update = () => {
-    const value = Math.round((complete / WELCOME_ASSETS.length) * 100);
+    const totalAssets = WELCOME_ASSETS.length + 2;
+    const value = Math.round((complete / totalAssets) * 100);
     fill.style.width = value + '%';
     percent.textContent = value + '%';
     progress.setAttribute('aria-valuenow', String(value));
-    status.textContent = failed ? `Prepared ${complete} of ${WELCOME_ASSETS.length} files · ${failed} unavailable` : `Preparing opening assets · ${complete} of ${WELCOME_ASSETS.length}`;
+    status.textContent = failed ? `Prepared ${complete} of ${totalAssets} items · ${failed} unavailable` : `Preparing opening assets · ${complete} of ${totalAssets}`;
   };
+  $('homeVideo')?.load();
+  $('homeAmbience')?.load();
   for (const path of WELCOME_ASSETS) {
     try {
       const request = new Request(new URL(path, document.baseURI), { cache: 'reload' });
@@ -216,9 +217,37 @@ async function prepareWelcomeAssets() {
     complete++;
     update();
   }
+  const waitForMedia = (element) => new Promise((resolve) => {
+    if (!element) return resolve(false);
+    if (element.readyState >= 2) return resolve(true);
+    let settled = false;
+    const finish = (ready) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timeout);
+      element.removeEventListener('canplay', onReady);
+      element.removeEventListener('error', onError);
+      resolve(ready);
+    };
+    const onReady = () => finish(true);
+    const onError = () => finish(false);
+    const timeout = setTimeout(() => finish(false), 12000);
+    element.addEventListener('canplay', onReady, { once: true });
+    element.addEventListener('error', onError, { once: true });
+  });
+  for (const [element, label] of [[$('homeVideo'), 'sea footage'], [$('homeAmbience'), 'sea ambience']]) {
+    status.textContent = `Loading ${label}…`;
+    const ready = await waitForMedia(element);
+    if (!ready) {
+      failed++;
+      console.info(`Optional welcome media not ready yet: ${label}`);
+    }
+    complete++;
+    update();
+  }
   status.textContent = failed
-    ? `Preparation finished with ${failed} optional file(s) unavailable`
-    : 'Opening assets are ready on this device';
+    ? `Preparation finished; ${failed} item(s) can load later`
+    : 'Sea footage and ambience are ready';
   continueButton.disabled = false;
   continueButton.textContent = failed ? 'Enter Narcissu' : 'Begin the journey';
   continueButton.addEventListener('click', enter, { once: true });
