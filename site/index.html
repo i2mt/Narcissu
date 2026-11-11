@@ -38,6 +38,12 @@
       <div class="stage-vignette" aria-hidden="true"></div>
 
       <section class="home-screen" id="homeScreen" aria-labelledby="homeTitle">
+        <video class="home-video" id="homeVideo" autoplay muted playsinline preload="auto" poster="./public/assets/e/umibe_yoru.jpg" aria-hidden="true">
+          <source src="https://videos.pexels.com/video-files/39553425/16854775_1920_1080_30fps.mp4" type="video/mp4">
+        </video>
+        <audio id="homeAmbience" preload="auto" loop>
+          <source src="https://wormersports.nl/files/uploads/2023/08/gentle-ocean-waves-birdsong-and-gull-7109.mp3" type="audio/mpeg">
+        </audio>
         <div class="home-content">
           <div class="home-identity">
             <a class="home-emblem" href="https://t.me/i_2MT" target="_blank" rel="noopener noreferrer" aria-label="Contact Mohammad Mahdi Taghavi on Telegram" title="Contact the Persian edition translator">
@@ -138,7 +144,8 @@
         <p class="welcome-copy">Narcissu prepares a few images and sound files for a smoother experience. They will be saved on this device where browser storage is available.</p>
         <div class="welcome-progress" role="progressbar" aria-label="Preparing game resources" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="welcomeProgress"><span id="welcomeProgressFill"></span></div>
         <div class="welcome-status"><span id="welcomeStatus">Preparing the first visit…</span><strong id="welcomePercent">0%</strong></div>
-        <p class="welcome-note">Only essential opening assets are prepared now. Story artwork and audio can load as you reach each chapter.</p>
+        <p class="welcome-note">The opening sea footage and natural ambience are prepared now. Story artwork and audio can load as you reach each chapter.</p>
+        <p class="welcome-media-credit">Sea footage: Mario Krimer / Pexels · Field recording: jackmichaelking / Freesound (CC0)</p>
         <div class="welcome-actions">
           <button class="primary-button" id="welcomeContinueButton" type="button" disabled>Enter Narcissu</button>
           <button class="welcome-skip-button" id="welcomeSkipButton" type="button">Continue without waiting</button>
