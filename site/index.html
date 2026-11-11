@@ -129,6 +129,22 @@
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
     </main>
 
+    <section class="welcome-preload" id="welcomeScreen" hidden aria-labelledby="welcomeTitle" aria-hidden="true">
+      <div class="welcome-preload-card">
+        <img src="./icons/fox-emblem-white.png" alt="" class="welcome-fox" width="72" height="72">
+        <p class="eyebrow">Persian Edition · First Visit</p>
+        <h1 id="welcomeTitle">Before the journey begins</h1>
+        <p class="welcome-copy">Narcissu prepares a few images and sound files for a smoother experience. They will be saved on this device where browser storage is available.</p>
+        <div class="welcome-progress" role="progressbar" aria-label="Preparing game resources" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="welcomeProgress"><span id="welcomeProgressFill"></span></div>
+        <div class="welcome-status"><span id="welcomeStatus">Preparing the first visit…</span><strong id="welcomePercent">0%</strong></div>
+        <p class="welcome-note">Only essential opening assets are prepared now. Story artwork and audio can load as you reach each chapter.</p>
+        <div class="welcome-actions">
+          <button class="primary-button" id="welcomeContinueButton" type="button" disabled>Enter Narcissu</button>
+          <button class="welcome-skip-button" id="welcomeSkipButton" type="button">Continue without waiting</button>
+        </div>
+        <p class="welcome-credit">Translated and brought back to life by <strong>Mohammad Mahdi Taghavi</strong></p>
+      </div>
+    </section>
     <section class="dedication-screen" id="dedicationScreen" aria-label="Dedication" aria-hidden="false">
       <div class="dedication-card">
         <span class="dedication-rule" aria-hidden="true"></span>
