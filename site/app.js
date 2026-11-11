@@ -89,6 +89,7 @@ function createWindLayer() {
   }
 }
 function startAmbientSound() {
+  if (ambientEnabled) return;
   const button = $('ambientToggle');
   const audio = $('homeAmbience');
   if (!audio) {
@@ -136,13 +137,34 @@ function stopAmbientSound() {
 }
 
 const WELCOME_CACHE_NAME = 'narcissu-welcome-assets-v1';
+const HOME_VIDEO_URL = 'https://videos.pexels.com/video-files/39553425/16854775_1920_1080_30fps.mp4';
+const HOME_AMBIENCE_URL = 'https://wormersports.nl/files/uploads/2023/08/gentle-ocean-waves-birdsong-and-gull-7109.mp3';
 const WELCOME_ASSETS = [
   './public/assets/e/umibe_yoru.jpg',
   './icons/fox-emblem-white.png',
-  'https://videos.pexels.com/video-files/39553425/16854775_1920_1080_30fps.mp4',
-  'https://wormersports.nl/files/uploads/2023/08/gentle-ocean-waves-birdsong-and-gull-7109.mp3'
+  HOME_VIDEO_URL,
+  HOME_AMBIENCE_URL
 ];
-async function prepareWelcomeAssets() {
+async function setupHomeVideoLoop() {
+  const video = $('homeVideo');
+  if (!video || video.dataset.loopManaged === 'true') return;
+  video.dataset.loopManaged = 'true';
+  video.addEventListener('timeupdate', () => {
+    if (Number.isFinite(video.duration) && video.duration - video.currentTime < 0.85) {
+      video.classList.add('is-restarting');
+    }
+  });
+  video.addEventListener('ended', () => {
+    video.currentTime = 0;
+    video.play().catch(() => {});
+  });
+  video.addEventListener('seeked', () => video.classList.remove('is-restarting'));
+  video.addEventListener('error', () => {
+    document.documentElement.classList.add('home-video-unavailable');
+  });
+}
+function prepareWelcomeAssets() {
+  setupHomeVideoLoop();
   const screen = $('welcomeScreen');
   if (!screen) { startDedicationSequence(); return; }
   let alreadyPrepared = false;
@@ -1511,6 +1533,10 @@ function bindUI() {
   $('brandHome').addEventListener('click',e=>{e.preventDefault();returnHome();});
   $('newGameButton').addEventListener('click',startNewGame);
   $('ambientToggle')?.addEventListener('click', () => ambientEnabled ? stopAmbientSound() : startAmbientSound());
+  document.addEventListener('pointerdown', () => {
+    if (!ambientEnabled && !$('welcomeScreen')?.hidden) return;
+    if (!ambientEnabled) startAmbientSound();
+  }, { once: true });
   $('homeVideo')?.play().catch(() => {});
   $('continueButton').addEventListener('click',()=>{const p=getProgress();if(p)restoreProgress(p);});
   $('chaptersButton').addEventListener('click',()=>{$('chapterSelectPanel').hidden=false;});
