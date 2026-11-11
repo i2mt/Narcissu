@@ -52,6 +52,16 @@ async function prepareWelcomeAssets() {
   const status = $('welcomeStatus');
   const percent = $('welcomePercent');
   const progress = $('welcomeProgress');
+  let entered = false;
+  const enter = () => {
+    if (entered) return;
+    entered = true;
+    try { localStorage.setItem('narcissu-welcome-prepared-v1', '1'); } catch {}
+    screen.hidden = true;
+    screen.setAttribute('aria-hidden', 'true');
+    startDedicationSequence();
+  };
+  skipButton.addEventListener('click', enter, { once: true });
   let cache = null;
   try { if ('caches' in window) cache = await caches.open(WELCOME_CACHE_NAME); } catch {}
   let complete = 0, failed = 0;
@@ -83,14 +93,7 @@ async function prepareWelcomeAssets() {
     : 'Opening assets are ready on this device';
   continueButton.disabled = false;
   continueButton.textContent = failed ? 'Enter Narcissu' : 'Begin the journey';
-  const enter = () => {
-    try { localStorage.setItem('narcissu-welcome-prepared-v1', '1'); } catch {}
-    screen.hidden = true;
-    screen.setAttribute('aria-hidden', 'true');
-    prepareWelcomeAssets();
-  };
   continueButton.addEventListener('click', enter, { once: true });
-  skipButton.addEventListener('click', enter, { once: true });
 }
 
 const SERVICE_WORKER_RESUME_KEY = 'narcissu-resume-after-sw-update';
