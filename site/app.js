@@ -28,6 +28,71 @@ let appUpdateInterval = null;
 let serviceWorkerHadController = false;
 let serviceWorkerUpdateReloading = false;
 const APP_UPDATE_CHECK_INTERVAL_MS = 20 * 60 * 1000;
+
+const WELCOME_CACHE_NAME = 'narcissu-welcome-assets-v1';
+const WELCOME_ASSETS = [
+  './public/assets/e/umibe_yoru.jpg',
+  './public/assets/se/nami02b.ogg',
+  './public/assets/se/umi13.ogg',
+  './public/assets/bgm/a01.mp3',
+  './icons/fox-emblem-white.png'
+];
+async function prepareWelcomeAssets() {
+  const screen = $('welcomeScreen');
+  if (!screen) { startDedicationSequence(); return; }
+  let alreadyPrepared = false;
+  try { alreadyPrepared = localStorage.getItem('narcissu-welcome-prepared-v1') === '1'; } catch {}
+  if (alreadyPrepared) { startDedicationSequence(); return; }
+
+  screen.hidden = false;
+  screen.setAttribute('aria-hidden', 'false');
+  const continueButton = $('welcomeContinueButton');
+  const skipButton = $('welcomeSkipButton');
+  const fill = $('welcomeProgressFill');
+  const status = $('welcomeStatus');
+  const percent = $('welcomePercent');
+  const progress = $('welcomeProgress');
+  let cache = null;
+  try { if ('caches' in window) cache = await caches.open(WELCOME_CACHE_NAME); } catch {}
+  let complete = 0, failed = 0;
+  const update = () => {
+    const value = Math.round((complete / WELCOME_ASSETS.length) * 100);
+    fill.style.width = value + '%';
+    percent.textContent = value + '%';
+    progress.setAttribute('aria-valuenow', String(value));
+    status.textContent = failed ? `Prepared ${complete} of ${WELCOME_ASSETS.length} files · ${failed} unavailable` : `Preparing opening assets · ${complete} of ${WELCOME_ASSETS.length}`;
+  };
+  for (const path of WELCOME_ASSETS) {
+    try {
+      const request = new Request(new URL(path, document.baseURI), { cache: 'reload' });
+      const cached = cache ? await cache.match(request) : null;
+      if (!cached) {
+        const response = await fetch(request);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        if (cache) await cache.put(request, response.clone());
+      }
+    } catch (error) {
+      failed++;
+      console.info('Welcome asset could not be cached; it can load later.', path, error);
+    }
+    complete++;
+    update();
+  }
+  status.textContent = failed
+    ? `Preparation finished with ${failed} optional file(s) unavailable`
+    : 'Opening assets are ready on this device';
+  continueButton.disabled = false;
+  continueButton.textContent = failed ? 'Enter Narcissu' : 'Begin the journey';
+  const enter = () => {
+    try { localStorage.setItem('narcissu-welcome-prepared-v1', '1'); } catch {}
+    screen.hidden = true;
+    screen.setAttribute('aria-hidden', 'true');
+    prepareWelcomeAssets();
+  };
+  continueButton.addEventListener('click', enter, { once: true });
+  skipButton.addEventListener('click', enter, { once: true });
+}
+
 const SERVICE_WORKER_RESUME_KEY = 'narcissu-resume-after-sw-update';
 
 let story = null;
