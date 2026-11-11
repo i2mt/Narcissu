@@ -2,7 +2,7 @@
 
 const $ = (id) => document.getElementById(id);
 const STORAGE_KEYS = { progress: 'narcissu-progress-v1', settings: 'narcissu-settings-v1', history: 'narcissu-history-v1' };
-const DEFAULT_SETTINGS = { mode: 'enhanced', persianFont: 'parastoo', textSize: 13, textSizeVersion: 3, autoDelay: 5, musicVolume: 0.55, sfxVolume: 0.8, reduceMotion: false };
+const DEFAULT_SETTINGS = { mode: 'enhanced', persianFont: 'parastoo', textSize: 18, textSizeVersion: 4, autoDelay: 5, musicVolume: 0.55, sfxVolume: 0.8, reduceMotion: false };
 const DEFAULT_LANGUAGE = 'en';
 const PERSIAN_FONT_SOURCES = {
   parastoo: {
@@ -55,17 +55,19 @@ function normalizeSettings(raw, fallback = DEFAULT_SETTINGS) {
   const version = Number(source.textSizeVersion) || 1;
   const oldSize = Number(source.textSize);
   if (version < 2) {
-    // Migrate Increment 49's 16–24 range to the smaller Increment 50 range.
+    // Migrate Increment 49's 16–24 range into the legacy 11–18 range first.
     merged.textSize = Number.isFinite(oldSize) && oldSize > 0
       ? Math.round(13 + (oldSize - 16) * 0.625) : 13;
   } else if (version < 3) {
-    // Increment 51 reduces the default by one pixel without losing the user's
-    // selected relative size from Increment 50.
-    merged.textSize = Number.isFinite(oldSize) && oldSize > 0
-      ? oldSize - 1 : 13;
+    merged.textSize = Number.isFinite(oldSize) && oldSize > 0 ? oldSize - 1 : 13;
   }
-  merged.textSize = Math.min(18, Math.max(11, Number(merged.textSize) || 13));
-  merged.textSizeVersion = 3;
+  if (version < 4) {
+    // Raise legacy dialogue sizes proportionally; the old 13px default becomes 18px.
+    const legacySize = Number.isFinite(Number(merged.textSize)) ? Number(merged.textSize) : 13;
+    merged.textSize = Math.round(15 + (legacySize - 11) * (9 / 7));
+  }
+  merged.textSize = Math.min(24, Math.max(15, Number(merged.textSize) || 18));
+  merged.textSizeVersion = 4;
   return merged;
 }
 function normalizePath(path) { return String(path || '').replace(/\\/g, '/').replace(/^\/+/, '').toLocaleLowerCase('en-US'); }
@@ -143,10 +145,10 @@ function startDedicationSequence() {
 }
 function getEffectiveDialogueFontSize() {
   const candidate = state.previewTextSize ?? state.settings.textSize;
-  return Math.min(18, Math.max(11, Number(candidate) || 13));
+  return Math.min(24, Math.max(15, Number(candidate) || 18));
 }
 function applyDialogueTypography(size = getEffectiveDialogueFontSize()) {
-  const px = `${Math.min(18, Math.max(11, Number(size) || 13))}px`;
+  const px = `${Math.min(24, Math.max(15, Number(size) || 18))}px`;
   document.documentElement.style.setProperty('--text-size', px);
   const textNode = $('dialogueText');
   if (textNode) {
@@ -1302,7 +1304,7 @@ function setupSettings() {
   $('settingsDialog').showModal();
 }
 function applySettings() {
-  state.settings.mode='enhanced';state.settings.persianFont=$('persianFontSetting').value;state.settings.textSize=Number($('textSizeSetting').value);state.settings.textSizeVersion=3;state.previewTextSize=null;state.settings.autoDelay=Number($('autoDelaySetting').value);
+  state.settings.mode='enhanced';state.settings.persianFont=$('persianFontSetting').value;state.settings.textSize=Number($('textSizeSetting').value);state.settings.textSizeVersion=4;state.previewTextSize=null;state.settings.autoDelay=Number($('autoDelaySetting').value);
   state.settings.musicVolume=Number($('musicVolumeSetting').value);state.settings.sfxVolume=Number($('sfxVolumeSetting').value);state.settings.reduceMotion=$('reduceMotionSetting').checked;
   applyVisualPreferences();
   updateTextSizeReadout(state.settings.textSize);
