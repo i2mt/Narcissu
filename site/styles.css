@@ -863,3 +863,9 @@ html[data-persian-font="noto"] .reader-screen.is-fa.caption-mode .dialogue-text{
 .home-content{position:relative;z-index:1}
 @media(prefers-reduced-motion:reduce){.home-video{display:none}}
 @media(max-width:760px){.home-video{object-position:center center}}
+
+
+.home-video{opacity:1;transition:opacity .75s ease}
+.home-video.is-restarting{opacity:0}
+.home-video-unavailable .home-video{display:none}
+.welcome-media-credit{margin:10px 0 0;font-size:9px;line-height:1.5;color:rgba(221,224,220,.62);letter-spacing:.025em}
