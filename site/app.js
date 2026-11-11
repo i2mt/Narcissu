@@ -1565,7 +1565,7 @@ async function boot() {
     } else if(location.hash==='#play') {
       const p=getProgress();if(p)restoreProgress(p);
     }
-    startDedicationSequence();
+    prepareWelcomeAssets();
   } catch(e) {
     console.error(e);document.body.innerHTML=`<main style="max-width:720px;margin:12vh auto;padding:24px;font:16px sans-serif;color:#eee;background:#111"> <h1>Narcissu could not start</h1><p>${escapeHTML(e.message)}</p><p>Serve this folder through a local web server or HTTPS. Opening index.html directly as a file will not load the game data.</p></main>`;
   }
