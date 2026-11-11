@@ -97,15 +97,14 @@ function startAmbientSound() {
     return;
   }
   audio.volume = 0.42;
+  createWindLayer();
+  if (ambientAudioContext) ambientAudioContext.resume().catch(() => {});
   const playPromise = audio.play();
   if (playPromise && typeof playPromise.then === 'function') {
     playPromise.then(() => {
-      createWindLayer();
       if (ambientAudioContext && ambientWindGain) {
-        ambientAudioContext.resume().then(() => {
-          ambientWindGain.gain.cancelScheduledValues(ambientAudioContext.currentTime);
-          ambientWindGain.gain.setTargetAtTime(0.22, ambientAudioContext.currentTime, 2.2);
-        }).catch(() => {});
+        ambientWindGain.gain.cancelScheduledValues(ambientAudioContext.currentTime);
+        ambientWindGain.gain.setTargetAtTime(0.22, ambientAudioContext.currentTime, 2.2);
       }
       ambientEnabled = true;
       if (button) {
