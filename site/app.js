@@ -162,7 +162,7 @@ async function setupHomeVideoLoop() {
     document.documentElement.classList.add('home-video-unavailable');
   });
 }
-function prepareWelcomeAssets() {
+async function prepareWelcomeAssets() {
   setupHomeVideoLoop();
   const screen = $('welcomeScreen');
   if (!screen) { startDedicationSequence(); return; }
