@@ -638,3 +638,140 @@ html[data-persian-font="noto"] .reader-screen.is-fa.caption-mode .dialogue-text{
   display:inline!important;color:var(--accent-strong);font-size:inherit;font-weight:600
 }
 .setting-row input[type=range]#textSizeSetting{accent-color:#d5d0bd}
+
+
+/* Quiet Sea redesign — main menu, attribution and fixed-size dialogue. */
+:root{--text-size:18px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.home-screen{
+  align-items:center;justify-content:center;
+  background:linear-gradient(90deg,rgba(4,8,12,.78),rgba(4,8,12,.55) 48%,rgba(4,8,12,.62)),
+    linear-gradient(180deg,rgba(2,5,8,.28),rgba(2,5,8,.14) 48%,rgba(2,5,8,.72));
+}
+.home-content{
+  width:min(1120px,92%);max-width:none;margin:0 auto;padding:38px 24px 24px;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,370px);
+  column-gap:clamp(36px,8vw,112px);align-items:center;
+}
+.home-identity{min-width:0;max-width:570px}
+.home-emblem{
+  display:grid;place-items:center;width:54px;height:54px;margin:0 0 22px;
+  color:#e1ddcf;opacity:.9;text-decoration:none;cursor:pointer;
+  transition:opacity .25s,transform .25s;
+}
+.home-emblem:hover{opacity:1;transform:translateY(-2px)}
+.fox-seal-image{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 2px 10px rgba(0,0,0,.3))}
+.home-content h1{
+  font-family:Georgia,"Times New Roman",serif;font-size:clamp(64px,8vw,92px);
+  line-height:.98;letter-spacing:.045em;text-shadow:0 4px 30px rgba(0,0,0,.32)
+}
+.home-japanese-title{
+  margin:8px 0 5px;color:rgba(238,235,226,.78);
+  font-family:"Yu Mincho","Hiragino Mincho ProN","Noto Serif JP",serif;
+  font-size:16px;letter-spacing:.28em
+}
+.home-subtitle{margin:9px 0 20px;font-size:10px;letter-spacing:.2em}
+.home-credit{
+  display:inline-flex;flex-direction:column;gap:4px;margin:0 0 20px;
+  color:#c9c6bc;text-decoration:none;font-size:10px;letter-spacing:.08em;line-height:1.5;
+  transition:color .2s
+}
+.home-credit strong{font-family:Georgia,"Times New Roman",serif;font-size:16px;letter-spacing:.045em;font-weight:400;color:#f0ede4}
+.home-credit small{font-size:9px;letter-spacing:.1em;color:#a9b0b1;opacity:0;max-height:0;transition:opacity .2s}
+.home-credit:hover{color:#fff}.home-credit:hover small,.home-credit:focus-visible small{opacity:1;max-height:20px}
+.home-description{max-width:440px;font-size:17px;line-height:1.72;color:#e0dfd8;margin:0}
+.home-menu-column{align-self:center}
+.menu-actions{gap:11px;align-items:stretch}
+.menu-actions .primary-button,.menu-actions .menu-button{
+  width:100%;min-height:48px;padding:12px 18px;border-radius:1px;
+  font-size:12px;letter-spacing:.1em;text-align:left
+}
+.menu-actions .menu-button{
+  background:rgba(5,9,12,.25);border:0;border-bottom:1px solid rgba(239,236,225,.27);
+  padding-left:5px;transition:padding-left .22s,background .22s,color .22s
+}
+.menu-actions .menu-button:hover{padding-left:14px;background:rgba(255,255,255,.07);border-color:rgba(239,236,225,.58)}
+.home-footer{grid-column:1/-1;width:100%;justify-content:space-between;margin-top:34px;padding-top:12px;border-top:1px solid rgba(255,255,255,.16);font-size:8px}
+.home-footer span:nth-child(2){max-width:48%;text-align:center}
+.stage:not(.is-reading) .background-frame{
+  background-image:linear-gradient(rgba(4,8,12,.22),rgba(4,8,12,.35)),url("./public/assets/e/umibe_yoru.jpg");
+  background-size:cover;background-position:center
+}
+.stage:not(.is-reading) .background-frame img{opacity:0}
+.stage:not(.is-reading) .background-fade{opacity:0!important}
+.reader-screen{padding:64px 30px 18px}
+.dialogue-panel{
+  width:min(1120px,100%);min-height:clamp(150px,24svh,220px);max-height:36%;
+  padding:18px 28px 12px;border-radius:2px;background:rgba(8,12,16,.91);
+  border-color:rgba(226,222,210,.25);box-shadow:0 14px 45px rgba(0,0,0,.18)
+}
+.dialogue-text{
+  font-size:var(--text-size)!important;line-height:1.55;max-height:none;
+  overflow:hidden!important;overflow-y:hidden!important;overscroll-behavior:contain
+}
+.reader-screen.is-fa .dialogue-text{font-size:var(--text-size)!important;line-height:1.8}
+.reader-toolbar{gap:8px;margin-top:10px}
+.toolbar-button,.next-button{min-height:38px;padding:8px 13px;font-size:10px;letter-spacing:.07em;border-radius:1px}
+.next-button{min-width:104px}
+.app-dialog{border-radius:2px;background:rgba(15,20,23,.97);backdrop-filter:blur(18px)}
+.dialog-inner{padding:30px 32px}
+.dialog-heading h2{font-family:Georgia,"Times New Roman",serif;font-size:32px;letter-spacing:.025em}
+.setting-row{padding:16px 0;font-size:12px}
+.setting-row strong{font-size:12px;letter-spacing:.035em}
+.setting-row small{font-size:10px;max-width:330px}
+.setting-row select,.setting-row input:not([type=checkbox]){
+  min-width:130px;accent-color:#d8d2bf
+}
+@media(max-width:760px){
+  .home-screen{align-items:center;padding:18px 0;background:linear-gradient(90deg,rgba(3,7,10,.8),rgba(3,7,10,.58)),linear-gradient(180deg,rgba(3,7,10,.18),rgba(3,7,10,.72))}
+  .home-content{
+    width:100%;padding:24px clamp(20px,6vw,34px) 18px;
+    grid-template-columns:minmax(0,1fr);row-gap:20px;align-content:center
+  }
+  .home-emblem{width:42px;height:42px;margin-bottom:13px}
+  .home-content h1{font-size:clamp(52px,12vw,70px)}
+  .home-japanese-title{font-size:13px;margin:5px 0}
+  .home-subtitle{font-size:9px;margin:6px 0 12px}
+  .home-credit{margin-bottom:12px}.home-credit strong{font-size:14px}
+  .home-description{font-size:14px;line-height:1.5;margin:0}
+  .home-menu-column{width:100%}
+  .menu-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .menu-actions .primary-button,.menu-actions .menu-button{min-width:0;min-height:42px;padding:9px 10px;font-size:9px;letter-spacing:.04em}
+  .menu-actions .menu-button{border:1px solid rgba(239,236,225,.23);background:rgba(5,9,12,.24)}
+  .home-footer{margin-top:8px;padding-top:9px;gap:6px 10px;font-size:7px}
+  .home-footer span:nth-child(2){max-width:none;text-align:left}
+  .reader-screen{padding:54px 10px calc(env(safe-area-inset-bottom) + 8px)}
+  .app-shell.is-reading .dialogue-panel{
+    height:clamp(148px,30svh,210px);min-height:0;max-height:38svh;
+    padding:12px 13px 9px;flex:0 0 auto
+  }
+  .app-shell.is-reading .dialogue-text,
+  .app-shell.is-reading .reader-screen.is-fa .dialogue-text{
+    font-size:var(--text-size)!important;line-height:1.48!important;
+    max-height:none!important;overflow:hidden!important;overflow-y:hidden!important
+  }
+  .app-shell.is-reading .dialogue-footer{margin-top:7px;font-size:8px}
+  .reader-toolbar{margin-top:7px;gap:6px}
+  .toolbar-left,.toolbar-right{gap:5px}
+  .toolbar-button,.next-button{min-height:36px;font-size:9px;padding:7px 5px}
+  .toolbar-right > button{font-size:8px}
+  .dialog-inner{padding:22px 18px}
+  .setting-row{gap:10px;padding:12px 0}
+  .setting-row small{max-width:190px}
+}
+@media(max-width:390px){
+  .home-content{padding-left:18px;padding-right:18px;row-gap:14px}
+  .menu-actions .primary-button,.menu-actions .menu-button{font-size:8px;min-height:39px}
+  .app-shell.is-reading .dialogue-panel{height:clamp(142px,29svh,190px)}
+}
+@media(max-height:500px) and (orientation:landscape){
+  .home-content{grid-template-columns:minmax(0,1fr) minmax(220px,34%);column-gap:5%;padding:16px 22px}
+  .home-emblem{width:34px;height:34px;margin-bottom:9px}
+  .home-content h1{font-size:clamp(42px,7vw,62px)}
+  .home-description{font-size:13px}
+  .home-footer{margin-top:12px}
+  .menu-actions{gap:5px}
+  .menu-actions .primary-button,.menu-actions .menu-button{min-height:34px;padding:7px 12px;font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+  .home-emblem,.home-credit,.menu-actions .menu-button{transition:none}
+}
