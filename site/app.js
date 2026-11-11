@@ -31,97 +31,102 @@ const APP_UPDATE_CHECK_INTERVAL_MS = 20 * 60 * 1000;
 
 
 let ambientAudioContext = null;
-let ambientMasterGain = null;
+let ambientWindGain = null;
 let ambientEnabled = false;
+let ambientWindSource = null;
+function createWindLayer() {
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContextClass || ambientAudioContext) return;
+  try {
+    const context = new AudioContextClass();
+    ambientAudioContext = context;
+    const master = context.createGain();
+    master.gain.value = 0;
+    master.connect(context.destination);
+    ambientWindGain = master;
+
+    // Soft, low-passed coastal breeze under the real field recording.
+    const length = context.sampleRate * 8;
+    const buffer = context.createBuffer(1, length, context.sampleRate);
+    const data = buffer.getChannelData(0);
+    let brown = 0;
+    for (let i = 0; i < length; i++) {
+      const white = Math.random() * 2 - 1;
+      brown = (brown + 0.018 * white) / 1.018;
+      data[i] = brown * 2.8;
+    }
+    const source = context.createBufferSource();
+    source.buffer = buffer;
+    source.loop = true;
+    ambientWindSource = source;
+
+    const highpass = context.createBiquadFilter();
+    highpass.type = 'highpass';
+    highpass.frequency.value = 75;
+    const lowpass = context.createBiquadFilter();
+    lowpass.type = 'lowpass';
+    lowpass.frequency.value = 520;
+    lowpass.Q.value = 0.5;
+    const windGain = context.createGain();
+    windGain.gain.value = 0.12;
+
+    const gust = context.createOscillator();
+    const gustDepth = context.createGain();
+    gust.type = 'sine';
+    gust.frequency.value = 0.045;
+    gustDepth.gain.value = 0.045;
+    gust.connect(gustDepth);
+    gustDepth.connect(windGain.gain);
+
+    source.connect(highpass);
+    highpass.connect(lowpass);
+    lowpass.connect(windGain);
+    windGain.connect(master);
+    source.start();
+    gust.start();
+  } catch (error) {
+    console.info('Optional wind layer unavailable.', error);
+  }
+}
 function startAmbientSound() {
   const button = $('ambientToggle');
-  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-  if (!AudioContextClass) {
+  const audio = $('homeAmbience');
+  if (!audio) {
     if (button) button.textContent = 'Ambient sound unavailable';
     return;
   }
-  try {
-    if (!ambientAudioContext) {
-      const context = new AudioContextClass();
-      ambientAudioContext = context;
-      const master = context.createGain();
-      master.gain.value = 0;
-      master.connect(context.destination);
-      ambientMasterGain = master;
-
-      // A continuously looping, synthesized coastal wash. No external audio file.
-      const bufferSize = context.sampleRate * 5;
-      const noiseBuffer = context.createBuffer(1, bufferSize, context.sampleRate);
-      const channel = noiseBuffer.getChannelData(0);
-      let brown = 0;
-      for (let i = 0; i < bufferSize; i++) {
-        const white = Math.random() * 2 - 1;
-        brown = (brown + 0.025 * white) / 1.025;
-        channel[i] = brown * 3.5;
+  audio.volume = 0.42;
+  const playPromise = audio.play();
+  if (playPromise && typeof playPromise.then === 'function') {
+    playPromise.then(() => {
+      createWindLayer();
+      if (ambientAudioContext && ambientWindGain) {
+        ambientAudioContext.resume().then(() => {
+          ambientWindGain.gain.cancelScheduledValues(ambientAudioContext.currentTime);
+          ambientWindGain.gain.setTargetAtTime(0.22, ambientAudioContext.currentTime, 2.2);
+        }).catch(() => {});
       }
-      const noise = context.createBufferSource();
-      noise.buffer = noiseBuffer;
-      noise.loop = true;
-
-      const lowPass = context.createBiquadFilter();
-      lowPass.type = 'lowpass';
-      lowPass.frequency.value = 720;
-      lowPass.Q.value = 0.55;
-
-      const highPass = context.createBiquadFilter();
-      highPass.type = 'highpass';
-      highPass.frequency.value = 38;
-
-      const surfGain = context.createGain();
-      surfGain.gain.value = 0.22;
-
-      const swell = context.createOscillator();
-      const swellDepth = context.createGain();
-      swell.type = 'sine';
-      swell.frequency.value = 0.075;
-      swellDepth.gain.value = 0.12;
-      swell.connect(swellDepth);
-      swellDepth.connect(surfGain.gain);
-
-      const windFilter = context.createBiquadFilter();
-      windFilter.type = 'bandpass';
-      windFilter.frequency.value = 1150;
-      windFilter.Q.value = 0.45;
-      const windGain = context.createGain();
-      windGain.gain.value = 0.035;
-
-      noise.connect(highPass);
-      highPass.connect(lowPass);
-      lowPass.connect(surfGain);
-      surfGain.connect(master);
-      highPass.connect(windFilter);
-      windFilter.connect(windGain);
-      windGain.connect(master);
-
-      noise.start();
-      swell.start();
-    }
-    ambientAudioContext.resume().then(() => {
-      if (!ambientMasterGain) return;
-      ambientMasterGain.gain.cancelScheduledValues(ambientAudioContext.currentTime);
-      ambientMasterGain.gain.setTargetAtTime(0.72, ambientAudioContext.currentTime, 1.8);
       ambientEnabled = true;
       if (button) {
         button.textContent = '♫ Sea ambience on';
         button.setAttribute('aria-pressed', 'true');
       }
-    }).catch(() => {
-      if (button) button.textContent = '♫ Enable sea ambience';
+    }).catch((error) => {
+      console.info('Browser requires a user gesture before audio playback.', error);
+      if (button) {
+        button.textContent = '♫ Enable sea ambience';
+        button.setAttribute('aria-pressed', 'false');
+      }
     });
-  } catch (error) {
-    console.warn('Ambient audio could not be initialized.', error);
-    if (button) button.textContent = 'Ambient sound unavailable';
   }
 }
 function stopAmbientSound() {
-  if (!ambientAudioContext || !ambientMasterGain) return;
-  ambientMasterGain.gain.cancelScheduledValues(ambientAudioContext.currentTime);
-  ambientMasterGain.gain.setTargetAtTime(0, ambientAudioContext.currentTime, 0.35);
+  const audio = $('homeAmbience');
+  if (audio) audio.pause();
+  if (ambientAudioContext && ambientWindGain) {
+    ambientWindGain.gain.cancelScheduledValues(ambientAudioContext.currentTime);
+    ambientWindGain.gain.setTargetAtTime(0, ambientAudioContext.currentTime, 0.35);
+  }
   ambientEnabled = false;
   const button = $('ambientToggle');
   if (button) {
@@ -133,10 +138,9 @@ function stopAmbientSound() {
 const WELCOME_CACHE_NAME = 'narcissu-welcome-assets-v1';
 const WELCOME_ASSETS = [
   './public/assets/e/umibe_yoru.jpg',
-  './public/assets/se/nami02b.ogg',
-  './public/assets/se/umi13.ogg',
-  './public/assets/bgm/a01.mp3',
-  './icons/fox-emblem-white.png'
+  './icons/fox-emblem-white.png',
+  'https://videos.pexels.com/video-files/39553425/16854775_1920_1080_30fps.mp4',
+  'https://wormersports.nl/files/uploads/2023/08/gentle-ocean-waves-birdsong-and-gull-7109.mp3'
 ];
 async function prepareWelcomeAssets() {
   const screen = $('welcomeScreen');
@@ -160,6 +164,7 @@ async function prepareWelcomeAssets() {
     try { localStorage.setItem('narcissu-welcome-prepared-v1', '1'); } catch {}
     screen.hidden = true;
     screen.setAttribute('aria-hidden', 'true');
+    $('homeVideo')?.play().catch(() => {});
     startAmbientSound();
     startDedicationSequence();
   };
@@ -1506,6 +1511,7 @@ function bindUI() {
   $('brandHome').addEventListener('click',e=>{e.preventDefault();returnHome();});
   $('newGameButton').addEventListener('click',startNewGame);
   $('ambientToggle')?.addEventListener('click', () => ambientEnabled ? stopAmbientSound() : startAmbientSound());
+  $('homeVideo')?.play().catch(() => {});
   $('continueButton').addEventListener('click',()=>{const p=getProgress();if(p)restoreProgress(p);});
   $('chaptersButton').addEventListener('click',()=>{$('chapterSelectPanel').hidden=false;});
   $('closeChapters').addEventListener('click',()=>{$('chapterSelectPanel').hidden=true;});
