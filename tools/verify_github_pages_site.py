@@ -17,7 +17,9 @@ def shell_files(site: Path) -> list[str]:
 def verify(site: Path) -> dict:
     site = site.resolve()
     required = [
-        "index.html", "styles.css", "app.js", "service-worker.js", "manifest.webmanifest",
+        "index.html", "styles.css", "responsive.css", "app.js", "service-worker.js", "manifest.webmanifest",
+        "public/assets/images/narcissu-coastal-background.jpg",
+        "public/assets/audio/narcissu-coastal-ambience.mp3",
         "data/story-gp32.json", "data/asset-manifest.json",
         "fonts/NotoSans-Regular.ttf", "fonts/NotoSansArabic-Regular.ttf",
         "icons/narcissu-192.png", "icons/narcissu-512.png", "icons/fox-emblem-white.png", ".nojekyll",
@@ -31,11 +33,16 @@ def verify(site: Path) -> dict:
         raise SystemExit(f"Missing service-worker shell files: {missing_shell[:10]}")
     manifest = json.loads((site / "data/asset-manifest.json").read_text(encoding="utf-8"))
     missing_assets = []
+    mobile_variant_count = 0
     for item in manifest["assets"].values():
         for field in ("url", "mobile_url", "mobile_landscape_url"):
             asset_url = item.get(field)
             if asset_url and not (site / "public" / asset_url).is_file():
                 missing_assets.append(asset_url)
+            if field in ("mobile_url", "mobile_landscape_url") and asset_url:
+                mobile_variant_count += 1
+                if not asset_url.startswith("assets/mobile-assets/"):
+                    missing_assets.append(f"incorrect mobile path prefix: {asset_url}")
     if missing_assets:
         raise SystemExit(f"Missing media assets: {missing_assets[:10]}")
     if (site / "data/source").exists():
@@ -44,6 +51,15 @@ def verify(site: Path) -> dict:
     if any(value.startswith("/") for value in [webmanifest["id"], webmanifest["scope"], webmanifest["start_url"]]):
         raise SystemExit("Manifest paths must be relative for project-site deployments")
     html = (site / "index.html").read_text(encoding="utf-8")
+    if "./responsive.css" not in html:
+        raise SystemExit("Responsive stylesheet is not linked from index.html")
+    if "homeBackgroundVideo" in html or "<video" in html.lower():
+        raise SystemExit("The menu should use the supplied still photo, not the rejected generated MP4")
+    if "homeAmbientAudio" not in html:
+        raise SystemExit("The optional coastal ambience audio element is missing")
+    responsive_css = (site / "responsive.css").read_text(encoding="utf-8")
+    if "home-backdrop-photo" not in responsive_css or "narcissu-coastal-background.jpg" not in html:
+        raise SystemExit("The supplied still photo is not configured as the menu background")
     if re.search(r"(?:href|src)\s*=\s*['\"]/", html, re.I):
         raise SystemExit("Found root-absolute HTML asset path; project Pages sites require relative paths")
     app = (site / "app.js").read_text(encoding="utf-8")
@@ -53,11 +69,18 @@ def verify(site: Path) -> dict:
         raise SystemExit("Asset URLs are no longer derived from document.baseURI")
     if "mobile_landscape_url" not in app or "isMobileArtworkViewport" not in app:
         raise SystemExit("Mobile artwork variants are not wired into the reader")
-    if "narcissu-assets-v4" not in app or "narcissu-assets-v4" not in (site / "service-worker.js").read_text(encoding="utf-8"):
-        raise SystemExit("Mobile artwork cache version is inconsistent")
+    if "narcissu-assets-v6" not in app or "narcissu-assets-v6" not in (site / "service-worker.js").read_text(encoding="utf-8"):
+        raise SystemExit("Media asset cache version is inconsistent")
+    if "narcissu-coastal-background.jpg" not in app or "narcissu-coastal-ambience.mp3" not in app:
+        raise SystemExit("Menu photo/audio are not included in the offline download")
+    if "narcissu-coastal-loop.mp4" in app or "narcissu-coastal-loop.mp4" in (site / "service-worker.js").read_text(encoding="utf-8"):
+        raise SystemExit("Obsolete generated MP4 remains referenced by the application")
+    service_worker = (site / "service-worker.js").read_text(encoding="utf-8")
+    if "./responsive.css" not in service_worker:
+        raise SystemExit("Responsive stylesheet is not included in the service-worker shell")
     base = PROJECT_SITE_PREFIX
     refs = [
-        "./index.html", "./styles.css", "./app.js", "./service-worker.js", "./manifest.webmanifest",
+        "./index.html", "./styles.css", "./responsive.css", "./app.js", "./service-worker.js", "./manifest.webmanifest",
         "./data/story-gp32.json", "./data/asset-manifest.json", "./data/localization/fa.json",
         "./public/assets/bgm/a01.mp3",
     ]
@@ -75,6 +98,7 @@ def verify(site: Path) -> dict:
         "file_count": sum(1 for p in site.rglob("*") if p.is_file()),
         "service_worker_shell_count": len([p for p in shell if p != "./"]),
         "asset_count": len(manifest["assets"]),
+        "mobile_variant_count": mobile_variant_count,
         "total_bytes": total_bytes,
         "largest_file_bytes": largest,
         "github_project_path_test": "passed",
