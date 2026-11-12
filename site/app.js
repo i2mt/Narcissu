@@ -1624,8 +1624,10 @@ function renderChapterEndScreen() {
   const endingPanel = $('endingMessagePanel');
   if (endingPanel) endingPanel.hidden = hasNext;
   if (!hasNext) stopAllAudio();
+  // Keep the final photos and credit sequence completely unobstructed.
+  // The closing message is intentionally user-started from the end screen,
+  // after the player has finished viewing the credits.
   setScreen('chapterEnd');
-  if (!hasNext) playEndingMessage();
 }
 function showChapterEnd() {
   clearWaitingTimer(); state.awaitingClick = false; state.chapterComplete = true;
