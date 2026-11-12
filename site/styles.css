@@ -1065,3 +1065,88 @@ body[data-mode="enhanced"] .dialogue-panel{background:rgba(15,20,22,var(--dialog
    overlays produced artificial striping and made the photograph look warped. */
 .home-screen::before,.home-screen::after{display:none!important;content:none!important}
 .home-screen{background:linear-gradient(90deg,rgba(4,8,13,.48),rgba(4,8,13,.2) 58%,rgba(4,8,13,.34))!important}
+
+
+/* Literary interface typography — extend the approved main-menu language
+   to settings, reader controls, dialogs and in-game navigation. */
+:root{
+  --ui-serif: Georgia,"Times New Roman",serif;
+  --ui-ink:rgba(244,241,232,.96);
+  --ui-muted:rgba(222,219,208,.78);
+  --ui-rule:rgba(235,231,218,.24);
+  --ui-focus:rgba(239,232,211,.9);
+}
+.brand-copy strong,.brand-copy small,
+.home-content h1,.home-japanese-title,.home-subtitle,.home-description,
+.home-credit strong,.home-footer,
+.chapter-select-panel .panel-heading h2,
+.chapter-choice strong,.chapter-heading h2,
+.reader-toolbar button,.language-switch,
+.settings-sidebar h2,.settings-nav-button,
+.settings-panel h3,.settings-control,
+.settings-control select,.settings-control output,
+.settings-actions button,.chapter-end-card h2,
+.chapter-end-card p,.end-actions button,
+.app-dialog .dialog-heading h2,
+.app-dialog .setting-row,.app-dialog .setting-row select,
+.app-dialog .dialog-actions button,
+.slot-item,.slot-actions button,.history-entry,
+.toast,.welcome-preload-card h1,.welcome-copy,
+.welcome-actions button,.orientation-prompt-card h2{
+  font-family:var(--ui-serif);
+}
+.menu-actions .primary-button,.menu-actions .menu-button{
+  font-family:var(--ui-serif);
+  font-weight:400;
+  letter-spacing:.025em;
+}
+.toolbar-button,.next-button{
+  font-family:var(--ui-serif);
+  font-size:12px;
+  letter-spacing:.025em;
+}
+.reader-toolbar .toolbar-button span,
+.reader-toolbar .next-button span{font-family:var(--ui-serif)}
+.settings-nav-button{
+  font-size:clamp(15px,1.25vw,18px);
+  letter-spacing:.015em;
+  line-height:1.35;
+  padding:13px 14px;
+}
+.settings-nav-button.is-active:before{font-size:10px}
+.settings-panel h3{
+  font-size:15px;
+  letter-spacing:.13em;
+  line-height:1.5;
+}
+.settings-control{
+  font-size:clamp(14px,1.15vw,16px);
+  line-height:1.45;
+}
+.settings-control select{
+  font-size:14px;
+  letter-spacing:.01em;
+}
+.settings-actions button,.dialog-actions button{
+  font-size:13px;
+  letter-spacing:.035em;
+}
+.chapter-choice strong{font-size:14px;letter-spacing:.015em}
+.chapter-choice small,.chapter-index{font-family:var(--ui-serif)}
+.icon-button,.close-button{
+  font-family:var(--ui-serif);
+}
+button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{
+  outline:1px solid var(--ui-focus);
+  outline-offset:3px;
+}
+.settings-nav-button:hover,.settings-nav-button.is-active,
+.chapter-choice:hover,.toolbar-button:hover,.menu-button:hover{
+  text-shadow:0 1px 14px rgba(255,255,255,.16);
+}
+@media(max-width:760px){
+  .settings-nav-button{font-size:15px;padding:10px 9px}
+  .settings-control{font-size:14px}
+  .settings-actions button,.dialog-actions button{font-size:12px}
+  .toolbar-button,.next-button{font-size:11px}
+}
