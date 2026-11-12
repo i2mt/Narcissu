@@ -2,7 +2,7 @@
 
 const $ = (id) => document.getElementById(id);
 const STORAGE_KEYS = { progress: 'narcissu-progress-v1', settings: 'narcissu-settings-v1', history: 'narcissu-history-v1' };
-const DEFAULT_SETTINGS = { mode: 'enhanced', persianFont: 'parastoo', textSize: 18, textSizeVersion: 4, autoDelay: 5, musicVolume: 0.55, sfxVolume: 0.8, reduceMotion: false };
+const DEFAULT_SETTINGS = { mode: 'enhanced', persianFont: 'parastoo', textSize: 18, textSizeVersion: 4, autoDelay: 5, musicVolume: 0.55, sfxVolume: 0.8, ambientVolume: 0.6, reduceMotion: false, highContrast: false, fontStyle: 'serif', messageBoxOpacity: 80 };
 const DEFAULT_LANGUAGE = 'en';
 const PERSIAN_FONT_SOURCES = {
   parastoo: {
@@ -285,6 +285,7 @@ function setScreen(name) {
   $('homeScreen').hidden = name !== 'home';
   $('readerScreen').hidden = name !== 'reader';
   $('chapterEndScreen').hidden = name !== 'chapterEnd';
+  if ($('settingsScreen')) $('settingsScreen').hidden = name !== 'settings';
   $('stage').classList.toggle('is-reading', name === 'reader');
   updateReaderChrome();
   $('languageNotice').hidden = true;
@@ -327,6 +328,9 @@ function applyDialogueTypography(size = getEffectiveDialogueFontSize()) {
 }
 function applyVisualPreferences() {
   state.settings.mode = 'enhanced';
+  document.body.classList.toggle('high-contrast', !!state.settings.highContrast);
+  document.body.classList.toggle('interface-sans', state.settings.fontStyle === 'sans');
+  document.documentElement.style.setProperty('--dialogue-opacity', String(Math.min(100, Math.max(40, Number(state.settings.messageBoxOpacity) || 80)) / 100));
   state.settings.persianFont = ['parastoo', 'vazirmatn', 'noto'].includes(state.settings.persianFont)
     ? state.settings.persianFont : 'parastoo';
   document.body.dataset.mode = state.settings.mode;
@@ -1462,6 +1466,75 @@ function cancelTextSizePreview() {
   updateTextSizeReadout(state.settings.textSize);
   scheduleDialogueFit();
 }
+
+function openSettingsScreen() {
+  const s=state.settings;
+  $('fullTextSize').value=s.textSize;
+  $('fullTextSizeValue').textContent=s.textSize+' px';
+  $('fullAutoAdvance').checked=!!state.auto;
+  $('fullAutoDelay').value=s.autoDelay;
+  $('fullAutoDelayValue').textContent=s.autoDelay+' s';
+  $('fullFontStyle').value=s.fontStyle||'serif';
+  $('fullMessageOpacity').value=s.messageBoxOpacity||80;
+  $('fullMessageOpacityValue').textContent=(s.messageBoxOpacity||80)+'%';
+  $('fullPersianFont').value=s.persianFont;
+  $('fullMusicVolume').value=Math.round(s.musicVolume*100);
+  $('fullMusicVolumeValue').textContent=Math.round(s.musicVolume*100)+'%';
+  $('fullSfxVolume').value=Math.round(s.sfxVolume*100);
+  $('fullSfxVolumeValue').textContent=Math.round(s.sfxVolume*100)+'%';
+  $('fullAmbientVolume').value=Math.round((s.ambientVolume??0.6)*100);
+  $('fullAmbientVolumeValue').textContent=Math.round((s.ambientVolume??0.6)*100)+'%';
+  $('fullReduceMotion').checked=!!s.reduceMotion;
+  $('fullHighContrast').checked=!!s.highContrast;
+  $('fullLanguage').value=state.language;
+  document.querySelectorAll('[data-settings-tab]').forEach(b=>b.classList.toggle('is-active',b.dataset.settingsTab==='reading'));
+  document.querySelectorAll('[data-settings-panel]').forEach(p=>{p.hidden=p.dataset.settingsPanel!=='reading';p.classList.toggle('is-active',!p.hidden);});
+  setScreen('settings');
+}
+function saveFullSettings() {
+  state.settings.textSize=Number($('fullTextSize').value);
+  state.settings.textSizeVersion=4;
+  state.settings.autoDelay=Number($('fullAutoDelay').value);
+  state.settings.fontStyle=$('fullFontStyle').value;
+  state.settings.messageBoxOpacity=Number($('fullMessageOpacity').value);
+  state.settings.persianFont=$('fullPersianFont').value;
+  state.settings.musicVolume=Number($('fullMusicVolume').value)/100;
+  state.settings.sfxVolume=Number($('fullSfxVolume').value)/100;
+  state.settings.ambientVolume=Number($('fullAmbientVolume').value)/100;
+  state.settings.reduceMotion=$('fullReduceMotion').checked;
+  state.settings.highContrast=$('fullHighContrast').checked;
+  applyVisualPreferences();
+  if(state.musicAudio)setAudioVolume(state.musicAudio,state.settings.musicVolume);
+  for(const [,audio] of state.audioChannels)setAudioVolume(audio,state.settings.sfxVolume);
+  if(ambientMasterGain&&ambientAudioContext)ambientMasterGain.gain.setTargetAtTime(ambientEnabled?state.settings.ambientVolume:0,ambientAudioContext.currentTime,.35);
+  persistSettings();
+  if(state.settings.persianFont!=='noto')ensurePersianFontLoaded(state.settings.persianFont).then(scheduleDialogueFit).catch(()=>showToast('Persian font unavailable; using the bundled fallback.'));
+  setLanguage($('fullLanguage').value);
+  if($('fullAutoAdvance').checked!==state.auto)toggleAuto();
+  setScreen('home');
+  showToast('Settings applied.');
+}
+function resetFullSettings() {
+  state.settings=normalizeSettings({},DEFAULT_SETTINGS);
+  state.auto=false;
+  applyVisualPreferences();
+  persistSettings();
+  openSettingsScreen();
+  showToast('Settings restored to defaults.');
+}
+function bindFullSettings() {
+  document.querySelectorAll('[data-settings-tab]').forEach(button=>button.addEventListener('click',()=>{
+    const tab=button.dataset.settingsTab;
+    document.querySelectorAll('[data-settings-tab]').forEach(b=>b.classList.toggle('is-active',b===button));
+    document.querySelectorAll('[data-settings-panel]').forEach(panel=>{panel.hidden=panel.dataset.settingsPanel!==tab;panel.classList.toggle('is-active',!panel.hidden);});
+  }));
+  const pairs=[['fullTextSize','fullTextSizeValue',v=>v+' px'],['fullAutoDelay','fullAutoDelayValue',v=>v+' s'],['fullMessageOpacity','fullMessageOpacityValue',v=>v+'%'],['fullMusicVolume','fullMusicVolumeValue',v=>v+'%'],['fullSfxVolume','fullSfxVolumeValue',v=>v+'%'],['fullAmbientVolume','fullAmbientVolumeValue',v=>v+'%']];
+  pairs.forEach(([id,out,format])=>$(id).addEventListener('input',e=>$(out).textContent=format(e.target.value)));
+  $('saveFullSettings').addEventListener('click',saveFullSettings);
+  $('resetFullSettings').addEventListener('click',resetFullSettings);
+  $('backFromSettings').addEventListener('click',()=>setScreen('home'));
+}
+
 function setupSettings() {
   $('persianFontSetting').value=state.settings.persianFont;
   $('textSizeSetting').value=state.settings.textSize;
@@ -1503,6 +1576,7 @@ function toggleFullscreen() {
   else document.exitFullscreen?.();
 }
 function bindUI() {
+  bindFullSettings();
   $('brandHome').addEventListener('click',e=>{e.preventDefault();returnHome();});
   $('newGameButton').addEventListener('click',startNewGame);
   $('ambientToggle')?.addEventListener('click', () => ambientEnabled ? stopAmbientSound() : startAmbientSound());
@@ -1516,7 +1590,7 @@ function bindUI() {
   $('installAppButton').addEventListener('click',installApp);
   $('closeInstallHelp').addEventListener('click',()=>$('installHelpDialog').close());
   $('closeInstallHelpButton').addEventListener('click',()=>$('installHelpDialog').close());
-  $('settingsButton').addEventListener('click',setupSettings);
+  $('settingsButton').addEventListener('click',openSettingsScreen);
   $('textSizeSetting').addEventListener('input', event => previewTextSize(event.target.value));
   $('settingsDialog').addEventListener('close', cancelTextSizePreview);
   $('saveSettingsButton').addEventListener('click',applySettings);
