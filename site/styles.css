@@ -843,3 +843,77 @@ html[data-persian-font="noto"] .reader-screen.is-fa.caption-mode .dialogue-text{
 @media(max-width:760px){
  .home-footer .ambient-toggle{font-size:7px}
 }
+
+
+/* Reference-led main menu and full-stage settings view */
+@media(min-width:761px){
+  .app-shell{width:100%;max-width:none;min-height:100svh;padding:0}
+  .topbar{position:absolute;inset:0 0 auto;height:82px;padding:0 3.2vw;border:0;z-index:8;pointer-events:none}
+  .topbar>*{pointer-events:auto}
+  .brand{gap:14px}
+  .brand-mark{width:42px;height:42px}
+  .brand-copy strong{font-family:Georgia,"Times New Roman",serif;font-size:24px;letter-spacing:.08em}
+  .brand-copy small{font-family:Georgia,serif;font-size:10px;letter-spacing:.16em}
+  .topbar-actions{gap:14px}
+  .offline-indicator{display:none}
+  .icon-button{width:42px;height:42px;font-size:20px;border-color:rgba(255,255,255,.28);color:#f0eee8}
+  .stage{width:100%;max-width:none;height:100svh;min-height:620px;max-height:none;aspect-ratio:auto;margin:0;border:0;box-shadow:none}
+  .stage:not(.is-reading) .background-frame{background-position:center;background-size:cover}
+  .home-screen{align-items:stretch;justify-content:stretch;background:linear-gradient(90deg,rgba(7,12,19,.48),rgba(7,12,19,.16) 62%,rgba(7,12,19,.28))}
+  .home-content{width:100%;max-width:none;height:100%;margin:0;padding:13vh 7.7vw 8vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,27%);grid-template-rows:1fr auto;column-gap:8vw;align-items:center}
+  .home-identity{max-width:620px}
+  .home-emblem{width:52px;height:52px;margin-bottom:20px}
+  .home-content h1{font-size:clamp(68px,8vw,112px);letter-spacing:.035em}
+  .home-japanese-title{font-size:19px;letter-spacing:.34em}
+  .home-subtitle{margin-top:14px;font-size:11px}
+  .home-description{max-width:410px;font-family:Georgia,serif;font-size:17px;line-height:1.55;font-style:italic;color:rgba(245,242,234,.88)}
+  .home-credit{margin-top:22px}
+  .home-menu-column{align-self:center}
+  .menu-actions{gap:2px;border-left:1px solid rgba(240,237,228,.55);padding-left:20px}
+  .menu-actions .primary-button,.menu-actions .menu-button{min-width:0;width:100%;min-height:48px;padding:11px 8px;border:0;border-bottom:1px solid rgba(240,237,228,.2);background:transparent;color:#f2f0e9;font-family:Georgia,serif;font-size:18px;letter-spacing:.02em}
+  .menu-actions .primary-button{background:transparent;color:#fff;font-weight:500}
+  .menu-actions .menu-button:hover,.menu-actions .primary-button:hover{padding-left:17px;background:rgba(255,255,255,.07)}
+  .home-footer{grid-column:1/-1;margin:0;padding-top:12px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.32);font-family:Georgia,serif;font-size:10px;color:rgba(245,242,234,.8)}
+  .home-footer .ambient-toggle{margin-left:auto}
+}
+.settings-screen{position:absolute;inset:0;z-index:4;display:grid;grid-template-columns:minmax(220px,23%) 1fr;padding:8vh 3.3vw 8vh;background:linear-gradient(115deg,rgba(10,18,29,.9),rgba(12,20,31,.82));backdrop-filter:blur(18px);color:#f1efe9}
+.settings-sidebar{border-right:1px solid rgba(255,255,255,.2);padding:12px 28px 12px 10px;display:flex;flex-direction:column;align-items:flex-start}
+.settings-emblem{width:48px;height:48px;display:block;margin-bottom:16px}.settings-emblem img{width:100%;height:100%;object-fit:contain}
+.settings-sidebar h2{font:400 clamp(28px,3vw,40px) Georgia,serif;margin:0 0 24px 18px}
+.settings-nav{width:100%;display:flex;flex-direction:column;gap:2px}
+.settings-nav-button{width:100%;text-align:left;padding:11px 12px;border:0;border-bottom:1px solid transparent;background:transparent;color:#e5e3dc;font:16px Georgia,serif;cursor:pointer}
+.settings-nav-button:hover,.settings-nav-button.is-active{background:rgba(255,255,255,.08);border-bottom-color:rgba(255,255,255,.2)}
+.settings-nav-button.is-active:before{content:"▶";margin-right:12px;font-size:12px}
+.settings-main{min-width:0;display:flex;flex-direction:column;padding:12px 2.5vw 0 3vw}
+.settings-panel{max-width:1000px;flex:1}
+.settings-panel h3{font:14px Georgia,serif;letter-spacing:.16em;text-transform:uppercase;margin:4px 0 20px;padding-bottom:9px;border-bottom:1px solid rgba(255,255,255,.25)}
+.settings-control{min-height:52px;display:grid;grid-template-columns:minmax(150px,1fr) minmax(160px, min(34vw,340px)) 42px;gap:18px;align-items:center;border-bottom:1px solid rgba(255,255,255,.12);font:15px Georgia,serif}
+.settings-control input[type=range]{width:100%;accent-color:#e4dfcf}
+.settings-control input[type=checkbox]{justify-self:start;width:20px;height:20px;accent-color:#d9d4c5}
+.settings-control select{width:100%;padding:8px 10px;background:rgba(15,22,32,.78);border:1px solid rgba(255,255,255,.35);color:#f1efe9;font:14px Georgia,serif}
+.settings-control output{font:13px Georgia,serif;text-align:right;color:#d7d3c8}
+.settings-actions{display:flex;justify-content:flex-end;align-items:center;gap:12px;padding-top:18px;border-top:1px solid rgba(255,255,255,.2)}
+.settings-actions button{min-width:130px;text-align:center}
+.settings-actions .menu-button{background:transparent;border:1px solid rgba(255,255,255,.3);color:#f2f0e9}
+.settings-screen[hidden],.settings-panel[hidden]{display:none!important}
+body.high-contrast .settings-screen{background:rgba(0,0,0,.97)}
+body.high-contrast .settings-control,body.high-contrast .settings-nav-button{color:#fff;border-color:#fff}
+body.interface-sans .settings-screen,body.interface-sans .settings-screen button,body.interface-sans .settings-screen select{font-family:Arial,sans-serif}
+@media(max-width:760px){
+ .settings-screen{inset:0;grid-template-columns:118px 1fr;padding:64px 12px 14px;background:rgba(9,16,25,.96);overflow:auto}
+ .settings-sidebar{padding:8px 10px 8px 0}
+ .settings-emblem{width:36px;height:36px}
+ .settings-sidebar h2{font-size:22px;margin:0 0 18px 4px}
+ .settings-nav-button{font-size:13px;padding:10px 4px}
+ .settings-nav-button.is-active:before{margin-right:5px;font-size:9px}
+ .settings-main{padding:8px 0 0 14px}
+ .settings-panel h3{font-size:11px;margin-bottom:10px}
+ .settings-control{grid-template-columns:minmax(84px,1fr) minmax(70px,1.2fr) 30px;gap:6px;min-height:48px;font-size:11px}
+ .settings-control select{font-size:10px;padding:6px 3px}
+ .settings-control output{font-size:10px}
+ .settings-actions{flex-wrap:wrap;gap:6px}
+ .settings-actions button{min-width:0;flex:1;padding:8px 6px;font-size:10px}
+ .home-content{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:16px;padding:76px 22px 60px}
+ .home-menu-column{width:min(100%,320px)}
+ .home-footer{font-size:7px}
+}
