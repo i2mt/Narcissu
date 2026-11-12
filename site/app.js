@@ -1512,13 +1512,15 @@ function saveFullSettings() {
   persistSettings();
   if(state.settings.persianFont!=='noto')ensurePersianFontLoaded(state.settings.persianFont).then(scheduleDialogueFit).catch(()=>showToast('Persian font unavailable; using the bundled fallback.'));
   setLanguage($('fullLanguage').value);
-  if($('fullAutoAdvance').checked!==state.auto)toggleAuto();
   setScreen(settingsReturnScreen);
+  if($('fullAutoAdvance').checked!==state.auto)toggleAuto();
   showToast('Settings applied.');
 }
 function resetFullSettings() {
   state.settings=normalizeSettings({},DEFAULT_SETTINGS);
+  clearWaitingTimer();
   state.auto=false;
+  $('autoButton').setAttribute('aria-pressed','false');
   applyVisualPreferences();
   persistSettings();
   openSettingsScreen();
