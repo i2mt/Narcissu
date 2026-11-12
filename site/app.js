@@ -1810,6 +1810,7 @@ function getOfflineAssetUrls() {
   // manifest, so include them explicitly in the optional offline library.
   add('assets/images/narcissu-coastal-background.jpg');
   add('assets/audio/narcissu-coastal-ambience.mp3');
+  add('assets/audio/narcissu-ending-message.m4a');
   return [...urls];
 }
 async function openOfflineDialog() {
