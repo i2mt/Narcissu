@@ -1284,6 +1284,8 @@ function updateInstallButton() {
   if (reminderAction && deferredInstallPrompt) {
     reminderAction.textContent = 'افزودن به صفحهٔ اصلی';
     reminderAction.dataset.action = 'install';
+    const reminderDialog = $('homeInstallReminderDialog');
+    if (reminderDialog?.open) $('homeInstallGuidance').textContent = getHomeInstallGuidance();
   }
 }
 function getHomeInstallGuidance() {
@@ -2213,7 +2215,6 @@ function bindUI() {
   window.addEventListener('orientationchange',()=>{refreshBackgroundForViewport();scheduleDialogueFit();updateOrientationPrompt();},{passive:true});
   if (document.fonts?.ready) document.fonts.ready.then(scheduleDialogueFit);
   updateInstallButton(); refreshBackgroundForViewport();
-  maybeShowHomeInstallReminder();
   window.addEventListener('online',()=>{updateNetworkStatus();checkForAppUpdate(true);});
   window.addEventListener('offline',updateNetworkStatus);
   window.addEventListener('pageshow',()=>checkForAppUpdate(true));
