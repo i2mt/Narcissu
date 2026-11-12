@@ -109,6 +109,57 @@ def main():
             chapter_panel_foreground = page.locator('#chapterSelectPanel').evaluate("e=>Number(getComputedStyle(e).zIndex)>=50 && !!document.elementFromPoint(e.getBoundingClientRect().left+12,e.getBoundingClientRect().top+12)?.closest('#chapterSelectPanel')")
             page.keyboard.press('Escape')
             chapter_panel_escape_closes = page.locator('#chapterSelectPanel').evaluate('(e)=>e.hidden') and page.locator('#chaptersButton').get_attribute('aria-expanded')=='false' and page.evaluate("document.activeElement.id === 'chaptersButton'")
+            # Music Room: the selected track owns the audio space; sea ambience
+            # returns only after pause/stop. Resolve the initial delayed ambience
+            # promise after selecting music to exercise the stale-promise race.
+            page.evaluate("""() => {
+              const music=getMusicAudioElement();
+              let playing=false;
+              Object.defineProperty(music,'paused',{configurable:true,get(){return !playing}});
+              music.play=function(){playing=true;const src=this.src||'';if(src.startsWith('data:audio/wav'))window.__primedStoryAudio.add(this);else window.__audioPlayCalls.push(src);return Promise.resolve()};
+              music.pause=function(){playing=false};
+              music.load=function(){};
+              const ambient=document.getElementById('homeAmbientAudio');
+              ambient.play=function(){window.__setAmbientPlaying(true);if(window.__deferMusicRoomAmbient)return new Promise(resolve=>{window.__resolveMusicRoomAmbient=resolve});return Promise.resolve()};
+              ambient.pause=function(){window.__setAmbientPlaying(false)};
+              window.__deferMusicRoomAmbient=true;
+              window.__resolveMusicRoomAmbient=()=>{};
+              localStorage.setItem('narcissu-ambient-enabled-v1','1');
+            }""")
+            page.locator('#musicRoomButton').click(timeout=2000)
+            music_room_open=page.locator('#musicRoomDialog').evaluate('(e)=>e.open')
+            music_room_track_count=page.locator('#musicTrackList .music-track-row').count()
+            music_room_columns=page.locator('#musicTrackList').evaluate("e=>getComputedStyle(e).gridTemplateColumns.split(' ').length")
+            music_room_panel_fits=page.locator('#musicRoomDialog').evaluate("e=>{const r=e.getBoundingClientRect(),l=e.querySelector('#musicTrackList').getBoundingClientRect(),a=e.querySelector('.music-room-actions').getBoundingClientRect();return r.top>=-1&&r.bottom<=innerHeight+1&&r.left>=-1&&r.right<=innerWidth+1&&l.bottom<=a.top+1&&l.top>=r.top}")
+            page.locator('#musicTrackList .music-track-play').first.click(timeout=2000)
+            page.evaluate("window.__resolveAmbient(); window.__deferMusicRoomAmbient=false; window.__resolveMusicRoomAmbient();")
+            page.wait_for_timeout(30)
+            music_room_play_silences_ambience=page.evaluate("musicRoomTrackActive===true && state.musicAudio && !state.musicAudio.paused && document.getElementById('homeAmbientAudio').paused && ambientEnabled===false")
+            if label in ('phone-landscape','desktop'):
+                page.screenshot(path=str(ROOT/'qa'/('music-room-844x390.png' if label=='phone-landscape' else 'music-room-1536x864.png')))
+            if page.evaluate('innerWidth <= 600'):
+                page.screenshot(path=str(ROOT/'qa'/'music-room-568x320.png'))
+            page.locator('#musicTrackList .music-track-play').first.click(timeout=2000)
+            page.wait_for_timeout(30)
+            music_room_pause_restores_ambience=page.evaluate("musicRoomTrackActive===false && state.musicAudio && state.musicAudio.paused && !document.getElementById('homeAmbientAudio').paused")
+            page.locator('#musicTrackList .music-track-play').first.click(timeout=2000)
+            page.wait_for_timeout(30)
+            music_room_resume_silences_ambience=page.evaluate("musicRoomTrackActive===true && state.musicAudio && !state.musicAudio.paused && document.getElementById('homeAmbientAudio').paused")
+            page.locator('#closeMusicRoom').click(timeout=2000)
+            page.locator('#ambientToggle').click(timeout=2000)
+            music_room_close_keeps_ambience_off=page.evaluate("musicRoomTrackActive===true && document.getElementById('homeAmbientAudio').paused")
+            page.locator('#settingsButton').click(timeout=2000)
+            page.evaluate('state.musicAudio.pause()')
+            page.wait_for_timeout(30)
+            music_room_pause_in_settings_keeps_ambience_off=page.evaluate("state.screen==='settings' && document.getElementById('homeAmbientAudio').paused")
+            page.locator('#backFromSettings').click(timeout=2000)
+            page.wait_for_timeout(30)
+            music_room_return_home_restores_ambience=page.evaluate("state.screen==='home' && musicRoomTrackActive===false && !document.getElementById('homeAmbientAudio').paused")
+            page.locator('#musicRoomButton').click(timeout=2000)
+            page.locator('#stopMusicRoomButton').click(timeout=2000)
+            page.wait_for_timeout(30)
+            music_room_stop_restores_ambience=page.evaluate("musicRoomTrackActive===false && !state.musicAudio && !document.getElementById('homeAmbientAudio').paused")
+            page.locator('#closeMusicRoom').click(timeout=2000)
             home_button_balance = page.evaluate("""() => {
               const s=document.querySelector('#settingsButton').getBoundingClientRect();
               const a=document.querySelector('#ambientToggle').getBoundingClientRect();
@@ -221,6 +272,15 @@ def main():
                 'chapter_select_populates_chapters':chapter_choices_populated,
                 'chapter_select_moves_focus_to_close':chapter_panel_focus,
                 'chapter_select_escape_closes':chapter_panel_escape_closes,
+                'music_room_opens_and_lists_tracks':music_room_open and music_room_track_count >= 10,
+                'music_room_layout_uses_columns_and_fits_viewport':music_room_panel_fits and music_room_columns >= (2 if page.evaluate('innerWidth') >= 550 else 1),
+                'music_room_play_silences_ambience_after_delayed_promise':music_room_play_silences_ambience,
+                'music_room_pause_restores_ambience':music_room_pause_restores_ambience,
+                'music_room_resume_silences_ambience':music_room_resume_silences_ambience,
+                'music_room_close_keeps_ambience_off_while_music_plays':music_room_close_keeps_ambience_off,
+                'music_room_pause_in_settings_keeps_ambience_off':music_room_pause_in_settings_keeps_ambience_off,
+                'music_room_return_home_restores_ambience_after_pause':music_room_return_home_restores_ambience,
+                'music_room_stop_restores_ambience':music_room_stop_restores_ambience,
                 'home_settings_button_matches_ambient_size':home_button_balance,
                 'orientation_prompt_matches_viewport':orientation_prompt_visible == orientation_prompt_expected and reader_app_inert == orientation_prompt_expected,
                 'rotate_prompt_hides_in_landscape':orientation_prompt_dismisses_in_landscape,
@@ -242,12 +302,12 @@ def main():
             })
             context.close()
         browser.close()
-    (ROOT/'INTERACTION_SMOKE_RESULTS_0.57.json').write_text(json.dumps(out,indent=2,ensure_ascii=False),encoding='utf-8')
+    (ROOT/'INTERACTION_SMOKE_RESULTS_0.59.json').write_text(json.dumps(out,indent=2,ensure_ascii=False),encoding='utf-8')
     failed=[]
     for r in out:
-        for key in ['settings_audio_tab_works','settings_keyboard_tab_navigation','only_selected_settings_panel_visible','ambient_silent_in_settings','home_orientation_prompt_matches_viewport','home_portrait_gate_makes_app_inert','home_prompt_hides_in_landscape','chapter_select_visible_in_foreground','chapter_select_populates_chapters','chapter_select_moves_focus_to_close','chapter_select_escape_closes','home_settings_button_matches_ambient_size','orientation_prompt_matches_viewport','rotate_prompt_hides_in_landscape','auto_mode_passes_click_wait_and_starts_scene_music','auto_mode_music_playback_attempted_after_audio_unlock','story_sound_effect_playback_after_audio_unlock','main_menu_offline_download_opens','settings_and_language_touch_targets_are_larger','fullscreen_control_removed','offline_download_includes_photo_and_ambience','menu_ambience_restarts_on_return_home','ambience_stays_off_in_settings_after_return','ambient_toggle_on','ambient_toggle_off','new_game_opens_reader','dialogue_loaded','live_language_switch_round_trip','save_slot_and_continue_work']:
+        for key in ['settings_audio_tab_works','settings_keyboard_tab_navigation','only_selected_settings_panel_visible','ambient_silent_in_settings','home_orientation_prompt_matches_viewport','home_portrait_gate_makes_app_inert','home_prompt_hides_in_landscape','chapter_select_visible_in_foreground','chapter_select_populates_chapters','chapter_select_moves_focus_to_close','chapter_select_escape_closes','music_room_opens_and_lists_tracks','music_room_layout_uses_columns_and_fits_viewport','music_room_play_silences_ambience_after_delayed_promise','music_room_pause_restores_ambience','music_room_resume_silences_ambience','music_room_close_keeps_ambience_off_while_music_plays','music_room_pause_in_settings_keeps_ambience_off','music_room_return_home_restores_ambience_after_pause','music_room_stop_restores_ambience','home_settings_button_matches_ambient_size','orientation_prompt_matches_viewport','rotate_prompt_hides_in_landscape','auto_mode_passes_click_wait_and_starts_scene_music','auto_mode_music_playback_attempted_after_audio_unlock','story_sound_effect_playback_after_audio_unlock','main_menu_offline_download_opens','settings_and_language_touch_targets_are_larger','fullscreen_control_removed','offline_download_includes_photo_and_ambience','menu_ambience_restarts_on_return_home','ambience_stays_off_in_settings_after_return','ambient_toggle_on','ambient_toggle_off','new_game_opens_reader','dialogue_loaded','live_language_switch_round_trip','save_slot_and_continue_work']:
             if not r.get(key): failed.append(f"{r['viewport']}: {key}")
         if r['page_errors']: failed.append(f"{r['viewport']}: page errors {r['page_errors']}")
-    print(json.dumps({'runs':len(out),'failed_checks':failed,'results_file':'INTERACTION_SMOKE_RESULTS_0.57.json','details':out},indent=2,ensure_ascii=False))
+    print(json.dumps({'runs':len(out),'failed_checks':failed,'results_file':'INTERACTION_SMOKE_RESULTS_0.59.json','details':out},indent=2,ensure_ascii=False))
     return 1 if failed else 0
 if __name__=='__main__': raise SystemExit(main())

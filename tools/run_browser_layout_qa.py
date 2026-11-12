@@ -117,7 +117,18 @@ def run():
                     'docW':page.evaluate('document.documentElement.scrollWidth'),
                     'screen':box(page,'#homeScreen'),'content':box(page,'.home-content'),
                     'identity':box(page,'.home-identity'),'menu':box(page,'.home-menu-column'),
-                    'footer':box(page,'.home-footer')
+                    'footer':box(page,'.home-footer'),
+                    'menu_style':page.evaluate('''() => {
+                      const read = selector => {
+                        const e=document.querySelector(selector), c=getComputedStyle(e);
+                        const m=c.backgroundColor.match(/rgba?\\(([^)]+)\\)/);
+                        const parts=m?m[1].split(',').map(v=>parseFloat(v.trim())):[];
+                        return {background:c.backgroundColor,alpha:parts.length===4?parts[3]:1,
+                          backdrop:c.backdropFilter,
+                          backgroundImage:c.backgroundImage};
+                      };
+                      return {primary:read('.menu-actions .primary-button'),secondary:read('.menu-actions .menu-button')};
+                    }''')
                 }
                 prompt_home_visible = page.locator('#orientationPrompt').evaluate('(e)=>!e.hidden')
                 prompt_home_expected = h > w and (is_touch or w <= 900)
@@ -138,8 +149,23 @@ def run():
                     page.set_viewport_size({'width':w,'height':h})
                     set_state(page,'home')
                     page.wait_for_timeout(20)
+                menu_style=home['menu_style']
+                if w <= 900:
+                    mobile_menu_surface = all(
+                        0.10 <= menu_style[k]['alpha'] <= 0.35
+                        and menu_style[k]['backdrop'] == 'none'
+                        and menu_style[k]['backgroundImage'] == 'none'
+                        for k in ('primary','secondary')
+                    )
+                else:
+                    mobile_menu_surface = all(
+                        menu_style[k]['backdrop'] == 'none'
+                        and menu_style[k]['backgroundImage'] == 'none'
+                        for k in ('primary','secondary')
+                    )
                 home_checks={
                     'no_document_horizontal_overflow':home['docW']<=w,
+                    'mobile_menu_background_is_translucent_and_unblurred':mobile_menu_surface,
                     'identity_and_menu_do_not_overlap':not overlaps(home['identity'],home['menu']),
                     'menu_inside_home_screen':home['menu']['x']>=home['screen']['x']-1 and home['menu']['right']<=home['screen']['right']+1,
                     'footer_inside_home_screen':home['footer']['bottom']<=home['screen']['bottom']+1 or home['screen']['scrollH']>home['screen']['clientH'],
@@ -195,10 +221,10 @@ def run():
                 results.append(record)
             context.close()
         browser.close()
-    (ROOT/'BROWSER_QA_RESULTS_0.57.json').write_text(json.dumps(results,indent=2,ensure_ascii=False),encoding='utf-8')
+    (ROOT/'BROWSER_QA_RESULTS_0.59.json').write_text(json.dumps(results,indent=2,ensure_ascii=False),encoding='utf-8')
     failed=[f"{r['viewport']}: {k}" for r in results for k,v in r['checks'].items() if not v]
-    summary={'viewport_count':len(results),'states_tested':['home','settings','reader-en','reader-fa'],'failed_checks':failed,'screenshots':len(list(QA_DIR.glob('*.png'))),'results_file':'BROWSER_QA_RESULTS_0.57.json'}
-    (ROOT/'BROWSER_QA_SUMMARY_0.57.json').write_text(json.dumps(summary,indent=2),encoding='utf-8')
+    summary={'viewport_count':len(results),'states_tested':['home','settings','reader-en','reader-fa'],'failed_checks':failed,'screenshots':len(list(QA_DIR.glob('*.png'))),'results_file':'BROWSER_QA_RESULTS_0.59.json'}
+    (ROOT/'BROWSER_QA_SUMMARY_0.59.json').write_text(json.dumps(summary,indent=2),encoding='utf-8')
     print(json.dumps(summary,indent=2))
     return 1 if failed else 0
 

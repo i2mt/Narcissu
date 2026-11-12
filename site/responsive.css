@@ -1118,3 +1118,162 @@ body {
     flex-basis: 30px !important;
   }
 }
+
+
+/* Increment 58 — Music Room gets a compact header and a readable responsive track grid. */
+.music-room-dialog {
+  width: min(940px, calc(100vw - 20px - var(--narcissu-safe-left) - var(--narcissu-safe-right)));
+  max-width: min(940px, calc(100vw - 20px - var(--narcissu-safe-left) - var(--narcissu-safe-right)));
+  max-height: calc(100dvh - 16px - var(--narcissu-safe-top) - var(--narcissu-safe-bottom));
+  overflow: hidden;
+}
+.music-room-dialog .dialog-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+  max-height: inherit;
+  padding: clamp(14px, 2vw, 24px);
+  overflow: hidden;
+}
+.music-room-dialog .dialog-heading {
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+}
+.music-room-dialog .dialog-heading .eyebrow {
+  margin: 0 0 3px;
+  font-size: 8px;
+  line-height: 1.2;
+  letter-spacing: .16em;
+}
+.music-room-dialog .dialog-heading h2 {
+  margin: 0;
+  font-size: clamp(22px, 2.6vw, 30px);
+  line-height: 1.08;
+}
+.music-room-dialog .dialog-copy.music-room-note {
+  flex: 0 0 auto;
+  margin: 0;
+  max-width: none;
+  font-size: 10px;
+  line-height: 1.35;
+  letter-spacing: .015em;
+}
+.music-room-dialog .music-room-now {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 7px 10px;
+  font-size: 10px;
+  line-height: 1.3;
+}
+.music-room-dialog .music-track-list {
+  flex: 0 1 auto;
+  min-height: 0;
+  max-height: min(54dvh, 520px);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+  grid-auto-rows: minmax(50px, auto);
+  gap: 7px;
+  margin: 0;
+  padding: 2px 4px 2px 0;
+  overscroll-behavior: contain;
+}
+.music-room-dialog .music-track-row {
+  min-height: 50px;
+  padding: 7px 9px;
+  gap: 9px;
+}
+.music-room-dialog .music-track-meta { gap: 3px; }
+.music-room-dialog .music-track-meta strong {
+  font-size: 13px;
+  line-height: 1.25;
+  letter-spacing: .025em;
+}
+.music-room-dialog .music-track-meta small {
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: .08em;
+}
+.music-room-dialog .music-track-play {
+  min-width: 68px;
+  min-height: 34px;
+  padding: 6px 9px;
+  font-size: 10px;
+}
+.music-room-dialog .music-room-actions {
+  flex: 0 0 auto;
+  margin: 0;
+  padding-top: 1px;
+}
+.music-room-dialog .music-room-actions .menu-button {
+  min-height: 34px;
+  padding: 7px 14px;
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  .music-room-dialog {
+    width: min(960px, calc(100vw - 16px));
+    max-width: min(960px, calc(100vw - 16px));
+    height: calc(100dvh - 10px - var(--narcissu-safe-top) - var(--narcissu-safe-bottom));
+    max-height: calc(100dvh - 10px - var(--narcissu-safe-top) - var(--narcissu-safe-bottom));
+  }
+  .music-room-dialog .dialog-inner {
+    height: 100%;
+    max-height: 100%;
+    gap: 5px;
+    padding: 10px 14px;
+  }
+  .music-room-dialog .dialog-heading .eyebrow { display: none; }
+  .music-room-dialog .dialog-heading h2 { font-size: 22px; }
+  .music-room-dialog .dialog-copy.music-room-note { font-size: 9px; line-height: 1.2; }
+  .music-room-dialog .music-room-now { padding: 5px 8px; font-size: 9px; }
+  .music-room-dialog .music-track-list {
+    flex: 1 1 0;
+    max-height: none;
+    min-height: 0;
+    overflow-y: auto;
+    grid-auto-rows: minmax(44px, auto);
+    gap: 5px;
+  }
+  .music-room-dialog .music-track-row { min-height: 44px; padding: 5px 8px; }
+  .music-room-dialog .music-track-meta strong { font-size: 12px; }
+  .music-room-dialog .music-track-meta small { font-size: 9px; }
+  .music-room-dialog .music-track-play { min-height: 30px; min-width: 62px; padding: 5px 8px; }
+  .music-room-dialog .music-room-actions .menu-button { min-height: 30px; padding: 5px 12px; }
+}
+@media (max-width: 560px) {
+  .music-room-dialog .music-track-list { grid-template-columns: minmax(0, 1fr); }
+  .music-room-dialog .dialog-inner { padding: 14px 13px; }
+  .music-room-dialog .music-track-meta strong { font-size: 13px; }
+}
+
+
+/* Increment 59 — mobile menu buttons follow the desktop glass-light treatment.
+   Keep a faint surface for legibility, but remove the frosted blur that hid the
+   supplied shoreline photograph behind the controls. */
+@media (max-width: 900px) {
+  .stage:not(.is-reading) .menu-actions .primary-button,
+  .stage:not(.is-reading) .menu-actions .menu-button {
+    background: rgba(7, 13, 20, .20) !important;
+    color: rgba(245, 242, 234, .96) !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(240, 237, 228, .25) !important;
+    border-radius: 1px !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .stage:not(.is-reading) .menu-actions .primary-button {
+    background: rgba(7, 13, 20, .27) !important;
+    color: #fff !important;
+    border-bottom-color: rgba(240, 237, 228, .46) !important;
+    font-weight: 500;
+  }
+  .stage:not(.is-reading) .menu-actions .menu-button:hover,
+  .stage:not(.is-reading) .menu-actions .primary-button:hover,
+  .stage:not(.is-reading) .menu-actions .menu-button:active,
+  .stage:not(.is-reading) .menu-actions .primary-button:active {
+    background: rgba(255, 255, 255, .075) !important;
+    border-bottom-color: rgba(240, 237, 228, .48) !important;
+  }
+}

@@ -203,12 +203,12 @@ def main():
             })
             context.close()
         browser.close()
-    (ROOT/'WIDE_TABLET_SMOKE_RESULTS_0.57.json').write_text(json.dumps(out,indent=2,ensure_ascii=False),encoding='utf-8')
+    (ROOT/'WIDE_TABLET_SMOKE_RESULTS_0.59.json').write_text(json.dumps(out,indent=2,ensure_ascii=False),encoding='utf-8')
     failed=[]
     for r in out:
         for key in ['settings_audio_tab_works','settings_keyboard_tab_navigation','only_selected_settings_panel_visible','ambient_silent_in_settings','orientation_prompt_matches_viewport','rotate_prompt_hides_in_landscape','auto_mode_passes_click_wait_and_starts_scene_music','auto_mode_music_playback_attempted_after_audio_unlock','story_sound_effect_playback_after_audio_unlock','main_menu_offline_download_opens','settings_and_language_touch_targets_are_larger','fullscreen_control_removed','offline_download_includes_photo_and_ambience','menu_ambience_restarts_on_return_home','ambience_stays_off_in_settings_after_return','ambient_toggle_on','ambient_toggle_off','new_game_opens_reader','dialogue_loaded','live_language_switch_round_trip','save_slot_and_continue_work']:
             if not r.get(key): failed.append(f"{r['viewport']}: {key}")
         if r['page_errors']: failed.append(f"{r['viewport']}: page errors {r['page_errors']}")
-    print(json.dumps({'runs':len(out),'failed_checks':failed,'results_file':'WIDE_TABLET_SMOKE_RESULTS_0.57.json','details':out},indent=2,ensure_ascii=False))
+    print(json.dumps({'runs':len(out),'failed_checks':failed,'results_file':'WIDE_TABLET_SMOKE_RESULTS_0.59.json','details':out},indent=2,ensure_ascii=False))
     return 1 if failed else 0
 if __name__=='__main__': raise SystemExit(main())

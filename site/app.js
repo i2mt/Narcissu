@@ -36,6 +36,8 @@ let ambientAudioContext = null;
 let ambientMasterGain = null;
 let ambientEnabled = false;
 let ambientStartPending = false;
+// True only while a track selected from Music Room owns the menu audio space.
+let musicRoomTrackActive = false;
 
 // Reuse the same media elements for the complete story. Several mobile browsers
 // grant playback permission to media elements that were first played during a
@@ -53,10 +55,34 @@ const AMBIENT_PREFERENCE_KEY = 'narcissu-ambient-enabled-v1';
 function ambientAutoplayAllowed() {
   try { return localStorage.getItem(AMBIENT_PREFERENCE_KEY) !== '0'; } catch { return true; }
 }
+function syncMusicRoomAmbient(isMusicPlaying) {
+  musicRoomTrackActive = !!isMusicPlaying;
+  if (state.screen !== 'home') return;
+  if (musicRoomTrackActive) {
+    // A selected Music Room track temporarily replaces, but does not disable,
+    // the user's saved sea-ambience preference.
+    silenceAmbientForNonMenu();
+    return;
+  }
+  if (ambientAutoplayAllowed() && Number(state.settings.ambientVolume ?? 0.6) > 0 && !document.hidden) {
+    startAmbientSound();
+  } else {
+    silenceAmbientForNonMenu();
+  }
+}
 function startAmbientSound() {
   // Menu ambience must never be started from Settings, even if a delayed
   // autoplay promise from the previous screen resolves after navigation.
   if (state.screen !== 'home' || document.hidden) return;
+  if (musicRoomTrackActive && state.musicAudio && !state.musicAudio.paused) {
+    ambientStartPending = false;
+    silenceAmbientForNonMenu();
+    return;
+  }
+  // A track can be paused by the operating system while Settings is open;
+  // in that case its pause event must not start ambience behind Settings, but
+  // returning to the main menu should restore ambience normally.
+  if (musicRoomTrackActive) musicRoomTrackActive = false;
   const button = $('ambientToggle');
   const audio = $('homeAmbientAudio');
   if (audio) {
@@ -73,7 +99,7 @@ function startAmbientSound() {
     }
     Promise.resolve(audioPlayResult).then(() => {
       ambientStartPending = false;
-      if (state.screen !== 'home' || document.hidden) {
+      if (state.screen !== 'home' || document.hidden || musicRoomTrackActive) {
         audio.pause();
         ambientEnabled = false;
         if (button) { button.setAttribute('aria-pressed', 'false'); button.setAttribute('aria-label', 'Enable sea ambience'); }
@@ -84,7 +110,7 @@ function startAmbientSound() {
       if (button) { button.textContent = '♫'; button.title = 'Sea ambience on'; button.setAttribute('aria-label', 'Turn sea ambience off'); button.setAttribute('aria-pressed', 'true'); }
     }).catch(error => {
       ambientStartPending = false;
-      if (state.screen !== 'home' || document.hidden) return;
+      if (state.screen !== 'home' || document.hidden || musicRoomTrackActive) return;
       console.warn('Recorded ambience could not be played; using the synthesized fallback.', error);
       startSyntheticAmbientSound();
     });
@@ -95,6 +121,15 @@ function startAmbientSound() {
 
 function startSyntheticAmbientSound() {
   const button = $('ambientToggle');
+  if (state.screen !== 'home' || document.hidden || musicRoomTrackActive) {
+    ambientStartPending = false;
+    if (ambientMasterGain && ambientAudioContext) {
+      ambientMasterGain.gain.cancelScheduledValues(ambientAudioContext.currentTime);
+      ambientMasterGain.gain.setTargetAtTime(0, ambientAudioContext.currentTime, 0.2);
+    }
+    ambientEnabled = false;
+    return;
+  }
   const AudioContextClass = window.AudioContext || window.webkitAudioContext;
   if (!AudioContextClass) {
     if (button) button.textContent = 'Ambient audio unavailable';
@@ -164,7 +199,7 @@ function startSyntheticAmbientSound() {
     const resumeResult = ambientAudioContext.resume();
     Promise.resolve(resumeResult).then(() => {
       if (!ambientAudioContext || !ambientMasterGain) return;
-      if (state.screen !== 'home' || document.hidden) {
+      if (state.screen !== 'home' || document.hidden || musicRoomTrackActive) {
         ambientStartPending = false;
         ambientMasterGain.gain.cancelScheduledValues(ambientAudioContext.currentTime);
         ambientMasterGain.gain.setTargetAtTime(0, ambientAudioContext.currentTime, 0.2);
@@ -946,10 +981,22 @@ function getMusicAudioElement() {
         state.musicAudio = null;
         state.currentMusic = null;
         state.currentMusicLoop = false;
+        if (musicRoomTrackActive) syncMusicRoomAmbient(false);
+        if ($('musicRoomDialog')?.open) renderMusicRoom();
         return;
       }
       // Native loop should normally handle this; retain a guarded fallback.
       try { musicAudioElement.currentTime = 0; const restarted = musicAudioElement.play(); if (restarted?.catch) restarted.catch(() => {}); } catch {}
+    });
+    musicAudioElement.addEventListener('play', () => {
+      if (musicRoomTrackActive && state.screen === 'home') silenceAmbientForNonMenu();
+      if ($('musicRoomDialog')?.open) renderMusicRoom();
+    });
+    musicAudioElement.addEventListener('pause', () => {
+      if (musicRoomTrackActive && state.screen === 'home' && state.musicAudio === musicAudioElement && musicAudioElement.paused && !musicAudioElement.ended) {
+        syncMusicRoomAmbient(false);
+      }
+      if ($('musicRoomDialog')?.open) renderMusicRoom();
     });
     musicAudioElement.addEventListener('error', () => {
       if (state.musicAudio === musicAudioElement) showToast('Background music could not be loaded.');
@@ -1009,7 +1056,7 @@ function retryPendingStoryAudio() {
   if (pendingMusicPlayback) {
     const request = pendingMusicPlayback;
     pendingMusicPlayback = null;
-    playMusic(request.path, request.loop);
+    playMusic(request.path, request.loop, request.musicRoom ? 'musicRoom' : 'story');
   }
   for (const [channel, ev] of [...pendingChannelPlayback]) {
     pendingChannelPlayback.delete(channel);
@@ -1063,14 +1110,15 @@ function stopMusic() {
   state.musicAudio = null;
   state.currentMusic = null;
   state.currentMusicLoop = false;
+  musicRoomTrackActive = false;
   if (audio) {
     audio.pause();
     try { audio.currentTime = 0; } catch {}
   }
 }
-function playMusic(path, loop) {
+function playMusic(path, loop, source = 'story') {
   const url = assetURL(path);
-  if (!url) { showToast(`Missing music resource: ${path}`); return; }
+  if (!url) { showToast(`Missing music resource: ${path}`); return null; }
   // Reuse one element across scene changes. This preserves the media-playback
   // permission granted by the player's first touch/click on mobile browsers.
   stopMusic();
@@ -1085,16 +1133,22 @@ function playMusic(path, loop) {
   state.musicAudio = audio;
   state.currentMusic = path;
   state.currentMusicLoop = !!loop;
+  if (source === 'musicRoom') syncMusicRoomAmbient(true);
   let playback;
   try { playback = audio.play(); }
   catch (error) { playback = Promise.reject(error); }
   if (playback?.catch) playback.catch(error => {
     if (state.musicAudio !== audio || state.currentMusic !== path) return;
     if (error?.name === 'NotAllowedError') {
-      pendingMusicPlayback = { path, loop: !!loop };
+      pendingMusicPlayback = { path, loop: !!loop, musicRoom: source === 'musicRoom' };
+      if (source === 'musicRoom') syncMusicRoomAmbient(false);
       showToast('The soundtrack will resume after your next interaction.');
-    } else if (error?.name !== 'AbortError') showToast('Background music could not be played.');
+    } else if (error?.name !== 'AbortError') {
+      if (source === 'musicRoom') syncMusicRoomAmbient(false);
+      showToast('Background music could not be played.');
+    }
   });
+  return playback;
 }
 function getMusicRoomTracks() {
   const seen = new Set();
@@ -1121,9 +1175,11 @@ function renderMusicRoom() {
   $('musicRoomNow').textContent = currentIndex >= 0
     ? `${isPlayingNow ? 'Now playing' : 'Paused'} · Track ${String(currentIndex + 1).padStart(2, '0')}`
     : 'Nothing is playing';
+  $('musicRoomNow').dataset.playing = String(isPlayingNow);
   tracks.forEach((track, index) => {
     const row = document.createElement('div');
     row.className = 'music-track-row';
+    row.dataset.trackIndex = String(index + 1);
     const meta = document.createElement('div');
     meta.className = 'music-track-meta';
     const title = document.createElement('strong');
@@ -1141,18 +1197,18 @@ function renderMusicRoom() {
     button.addEventListener('click', () => {
       if (isPlaying && state.musicAudio) {
         state.musicAudio.pause();
+        syncMusicRoomAmbient(false);
       } else if (isCurrent && state.musicAudio) {
+        syncMusicRoomAmbient(true);
         const resumed = state.musicAudio.play();
-        if (resumed?.catch) resumed.catch(() => showToast('Music will resume after your next interaction.'));
+        if (resumed?.catch) resumed.catch(() => {
+          syncMusicRoomAmbient(false);
+          showToast('Music will resume after your next interaction.');
+        });
       } else {
-        playMusic(track.path, false);
+        playMusic(track.path, false, 'musicRoom');
         const audio = state.musicAudio;
-        if (audio) audio.addEventListener('ended', () => {
-          if (state.musicAudio === audio) {
-            state.musicAudio = null; state.currentMusic = null; state.currentMusicLoop = false;
-          }
-          renderMusicRoom();
-        }, { once: true });
+        if (audio) audio.addEventListener('ended', () => renderMusicRoom(), { once: true });
       }
       renderMusicRoom();
     });
@@ -1166,6 +1222,7 @@ function openMusicRoom() {
 }
 function stopMusicRoom() {
   stopMusic();
+  syncMusicRoomAmbient(false);
   renderMusicRoom();
 }
 function isStandaloneMode() {
