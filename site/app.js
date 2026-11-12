@@ -1308,7 +1308,7 @@ function getHomeInstallGuidance() {
   return 'در مرورگر، آیکون نصب کنار نوار نشانی یا گزینهٔ «Install app» در منوی مرورگر را انتخاب کنید. اگر این گزینه در دسترس نیست، می‌توانید بازی را همچنان در همین زبانه اجرا کنید.';
 }
 function maybeShowHomeInstallReminder() {
-  if (homeInstallReminderShown || state.screen !== 'home' || isStandaloneMode() || isPortraitGameplayBlocked()) return;
+  if (!dedicationDismissed || homeInstallReminderShown || state.screen !== 'home' || isStandaloneMode() || isPortraitGameplayBlocked()) return;
   try {
     if (localStorage.getItem(HOME_INSTALL_REMINDER_KEY) === '1') {
       homeInstallReminderShown = true;
