@@ -436,6 +436,7 @@ function setScreen(name) {
   // Update the screen state before starting/stopping ambience so the menu-only
   // audio guard sees the destination screen, including when returning from play.
   state.screen = name;
+  if (name !== 'chapterEnd') stopEndingMessage();
   if (name === 'home') {
     if (ambientAutoplayAllowed() && (state.settings.ambientVolume ?? 0.6) > 0) {
       startAmbientSound();
@@ -1316,6 +1317,32 @@ function fadeMusic(duration) {
   }, interval);
   state.musicFadeTimer = timer;
 }
+function stopEndingMessage() {
+  const audio = $('endingMessageAudio');
+  if (!audio) return;
+  audio.pause();
+  try { audio.currentTime = 0; } catch {}
+  const button = $('playEndingMessageButton');
+  if (button) button.textContent = 'Play closing message';
+}
+function playEndingMessage() {
+  const audio = $('endingMessageAudio');
+  const button = $('playEndingMessageButton');
+  if (!audio) return;
+  try { audio.currentTime = 0; } catch {}
+  audio.volume = Math.max(0, Math.min(1, Number(state.settings.sfxVolume ?? 0.8)));
+  let playback;
+  try { playback = audio.play(); }
+  catch (error) { playback = Promise.reject(error); }
+  Promise.resolve(playback).then(() => {
+    if (button) button.textContent = 'Replay closing message';
+  }).catch(error => {
+    if (button) button.textContent = 'Play closing message';
+    if (error?.name !== 'NotAllowedError' && error?.name !== 'AbortError') {
+      console.info('The closing message could not start.', error);
+    }
+  });
+}
 function stopAllAudio() {
   for (const channel of [...state.audioChannels.keys()]) stopChannel(channel);
   pendingChannelPlayback.clear();
@@ -1594,7 +1621,11 @@ function renderChapterEndScreen() {
   $('chapterEndMessage').textContent = hasNext ? 'You have reached the end of this chapter.' : 'You have reached the end of Narcissu 1.';
   $('nextChapterButton').textContent = hasNext ? 'Continue to next chapter' : 'Return to Main Menu';
   $('nextChapterButton').dataset.last = hasNext ? 'false' : 'true';
+  const endingPanel = $('endingMessagePanel');
+  if (endingPanel) endingPanel.hidden = hasNext;
+  if (!hasNext) stopAllAudio();
   setScreen('chapterEnd');
+  if (!hasNext) playEndingMessage();
 }
 function showChapterEnd() {
   clearWaitingTimer(); state.awaitingClick = false; state.chapterComplete = true;
@@ -2056,6 +2087,10 @@ function bindUI() {
   $('readerLoadButton').addEventListener('click',()=>openSlots('load'));
   $('readerMenuButton').addEventListener('click',returnHome);
   $('nextChapterButton').addEventListener('click',continueChapter);
+  $('playEndingMessageButton').addEventListener('click',playEndingMessage);
+  $('endingMessageAudio').addEventListener('ended',()=>{
+    $('playEndingMessageButton').textContent='Replay closing message';
+  });
   $('chapterEndPreviousButton').addEventListener('click',goPrevious);
   $('endMenuButton').addEventListener('click',()=>{setScreen('home');});
   $('homeOfflineDownloadButton').addEventListener('click',openOfflineDialog);

@@ -151,6 +151,10 @@
           <p class="eyebrow" id="chapterEndKicker">CHAPTER COMPLETE</p>
           <h2 id="chapterEndTitle">The Silver Coupe</h2>
           <p id="chapterEndMessage">You have reached the end of this chapter.</p>
+          <div class="ending-message-panel" id="endingMessagePanel" hidden>
+            <p>A final note</p>
+            <button class="menu-button" id="playEndingMessageButton" type="button">Play closing message</button>
+          </div>
           <div class="end-actions">
             <button class="menu-button" id="chapterEndPreviousButton" type="button">← Previous</button>
             <button class="primary-button" id="nextChapterButton" type="button">Continue</button>
@@ -168,6 +172,7 @@
       <div class="chapter-list" id="chapterList"></div>
     </div>
     <audio id="homeAmbientAudio" src="./public/assets/audio/narcissu-coastal-ambience.mp3" preload="none" loop></audio>
+    <audio id="endingMessageAudio" src="./public/assets/audio/narcissu-ending-message.m4a" preload="auto"></audio>
 
     <section class="welcome-preload" id="welcomeScreen" hidden aria-labelledby="welcomeTitle" aria-hidden="true">
       <div class="welcome-preload-card">

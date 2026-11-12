@@ -1986,3 +1986,30 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{
     min-height:29px;padding:4px 28px 4px 32px;font-size:11px;
   }
 }
+
+
+/* Final-chapter voice message: quiet, understated, and separate from chapter navigation. */
+.ending-message-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 22px auto 0;
+  padding: 14px 16px;
+  width: min(330px, 100%);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: rgba(255,255,255,.025);
+}
+.ending-message-panel[hidden] { display: none !important; }
+.ending-message-panel p {
+  margin: 0 !important;
+  color: var(--muted);
+  font-size: 10px !important;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.ending-message-panel button {
+  min-width: 210px;
+  text-align: center;
+}
