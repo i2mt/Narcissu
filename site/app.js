@@ -16,6 +16,7 @@ const PERSIAN_FONT_SOURCES = {
 };
 const loadedPersianFonts = new Set();
 const pendingPersianFonts = new Map();
+let settingsReturnScreen = 'home';
 let dedicationTimer = null;
 let dedicationDismissed = false;
 let dialogueFitFrame = 0;
@@ -1468,6 +1469,7 @@ function cancelTextSizePreview() {
 }
 
 function openSettingsScreen() {
+  settingsReturnScreen = state.screen === 'settings' ? settingsReturnScreen : state.screen;
   const s=state.settings;
   $('fullTextSize').value=s.textSize;
   $('fullTextSizeValue').textContent=s.textSize+' px';
@@ -1511,7 +1513,7 @@ function saveFullSettings() {
   if(state.settings.persianFont!=='noto')ensurePersianFontLoaded(state.settings.persianFont).then(scheduleDialogueFit).catch(()=>showToast('Persian font unavailable; using the bundled fallback.'));
   setLanguage($('fullLanguage').value);
   if($('fullAutoAdvance').checked!==state.auto)toggleAuto();
-  setScreen('home');
+  setScreen(settingsReturnScreen);
   showToast('Settings applied.');
 }
 function resetFullSettings() {
@@ -1532,7 +1534,7 @@ function bindFullSettings() {
   pairs.forEach(([id,out,format])=>$(id).addEventListener('input',e=>$(out).textContent=format(e.target.value)));
   $('saveFullSettings').addEventListener('click',saveFullSettings);
   $('resetFullSettings').addEventListener('click',resetFullSettings);
-  $('backFromSettings').addEventListener('click',()=>setScreen('home'));
+  $('backFromSettings').addEventListener('click',()=>setScreen(settingsReturnScreen));
 }
 
 function setupSettings() {
