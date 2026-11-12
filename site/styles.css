@@ -1065,3 +1065,109 @@ body[data-mode="enhanced"] .dialogue-panel{background:rgba(15,20,22,var(--dialog
    overlays produced artificial striping and made the photograph look warped. */
 .home-screen::before,.home-screen::after{display:none!important;content:none!important}
 .home-screen{background:linear-gradient(90deg,rgba(4,8,13,.48),rgba(4,8,13,.2) 58%,rgba(4,8,13,.34))!important}
+
+
+/* Reader layout stabilization: preserve the source artwork ratio and reserve
+   distinct vertical bands for the site header, chapter controls, artwork,
+   dialogue and action buttons. */
+.stage.is-reading .background-frame{
+  inset:68px 0 31%;
+  width:auto;
+  max-width:100%;
+}
+.stage.is-reading:not(.is-panorama) .background-frame{
+  left:50%;right:auto;
+  width:auto;
+  height:min(60%,600px);
+  max-width:calc(100% - 36px);
+  aspect-ratio:4/3;
+  bottom:auto;
+  transform:translateX(-50%);
+}
+.stage.is-reading:not(.is-panorama) .background-frame img{
+  width:100%;height:100%;max-width:100%;max-height:100%;
+  object-fit:contain;object-position:center
+}
+.stage.is-reading.is-panorama .background-frame{
+  left:0;right:0;width:100%;height:auto;aspect-ratio:auto;transform:none
+}
+.reader-screen{min-width:0}
+.reader-topline{z-index:3;min-width:0}
+.reader-top-actions{flex:0 0 auto;min-width:0}
+.chapter-heading{min-width:0}
+.chapter-heading h2{max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.language-switch{white-space:nowrap;flex:0 0 auto}
+.dialogue-panel{min-width:0;max-width:100%;overflow:hidden}
+.dialogue-text{min-width:0;max-width:100%;overflow-wrap:anywhere}
+.reader-toolbar{min-width:0}
+.toolbar-left,.toolbar-right{min-width:0}
+.toolbar-button,.next-button{min-width:0;white-space:nowrap}
+
+/* Phones: the global header owns the top row; reader title/language controls
+   sit inside the stage below it. Toolbar groups occupy separate rows. */
+@media(max-width:760px){
+  .app-shell{overflow:hidden}
+  .topbar{position:relative;z-index:20;flex:0 0 48px;height:48px;min-height:48px}
+  .topbar-actions{display:flex;align-items:center;gap:5px;flex:0 0 auto}
+  .topbar .icon-button{position:relative;z-index:21;flex:0 0 28px}
+  .stage{position:relative;min-width:0;overflow:hidden}
+  .reader-screen{padding-top:calc(env(safe-area-inset-top) + 48px)}
+  .reader-topline{
+    top:calc(env(safe-area-inset-top) + 6px);
+    left:max(10px,env(safe-area-inset-left));
+    right:max(10px,env(safe-area-inset-right));
+    min-height:32px;gap:8px
+  }
+  .reader-top-actions{gap:5px}
+  .reader-top-actions .icon-button{width:28px;height:28px;min-width:28px}
+  .language-switch{height:30px;min-height:30px;padding:5px 8px;font-size:9px;gap:6px}
+  .chapter-heading h2{font-size:13px;line-height:1.2}
+  .app-shell.is-reading .reader-toolbar{
+    display:flex!important;flex-direction:column!important;
+    align-items:stretch;justify-content:flex-start;gap:5px;
+    width:100%;margin-top:7px;min-width:0
+  }
+  .app-shell.is-reading .toolbar-left,
+  .app-shell.is-reading .toolbar-right{
+    display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr));
+    gap:5px;width:100%;min-width:0
+  }
+  .app-shell.is-reading .toolbar-left{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .app-shell.is-reading .toolbar-button,
+  .app-shell.is-reading .next-button{
+    display:flex;align-items:center;justify-content:center;
+    width:100%;min-width:0;max-width:100%;min-height:34px;
+    padding:6px 3px;font-size:clamp(8px,2.6vw,10px);
+    line-height:1.1;letter-spacing:0;white-space:nowrap;overflow:hidden
+  }
+  .app-shell.is-reading .toolbar-button span,
+  .app-shell.is-reading .next-button span{margin:0 3px 0 0}
+  .app-shell.is-reading .dialogue-panel{width:100%;max-width:100%;margin-inline:0}
+}
+@media(max-width:390px){
+  .reader-topline{left:8px;right:8px;gap:5px}
+  .chapter-heading h2{font-size:12px}
+  .language-switch{padding:4px 6px;gap:4px;font-size:8px}
+  .app-shell.is-reading .toolbar-left,
+  .app-shell.is-reading .toolbar-right{gap:3px}
+  .app-shell.is-reading .toolbar-button,
+  .app-shell.is-reading .next-button{min-height:32px;padding:5px 1px;font-size:8px}
+}
+@media(max-width:350px){
+  .brand-copy small{display:none}
+  .topbar{padding-inline:8px}
+  .topbar-actions{gap:3px}
+  .topbar .icon-button{width:26px;height:26px;min-width:26px}
+  .reader-topline{left:6px;right:6px}
+  .language-switch{font-size:7px;padding:3px 5px}
+  .app-shell.is-reading .toolbar-button,
+  .app-shell.is-reading .next-button{font-size:7px}
+}
+@media(max-height:500px) and (orientation:landscape){
+  .reader-topline{top:calc(env(safe-area-inset-top) + 5px)}
+  .app-shell.is-reading .reader-toolbar{gap:4px}
+  .app-shell.is-reading .toolbar-left,
+  .app-shell.is-reading .toolbar-right{gap:4px}
+  .app-shell.is-reading .toolbar-button,
+  .app-shell.is-reading .next-button{min-height:29px;padding:4px 2px;font-size:8px}
+}
