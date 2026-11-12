@@ -1593,3 +1593,121 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{
   .settings-control {min-height:27px;font-size:10px}
   .settings-actions {padding-top:3px}
 }
+
+
+/* Follow-up from 1334x750 landscape device screenshots.
+   Reading state belongs to .stage, not .app-shell. Keep the artwork behind
+   the chapter controls and give the image/dialogue bands a deliberate fit. */
+@media (orientation:landscape) and (max-height:850px) and (pointer:coarse) {
+  .stage:not(.is-reading) .home-content {
+    grid-template-columns:minmax(0,1.05fr) minmax(260px,.82fr);
+    column-gap:clamp(24px,4vw,54px);
+    width:min(94%,1120px);
+    padding:12px 18px;
+  }
+  .stage:not(.is-reading) .home-identity {align-self:center;min-width:0}
+  .stage:not(.is-reading) .home-description {
+    max-width:min(100%,440px);
+    padding-right:12px;
+    font-size:clamp(13px,1.9vh,16px);
+    line-height:1.5;
+    overflow-wrap:normal;
+  }
+  .stage:not(.is-reading) .home-menu-column {align-self:center}
+  .stage:not(.is-reading) .menu-actions {width:100%;gap:6px}
+  .stage:not(.is-reading) .menu-actions button {
+    width:100%;min-height:clamp(40px,6.2vh,48px);
+    padding:7px 13px;font-size:clamp(11px,1.7vh,13px);
+  }
+
+  /* The .is-reading state is applied to .stage. Earlier .app-shell.is-reading
+     selectors never matched, leaving the reader's desktop image geometry. */
+  .stage.is-reading .background-frame {
+    position:absolute!important;
+    z-index:0!important;
+    top:48px!important;right:14px!important;bottom:29%!important;left:14px!important;
+    width:auto!important;height:auto!important;max-width:none!important;
+    transform:none!important;aspect-ratio:auto!important;
+    display:grid;place-items:center!important;overflow:hidden;
+  }
+  .stage.is-reading .background-frame img {
+    display:block;width:100%;height:100%;max-width:100%;max-height:100%;
+    object-fit:contain!important;object-position:center!important;
+  }
+  .stage.is-reading .stage-vignette {z-index:1}
+  .stage.is-reading .reader-screen {
+    position:absolute;inset:0;z-index:2;
+    display:flex;flex-direction:column;justify-content:flex-end;
+    min-height:0;overflow:hidden;
+    padding:0 16px 8px!important;
+  }
+  .stage.is-reading .reader-topline {
+    position:absolute;top:8px!important;left:16px!important;right:16px!important;
+    z-index:6;display:flex;align-items:center;gap:10px;min-height:30px;
+  }
+  .stage.is-reading .chapter-heading {min-width:0;flex:1 1 auto}
+  .stage.is-reading .chapter-heading h2 {
+    font-size:clamp(12px,2.2vh,16px);white-space:nowrap;
+    overflow:visible;text-overflow:clip;
+  }
+  .stage.is-reading .reader-top-actions {position:relative;z-index:7;flex:0 0 auto}
+  .stage.is-reading .dialogue-panel {
+    position:relative;z-index:5;flex:0 0 auto;width:100%;max-width:100%;
+    min-height:clamp(66px,16vh,94px);max-height:22vh;
+    margin:0;padding:8px 14px 7px;overflow:hidden;
+  }
+  .stage.is-reading .dialogue-text {
+    max-height:calc(22vh - 22px);overflow:auto;
+    font-size:clamp(12px,2.1vh,15px);line-height:1.42;
+  }
+  .stage.is-reading .dialogue-footer {margin-top:5px;font-size:8px}
+  .stage.is-reading .reader-toolbar {
+    position:relative;z-index:5;display:flex!important;flex-direction:row!important;
+    align-items:center;justify-content:space-between;gap:5px;
+    flex:0 0 auto;width:100%;margin:5px 0 0;min-width:0;
+  }
+  .stage.is-reading .toolbar-left,
+  .stage.is-reading .toolbar-right {
+    display:flex!important;flex:1 1 0;align-items:center;justify-content:center;
+    gap:4px;min-width:0;
+  }
+  .stage.is-reading .toolbar-button,
+  .stage.is-reading .next-button {
+    display:flex;align-items:center;justify-content:center;flex:1 1 0;
+    min-width:0;max-width:100%;min-height:30px;padding:4px 4px;
+    font-size:clamp(8px,1.35vh,10px);line-height:1.1;white-space:nowrap;
+  }
+  .stage.is-reading .reader-progress {z-index:6;height:2px}
+}
+@media (orientation:landscape) and (max-height:650px) and (pointer:coarse) {
+  .stage:not(.is-reading) .home-content {padding:6px 12px;column-gap:22px}
+  .stage:not(.is-reading) .home-description {font-size:12px;line-height:1.4}
+  .stage:not(.is-reading) .menu-actions button {min-height:34px}
+  .stage.is-reading .background-frame {top:42px!important;bottom:27%!important}
+  .stage.is-reading .dialogue-panel {min-height:58px;max-height:19vh;padding:6px 10px}
+  .stage.is-reading .dialogue-text {max-height:calc(19vh - 18px);font-size:12px}
+  .stage.is-reading .toolbar-button,.stage.is-reading .next-button {min-height:26px;font-size:8px}
+}
+
+
+/* The fox seal is part of the main-menu identity and must never be hidden
+   to save vertical space on landscape phones. */
+@media (orientation:landscape) and (max-height:850px) and (pointer:coarse) {
+  .stage:not(.is-reading) .home-identity {
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr);
+    grid-template-rows:auto;
+    align-items:start;
+  }
+  .stage:not(.is-reading) .home-identity > .home-emblem {
+    display:grid!important;
+    visibility:visible!important;
+    opacity:.9!important;
+    width:34px;height:34px;
+    margin:0 0 7px!important;
+    grid-column:1!important;grid-row:auto!important;
+  }
+}
+@media (orientation:landscape) and (max-height:650px) and (pointer:coarse) {
+  .stage:not(.is-reading) .home-emblem {display:grid!important;width:28px;height:28px;margin-bottom:4px!important}
+}
