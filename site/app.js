@@ -2,8 +2,9 @@
 
 const $ = (id) => document.getElementById(id);
 const STORAGE_KEYS = { progress: 'narcissu-progress-v1', settings: 'narcissu-settings-v1', history: 'narcissu-history-v1' };
+const HOME_INSTALL_REMINDER_KEY = 'narcissu-home-install-reminder-seen-v1';
 const DEFAULT_SETTINGS = { mode: 'enhanced', persianFont: 'parastoo', textSize: 18, textSizeVersion: 4, autoDelay: 5, musicVolume: 0.55, sfxVolume: 0.8, ambientVolume: 0.6, reduceMotion: false, highContrast: false, fontStyle: 'serif', messageBoxOpacity: 80 };
-const DEFAULT_LANGUAGE = 'en';
+const DEFAULT_LANGUAGE = 'fa';
 const PERSIAN_FONT_SOURCES = {
   parastoo: {
     family: 'NarcissuParastoo',
@@ -355,6 +356,7 @@ let faData = { translations: {} };
 let revisedOverlay = { translations: {} };
 let historicalEventAlignment = {};
 let deferredInstallPrompt = null;
+let homeInstallReminderShown = false;
 let state = {
   screen: 'home', chapterIndex: 0, eventIndex: 0, currentEvent: null,
   backgroundPath: null, currentMusic: null, language: DEFAULT_LANGUAGE,
@@ -1273,10 +1275,74 @@ function updateOrientationPrompt() {
   } else if (!blocked && state.screen !== 'settings' && state.screen !== 'reader' && state.screen !== 'chapterEnd') {
     state.orientationPaused = false;
   }
+  if (!blocked) maybeShowHomeInstallReminder();
 }
 function updateInstallButton() {
   const button = $('installAppButton');
   if (button) button.hidden = isStandaloneMode();
+  const reminderAction = $('homeInstallActionButton');
+  if (reminderAction && deferredInstallPrompt) {
+    reminderAction.textContent = 'افزودن به صفحهٔ اصلی';
+    reminderAction.dataset.action = 'install';
+  }
+}
+function getHomeInstallGuidance() {
+  const ua = navigator.userAgent || '';
+  const isIOS = /iPhone|iPad|iPod/i.test(ua) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const isAndroid = /Android/i.test(ua);
+  if (isIOS) {
+    return 'برای افزودن بازی، منوی اشتراک‌گذاری مرورگر را باز کنید و گزینهٔ «Add to Home Screen» را بزنید. در Safari این گزینه در منوی Share قرار دارد. سپس بازی را از آیکون صفحهٔ اصلی اجرا کنید.';
+  }
+  if (isAndroid && deferredInstallPrompt) {
+    return 'می‌توانید با دکمهٔ زیر پنجرهٔ نصب مرورگر را باز کنید و Narcissu را به صفحهٔ اصلی اضافه کنید.';
+  }
+  if (isAndroid) {
+    return 'در Chrome، منوی سه‌نقطه را باز کنید و گزینهٔ «Install app» یا «Add to Home screen» را انتخاب کنید؛ نام گزینه ممکن است با نسخهٔ مرورگر فرق داشته باشد.';
+  }
+  if (deferredInstallPrompt) {
+    return 'مرورگر شما از نصب مستقیم پشتیبانی می‌کند. با دکمهٔ زیر پنجرهٔ نصب Narcissu را باز کنید.';
+  }
+  return 'در مرورگر، آیکون نصب کنار نوار نشانی یا گزینهٔ «Install app» در منوی مرورگر را انتخاب کنید. اگر این گزینه در دسترس نیست، می‌توانید بازی را همچنان در همین زبانه اجرا کنید.';
+}
+function maybeShowHomeInstallReminder() {
+  if (homeInstallReminderShown || state.screen !== 'home' || isStandaloneMode() || isPortraitGameplayBlocked()) return;
+  try {
+    if (localStorage.getItem(HOME_INSTALL_REMINDER_KEY) === '1') {
+      homeInstallReminderShown = true;
+      return;
+    }
+  } catch {}
+  const dialog = $('homeInstallReminderDialog');
+  if (!dialog || dialog.open) return;
+  $('homeInstallGuidance').textContent = getHomeInstallGuidance();
+  const action = $('homeInstallActionButton');
+  action.textContent = deferredInstallPrompt ? 'افزودن به صفحهٔ اصلی' : 'متوجه شدم';
+  action.dataset.action = deferredInstallPrompt ? 'install' : 'dismiss';
+  dialog.showModal();
+}
+function markHomeInstallReminderSeen() {
+  homeInstallReminderShown = true;
+  try { localStorage.setItem(HOME_INSTALL_REMINDER_KEY, '1'); } catch {}
+}
+async function handleHomeInstallAction() {
+  const dialog = $('homeInstallReminderDialog');
+  const promptEvent = deferredInstallPrompt;
+  if (promptEvent && $('homeInstallActionButton').dataset.action === 'install') {
+    deferredInstallPrompt = null;
+    markHomeInstallReminderSeen();
+    dialog.close();
+    try {
+      await promptEvent.prompt();
+      const choice = await promptEvent.userChoice;
+      if (choice?.outcome === 'accepted') showToast('Narcissu is being installed.');
+    } catch {
+      showToast('Use your browser menu to install Narcissu.');
+    }
+    updateInstallButton();
+    return;
+  }
+  dialog.close();
 }
 async function installApp() {
   if (deferredInstallPrompt) {
@@ -2110,6 +2176,9 @@ function bindUI() {
   $('closeMusicRoom').addEventListener('click',()=>$('musicRoomDialog').close());
   $('stopMusicRoomButton').addEventListener('click',stopMusicRoom);
   $('installAppButton').addEventListener('click',installApp);
+  $('homeInstallActionButton').addEventListener('click',handleHomeInstallAction);
+  $('homeInstallLaterButton').addEventListener('click',()=>$('homeInstallReminderDialog').close());
+  $('homeInstallReminderDialog').addEventListener('close',markHomeInstallReminderSeen);
   $('closeInstallHelp').addEventListener('click',()=>$('installHelpDialog').close());
   $('closeInstallHelpButton').addEventListener('click',()=>$('installHelpDialog').close());
   $('settingsButton').addEventListener('click',openSettingsScreen);
@@ -2144,6 +2213,7 @@ function bindUI() {
   window.addEventListener('orientationchange',()=>{refreshBackgroundForViewport();scheduleDialogueFit();updateOrientationPrompt();},{passive:true});
   if (document.fonts?.ready) document.fonts.ready.then(scheduleDialogueFit);
   updateInstallButton(); refreshBackgroundForViewport();
+  maybeShowHomeInstallReminder();
   window.addEventListener('online',()=>{updateNetworkStatus();checkForAppUpdate(true);});
   window.addEventListener('offline',updateNetworkStatus);
   window.addEventListener('pageshow',()=>checkForAppUpdate(true));
