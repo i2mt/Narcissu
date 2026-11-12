@@ -1277,3 +1277,171 @@ body {
     border-bottom-color: rgba(240, 237, 228, .48) !important;
   }
 }
+
+
+/* Increment 60 — refine the main-menu identity and compact first-visit setup.
+   Keep the Japanese title optically centered beneath the Latin wordmark. */
+.home-title-lockup {
+  display: block;
+  grid-column: 1 / -1;
+  width: fit-content;
+  max-width: 100%;
+  min-width: 0;
+}
+.home-title-lockup #homeTitle {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  margin: 0;
+}
+.home-title-lockup .home-japanese-title {
+  display: block;
+  width: 100%;
+  margin: 3px 0 5px;
+  text-align: center;
+}
+
+/* A short, two-column welcome card keeps setup readable without scrolling on
+   landscape phones. The progress and both actions remain visible at once. */
+@media (max-width: 1100px) and (orientation: landscape) and (max-height: 650px) {
+  .welcome-preload {
+    place-items: center !important;
+    align-content: center !important;
+    overflow: hidden !important;
+    padding: max(8px, var(--narcissu-safe-top))
+             max(10px, var(--narcissu-safe-right))
+             max(8px, var(--narcissu-safe-bottom))
+             max(10px, var(--narcissu-safe-left)) !important;
+  }
+  .welcome-preload-card {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "eyebrow eyebrow"
+      "title title"
+      "copy copy"
+      "progress progress"
+      "status status"
+      "note actions";
+    align-items: center;
+    column-gap: 14px;
+    row-gap: 5px;
+    width: min(760px, calc(100vw - 20px));
+    max-width: 760px;
+    max-height: calc(100dvh - 16px);
+    margin: 0 !important;
+    padding: 13px clamp(14px, 2.6vw, 24px) !important;
+    overflow: hidden;
+  }
+  .welcome-fox,
+  .welcome-credit { display: none !important; }
+  .welcome-preload-card > .eyebrow {
+    grid-area: eyebrow;
+    grid-column: 1 / -1;
+    margin: 0 !important;
+    font-size: 8px;
+    line-height: 1.15;
+  }
+  .welcome-preload-card h1 {
+    grid-area: title;
+    grid-column: 1 / -1;
+    margin: 0 !important;
+    font-size: clamp(22px, 5.7vh, 28px);
+    line-height: 1.08;
+  }
+  .welcome-copy {
+    grid-area: copy;
+    grid-column: 1 / -1;
+    margin: 0 !important;
+    font-size: clamp(11px, 2.7vh, 13px);
+    line-height: 1.35;
+  }
+  .welcome-progress { grid-area: progress; grid-column: 1 / -1; margin-top: 1px; }
+  .welcome-status {
+    grid-area: status;
+    grid-column: 1 / -1;
+    margin-top: 1px;
+    font-size: 9px;
+    line-height: 1.2;
+  }
+  .welcome-note {
+    grid-area: note;
+    grid-column: 1;
+    min-width: 0;
+    margin: 0 !important;
+    font-size: 9px;
+    line-height: 1.25;
+  }
+  .welcome-actions {
+    grid-area: actions;
+    grid-column: 2;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-end;
+    flex-wrap: nowrap !important;
+    gap: 10px !important;
+    min-width: 0;
+    margin: 0;
+  }
+  .welcome-actions .primary-button {
+    width: auto !important;
+    min-width: 104px !important;
+    min-height: 34px !important;
+    padding: 6px 12px !important;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+  .welcome-skip-button {
+    width: auto !important;
+    min-width: 0 !important;
+    min-height: 30px;
+    padding: 5px 0;
+    font-size: 9px;
+    white-space: nowrap;
+  }
+}
+
+/* Mobile landscape main-menu refinement: slightly taller, more legible rows;
+   align labels toward the right-hand chevrons for a tighter navigation column. */
+@media (max-width: 1100px) and (orientation: landscape) and (pointer: coarse) {
+  .stage:not(.is-reading) .home-title-lockup {
+    width: fit-content;
+    max-width: 100%;
+  }
+  .stage:not(.is-reading) .home-title-lockup .home-japanese-title {
+    width: 100%;
+    text-align: center;
+  }
+  .stage:not(.is-reading) .menu-actions {
+    gap: 3px !important;
+  }
+  .stage:not(.is-reading) .menu-actions .primary-button,
+  .stage:not(.is-reading) .menu-actions .menu-button {
+    justify-content: flex-end !important;
+    text-align: right !important;
+    min-height: 36px !important;
+    padding: 6px 34px 6px 38px !important;
+    font-size: clamp(12px, 3.35vh, 14px) !important;
+    line-height: 1.15 !important;
+  }
+  .stage:not(.is-reading) .menu-actions .primary-button::before,
+  .stage:not(.is-reading) .menu-actions .menu-button::before {
+    left: 11px !important;
+    font-size: 9px !important;
+  }
+  .stage:not(.is-reading) .menu-actions .primary-button::after,
+  .stage:not(.is-reading) .menu-actions .menu-button::after {
+    right: 11px !important;
+  }
+}
+@media (max-width: 760px) and (max-height: 380px) and (orientation: landscape) and (pointer: coarse) {
+  .stage:not(.is-reading) .menu-actions .primary-button,
+  .stage:not(.is-reading) .menu-actions .menu-button {
+    min-height: 30px !important;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+    font-size: 11px !important;
+  }
+}

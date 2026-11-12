@@ -221,10 +221,10 @@ def run():
                 results.append(record)
             context.close()
         browser.close()
-    (ROOT/'BROWSER_QA_RESULTS_0.59.json').write_text(json.dumps(results,indent=2,ensure_ascii=False),encoding='utf-8')
+    (ROOT/'BROWSER_QA_RESULTS_0.60.json').write_text(json.dumps(results,indent=2,ensure_ascii=False),encoding='utf-8')
     failed=[f"{r['viewport']}: {k}" for r in results for k,v in r['checks'].items() if not v]
-    summary={'viewport_count':len(results),'states_tested':['home','settings','reader-en','reader-fa'],'failed_checks':failed,'screenshots':len(list(QA_DIR.glob('*.png'))),'results_file':'BROWSER_QA_RESULTS_0.59.json'}
-    (ROOT/'BROWSER_QA_SUMMARY_0.59.json').write_text(json.dumps(summary,indent=2),encoding='utf-8')
+    summary={'viewport_count':len(results),'states_tested':['home','settings','reader-en','reader-fa'],'failed_checks':failed,'screenshots':len(list(QA_DIR.glob('*.png'))),'results_file':'BROWSER_QA_RESULTS_0.60.json'}
+    (ROOT/'BROWSER_QA_SUMMARY_0.60.json').write_text(json.dumps(summary,indent=2),encoding='utf-8')
     print(json.dumps(summary,indent=2))
     return 1 if failed else 0
 

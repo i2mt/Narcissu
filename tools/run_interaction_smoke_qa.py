@@ -302,12 +302,12 @@ def main():
             })
             context.close()
         browser.close()
-    (ROOT/'INTERACTION_SMOKE_RESULTS_0.59.json').write_text(json.dumps(out,indent=2,ensure_ascii=False),encoding='utf-8')
+    (ROOT/'INTERACTION_SMOKE_RESULTS_0.60.json').write_text(json.dumps(out,indent=2,ensure_ascii=False),encoding='utf-8')
     failed=[]
     for r in out:
         for key in ['settings_audio_tab_works','settings_keyboard_tab_navigation','only_selected_settings_panel_visible','ambient_silent_in_settings','home_orientation_prompt_matches_viewport','home_portrait_gate_makes_app_inert','home_prompt_hides_in_landscape','chapter_select_visible_in_foreground','chapter_select_populates_chapters','chapter_select_moves_focus_to_close','chapter_select_escape_closes','music_room_opens_and_lists_tracks','music_room_layout_uses_columns_and_fits_viewport','music_room_play_silences_ambience_after_delayed_promise','music_room_pause_restores_ambience','music_room_resume_silences_ambience','music_room_close_keeps_ambience_off_while_music_plays','music_room_pause_in_settings_keeps_ambience_off','music_room_return_home_restores_ambience_after_pause','music_room_stop_restores_ambience','home_settings_button_matches_ambient_size','orientation_prompt_matches_viewport','rotate_prompt_hides_in_landscape','auto_mode_passes_click_wait_and_starts_scene_music','auto_mode_music_playback_attempted_after_audio_unlock','story_sound_effect_playback_after_audio_unlock','main_menu_offline_download_opens','settings_and_language_touch_targets_are_larger','fullscreen_control_removed','offline_download_includes_photo_and_ambience','menu_ambience_restarts_on_return_home','ambience_stays_off_in_settings_after_return','ambient_toggle_on','ambient_toggle_off','new_game_opens_reader','dialogue_loaded','live_language_switch_round_trip','save_slot_and_continue_work']:
             if not r.get(key): failed.append(f"{r['viewport']}: {key}")
         if r['page_errors']: failed.append(f"{r['viewport']}: page errors {r['page_errors']}")
-    print(json.dumps({'runs':len(out),'failed_checks':failed,'results_file':'INTERACTION_SMOKE_RESULTS_0.59.json','details':out},indent=2,ensure_ascii=False))
+    print(json.dumps({'runs':len(out),'failed_checks':failed,'results_file':'INTERACTION_SMOKE_RESULTS_0.60.json','details':out},indent=2,ensure_ascii=False))
     return 1 if failed else 0
 if __name__=='__main__': raise SystemExit(main())
