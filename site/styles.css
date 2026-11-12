@@ -924,3 +924,13 @@ body.interface-sans .settings-screen,body.interface-sans .settings-screen button
 body.high-contrast .dialogue-panel{background:#000!important;border-color:#fff!important;color:#fff!important}
 body.high-contrast .menu-button,body.high-contrast .primary-button{border:1px solid #fff}
 body[data-mode="enhanced"] .dialogue-panel{background:rgba(15,20,22,var(--dialogue-opacity,.78));}
+
+@media(min-width:761px){
+ .home-identity{display:grid;grid-template-columns:54px minmax(0,1fr);column-gap:22px;align-items:center}
+ .home-identity>.home-emblem{grid-column:1;grid-row:1;margin:0}
+ .home-identity>.home-credit{grid-column:2;grid-row:1;margin:0}
+ .home-identity>.eyebrow,.home-identity>#homeTitle,.home-identity>.home-japanese-title,.home-identity>.home-subtitle,.home-identity>.home-description{grid-column:1/-1}
+}
+@media(max-width:760px){
+ .home-identity{display:block}
+}
