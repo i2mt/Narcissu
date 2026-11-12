@@ -40,80 +40,87 @@ function ambientAutoplayAllowed() {
   try { return localStorage.getItem(AMBIENT_PREFERENCE_KEY) !== '0'; } catch { return true; }
 }
 function startAmbientSound() {
-  if (ambientEnabled || ambientStartPending) return;
-  ambientStartPending = true;
   const button = $('ambientToggle');
   const AudioContextClass = window.AudioContext || window.webkitAudioContext;
   if (!AudioContextClass) {
-    ambientStartPending = false;
-    if (button) button.textContent = 'Ambient sound unavailable';
+    if (button) button.textContent = 'Ambient audio unavailable';
     return;
   }
+
   try {
+    // Build the graph once. Every manual press calls resume() again, even if a
+    // previous autoplay attempt was left suspended by iOS Safari.
     if (!ambientAudioContext) {
-      const context = new AudioContextClass();
-      ambientAudioContext = context;
+      ambientAudioContext = new AudioContextClass();
+      const context = ambientAudioContext;
       const master = context.createGain();
       master.gain.value = 0;
       master.connect(context.destination);
       ambientMasterGain = master;
 
-      // A continuously looping, synthesized coastal wash. No external audio file.
-      const bufferSize = context.sampleRate * 5;
+      const bufferSize = context.sampleRate * 6;
       const noiseBuffer = context.createBuffer(1, bufferSize, context.sampleRate);
-      const channel = noiseBuffer.getChannelData(0);
+      const samples = noiseBuffer.getChannelData(0);
       let brown = 0;
       for (let i = 0; i < bufferSize; i++) {
         const white = Math.random() * 2 - 1;
-        brown = (brown + 0.025 * white) / 1.025;
-        channel[i] = brown * 3.5;
+        brown = (brown + 0.035 * white) / 1.035;
+        samples[i] = brown * 4.2;
       }
-      const noise = context.createBufferSource();
-      noise.buffer = noiseBuffer;
-      noise.loop = true;
 
-      const lowPass = context.createBiquadFilter();
-      lowPass.type = 'lowpass';
-      lowPass.frequency.value = 720;
-      lowPass.Q.value = 0.55;
-
-      const highPass = context.createBiquadFilter();
-      highPass.type = 'highpass';
-      highPass.frequency.value = 38;
-
+      const surf = context.createBufferSource();
+      surf.buffer = noiseBuffer;
+      surf.loop = true;
+      const surfFilter = context.createBiquadFilter();
+      surfFilter.type = 'lowpass';
+      surfFilter.frequency.value = 620;
+      surfFilter.Q.value = 0.55;
       const surfGain = context.createGain();
-      surfGain.gain.value = 0.22;
+      surfGain.gain.value = 0.42;
+
+      const windFilter = context.createBiquadFilter();
+      windFilter.type = 'bandpass';
+      windFilter.frequency.value = 1050;
+      windFilter.Q.value = 0.38;
+      const windGain = context.createGain();
+      windGain.gain.value = 0.075;
 
       const swell = context.createOscillator();
       const swellDepth = context.createGain();
       swell.type = 'sine';
-      swell.frequency.value = 0.075;
-      swellDepth.gain.value = 0.12;
+      swell.frequency.value = 0.065;
+      swellDepth.gain.value = 0.13;
       swell.connect(swellDepth);
       swellDepth.connect(surfGain.gain);
 
-      const windFilter = context.createBiquadFilter();
-      windFilter.type = 'bandpass';
-      windFilter.frequency.value = 1150;
-      windFilter.Q.value = 0.45;
-      const windGain = context.createGain();
-      windGain.gain.value = 0.035;
-
-      noise.connect(highPass);
-      highPass.connect(lowPass);
-      lowPass.connect(surfGain);
+      surf.connect(surfFilter);
+      surfFilter.connect(surfGain);
       surfGain.connect(master);
-      highPass.connect(windFilter);
+      surfFilter.connect(windFilter);
       windFilter.connect(windGain);
       windGain.connect(master);
 
-      noise.start();
+      surf.start();
       swell.start();
     }
-    ambientAudioContext.resume().then(() => {
-      if (!ambientMasterGain) return;
+
+    // Invoke resume immediately in the user-gesture call stack. Do not let a
+    // stale "pending" flag prevent a later button press from retrying.
+    ambientStartPending = true;
+    const resumeResult = ambientAudioContext.resume();
+    Promise.resolve(resumeResult).then(() => {
+      if (!ambientAudioContext || !ambientMasterGain) return;
+      if (ambientAudioContext.state !== 'running') {
+        ambientStartPending = false;
+        if (button) button.textContent = '♫ Tap to enable sea ambience';
+        return;
+      }
       ambientMasterGain.gain.cancelScheduledValues(ambientAudioContext.currentTime);
-      ambientMasterGain.gain.setTargetAtTime(state.settings.ambientVolume ?? 0.6, ambientAudioContext.currentTime, 1.8);
+      ambientMasterGain.gain.setTargetAtTime(
+        Math.max(0, Math.min(1, Number(state.settings.ambientVolume ?? 0.6))),
+        ambientAudioContext.currentTime,
+        0.9
+      );
       ambientEnabled = true;
       ambientStartPending = false;
       try { localStorage.setItem(AMBIENT_PREFERENCE_KEY, '1'); } catch {}
@@ -121,14 +128,15 @@ function startAmbientSound() {
         button.textContent = '♫ Sea ambience on';
         button.setAttribute('aria-pressed', 'true');
       }
-    }).catch(() => {
+    }).catch(error => {
       ambientStartPending = false;
-      if (button) button.textContent = '♫ Enable sea ambience';
+      console.warn('Ambient audio resume failed.', error);
+      if (button) button.textContent = '♫ Tap to retry ambience';
     });
   } catch (error) {
     ambientStartPending = false;
     console.warn('Ambient audio could not be initialized.', error);
-    if (button) button.textContent = 'Ambient sound unavailable';
+    if (button) button.textContent = 'Ambient audio unavailable';
   }
 }
 function stopAmbientSound() {
