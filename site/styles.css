@@ -917,3 +917,10 @@ body.interface-sans .settings-screen,body.interface-sans .settings-screen button
  .home-menu-column{width:min(100%,320px)}
  .home-footer{font-size:7px}
 }
+
+/* Apply the selected appearance settings to the reader as well as the settings view. */
+body.interface-sans .home-screen,body.interface-sans .reader-screen,body.interface-sans .chapter-end-screen,
+body.interface-sans .settings-screen,body.interface-sans .settings-screen button,body.interface-sans .settings-screen select{font-family:Arial,sans-serif}
+body.high-contrast .dialogue-panel{background:#000!important;border-color:#fff!important;color:#fff!important}
+body.high-contrast .menu-button,body.high-contrast .primary-button{border:1px solid #fff}
+body[data-mode="enhanced"] .dialogue-panel{background:rgba(15,20,22,var(--dialogue-opacity,.78));}
