@@ -34,7 +34,14 @@ const APP_UPDATE_CHECK_INTERVAL_MS = 20 * 60 * 1000;
 let ambientAudioContext = null;
 let ambientMasterGain = null;
 let ambientEnabled = false;
+let ambientStartPending = false;
+const AMBIENT_PREFERENCE_KEY = 'narcissu-ambient-enabled-v1';
+function ambientAutoplayAllowed() {
+  try { return localStorage.getItem(AMBIENT_PREFERENCE_KEY) !== '0'; } catch { return true; }
+}
 function startAmbientSound() {
+  if (ambientEnabled || ambientStartPending) return;
+  ambientStartPending = true;
   const button = $('ambientToggle');
   const AudioContextClass = window.AudioContext || window.webkitAudioContext;
   if (!AudioContextClass) {
@@ -107,19 +114,25 @@ function startAmbientSound() {
       ambientMasterGain.gain.cancelScheduledValues(ambientAudioContext.currentTime);
       ambientMasterGain.gain.setTargetAtTime(state.settings.ambientVolume ?? 0.6, ambientAudioContext.currentTime, 1.8);
       ambientEnabled = true;
+      ambientStartPending = false;
+      try { localStorage.setItem(AMBIENT_PREFERENCE_KEY, '1'); } catch {}
       if (button) {
         button.textContent = '♫ Sea ambience on';
         button.setAttribute('aria-pressed', 'true');
       }
     }).catch(() => {
+      ambientStartPending = false;
       if (button) button.textContent = '♫ Enable sea ambience';
     });
   } catch (error) {
+    ambientStartPending = false;
     console.warn('Ambient audio could not be initialized.', error);
     if (button) button.textContent = 'Ambient sound unavailable';
   }
 }
 function stopAmbientSound() {
+  try { localStorage.setItem(AMBIENT_PREFERENCE_KEY, '0'); } catch {}
+  ambientStartPending = false;
   if (!ambientAudioContext || !ambientMasterGain) return;
   ambientMasterGain.gain.cancelScheduledValues(ambientAudioContext.currentTime);
   ambientMasterGain.gain.setTargetAtTime(0, ambientAudioContext.currentTime, 0.35);
@@ -1585,6 +1598,17 @@ function bindUI() {
   $('brandHome').addEventListener('click',e=>{e.preventDefault();returnHome();});
   $('newGameButton').addEventListener('click',startNewGame);
   $('ambientToggle')?.addEventListener('click', () => ambientEnabled ? stopAmbientSound() : startAmbientSound());
+  // Browsers such as iOS Safari block audible autoplay until a real user
+  // gesture. Start on the first interaction anywhere, rather than requiring
+  // a separate tap on the ambience control. Respect an explicit opt-out.
+  const tryAmbientAfterGesture = (event) => {
+    if (!ambientAutoplayAllowed()) return;
+    if (event.target?.closest?.('#ambientToggle')) return;
+    if ((state.settings.ambientVolume ?? 0.6) <= 0) return;
+    startAmbientSound();
+  };
+  document.addEventListener('pointerdown', tryAmbientAfterGesture, { capture: true, once: true });
+  document.addEventListener('keydown', tryAmbientAfterGesture, { capture: true, once: true });
   $('continueButton').addEventListener('click',()=>{const p=getProgress();if(p)restoreProgress(p);});
   $('chaptersButton').addEventListener('click',()=>{$('chapterSelectPanel').hidden=false;});
   $('closeChapters').addEventListener('click',()=>{$('chapterSelectPanel').hidden=true;});
