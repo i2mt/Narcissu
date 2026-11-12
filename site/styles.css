@@ -1171,3 +1171,12 @@ body[data-mode="enhanced"] .dialogue-panel{background:rgba(15,20,22,var(--dialog
   .app-shell.is-reading .toolbar-button,
   .app-shell.is-reading .next-button{min-height:29px;padding:4px 2px;font-size:8px}
 }
+
+/* Desktop: keep reader chapter/language controls below the fixed global header. */
+@media(min-width:761px){
+  .app-shell.is-reading .reader-screen{padding-top:112px}
+  .app-shell.is-reading .reader-topline{
+    top:94px;left:clamp(24px,4vw,56px);right:clamp(24px,4vw,56px);
+    min-height:34px;align-items:center;z-index:3
+  }
+}
