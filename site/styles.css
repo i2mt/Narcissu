@@ -1759,3 +1759,114 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{
     line-height:1.4;overflow-wrap:normal;
   }
 }
+
+
+/* Landscape phone home screen: fit the complete composition inside the stage.
+   Keep the identity and menu in the upper row, and the credits/audio control
+   in a compact footer row that remains visible even on short screens. */
+@media (orientation:landscape) and (max-height:850px) and (pointer:coarse) {
+  .stage:not(.is-reading) .home-screen {
+    display:flex!important;align-items:stretch;justify-content:stretch;
+    height:100%;min-height:0;max-height:100%;
+    overflow:hidden!important;padding:0!important;
+  }
+  .stage:not(.is-reading) .home-content {
+    box-sizing:border-box;width:100%;max-width:1120px;height:100%;
+    min-height:0;max-height:100%;margin:0 auto;
+    display:grid!important;
+    grid-template-columns:minmax(0,1.05fr) minmax(230px,.82fr);
+    grid-template-rows:minmax(0,1fr) auto;
+    align-items:center;column-gap:clamp(20px,3.5vw,46px);
+    row-gap:4px;padding:clamp(7px,1.4vh,12px) clamp(14px,3vw,30px) 5px;
+    overflow:hidden;
+  }
+  .stage:not(.is-reading) .home-identity {
+    grid-column:1;grid-row:1;align-self:center;
+    display:flex!important;flex-direction:column!important;
+    justify-content:center;align-items:flex-start;gap:0;
+    min-width:0;max-width:100%;width:100%;
+  }
+  .stage:not(.is-reading) .home-identity > * {
+    position:static;flex:none;grid-area:auto!important;
+    grid-column:auto!important;grid-row:auto!important;min-width:0;
+  }
+  .stage:not(.is-reading) .home-emblem {
+    display:grid!important;width:clamp(24px,4vh,31px);height:clamp(24px,4vh,31px);
+    flex:0 0 auto;margin:0 0 4px!important;
+  }
+  .stage:not(.is-reading) .home-credit {
+    display:flex;flex-direction:column;align-items:flex-start;
+    font-size:clamp(8px,1.25vh,10px);line-height:1.15;
+    margin:0 0 5px!important;
+  }
+  .stage:not(.is-reading) .home-credit strong {
+    font-size:clamp(11px,1.8vh,14px);line-height:1.15
+  }
+  .stage:not(.is-reading) .home-credit small {display:none}
+  .stage:not(.is-reading) .home-identity .eyebrow {
+    margin:0 0 3px!important;font-size:clamp(8px,1.2vh,10px);line-height:1.2
+  }
+  .stage:not(.is-reading) .home-content h1 {
+    font-size:clamp(36px,6.8vh,58px);line-height:.98;margin:0
+  }
+  .stage:not(.is-reading) .home-japanese-title {
+    font-size:clamp(12px,2vh,16px);line-height:1.15;margin:2px 0 3px
+  }
+  .stage:not(.is-reading) .home-subtitle {
+    font-size:clamp(8px,1.35vh,10px);line-height:1.2;margin:2px 0 5px
+  }
+  .stage:not(.is-reading) .home-description {
+    max-width: min(100%,430px);padding:0!important;margin:0!important;
+    font-size:clamp(10px,1.65vh,13px);line-height:1.35
+  }
+  .stage:not(.is-reading) .home-menu-column {
+    grid-column:2;grid-row:1;align-self:center;
+    width:100%;min-width:0;margin:0
+  }
+  .stage:not(.is-reading) .menu-actions {
+    display:flex!important;flex-direction:column;align-items:stretch;
+    width:100%;gap:clamp(3px,.65vh,5px)
+  }
+  .stage:not(.is-reading) .menu-actions button {
+    display:flex;align-items:center;width:100%;min-width:0;
+    min-height:clamp(30px,5.3vh,39px);height:auto;
+    padding:4px 11px;font-size:clamp(10px,1.55vh,12px);
+    line-height:1.1
+  }
+  .stage:not(.is-reading) .home-footer {
+    grid-column:1/-1;grid-row:2;display:flex!important;
+    flex-wrap:nowrap;align-items:center;justify-content:space-between;
+    gap:8px;min-width:0;width:100%;margin:0!important;
+    padding:5px 0 0!important;border-top:1px solid rgba(230,228,218,.2);
+    font-size:clamp(6px,.95vh,8px);line-height:1.2;
+    white-space:nowrap;overflow:hidden;
+  }
+  .stage:not(.is-reading) .home-footer > span {
+    min-width:0;overflow:hidden;text-overflow:ellipsis
+  }
+  .stage:not(.is-reading) .home-footer .ambient-toggle {
+    display:inline-flex;flex:0 0 auto;align-items:center;
+    min-height:24px;padding:3px 7px;font-size:clamp(7px,1vh,9px);
+    line-height:1.1;white-space:nowrap
+  }
+  .stage:not(.is-reading) .home-footer .build-label {display:none}
+}
+@media (orientation:landscape) and (max-height:650px) and (pointer:coarse) {
+  .stage:not(.is-reading) .home-content {
+    grid-template-columns:minmax(0,1fr) minmax(205px,.78fr);
+    column-gap:16px;padding:5px 12px 3px;
+  }
+  .stage:not(.is-reading) .home-emblem {
+    width:22px;height:22px;margin-bottom:3px!important
+  }
+  .stage:not(.is-reading) .home-content h1 {font-size:clamp(32px,6vh,44px)}
+  .stage:not(.is-reading) .home-description {font-size:10px;line-height:1.25}
+  .stage:not(.is-reading) .menu-actions {gap:2px}
+  .stage:not(.is-reading) .menu-actions button {
+    min-height:27px;padding:3px 8px;font-size:10px
+  }
+  .stage:not(.is-reading) .home-footer {gap:5px;font-size:6px}
+  .stage:not(.is-reading) .home-footer .ambient-toggle {
+    min-height:20px;padding:2px 5px;font-size:7px
+  }
+}
