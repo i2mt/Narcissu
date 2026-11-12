@@ -1490,7 +1490,7 @@ function openSettingsScreen() {
   $('fullHighContrast').checked=!!s.highContrast;
   $('fullLanguage').value=state.language;
   document.querySelectorAll('[data-settings-tab]').forEach(b=>b.classList.toggle('is-active',b.dataset.settingsTab==='reading'));
-  document.querySelectorAll('[data-settings-panel]').forEach(p=>{p.hidden=p.dataset.settingsPanel!=='reading';p.classList.toggle('is-active',!p.hidden);});
+  document.querySelectorAll('[data-settings-panel]').forEach(p=>{p.hidden=false;p.classList.toggle('is-active',p.dataset.settingsPanel==='reading');});
   setScreen('settings');
 }
 function saveFullSettings() {
@@ -1530,7 +1530,8 @@ function bindFullSettings() {
   document.querySelectorAll('[data-settings-tab]').forEach(button=>button.addEventListener('click',()=>{
     const tab=button.dataset.settingsTab;
     document.querySelectorAll('[data-settings-tab]').forEach(b=>b.classList.toggle('is-active',b===button));
-    document.querySelectorAll('[data-settings-panel]').forEach(panel=>{panel.hidden=panel.dataset.settingsPanel!==tab;panel.classList.toggle('is-active',!panel.hidden);});
+    const panel=document.querySelector('[data-settings-panel="'+tab+'"]');
+    if(panel){panel.scrollIntoView({behavior:state.settings.reduceMotion?'auto':'smooth',block:'nearest'});}
   }));
   const pairs=[['fullTextSize','fullTextSizeValue',v=>v+' px'],['fullAutoDelay','fullAutoDelayValue',v=>v+' s'],['fullMessageOpacity','fullMessageOpacityValue',v=>v+'%'],['fullMusicVolume','fullMusicVolumeValue',v=>v+'%'],['fullSfxVolume','fullSfxVolumeValue',v=>v+'%'],['fullAmbientVolume','fullAmbientVolumeValue',v=>v+'%']];
   pairs.forEach(([id,out,format])=>$(id).addEventListener('input',e=>$(out).textContent=format(e.target.value)));
