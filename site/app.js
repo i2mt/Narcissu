@@ -1586,11 +1586,11 @@ function processNext() {
         }
         break;
       case 'audio_play':
-        if (!isEndingMessagePlaying()) playChannel(ev);
+        if (!isEndingMessagePlaying() && !endingMessagePending) playChannel(ev);
         break;
       case 'audio_stop_channel': stopChannel(ev.channel); break;
       case 'music_play':
-        if (!isEndingMessagePlaying()) playMusic(ev.path, ev.loop);
+        if (!isEndingMessagePlaying() && !endingMessagePending) playMusic(ev.path, ev.loop);
         break;
       case 'music_fadeout': fadeMusic(ev.duration_ms); break;
       case 'window_mode': state.windowMode = ev.window; break;
