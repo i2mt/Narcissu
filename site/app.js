@@ -45,6 +45,7 @@ function startAmbientSound() {
   const button = $('ambientToggle');
   const AudioContextClass = window.AudioContext || window.webkitAudioContext;
   if (!AudioContextClass) {
+    ambientStartPending = false;
     if (button) button.textContent = 'Ambient sound unavailable';
     return;
   }
@@ -174,7 +175,7 @@ async function prepareWelcomeAssets() {
     try { localStorage.setItem('narcissu-welcome-prepared-v1', '1'); } catch {}
     screen.hidden = true;
     screen.setAttribute('aria-hidden', 'true');
-    startAmbientSound();
+    if (ambientAutoplayAllowed() && (state.settings.ambientVolume ?? 0.6) > 0) startAmbientSound();
     startDedicationSequence();
   };
   skipButton.addEventListener('click', enter, { once: true });
