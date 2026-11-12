@@ -29,6 +29,7 @@ let appUpdateInterval = null;
 let serviceWorkerHadController = false;
 let serviceWorkerUpdateReloading = false;
 const APP_UPDATE_CHECK_INTERVAL_MS = 20 * 60 * 1000;
+const ASSET_CACHE_NAME = 'narcissu-assets-v6';
 
 
 let ambientAudioContext = null;
@@ -40,6 +41,41 @@ function ambientAutoplayAllowed() {
   try { return localStorage.getItem(AMBIENT_PREFERENCE_KEY) !== '0'; } catch { return true; }
 }
 function startAmbientSound() {
+  const button = $('ambientToggle');
+  const audio = $('homeAmbientAudio');
+  if (audio) {
+    audio.volume = Math.max(0, Math.min(1, Number(state.settings.ambientVolume ?? 0.6)));
+    audio.loop = true;
+    ambientStartPending = true;
+    let audioPlayResult;
+    try { audioPlayResult = audio.play(); }
+    catch (error) {
+      ambientStartPending = false;
+      console.warn('Recorded ambience could not start; using the synthesized fallback.', error);
+      startSyntheticAmbientSound();
+      return;
+    }
+    Promise.resolve(audioPlayResult).then(() => {
+      ambientStartPending = false;
+      if (!(state.screen === 'home' || state.screen === 'settings') || document.hidden) {
+        audio.pause();
+        ambientEnabled = false;
+        return;
+      }
+      ambientEnabled = true;
+      try { localStorage.setItem(AMBIENT_PREFERENCE_KEY, '1'); } catch {}
+      if (button) { button.textContent = '♫'; button.title = 'Sea ambience on'; button.setAttribute('aria-label', 'Turn sea ambience off'); button.setAttribute('aria-pressed', 'true'); }
+    }).catch(error => {
+      ambientStartPending = false;
+      console.warn('Recorded ambience could not be played; using the synthesized fallback.', error);
+      startSyntheticAmbientSound();
+    });
+    return;
+  }
+  startSyntheticAmbientSound();
+}
+
+function startSyntheticAmbientSound() {
   const button = $('ambientToggle');
   const AudioContextClass = window.AudioContext || window.webkitAudioContext;
   if (!AudioContextClass) {
@@ -125,7 +161,9 @@ function startAmbientSound() {
       ambientStartPending = false;
       try { localStorage.setItem(AMBIENT_PREFERENCE_KEY, '1'); } catch {}
       if (button) {
-        button.textContent = '♫ Sea ambience on';
+        button.textContent = '♫';
+        button.title = 'Sea ambience on';
+        button.setAttribute('aria-label', 'Turn sea ambience off');
         button.setAttribute('aria-pressed', 'true');
       }
     }).catch(error => {
@@ -140,8 +178,10 @@ function startAmbientSound() {
   }
 }
 function silenceAmbientForNonMenu() {
-  // Scene music owns the audio space while reading. Mute the menu ambience
-  // without changing the user's saved preference or destroying the graph.
+  // Scene music owns the audio space while reading. Pause menu ambience
+  // without changing the user's saved preference.
+  const audio = $('homeAmbientAudio');
+  if (audio) audio.pause();
   ambientStartPending = false;
   if (ambientAudioContext && ambientMasterGain) {
     ambientMasterGain.gain.cancelScheduledValues(ambientAudioContext.currentTime);
@@ -150,29 +190,38 @@ function silenceAmbientForNonMenu() {
   ambientEnabled = false;
   const button = $('ambientToggle');
   if (button) {
-    button.textContent = '♫ Enable sea ambience';
+    button.textContent = '♫';
+    button.title = 'Sea ambience paused';
+    button.setAttribute('aria-label', 'Enable sea ambience');
     button.setAttribute('aria-pressed', 'false');
   }
 }
 function stopAmbientSound() {
   try { localStorage.setItem(AMBIENT_PREFERENCE_KEY, '0'); } catch {}
+  const audio = $('homeAmbientAudio');
+  if (audio) { audio.pause(); try { audio.currentTime = 0; } catch {} }
   ambientStartPending = false;
-  if (!ambientAudioContext || !ambientMasterGain) return;
-  ambientMasterGain.gain.cancelScheduledValues(ambientAudioContext.currentTime);
-  ambientMasterGain.gain.setTargetAtTime(0, ambientAudioContext.currentTime, 0.35);
+  if (ambientAudioContext && ambientMasterGain) {
+    ambientMasterGain.gain.cancelScheduledValues(ambientAudioContext.currentTime);
+    ambientMasterGain.gain.setTargetAtTime(0, ambientAudioContext.currentTime, 0.35);
+  }
   ambientEnabled = false;
   const button = $('ambientToggle');
   if (button) {
-    button.textContent = '♫ Enable sea ambience';
+    button.textContent = '♫';
+    button.title = 'Sea ambience paused';
+    button.setAttribute('aria-label', 'Enable sea ambience');
     button.setAttribute('aria-pressed', 'false');
   }
 }
 
 const WELCOME_CACHE_NAME = 'narcissu-welcome-assets-v1';
 const WELCOME_ASSETS = [
+  './public/assets/images/narcissu-coastal-background.jpg',
   './public/assets/e/umibe_yoru.jpg',
   './public/assets/se/nami02b.ogg',
   './public/assets/se/umi13.ogg',
+  './public/assets/audio/narcissu-coastal-ambience.mp3',
   './public/assets/bgm/a01.mp3',
   './icons/fox-emblem-white.png'
 ];
@@ -280,10 +329,13 @@ function normalizeSettings(raw, fallback = DEFAULT_SETTINGS) {
 }
 function normalizePath(path) { return String(path || '').replace(/\\/g, '/').replace(/^\/+/, '').toLocaleLowerCase('en-US'); }
 function isMobileArtworkViewport() {
-  return !!window.matchMedia?.('(max-width: 760px), (max-height: 500px) and (orientation: landscape)').matches;
+  return !!window.matchMedia?.('(max-width: 900px)').matches;
+}
+function isCompactReaderViewport() {
+  return !!window.matchMedia?.('(max-width: 1100px)').matches;
 }
 function isMobileLandscapeViewport() {
-  return !!window.matchMedia?.('(max-height: 500px) and (orientation: landscape)').matches;
+  return !!window.matchMedia?.('(max-width: 900px) and (orientation: landscape)').matches;
 }
 function assetURL(path, preferMobileArtwork = false) {
   const item = assetManifest?.assets?.[normalizePath(path)];
@@ -302,13 +354,13 @@ function showToast(message) {
 }
 function chapter() { return story.chapters[state.chapterIndex]; }
 function updateReaderChrome() {
-  const reading = state.screen === 'reader';
-  const compact = reading && isMobileArtworkViewport();
+  const reading = state.screen === 'reader' || (state.screen === 'settings' && state.settingsReturnScreen === 'reader');
+  const compact = reading && isCompactReaderViewport();
   const shell = document.querySelector('.app-shell');
   shell?.classList.toggle('is-reading', reading);
   shell?.classList.toggle('is-compact-reading', compact);
-  // Desktop keeps its familiar top bar. Phones move only the essential actions
-  // into the compact reader header while the global chrome is collapsed.
+  // Desktop keeps its familiar top bar. Phones and tablets move the essential
+  // actions into the compact reader header to prevent collision with the chapter title.
   const targetActions = compact
     ? document.querySelector('.reader-top-actions')
     : document.querySelector('.topbar-actions');
@@ -318,20 +370,25 @@ function updateReaderChrome() {
   }
 }
 function setScreen(name) {
-  if (name !== 'home') {
+  const settingsOverReader = name === 'settings' && state.settingsReturnScreen === 'reader';
+  const menuBackdrop = name === 'home' || (name === 'settings' && !settingsOverReader);
+  const readerBackdrop = name === 'reader' || settingsOverReader;
+  if (!menuBackdrop) {
     silenceAmbientForNonMenu();
   } else if (ambientAutoplayAllowed() && (state.settings.ambientVolume ?? 0.6) > 0) {
-    // Returning home is itself normally a user gesture, so resume ambience
-    // here when the user's preference is still enabled.
+    // The menu and its settings overlay share the same coastal ambience.
     startAmbientSound();
   }
   state.screen = name;
+  $('stage')?.classList.toggle('has-home-backdrop', menuBackdrop);
+  $('stage')?.classList.toggle('is-settings-open', name === 'settings');
+  document.querySelector('.app-shell')?.classList.toggle('is-home-backdrop', menuBackdrop);
   try { localStorage.setItem('narcissu-active-screen', name); } catch {}
-  $('homeScreen').hidden = name !== 'home';
-  $('readerScreen').hidden = name !== 'reader';
+  $('homeScreen').hidden = !menuBackdrop;
+  $('readerScreen').hidden = !readerBackdrop;
   $('chapterEndScreen').hidden = name !== 'chapterEnd';
   if ($('settingsScreen')) $('settingsScreen').hidden = name !== 'settings';
-  $('stage').classList.toggle('is-reading', name === 'reader');
+  $('stage').classList.toggle('is-reading', readerBackdrop);
   updateReaderChrome();
   $('languageNotice').hidden = true;
   updateOrientationPrompt();
@@ -974,12 +1031,10 @@ function requestLandscapeOrientation() {
   } catch {}
 }
 function updateOrientationPrompt() {
+  // Portrait reading is supported by the responsive reader layout. A failed
+  // orientation lock must never cover the story with a blocking rotate prompt.
   const prompt = $('orientationPrompt');
-  if (!prompt) return;
-  const portrait = window.matchMedia?.('(orientation: portrait)').matches;
-  const touch = window.matchMedia?.('(pointer: coarse)').matches;
-  const reading = state.screen === 'reader';
-  prompt.hidden = !(portrait && touch && (isStandaloneMode() || reading));
+  if (prompt) prompt.hidden = true;
 }
 function updateInstallButton() {
   const button = $('installAppButton');
@@ -1453,8 +1508,13 @@ async function downloadOfflineAssets() {
       if(x.mobile_landscape_url && x.mobile_landscape_url!==x.mobile_url) paths.push(x.mobile_landscape_url);
       return paths.map(path=>new URL(`./public/${path}`,document.baseURI).toString());
     });
+    const menuAssets=[
+      'assets/images/narcissu-coastal-background.jpg',
+      'assets/audio/narcissu-coastal-ambience.mp3'
+    ];
+    for(const path of menuAssets) items.push(new URL(`./public/${path}`,document.baseURI).toString());
     total=items.length;
-    const cache=await caches.open('narcissu-assets-v4');
+    const cache=await caches.open(ASSET_CACHE_NAME);
     let cursor=0;
     const worker=async()=>{
       while(true){
@@ -1492,7 +1552,7 @@ async function downloadOfflineAssets() {
   }
 }
 async function clearOfflineAssets() {
-  await caches.delete('narcissu-assets-v4');$('downloadMeterFill').style.width='0%';$('downloadPercent').textContent='0%';$('downloadStatus').textContent='Offline assets cleared.';showToast('Offline assets cleared.');
+  await caches.delete(ASSET_CACHE_NAME);$('downloadMeterFill').style.width='0%';$('downloadPercent').textContent='0%';$('downloadStatus').textContent='Offline assets cleared.';showToast('Offline assets cleared.');
 }
 function updateTextSizeReadout(size) {
   const value = Math.min(18, Math.max(11, Number(size) || 13));
@@ -1552,7 +1612,7 @@ function saveFullSettings() {
   applyVisualPreferences();
   if(state.musicAudio)setAudioVolume(state.musicAudio,state.settings.musicVolume);
   for(const [,audio] of state.audioChannels)setAudioVolume(audio,state.settings.sfxVolume);
-  if(ambientMasterGain&&ambientAudioContext)ambientMasterGain.gain.setTargetAtTime(ambientEnabled?state.settings.ambientVolume:0,ambientAudioContext.currentTime,.35);
+  const ambienceAudio=$('homeAmbientAudio');if(ambienceAudio)ambienceAudio.volume=state.settings.ambientVolume;if(ambientMasterGain&&ambientAudioContext)ambientMasterGain.gain.setTargetAtTime(ambientEnabled?state.settings.ambientVolume:0,ambientAudioContext.currentTime,.35);
   persistSettings();
   if(state.settings.persianFont!=='noto')ensurePersianFontLoaded(state.settings.persianFont).then(scheduleDialogueFit).catch(()=>showToast('Persian font unavailable; using the bundled fallback.'));
   setLanguage($('fullLanguage').value);
@@ -1566,6 +1626,7 @@ function resetFullSettings() {
   state.auto=false;
   $('autoButton').setAttribute('aria-pressed','false');
   applyVisualPreferences();
+  const ambienceAudio=$('homeAmbientAudio');if(ambienceAudio)ambienceAudio.volume=state.settings.ambientVolume;
   persistSettings();
   openSettingsScreen();
   showToast('Settings restored to defaults.');

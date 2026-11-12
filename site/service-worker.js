@@ -1,9 +1,9 @@
-const SHELL_CACHE = 'narcissu-shell-v63';
-const ASSET_CACHE = 'narcissu-assets-v4';
+const SHELL_CACHE = 'narcissu-shell-v65';
+const ASSET_CACHE = 'narcissu-assets-v6';
 const FONT_CACHE = 'narcissu-fonts-v1';
 const FONT_HOSTS = new Set(['fonts.googleapis.com', 'fonts.gstatic.com']);
 const SHELL_FILES = [
-  './', './index.html', './styles.css', './app.js', './manifest.webmanifest',
+  './', './index.html', './styles.css', './responsive.css', './app.js', './manifest.webmanifest',
   './data/story-gp32.json', './data/asset-manifest.json', './data/localization/fa.json',
   './data/localization/fa-historical-alignment-increment28.json',
   './data/localization/fa-revised-overlay-increment17.json',
@@ -39,7 +39,9 @@ const SHELL_FILES = [
   './data/localization/fa-literary-revision-increment64.json',
   './data/localization/fa-literary-revision-increment65.json',
   './fonts/NotoSans-Regular.ttf', './fonts/NotoSansArabic-Regular.ttf', './fonts/NotoNaskhArabic-Regular.ttf', './fonts/NotoNaskhArabic-SemiBold.ttf', './fonts/Noto-Font-License.txt',
-  './icons/narcissu-192.png', './icons/narcissu-512.png', './icons/fox-emblem-white.png'
+  './icons/narcissu-192.png', './icons/narcissu-512.png', './icons/fox-emblem-white.png',
+  './public/assets/images/narcissu-coastal-background.jpg',
+  './public/assets/audio/narcissu-coastal-ambience.mp3'
 ];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(SHELL_CACHE).then(cache => cache.addAll(SHELL_FILES)).then(() => self.skipWaiting()));
@@ -198,7 +200,7 @@ self.addEventListener('fetch', event => {
     ? url.pathname.slice(scopePath.length)
     : url.pathname.replace(/^\//, '');
   const isCoreShell = req.mode === 'navigate' ||
-    ['index.html', 'app.js', 'styles.css', 'manifest.webmanifest'].includes(relativePath);
+    ['index.html', 'app.js', 'styles.css', 'responsive.css', 'manifest.webmanifest'].includes(relativePath);
   if (isCoreShell) {
     event.respondWith(handleCoreShellRequest(req));
     return;

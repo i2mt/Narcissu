@@ -1,0 +1,871 @@
+/* Narcissu responsive system — final, centralized layout rules.
+   The story engine and its reading controls remain in the original DOM; this
+   layer only defines how the same interface adapts to each viewport. */
+
+:root {
+  --narcissu-safe-top: env(safe-area-inset-top, 0px);
+  --narcissu-safe-right: env(safe-area-inset-right, 0px);
+  --narcissu-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --narcissu-safe-left: env(safe-area-inset-left, 0px);
+  --narcissu-glass: rgba(12, 20, 31, .76);
+  --narcissu-glass-border: rgba(235, 231, 218, .26);
+}
+
+html, body {
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+body {
+  min-height: 100dvh;
+  overscroll-behavior: none;
+}
+.app-shell {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  min-height: 100svh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.topbar {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 30;
+  display: flex;
+  flex: none;
+  width: 100%;
+  height: 66px;
+  min-height: 66px;
+  padding: 0 clamp(16px, 3.6vw, 56px);
+  border: 0;
+  background: linear-gradient(180deg, rgba(5, 10, 17, .48), rgba(5, 10, 17, 0));
+}
+.app-shell.is-home-backdrop .topbar .brand { display: none; }
+.topbar-actions { gap: clamp(6px, 1vw, 12px); margin-left: auto; }
+.app-shell.is-home-backdrop .offline-indicator { display: none; }
+.app-shell:not(.is-home-backdrop) #ambientToggle { display: none; }
+.topbar .icon-button {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-color: rgba(245, 242, 232, .3);
+  color: rgba(245, 242, 232, .9);
+  background: rgba(10, 16, 24, .2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.stage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  flex: none;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  aspect-ratio: auto;
+  overflow: hidden;
+  border: 0;
+}
+.background-frame { z-index: 0; }
+#homeAmbientAudio { display: none; }
+.stage.has-home-backdrop .background-frame {
+  background-color: #07101a;
+  background-image: none !important;
+}
+.home-backdrop-photo { display: none !important; }
+.stage.has-home-backdrop .background-frame .home-backdrop-photo {
+  display: block !important;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 1 !important;
+  pointer-events: none;
+}
+.stage.has-home-backdrop .background-frame #backgroundImage { opacity: 0 !important; }
+
+.stage.is-settings-open .home-screen { pointer-events: none; }
+.home-screen {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 52%;
+  min-height: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: linear-gradient(180deg, rgba(4, 8, 13, .12), rgba(4, 8, 13, .08) 45%, rgba(4, 8, 13, .34));
+}
+.home-content {
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 380px);
+  grid-template-rows: minmax(0, 1fr) auto;
+  align-items: center;
+  align-content: stretch;
+  gap: clamp(20px, 3.5vw, 48px) clamp(30px, 6vw, 100px);
+  width: min(1400px, 94vw);
+  max-width: 1400px;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: clamp(82px, 9.5vh, 116px) clamp(24px, 4.4vw, 72px) clamp(20px, 3.2vh, 38px);
+}
+.home-identity { min-width: 0; max-width: 660px; }
+.home-content h1 { font-size: clamp(58px, 7.8vw, 104px); line-height: .98; }
+.home-japanese-title { font-size: clamp(13px, 1.35vw, 17px); }
+.home-description { max-width: 470px; font-size: clamp(13px, 1.2vw, 17px); line-height: 1.65; }
+.home-menu-column {
+  align-self: center;
+  justify-self: end;
+  width: 100%;
+  max-width: 390px;
+  min-width: 0;
+}
+.menu-actions { display: flex; flex-direction: column; align-items: stretch; gap: 6px; width: 100%; }
+.menu-actions .primary-button,
+.menu-actions .menu-button {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 9px 38px 9px 42px;
+  font-size: clamp(12px, 1.15vw, 16px);
+}
+.home-footer {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 18px;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 11px 0 0;
+  border-top: 1px solid rgba(235, 231, 218, .2);
+  font-size: clamp(7px, .68vw, 9px);
+  line-height: 1.35;
+}
+.home-footer span:nth-child(2) { max-width: 46%; text-align: center; }
+.home-footer .ambient-toggle { min-height: 28px; font-size: inherit; }
+
+
+@media (min-width: 901px) {
+  .menu-actions { border-left: 1px solid rgba(240,237,228,.55); padding-left: 22px; gap: 0; }
+  .menu-actions .primary-button, .menu-actions .menu-button {
+    position: relative; min-height: 48px; padding: 10px 12px;
+    border: 0; border-bottom: 1px solid rgba(240,237,228,.2); border-radius: 0;
+    background: transparent !important; color: rgba(245,242,234,.94) !important;
+    box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none;
+    font: 400 clamp(16px, 1.45vw, 21px)/1.25 Georgia, "Times New Roman", serif;
+    letter-spacing: .015em; text-align: left; transform: none !important;
+  }
+  .menu-actions .primary-button { color: #fff !important; font-weight: 500; }
+  .stage:not(.is-reading) .menu-actions .primary-button::before {
+    content: "▶"; left: -31px; color: rgba(245,242,234,.92); font-size: 12px;
+  }
+  .stage:not(.is-reading) .menu-actions .menu-button::before,
+  .stage:not(.is-reading) .menu-actions .primary-button::after,
+  .stage:not(.is-reading) .menu-actions .menu-button::after { content: none !important; display: none !important; }
+  .menu-actions .primary-button:hover, .menu-actions .menu-button:hover {
+    padding-left: 16px; background: rgba(255,255,255,.07) !important;
+    border-bottom-color: rgba(240,237,228,.42);
+  }
+}
+
+
+@media (min-width: 901px) {
+  .stage:not(.is-reading) .menu-actions .primary-button,
+  .stage:not(.is-reading) .menu-actions .menu-button {
+    min-height: 48px; padding: 10px 12px;
+    border: 0; border-radius: 0; border-bottom: 1px solid rgba(240,237,228,.18);
+    background: transparent !important; color: rgba(245,242,234,.94) !important;
+    box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none;
+    font: 400 clamp(16px, 1.45vw, 21px)/1.25 Georgia, "Times New Roman", serif;
+    letter-spacing: .015em; text-align: left; transform: none !important;
+  }
+  .stage:not(.is-reading) .menu-actions .primary-button {
+    color: #fff !important; font-weight: 500; border-bottom-color: rgba(240,237,228,.5);
+  }
+  .stage:not(.is-reading) .menu-actions .primary-button::before {
+    content: "▶" !important; left: -31px; color: rgba(245,242,234,.92); font-size: 12px;
+  }
+  .stage:not(.is-reading) .menu-actions .menu-button::before,
+  .stage:not(.is-reading) .menu-actions .primary-button::after,
+  .stage:not(.is-reading) .menu-actions .menu-button::after {
+    content: none !important; display: none !important;
+  }
+  .stage:not(.is-reading) .menu-actions .primary-button:hover,
+  .stage:not(.is-reading) .menu-actions .menu-button:hover {
+    padding-left: 16px; background: rgba(255,255,255,.06) !important;
+    border-bottom-color: rgba(240,237,228,.42);
+  }
+}
+
+/* Settings: desktop keeps the home scene visible above a broad glass panel. */
+.settings-screen {
+  position: absolute;
+  inset: auto clamp(16px, 3.2vw, 50px) clamp(14px, 3.4vh, 30px);
+  z-index: 5;
+  display: grid;
+  grid-template-columns: minmax(190px, 21%) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 0;
+  width: auto;
+  height: clamp(330px, 44vh, 390px);
+  min-height: 330px;
+  max-height: calc(100% - 88px);
+  padding: 18px clamp(18px, 2.8vw, 42px) 14px;
+  overflow: hidden;
+  border: 1px solid var(--narcissu-glass-border);
+  border-radius: 5px;
+  background: linear-gradient(115deg, rgba(9, 18, 30, .82), rgba(13, 22, 34, .72));
+  box-shadow: 0 18px 55px rgba(0, 0, 0, .25);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+.settings-sidebar {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  position: relative;
+  top: auto;
+  align-self: stretch;
+  min-width: 0;
+  min-height: 0;
+  padding: 8px clamp(14px, 2vw, 28px) 8px 4px;
+  border-right: 1px solid rgba(255, 255, 255, .2);
+}
+.settings-sidebar h2 { margin: 0 0 20px 14px; }
+.settings-nav { display: flex; flex-direction: column; gap: 2px; width: 100%; }
+.settings-nav-button {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  min-height: 42px;
+  padding: 9px 12px;
+  font-size: clamp(14px, 1.2vw, 17px);
+  line-height: 1.25;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.settings-main {
+  grid-column: 2;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+  align-items: start;
+  gap: 8px clamp(20px, 2.6vw, 38px);
+  min-width: 0;
+  min-height: 0;
+  padding: 0 0 0 clamp(18px, 2.6vw, 38px);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.settings-panel { min-width: 0; max-width: none; scroll-margin-top: 12px; }
+.settings-panel[hidden] { display: block !important; }
+.settings-panel h3 {
+  margin: 1px 0 5px;
+  padding-bottom: 5px;
+  font-size: 13px;
+  line-height: 1.35;
+}
+.settings-control {
+  display: grid;
+  grid-template-columns: minmax(100px, 1fr) minmax(105px, 1.15fr) 36px;
+  gap: 10px;
+  align-items: center;
+  min-width: 0;
+  min-height: 32px;
+  font-size: clamp(11px, .95vw, 13px);
+  line-height: 1.35;
+}
+.settings-control > span { min-width: 0; overflow-wrap: anywhere; }
+.settings-control input[type="range"],
+.settings-control select { width: 100%; min-width: 0; max-width: 100%; }
+.settings-control select { padding: 7px 8px; font-size: 12px; }
+.settings-control output { min-width: 0; text-align: right; font-size: 12px; }
+.settings-control input[type="checkbox"] { width: 20px; height: 20px; justify-self: start; }
+.settings-actions {
+  grid-column: 2;
+  grid-row: 2;
+  position: static;
+  z-index: 3;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 0;
+  margin-top: 0;
+  padding: 5px 0 0;
+  background: transparent;
+}
+.settings-actions button { width: auto !important; min-width: 94px; min-height: 34px; padding: 6px 10px; font-size: 10px; }
+.settings-actions #offlineDownloadButton { min-width: 146px; }
+.settings-actions #installAppButton { min-width: 104px; }
+
+/* Reader: preserve a dedicated title, artwork, dialogue and control band. */
+.reader-screen { min-width: 0; min-height: 0; }
+.reader-topline { min-width: 0; }
+.chapter-heading { min-width: 0; }
+.chapter-heading h2 { max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+.dialogue-panel { min-width: 0; max-width: 100%; }
+.dialogue-text { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
+.toolbar-left, .toolbar-right { min-width: 0; }
+.toolbar-button, .next-button { min-width: 0; }
+
+/* Tablets and compact landscape devices. */
+@media (max-width: 900px) {
+  .topbar { height: 56px; min-height: 56px; padding-inline: 16px; }
+  .topbar-actions { gap: 6px; }
+  .topbar .icon-button { width: 32px; height: 32px; min-width: 32px; }
+  .home-content {
+    width: 100%;
+    padding: 76px clamp(18px, 3.8vw, 34px) 22px;
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 34%);
+    gap: 18px clamp(18px, 3vw, 34px);
+  }
+  .home-content h1 { font-size: clamp(48px, 7vw, 76px); }
+  .home-description { font-size: clamp(12px, 1.6vw, 15px); }
+  .home-menu-column { max-width: 340px; }
+  .menu-actions .primary-button, .menu-actions .menu-button { min-height: 40px; font-size: clamp(11px, 1.45vw, 13px); }
+  .settings-screen {
+    inset: 62px 12px 12px;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    padding: 14px;
+    overflow-y: auto;
+  }
+  .settings-sidebar {
+    grid-column: auto; grid-row: auto; flex: 0 0 auto;
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: 0 10px;
+    min-height: 0;
+    padding: 0 0 12px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, .2);
+  }
+  .settings-emblem { grid-column: 1; grid-row: 1; width: 34px; height: 34px; margin: 0; }
+  .settings-sidebar h2 { grid-column: 2; grid-row: 1; margin: 0; font-size: 26px; }
+  .settings-nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 5px;
+    margin-top: 12px;
+  }
+  .settings-nav-button {
+    min-height: 40px;
+    padding: 7px 4px;
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 3px;
+    font-size: clamp(11px, 1.55vw, 14px);
+    line-height: 1.2;
+    text-align: center;
+  }
+  .settings-nav-button.is-active:before { display: none; }
+  .settings-main { grid-column: auto; grid-row: auto; flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 16px 0 0; gap: 16px 20px; }
+  .settings-control { grid-template-columns: minmax(90px, 1fr) minmax(90px, 1.05fr) 32px; gap: 8px; font-size: 13px; }
+  .settings-control select { font-size: 12px; }
+  .settings-actions { grid-column: auto; grid-row: auto; flex: 0 0 auto; position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); flex-wrap: initial; margin-top: 10px; padding: 8px 0 0; background: none; }
+  .settings-actions button { width: auto !important; min-width: 0; min-height: 38px; }
+  .reader-topline { left: 18px; right: 18px; }
+}
+
+/* Portrait tablet and phone layout. */
+@media (max-width: 900px) and (orientation: portrait) {
+  .home-screen { inset: 0; height: 100%; min-height: 100%; align-items: stretch; }
+  .home-content {
+    height: auto;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    align-content: center;
+    gap: 16px;
+    width: 100%;
+    min-height: 100%;
+    padding: calc(50px + var(--narcissu-home-hero-height, 56.25vw) + 18px + var(--narcissu-safe-top)) clamp(18px, 5vw, 38px) calc(22px + var(--narcissu-safe-bottom));
+  }
+  .home-identity { max-width: 640px; }
+  .home-menu-column { justify-self: stretch; width: 100%; max-width: 640px; }
+  .menu-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .menu-actions .primary-button, .menu-actions .menu-button {
+    min-height: 44px;
+    padding: 9px 26px 9px 12px;
+    font-size: clamp(10px, 1.7vw, 13px);
+  }
+  .menu-actions .primary-button::before, .menu-actions .menu-button::before { left: 7px; font-size: 8px; }
+  .menu-actions .primary-button::after, .menu-actions .menu-button::after { right: 10px; }
+  .home-footer {
+    grid-column: 1;
+    grid-row: 3;
+    justify-content: flex-start;
+    gap: 7px 14px;
+    padding-top: 9px;
+  }
+  .home-footer span:nth-child(2) { max-width: none; text-align: left; }
+  .settings-screen { inset: calc(60px + var(--narcissu-safe-top)) 10px calc(10px + var(--narcissu-safe-bottom)); overflow: hidden; }
+  .settings-main { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .reader-screen {
+    padding: calc(98px + var(--narcissu-safe-top)) 14px calc(10px + var(--narcissu-safe-bottom));
+  }
+  .reader-topline {
+    top: calc(56px + var(--narcissu-safe-top));
+    left: max(12px, var(--narcissu-safe-left));
+    right: max(12px, var(--narcissu-safe-right));
+    align-items: center;
+    gap: 8px;
+  }
+  .reader-top-actions { flex: 0 0 auto; gap: 5px; }
+  .reader-top-actions .icon-button { width: 30px; height: 30px; min-width: 30px; }
+  .language-switch { min-height: 30px; padding: 5px 8px; font-size: 9px; }
+  .stage.is-reading .background-frame {
+    inset: calc(96px + var(--narcissu-safe-top)) 0 36%;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    transform: none;
+  }
+  .stage.is-reading:not(.is-panorama) .background-frame {
+    left: 0;
+    right: 0;
+    top: calc(96px + var(--narcissu-safe-top));
+    bottom: 36%;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    aspect-ratio: auto;
+    transform: none;
+  }
+  .stage.is-reading .background-frame img { width: 100%; height: 100%; object-fit: contain; object-position: center; }
+  .app-shell.is-reading .dialogue-panel {
+    width: 100%;
+    height: clamp(154px, 28svh, 230px);
+    min-height: 0;
+    max-height: 36svh;
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 12px 14px 9px;
+  }
+  .app-shell.is-reading .dialogue-text,
+  .app-shell.is-reading .reader-screen.is-fa .dialogue-text {
+    flex: 1 1 0;
+    height: 0;
+    max-height: none;
+    overflow: auto;
+    overflow-wrap: anywhere;
+    font-size: var(--text-size) !important;
+    line-height: 1.5 !important;
+  }
+  .app-shell.is-reading .reader-screen.is-fa .dialogue-text { line-height: 1.8 !important; }
+  .app-shell.is-reading .reader-toolbar {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch;
+    gap: 5px;
+    width: 100%;
+    margin-top: 7px;
+  }
+  .app-shell.is-reading .toolbar-left,
+  .app-shell.is-reading .toolbar-right {
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 5px;
+    width: 100%;
+  }
+  .app-shell.is-reading .toolbar-left { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .app-shell.is-reading .toolbar-button,
+  .app-shell.is-reading .next-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-width: 0;
+    min-height: 34px;
+    padding: 6px 2px;
+    font-size: clamp(8px, 1.6vw, 11px);
+    line-height: 1.1;
+    letter-spacing: 0;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 700px) and (orientation: portrait) {
+  .topbar { height: 50px; min-height: 50px; padding-inline: 10px; }
+  .topbar-actions { gap: 4px; }
+  .topbar .icon-button { width: 28px; height: 28px; min-width: 28px; font-size: 15px; }
+  .brand-mark { width: 29px; height: 29px; }
+  .brand-copy strong { font-size: 13px; }
+  .brand-copy small { font-size: 8px; }
+  .home-screen { inset: 0; height: 100%; min-height: 100%; }
+  .home-content {
+    height: auto;
+    align-content: start;
+    gap: 13px;
+    padding: calc(50px + var(--narcissu-home-hero-height, 56.25vw) + 14px + var(--narcissu-safe-top)) 16px calc(18px + var(--narcissu-safe-bottom));
+  }
+  .home-emblem { width: 38px; height: 38px; margin-bottom: 10px; }
+  .home-credit { margin-bottom: 10px; font-size: 9px; }
+  .home-credit strong { font-size: 13px; }
+  .home-content h1 { font-size: clamp(46px, 13vw, 62px); }
+  .home-japanese-title { font-size: 12px; }
+  .home-subtitle { font-size: 8px; margin: 5px 0 8px; }
+  .home-description { font-size: 12px; line-height: 1.45; }
+  .menu-actions { gap: 6px; }
+  .menu-actions .primary-button, .menu-actions .menu-button {
+    min-height: 42px;
+    padding: 8px 20px 8px 10px;
+    font-size: clamp(9px, 2.5vw, 11px);
+  }
+  .home-footer { font-size: 7px; }
+  .settings-screen { inset: calc(54px + var(--narcissu-safe-top)) 8px calc(8px + var(--narcissu-safe-bottom)); padding: 11px; }
+  .settings-main { grid-column: auto; grid-row: auto; flex: 1 1 auto; min-height: 0; grid-template-columns: minmax(0, 1fr); gap: 16px; overflow-y: auto !important; overflow-x: hidden; }
+  .settings-control { grid-template-columns: minmax(0, 1fr) minmax(94px, 1.05fr) 30px; gap: 7px; min-height: 48px; font-size: 12px; }
+  .settings-control select { padding: 7px 5px; font-size: 11px; }
+  .settings-control output { font-size: 11px; }
+  .settings-actions { grid-column: auto; grid-row: auto; flex: 0 0 auto; position: static !important; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); flex-wrap: initial; gap: 7px; margin-top: 8px; padding: 8px 0 0; background: none !important; }
+  .settings-actions button { width: 100%; min-width: 0; min-height: 40px; padding: 8px 5px; font-size: 11px; }
+  .settings-actions #backFromSettings { grid-column: 1 / -1; }
+  .reader-screen { padding: calc(88px + var(--narcissu-safe-top)) 10px calc(8px + var(--narcissu-safe-bottom)); }
+  .reader-topline { top: calc(52px + var(--narcissu-safe-top)); left: 9px; right: 9px; }
+  .chapter-heading h2 { font-size: 12px; }
+  .language-switch { min-height: 28px; height: 28px; padding: 4px 6px; font-size: 8px; gap: 4px; }
+  .stage.is-reading .background-frame,
+  .stage.is-reading:not(.is-panorama) .background-frame {
+    top: calc(88px + var(--narcissu-safe-top));
+    bottom: 38%;
+  }
+  .app-shell.is-reading .dialogue-panel { height: clamp(142px, 29svh, 205px); max-height: 36svh; padding: 10px 11px 8px; }
+  .app-shell.is-reading .toolbar-left,
+  .app-shell.is-reading .toolbar-right { gap: 3px; }
+  .app-shell.is-reading .toolbar-button,
+  .app-shell.is-reading .next-button { min-height: 32px; padding: 5px 1px; font-size: clamp(7px, 2.2vw, 9px); }
+}
+
+@media (max-width: 380px) and (orientation: portrait) {
+  .home-content { padding-inline: 12px; }
+  .home-footer span:nth-child(2) { display: none; }
+  .settings-screen { padding-inline: 9px; }
+  .settings-nav { gap: 3px; }
+  .settings-nav-button { padding-inline: 2px; font-size: 10px; }
+  .settings-control { grid-template-columns: minmax(0, 1fr) minmax(82px, 1fr) 28px; gap: 5px; font-size: 11px; }
+  .settings-control select { font-size: 10px; }
+  .reader-topline { left: 6px; right: 6px; gap: 4px; }
+  .chapter-heading h2 { font-size: 11px; }
+  .app-shell.is-reading .toolbar-button,
+  .app-shell.is-reading .next-button { font-size: 7px; }
+}
+
+/* Compact landscape phones: use a stable two-column menu and a short reader band. */
+@media (max-width: 900px) and (orientation: landscape) {
+  .topbar { height: 42px; min-height: 42px; padding-inline: 12px; }
+  .topbar .icon-button { width: 28px; height: 28px; min-width: 28px; }
+  .home-screen { inset: 0; height: 100%; min-height: 100%; }
+  .home-content {
+    height: 100%;
+    grid-template-columns: minmax(0, 1.05fr) minmax(190px, .82fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 8px clamp(14px, 3vw, 30px);
+    width: 100%;
+    min-height: 100%;
+    padding: 52px clamp(14px, 3vw, 28px) 9px;
+  }
+  .home-emblem { width: 30px; height: 30px; margin-bottom: 5px; }
+  .home-credit { margin-bottom: 7px; font-size: 8px; gap: 2px; }
+  .home-credit strong { font-size: 12px; }
+  .home-credit small { display: none; }
+  .home-content h1 { font-size: clamp(34px, 7vh, 58px); }
+  .home-japanese-title { font-size: 12px; margin: 3px 0; }
+  .home-subtitle { font-size: 8px; margin: 3px 0 6px; }
+  .home-description { font-size: clamp(9px, 1.8vh, 12px); line-height: 1.35; }
+  .home-menu-column { grid-column: 2; grid-row: 1; max-width: 340px; }
+  .menu-actions { display: flex; gap: 4px; }
+  .menu-actions .primary-button, .menu-actions .menu-button { min-height: clamp(29px, 7vh, 38px); padding: 5px 28px 5px 34px; font-size: clamp(10px, 2.5vh, 12px); }
+  .home-footer { grid-column: 1 / -1; grid-row: 2; flex-wrap: nowrap; gap: 6px 10px; padding-top: 5px; font-size: 6px; }
+  .home-footer span:nth-child(2) { max-width: none; text-align: left; }
+  .home-footer .ambient-toggle { min-height: 22px; padding: 2px 5px; font-size: 7px; }
+  .settings-screen { inset: 50px 8px 8px; display: grid; grid-template-columns: 124px minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; padding: 10px; overflow: hidden; }
+  .settings-sidebar { grid-column: 1; grid-row: 1 / span 2; display: flex; flex-direction: column; align-items: flex-start; padding: 4px 10px 4px 0; border-right: 1px solid rgba(255,255,255,.2); border-bottom: 0; }
+  .settings-emblem { width: 28px; height: 28px; }
+  .settings-sidebar h2 { margin: 0 0 10px 8px; font-size: 22px; }
+  .settings-nav { display: flex; flex-direction: column; gap: 1px; margin-top: 0; }
+  .settings-nav-button { min-height: 34px; padding: 6px 7px; font-size: 11px; text-align: left; border: 0; }
+  .settings-nav-button.is-active:before { display: inline-block; margin-right: 6px; }
+  .settings-main { grid-column: 2; grid-row: 1; min-height: 0; overflow-y: auto; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 14px; padding: 2px 0 0 12px; }
+  .settings-panel h3 { margin-bottom: 4px; font-size: 11px; }
+  .settings-control { grid-template-columns: minmax(72px, 1fr) minmax(62px, 1fr) 28px; gap: 5px; min-height: 34px; font-size: 10px; }
+  .settings-control select { padding: 4px 3px; font-size: 9px; }
+  .settings-control output { font-size: 9px; }
+  .settings-actions { grid-column: 2; grid-row: 2; position: static; flex-wrap: wrap; padding-top: 5px; gap: 5px; background: none; }
+  .settings-actions button { min-width: 0; min-height: 30px; padding: 4px 7px; font-size: 9px; }
+  .reader-screen { padding: 84px 12px 7px; }
+  .reader-topline { top: 48px; left: 12px; right: 12px; min-height: 28px; }
+  .chapter-heading h2 { font-size: clamp(11px, 2.5vh, 14px); }
+  .stage.is-reading .background-frame,
+  .stage.is-reading:not(.is-panorama) .background-frame { top: 82px; bottom: 31%; left: 0; right: 0; width: 100%; height: auto; aspect-ratio: auto; transform: none; }
+  .stage.is-reading .background-frame img { width: 100%; height: 100%; object-fit: contain; }
+  .app-shell.is-reading .reader-scene-spacer { display: block !important; flex: 1 1 auto; min-height: 0; }
+  .app-shell.is-reading .dialogue-panel { min-height: 0; height: clamp(68px, 22vh, 88px); flex: 0 0 auto; max-height: 24vh; padding: 6px 10px; }
+  .app-shell.is-reading .dialogue-text { flex: 1 1 auto; min-height: 0; max-height: calc(24vh - 28px); overflow: auto; font-size: clamp(10px, 2.3vh, 13px) !important; line-height: 1.35 !important; }
+  .app-shell.is-reading .dialogue-footer { margin-top: 4px; font-size: 8px; }
+  .app-shell.is-reading .dialogue-text { max-height: calc(24vh - 16px); font-size: clamp(10px, 2.3vh, 13px) !important; line-height: 1.35 !important; }
+  .app-shell.is-reading .reader-toolbar { flex-direction: row !important; align-items: center; gap: 5px; margin-top: 4px; }
+  .app-shell.is-reading .toolbar-left,
+  .app-shell.is-reading .toolbar-right { display: flex !important; flex: 1 1 0; gap: 3px; }
+  .app-shell.is-reading .toolbar-button,
+  .app-shell.is-reading .next-button { flex: 1 1 0; min-height: 28px; padding: 4px 2px; font-size: clamp(7px, 1.9vh, 9px); }
+}
+
+@media (max-height: 380px) and (orientation: landscape) {
+  .home-content { padding-top: 46px; padding-bottom: 5px; }
+  .home-emblem { width: 24px; height: 24px; margin-bottom: 2px; }
+  .home-content h1 { font-size: 32px; }
+  .home-description { font-size: 9px; }
+  .menu-actions .primary-button, .menu-actions .menu-button { min-height: 26px; font-size: 9px; }
+  .settings-screen { top: 46px; bottom: 5px; }
+  .settings-control { min-height: 30px; }
+  .reader-screen { padding-top: 76px; }
+  .reader-topline { top: 44px; }
+  .stage.is-reading .background-frame,
+  .stage.is-reading:not(.is-panorama) .background-frame { top: 74px; bottom: 33%; }
+  .app-shell.is-reading .dialogue-panel { height: 72px; min-height: 0; max-height: 24vh; }
+  .app-shell.is-reading .toolbar-button,
+  .app-shell.is-reading .next-button { min-height: 25px; }
+}
+
+
+@media (max-width: 760px) and (orientation: landscape) {
+  .stage:not(.is-reading) .home-screen {
+    position: absolute !important; inset: 0 !important; height: 100% !important;
+    padding: 0 !important; overflow: hidden !important;
+    align-items: stretch !important; justify-content: stretch !important;
+  }
+  .stage:not(.is-reading) .home-content {
+    display: grid !important; flex: none !important; flex-direction: initial !important;
+    grid-template-columns: minmax(0, 1.05fr) minmax(180px, .82fr) !important;
+    grid-template-rows: minmax(0, 1fr) auto !important;
+    align-items: center !important; justify-content: initial !important;
+    width: 100% !important; max-width: none !important; height: 100% !important;
+    min-height: 0 !important; margin: 0 !important;
+    padding: 52px 14px 8px !important; gap: 8px 14px !important;
+  }
+  .stage:not(.is-reading) .home-identity { display: block !important; width: auto !important; }
+  .stage:not(.is-reading) .home-menu-column {
+    display: block !important; width: 100% !important; min-width: 0 !important;
+    margin: 0 !important; grid-column: 2 !important; grid-row: 1 !important;
+  }
+  .stage:not(.is-reading) .home-footer { grid-column: 1 / -1 !important; grid-row: 2 !important; margin-top: 0 !important; }
+}
+
+/* Dialogs remain inside the visible viewport, including notched phones. */
+.app-dialog {
+  box-sizing: border-box;
+  max-width: min(620px, calc(100vw - 20px - var(--narcissu-safe-left) - var(--narcissu-safe-right)));
+  max-height: calc(100dvh - 20px - var(--narcissu-safe-top) - var(--narcissu-safe-bottom));
+  margin: auto;
+  overflow: auto;
+}
+.app-dialog .dialog-inner { max-height: inherit; overflow: auto; overscroll-behavior: contain; }
+
+/* A 4:3 tablet should see the complete coastal composition, not a cropped slice. */
+@media (min-width: 901px) and (max-width: 1100px) and (orientation: landscape) {
+  .stage.has-home-backdrop .background-frame .home-backdrop-photo {
+    object-fit: contain;
+  }
+}
+
+/* On portrait devices, keep the complete 16:9 scene as a calm hero band. */
+@media (max-width: 900px) and (orientation: portrait) {
+  :root { --narcissu-home-hero-height: 56.25vw; }
+  .stage.has-home-backdrop .background-frame .home-backdrop-photo {
+    inset: calc(50px + var(--narcissu-safe-top)) 0 auto;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+    object-position: center top;
+  }
+  .home-content {
+    padding-top: calc(50px + var(--narcissu-home-hero-height) + 18px + var(--narcissu-safe-top));
+  }
+}
+
+@media (min-width: 901px) and (max-height: 700px) {
+  .home-screen { height: 64%; }
+  .home-content { padding-top: 58px; padding-bottom: 12px; }
+  .menu-actions .primary-button, .menu-actions .menu-button { min-height: 39px; font-size: 15px; }
+  .settings-screen { height: 46vh; min-height: 280px; }
+}
+
+@media (max-width: 760px) and (max-height: 380px) and (orientation: landscape) {
+  .stage:not(.is-reading) .home-content { padding-top: 46px !important; padding-bottom: 5px !important; }
+  .stage:not(.is-reading) .home-content h1 { font-size: 32px !important; }
+  .stage:not(.is-reading) .menu-actions .primary-button,
+  .stage:not(.is-reading) .menu-actions .menu-button { min-height: 28px !important; padding: 4px 8px !important; font-size: 9px !important; }
+}
+
+/* Keep the dialogue panel compact on short landscape screens. Older landscape
+   rules used height:100% for the non-panorama reader and could make the panel
+   consume the entire viewport; this explicit, high-specificity rule wins. */
+@media (max-width: 900px) and (orientation: landscape) {
+  .app-shell.is-reading .reader-screen {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    min-height: 0;
+    overflow: hidden;
+    padding: 84px 12px 7px !important;
+  }
+  .app-shell.is-reading .reader-scene-spacer {
+    display: block !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+  }
+  .app-shell.is-reading .stage.is-reading:not(.is-panorama) .dialogue-panel,
+  .app-shell.is-reading .stage.is-reading.is-panorama .dialogue-panel {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    align-self: stretch !important;
+    width: 100% !important;
+    height: clamp(68px, 22vh, 88px) !important;
+    min-height: 0 !important;
+    max-height: 24vh !important;
+    flex: 0 0 auto !important;
+    padding: 6px 10px !important;
+    margin: 0 !important;
+  }
+  .app-shell.is-reading .stage.is-reading:not(.is-panorama) .dialogue-text,
+  .app-shell.is-reading .stage.is-reading.is-panorama .dialogue-text {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: calc(24vh - 28px) !important;
+    overflow: auto !important;
+    font-size: clamp(10px, 2.3vh, 13px) !important;
+    line-height: 1.35 !important;
+  }
+  .app-shell.is-reading .reader-screen.is-fa .dialogue-text { line-height: 1.52 !important; }
+}
+@media (max-width: 760px) and (max-height: 380px) and (orientation: landscape) {
+  .app-shell.is-reading .stage.is-reading:not(.is-panorama) .dialogue-panel,
+  .app-shell.is-reading .stage.is-reading.is-panorama .dialogue-panel {
+    height: 72px !important;
+    max-height: 24vh !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .stage:not(.is-reading) .menu-actions .primary-button::before,
+  .stage:not(.is-reading) .menu-actions .menu-button::before {
+    content: none !important;
+    display: none !important;
+  }
+}
+@media (max-width: 760px) and (max-height: 380px) and (orientation: landscape) {
+  .app-shell.is-reading .stage.is-reading:not(.is-panorama) .dialogue-panel,
+  .app-shell.is-reading .stage.is-reading.is-panorama .dialogue-panel {
+    height: 84px !important;
+  }
+}
+
+/* Compact reader chrome: on phones and tablets the reader owns the top row.
+   The global header otherwise sits above the chapter title and intercepts taps. */
+@media (max-width: 1100px) {
+  .app-shell.is-compact-reading > .topbar {
+    display: none !important;
+  }
+  .app-shell.is-compact-reading .reader-topline {
+    position: absolute !important;
+    top: calc(8px + var(--narcissu-safe-top)) !important;
+    left: max(10px, var(--narcissu-safe-left)) !important;
+    right: max(10px, var(--narcissu-safe-right)) !important;
+    z-index: 40 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    min-height: 32px;
+    pointer-events: auto;
+  }
+  .app-shell.is-compact-reading .chapter-heading {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .app-shell.is-compact-reading .chapter-heading .eyebrow {
+    margin: 0 0 2px;
+    font-size: 8px;
+    line-height: 1.1;
+  }
+  .app-shell.is-compact-reading .chapter-heading h2 {
+    font-size: clamp(12px, 2.1vw, 16px);
+    line-height: 1.1;
+  }
+  .app-shell.is-compact-reading .reader-top-actions {
+    display: flex !important;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+    min-width: 0;
+    z-index: 41;
+  }
+  .app-shell.is-compact-reading .reader-top-actions .icon-button {
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 30px;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    padding: 0;
+    font-size: 14px;
+  }
+  .app-shell.is-compact-reading .language-switch {
+    display: inline-flex;
+    flex: 0 0 auto;
+    min-width: 48px;
+    min-height: 30px;
+    height: 30px;
+    padding: 4px 7px;
+    gap: 5px;
+    font-size: 8px;
+    white-space: nowrap;
+  }
+  .app-shell.is-compact-reading .reader-screen {
+    padding-top: calc(52px + var(--narcissu-safe-top)) !important;
+  }
+  .app-shell.is-compact-reading .stage.is-reading .background-frame,
+  .app-shell.is-compact-reading .stage.is-reading:not(.is-panorama) .background-frame {
+    top: calc(52px + var(--narcissu-safe-top)) !important;
+  }
+}
+
+@media (max-width: 1100px) and (orientation: landscape) {
+  .app-shell.is-compact-reading .reader-screen {
+    padding-top: calc(48px + var(--narcissu-safe-top)) !important;
+  }
+  .app-shell.is-compact-reading .stage.is-reading .background-frame,
+  .app-shell.is-compact-reading .stage.is-reading:not(.is-panorama) .background-frame {
+    top: calc(46px + var(--narcissu-safe-top)) !important;
+  }
+}

@@ -13,10 +13,11 @@
   <link rel="icon" href="./icons/narcissu-192.png" type="image/png">
   <link rel="apple-touch-icon" href="./icons/narcissu-192.png">
   <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./responsive.css">
   <title>Narcissu — Persian Edition</title>
 </head>
 <body data-mode="enhanced">
-  <div class="app-shell">
+  <div class="app-shell is-home-backdrop">
     <header class="topbar">
       <a class="brand" href="#home" id="brandHome" aria-label="Narcissu home">
         <span class="brand-mark" aria-hidden="true">✳</span>
@@ -24,14 +25,15 @@
       </a>
       <div class="topbar-actions">
         <span class="offline-indicator" id="networkStatus"><i></i><span>Online</span></span>
-        <button class="icon-button offline-download-button" id="offlineDownloadButton" type="button" aria-label="Download for offline" title="Download for offline">↓</button>
+        <button class="icon-button ambient-toggle" id="ambientToggle" type="button" aria-label="Enable sea ambience" title="Sea ambience" aria-pressed="false">♫</button>
         <button class="icon-button" id="fullscreenButton" type="button" aria-label="Toggle fullscreen" title="Fullscreen">⛶</button>
         <button class="icon-button" id="settingsButton" type="button" aria-label="Settings" title="Settings">⚙</button>
       </div>
     </header>
 
-    <main class="stage" id="stage">
+    <main class="stage has-home-backdrop" id="stage">
       <div class="background-frame" aria-hidden="true">
+        <img class="home-backdrop-photo" src="./public/assets/images/narcissu-coastal-background.jpg" alt="" draggable="false">
         <img id="backgroundImage" alt="" draggable="false">
         <div class="background-fade" id="backgroundFade"></div>
       </div>
@@ -59,14 +61,12 @@
               <button class="menu-button" id="chaptersButton" type="button">Chapter Select</button>
               <button class="menu-button" id="musicRoomButton" type="button">Music Room</button>
               <button class="menu-button" id="loadButton" type="button">Load Game</button>
-              <button class="menu-button install-app-button" id="installAppButton" type="button">Install App ↗</button>
             </div>
           </div>
           <div class="home-footer">
             <span>English source: gp32 / Insani 2005</span>
             <span>Original story and assets remain credited to their respective rights holders.</span>
-            <button class="ambient-toggle" id="ambientToggle" type="button" aria-pressed="false">♫ Enable sea ambience</button>
-            <span class="build-label">Version 0.52</span>
+            <span class="build-label">Version 0.54</span>
           </div>
         </div>
         <div class="chapter-select-panel" id="chapterSelectPanel" hidden>
@@ -112,8 +112,8 @@
             <label class="settings-control"><span>High contrast</span><input id="fullHighContrast" type="checkbox"></label>
             <label class="settings-control"><span>Language</span><select id="fullLanguage"><option value="en">English</option><option value="fa">فارسی</option></select></label>
           </section>
-          <div class="settings-actions"><button type="button" class="menu-button" id="resetFullSettings">Reset to Default</button><button type="button" class="primary-button" id="saveFullSettings">Apply settings</button><button type="button" class="menu-button" id="backFromSettings">Back</button></div>
         </div>
+        <div class="settings-actions"><button type="button" class="menu-button offline-download-button" id="offlineDownloadButton" aria-label="Download for offline" title="Download for offline">↓ Download for offline</button><button type="button" class="menu-button install-app-button" id="installAppButton">Install App ↗</button><button type="button" class="menu-button" id="resetFullSettings">Reset to Default</button><button type="button" class="primary-button" id="saveFullSettings">Apply settings</button><button type="button" class="menu-button" id="backFromSettings">Back</button></div>
       </section>
 
       <section class="reader-screen" id="readerScreen" hidden aria-label="Novel reader">
@@ -170,6 +170,7 @@
       </div>
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
     </main>
+    <audio id="homeAmbientAudio" src="./public/assets/audio/narcissu-coastal-ambience.mp3" preload="none" loop></audio>
 
     <section class="welcome-preload" id="welcomeScreen" hidden aria-labelledby="welcomeTitle" aria-hidden="true">
       <div class="welcome-preload-card">
