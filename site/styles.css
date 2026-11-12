@@ -845,6 +845,28 @@ html[data-persian-font="noto"] .reader-screen.is-fa.caption-mode .dialogue-text{
 }
 
 
+/* Mobile reader pagination: give the dialogue text a real, measurable flex height.
+   Without this, max-height:none lets the text box grow to its full content height;
+   the paginator then believes the whole passage fits and the fixed panel clips it. */
+@media(max-width:760px){
+  .app-shell.is-reading .dialogue-panel{
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+    overflow:hidden;
+  }
+  .app-shell.is-reading .dialogue-text,
+  .app-shell.is-reading .reader-screen.is-fa .dialogue-text{
+    flex:1 1 0;
+    height:0;
+    min-height:0;
+    max-height:none!important;
+    overflow:hidden!important;
+    overflow-y:hidden!important;
+  }
+}
+
+
 /* Reference-led main menu and full-stage settings view */
 @media(min-width:761px){
   .app-shell{width:100%;max-width:none;min-height:100svh;padding:0}
