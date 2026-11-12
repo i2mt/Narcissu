@@ -573,9 +573,20 @@ function setMode() {
   persistSettings();
 }
 function persistSettings() { localStorage.setItem(STORAGE_KEYS.settings, JSON.stringify(state.settings)); }
+function getResponsiveDefaultTextSize() {
+  // Choose a comfortable first-run dialogue size from the available CSS
+  // viewport width. Existing user preferences are never changed.
+  if (window.matchMedia('(max-width: 380px)').matches) return 16;
+  if (window.matchMedia('(max-width: 430px)').matches) return 17;
+  return 18;
+}
 function loadSettings() {
-  const saved = safeJSONParse(localStorage.getItem(STORAGE_KEYS.settings), {});
-  state.settings = normalizeSettings(saved, DEFAULT_SETTINGS);
+  const savedValue = localStorage.getItem(STORAGE_KEYS.settings);
+  const saved = safeJSONParse(savedValue, {});
+  const firstRunDefaults = { ...DEFAULT_SETTINGS, textSize: getResponsiveDefaultTextSize() };
+  state.settings = savedValue === null
+    ? firstRunDefaults
+    : normalizeSettings(saved, DEFAULT_SETTINGS);
   delete state.settings.showReviewedSource;
   delete state.settings.showEditorialDrafts;
   persistSettings();
