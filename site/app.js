@@ -437,7 +437,7 @@ function setScreen(name) {
   // Update the screen state before starting/stopping ambience so the menu-only
   // audio guard sees the destination screen, including when returning from play.
   state.screen = name;
-  if (name !== 'reader') stopEndingMessage();
+  if (name !== 'reader' && !(name === 'settings' && settingsOverReader)) stopEndingMessage();
   if (name === 'home') {
     if (ambientAutoplayAllowed() && (state.settings.ambientVolume ?? 0.6) > 0) {
       startAmbientSound();
