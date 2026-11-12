@@ -1711,3 +1711,51 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{
 @media (orientation:landscape) and (max-height:650px) and (pointer:coarse) {
   .stage:not(.is-reading) .home-emblem {display:grid!important;width:28px;height:28px;margin-bottom:4px!important}
 }
+
+
+/* Main-menu repair: keep identity content in normal vertical flow.
+   Older short-landscape rules assign grid-area names to individual identity
+   children; those must not turn the identity wrapper into a nested grid. */
+@media (orientation:landscape) and (max-height:850px) and (pointer:coarse) {
+  .stage:not(.is-reading) .home-identity {
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:flex-start!important;
+    justify-content:center!important;
+    gap:0!important;
+    width:100%;max-width:100%;min-width:0;
+  }
+  .stage:not(.is-reading) .home-identity > * {
+    grid-area:auto!important;
+    grid-column:auto!important;
+    grid-row:auto!important;
+    position:relative;
+    flex:none;
+    min-width:0;
+  }
+  .stage:not(.is-reading) .home-identity > .home-emblem {
+    display:grid!important;visibility:visible!important;opacity:.9!important;
+    width:34px;height:34px;margin:0 0 7px!important;
+    flex:0 0 34px;
+  }
+  .stage:not(.is-reading) .home-identity > .home-credit {
+    display:inline-flex;flex-direction:column;align-items:flex-start;
+    margin:0 0 8px!important;line-height:1.3;
+  }
+  .stage:not(.is-reading) .home-identity > .eyebrow {
+    display:block;margin:0 0 4px!important;line-height:1.3;
+  }
+  .stage:not(.is-reading) .home-identity > #homeTitle {
+    display:block;margin:0!important;line-height:1;
+  }
+  .stage:not(.is-reading) .home-identity > .home-japanese-title {
+    display:block;margin:3px 0 4px!important;line-height:1.2;
+  }
+  .stage:not(.is-reading) .home-identity > .home-subtitle {
+    display:block;margin:3px 0 7px!important;line-height:1.3;
+  }
+  .stage:not(.is-reading) .home-identity > .home-description {
+    display:block;max-width:100%;margin:0!important;padding:0!important;
+    line-height:1.4;overflow-wrap:normal;
+  }
+}
