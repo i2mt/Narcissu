@@ -43,13 +43,13 @@
             <a class="home-emblem" href="https://t.me/i_2MT" target="_blank" rel="noopener noreferrer" aria-label="Contact Mohammad Mahdi Taghavi on Telegram" title="Contact the Persian edition translator">
               <img class="fox-seal-image" src="./icons/fox-emblem-white.png" alt="" width="512" height="512" draggable="false">
             </a>
+            <a class="home-credit" href="https://t.me/i_2MT" target="_blank" rel="noopener noreferrer">
+              <span>Translated and brought back to life by</span><strong>Mohammad Mahdi Taghavi</strong><small>Contact via Telegram ↗</small>
+            </a>
             <p class="eyebrow">A visual novel by stage-nana</p>
             <h1 id="homeTitle">Narcissu</h1>
             <p class="home-japanese-title" lang="ja">ナルキッソス</p>
             <p class="home-subtitle">Persian Edition <span>·</span> Narcissu 1</p>
-            <a class="home-credit" href="https://t.me/i_2MT" target="_blank" rel="noopener noreferrer">
-              <span>Translated and brought back to life by</span><strong>Mohammad Mahdi Taghavi</strong><small>Contact via Telegram ↗</small>
-            </a>
             <p class="home-description">A quiet story about a journey, a summer that never came, and the things we carry with us.</p>
           </div>
           <div class="home-menu-column">
@@ -72,6 +72,47 @@
         <div class="chapter-select-panel" id="chapterSelectPanel" hidden>
           <div class="panel-heading"><div><p class="eyebrow">Story</p><h2>Choose a chapter</h2></div><button class="close-button" id="closeChapters" aria-label="Close chapter selection">×</button></div>
           <div class="chapter-list" id="chapterList"></div>
+        </div>
+      </section>
+
+
+      <section class="settings-screen" id="settingsScreen" hidden aria-labelledby="settingsTitle">
+        <aside class="settings-sidebar">
+          <a class="settings-emblem" href="https://t.me/i_2MT" target="_blank" rel="noopener noreferrer" aria-label="Contact the translator"><img src="./icons/fox-emblem-white.png" alt="" width="54" height="54"></a>
+          <h2 id="settingsTitle">Settings</h2>
+          <nav class="settings-nav" aria-label="Settings categories">
+            <button type="button" class="settings-nav-button is-active" data-settings-tab="reading">Reading</button>
+            <button type="button" class="settings-nav-button" data-settings-tab="appearance">Appearance</button>
+            <button type="button" class="settings-nav-button" data-settings-tab="audio">Audio</button>
+            <button type="button" class="settings-nav-button" data-settings-tab="accessibility">Accessibility</button>
+          </nav>
+        </aside>
+        <div class="settings-main">
+          <section class="settings-panel is-active" data-settings-panel="reading">
+            <h3>Reading</h3>
+            <label class="settings-control"><span>Dialogue text size</span><input id="fullTextSize" type="range" min="15" max="24" step="1"><output id="fullTextSizeValue">18</output></label>
+            <label class="settings-control"><span>Auto-advance</span><input id="fullAutoAdvance" type="checkbox"></label>
+            <label class="settings-control"><span>Auto-advance delay</span><input id="fullAutoDelay" type="range" min="2" max="12" step="1"><output id="fullAutoDelayValue">5 s</output></label>
+          </section>
+          <section class="settings-panel" data-settings-panel="appearance" hidden>
+            <h3>Appearance</h3>
+            <label class="settings-control"><span>Interface font</span><select id="fullFontStyle"><option value="serif">Serif</option><option value="sans">Sans serif</option></select></label>
+            <label class="settings-control"><span>Message box opacity</span><input id="fullMessageOpacity" type="range" min="40" max="100" step="5"><output id="fullMessageOpacityValue">80%</output></label>
+            <label class="settings-control"><span>Persian dialogue font</span><select id="fullPersianFont"><option value="parastoo">Parastoo — literary</option><option value="vazirmatn">Vazirmatn — modern</option><option value="noto">Noto Naskh — original</option></select></label>
+          </section>
+          <section class="settings-panel" data-settings-panel="audio" hidden>
+            <h3>Audio</h3>
+            <label class="settings-control"><span>Background music</span><input id="fullMusicVolume" type="range" min="0" max="100" step="5"><output id="fullMusicVolumeValue">55%</output></label>
+            <label class="settings-control"><span>Sound effects and voice</span><input id="fullSfxVolume" type="range" min="0" max="100" step="5"><output id="fullSfxVolumeValue">80%</output></label>
+            <label class="settings-control"><span>Sea ambience</span><input id="fullAmbientVolume" type="range" min="0" max="100" step="5"><output id="fullAmbientVolumeValue">60%</output></label>
+          </section>
+          <section class="settings-panel" data-settings-panel="accessibility" hidden>
+            <h3>Accessibility</h3>
+            <label class="settings-control"><span>Reduce motion</span><input id="fullReduceMotion" type="checkbox"></label>
+            <label class="settings-control"><span>High contrast</span><input id="fullHighContrast" type="checkbox"></label>
+            <label class="settings-control"><span>Language</span><select id="fullLanguage"><option value="en">English</option><option value="fa">فارسی</option></select></label>
+          </section>
+          <div class="settings-actions"><button type="button" class="menu-button" id="resetFullSettings">Reset to Default</button><button type="button" class="primary-button" id="saveFullSettings">Apply settings</button><button type="button" class="menu-button" id="backFromSettings">Back</button></div>
         </div>
       </section>
 
@@ -146,7 +187,7 @@
         <p class="welcome-credit">Translated and brought back to life by <strong>Mohammad Mahdi Taghavi</strong></p>
       </div>
     </section>
-    <section class="dedication-screen" id="dedicationScreen" aria-label="Dedication" aria-hidden="false">
+    <section class="dedication-screen" id="dedicationScreen" aria-label="Dedication" aria-hidden="true" hidden>
       <div class="dedication-card">
         <span class="dedication-rule" aria-hidden="true"></span>
         <p class="dedication-quote" lang="en" dir="ltr">For those who remain in our memories,<br>long after the journey ends.</p>
