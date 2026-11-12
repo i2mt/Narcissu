@@ -139,6 +139,21 @@ function startAmbientSound() {
     if (button) button.textContent = 'Ambient audio unavailable';
   }
 }
+function silenceAmbientForNonMenu() {
+  // Scene music owns the audio space while reading. Mute the menu ambience
+  // without changing the user's saved preference or destroying the graph.
+  ambientStartPending = false;
+  if (ambientAudioContext && ambientMasterGain) {
+    ambientMasterGain.gain.cancelScheduledValues(ambientAudioContext.currentTime);
+    ambientMasterGain.gain.setTargetAtTime(0, ambientAudioContext.currentTime, 0.25);
+  }
+  ambientEnabled = false;
+  const button = $('ambientToggle');
+  if (button) {
+    button.textContent = '♫ Enable sea ambience';
+    button.setAttribute('aria-pressed', 'false');
+  }
+}
 function stopAmbientSound() {
   try { localStorage.setItem(AMBIENT_PREFERENCE_KEY, '0'); } catch {}
   ambientStartPending = false;
@@ -303,6 +318,13 @@ function updateReaderChrome() {
   }
 }
 function setScreen(name) {
+  if (name !== 'home') {
+    silenceAmbientForNonMenu();
+  } else if (ambientAutoplayAllowed() && (state.settings.ambientVolume ?? 0.6) > 0) {
+    // Returning home is itself normally a user gesture, so resume ambience
+    // here when the user's preference is still enabled.
+    startAmbientSound();
+  }
   state.screen = name;
   try { localStorage.setItem('narcissu-active-screen', name); } catch {}
   $('homeScreen').hidden = name !== 'home';
@@ -1616,8 +1638,12 @@ function bindUI() {
     if ((state.settings.ambientVolume ?? 0.6) <= 0) return;
     startAmbientSound();
   };
-  document.addEventListener('pointerdown', tryAmbientAfterGesture, { capture: true, once: true });
-  document.addEventListener('keydown', tryAmbientAfterGesture, { capture: true, once: true });
+  document.addEventListener('pointerdown', (event) => {
+    if (state.screen === 'home') tryAmbientAfterGesture(event);
+  }, { capture: true });
+  document.addEventListener('keydown', (event) => {
+    if (state.screen === 'home') tryAmbientAfterGesture(event);
+  }, { capture: true });
   $('continueButton').addEventListener('click',()=>{const p=getProgress();if(p)restoreProgress(p);});
   $('chaptersButton').addEventListener('click',()=>{$('chapterSelectPanel').hidden=false;});
   $('closeChapters').addEventListener('click',()=>{$('chapterSelectPanel').hidden=true;});
