@@ -36,11 +36,27 @@ let ambientAudioContext = null;
 let ambientMasterGain = null;
 let ambientEnabled = false;
 let ambientStartPending = false;
+
+// Reuse the same media elements for the complete story. Several mobile browsers
+// grant playback permission to media elements that were first played during a
+// real user gesture; creating a brand-new Audio() for every scene can make a
+// later Auto-mode soundtrack silently fail.
+let musicAudioElement = null;
+const channelAudioElements = new Map();
+const primedAudioElements = new WeakSet();
+const audioPrimePromises = new WeakMap();
+let silentAudioDataUrl = null;
+let pendingMusicPlayback = null;
+const pendingChannelPlayback = new Map();
+const STORY_AUDIO_CHANNELS = [0, 4, 5, 6];
 const AMBIENT_PREFERENCE_KEY = 'narcissu-ambient-enabled-v1';
 function ambientAutoplayAllowed() {
   try { return localStorage.getItem(AMBIENT_PREFERENCE_KEY) !== '0'; } catch { return true; }
 }
 function startAmbientSound() {
+  // Menu ambience must never be started from Settings, even if a delayed
+  // autoplay promise from the previous screen resolves after navigation.
+  if (state.screen !== 'home' || document.hidden) return;
   const button = $('ambientToggle');
   const audio = $('homeAmbientAudio');
   if (audio) {
@@ -57,9 +73,10 @@ function startAmbientSound() {
     }
     Promise.resolve(audioPlayResult).then(() => {
       ambientStartPending = false;
-      if (!(state.screen === 'home' || state.screen === 'settings') || document.hidden) {
+      if (state.screen !== 'home' || document.hidden) {
         audio.pause();
         ambientEnabled = false;
+        if (button) { button.setAttribute('aria-pressed', 'false'); button.setAttribute('aria-label', 'Enable sea ambience'); }
         return;
       }
       ambientEnabled = true;
@@ -67,6 +84,7 @@ function startAmbientSound() {
       if (button) { button.textContent = '♫'; button.title = 'Sea ambience on'; button.setAttribute('aria-label', 'Turn sea ambience off'); button.setAttribute('aria-pressed', 'true'); }
     }).catch(error => {
       ambientStartPending = false;
+      if (state.screen !== 'home' || document.hidden) return;
       console.warn('Recorded ambience could not be played; using the synthesized fallback.', error);
       startSyntheticAmbientSound();
     });
@@ -146,6 +164,14 @@ function startSyntheticAmbientSound() {
     const resumeResult = ambientAudioContext.resume();
     Promise.resolve(resumeResult).then(() => {
       if (!ambientAudioContext || !ambientMasterGain) return;
+      if (state.screen !== 'home' || document.hidden) {
+        ambientStartPending = false;
+        ambientMasterGain.gain.cancelScheduledValues(ambientAudioContext.currentTime);
+        ambientMasterGain.gain.setTargetAtTime(0, ambientAudioContext.currentTime, 0.2);
+        ambientEnabled = false;
+        if (button) { button.setAttribute('aria-pressed', 'false'); button.setAttribute('aria-label', 'Enable sea ambience'); }
+        return;
+      }
       if (ambientAudioContext.state !== 'running') {
         ambientStartPending = false;
         if (button) button.textContent = '♫ Tap to enable sea ambience';
@@ -300,7 +326,7 @@ let state = {
   settings: { ...DEFAULT_SETTINGS }, audioChannels: new Map(), musicAudio: null, currentMusicLoop: false,
   musicFadeTimer: null,
   centerNext: false, chapterComplete: false, pendingAdvance: false,
-  history: [], passageHistory: [], downloadBusy: false,
+  history: [], passageHistory: [], downloadBusy: false, orientationPaused: false,
   revealActive: false, revealTimer: null, revealDurationMs: 0, revealEndsAt: 0,
   dialogueSourceText: '', dialoguePages: [], dialoguePageIndex: 0, previewTextSize: null
 };
@@ -332,7 +358,7 @@ function isMobileArtworkViewport() {
   return !!window.matchMedia?.('(max-width: 900px)').matches;
 }
 function isCompactReaderViewport() {
-  return !!window.matchMedia?.('(max-width: 1100px)').matches;
+  return !!window.matchMedia?.('(max-width: 1100px)').matches || !!window.matchMedia?.('(any-pointer: coarse)').matches;
 }
 function isMobileLandscapeViewport() {
   return !!window.matchMedia?.('(max-width: 900px) and (orientation: landscape)').matches;
@@ -354,7 +380,7 @@ function showToast(message) {
 }
 function chapter() { return story.chapters[state.chapterIndex]; }
 function updateReaderChrome() {
-  const reading = state.screen === 'reader' || (state.screen === 'settings' && state.settingsReturnScreen === 'reader');
+  const reading = state.screen === 'reader' || (state.screen === 'settings' && settingsReturnScreen === 'reader');
   const compact = reading && isCompactReaderViewport();
   const shell = document.querySelector('.app-shell');
   shell?.classList.toggle('is-reading', reading);
@@ -365,7 +391,6 @@ function updateReaderChrome() {
     ? document.querySelector('.reader-top-actions')
     : document.querySelector('.topbar-actions');
   if (targetActions) {
-    targetActions.appendChild($('fullscreenButton'));
     targetActions.appendChild($('settingsButton'));
   }
 }
@@ -373,16 +398,24 @@ function setScreen(name) {
   const settingsOverReader = name === 'settings' && state.settingsReturnScreen === 'reader';
   const menuBackdrop = name === 'home' || (name === 'settings' && !settingsOverReader);
   const readerBackdrop = name === 'reader' || settingsOverReader;
-  if (!menuBackdrop) {
-    silenceAmbientForNonMenu();
-  } else if (ambientAutoplayAllowed() && (state.settings.ambientVolume ?? 0.6) > 0) {
-    // The menu and its settings overlay share the same coastal ambience.
-    startAmbientSound();
-  }
+  // Update the screen state before starting/stopping ambience so the menu-only
+  // audio guard sees the destination screen, including when returning from play.
   state.screen = name;
+  if (name === 'home') {
+    if (ambientAutoplayAllowed() && (state.settings.ambientVolume ?? 0.6) > 0) {
+      startAmbientSound();
+    } else {
+      silenceAmbientForNonMenu();
+    }
+  } else {
+    // Coastal ambience belongs to the main menu only. Settings, reading and
+    // chapter-end screens must remain quiet unless story audio is playing.
+    silenceAmbientForNonMenu();
+  }
   $('stage')?.classList.toggle('has-home-backdrop', menuBackdrop);
   $('stage')?.classList.toggle('is-settings-open', name === 'settings');
   document.querySelector('.app-shell')?.classList.toggle('is-home-backdrop', menuBackdrop);
+  document.querySelector('.app-shell')?.classList.toggle('is-settings-open', name === 'settings');
   try { localStorage.setItem('narcissu-active-screen', name); } catch {}
   $('homeScreen').hidden = !menuBackdrop;
   $('readerScreen').hidden = !readerBackdrop;
@@ -876,21 +909,138 @@ function refreshBackgroundForViewport() {
   const img = $('backgroundImage');
   if (url && img.src !== url) img.src = url;
 }
-function setAudioVolume(audio, volume) { try { audio.volume = Math.max(0, Math.min(1, volume)); } catch {} }
+function setAudioVolume(audio, volume) { try { if (audio) audio.volume = Math.max(0, Math.min(1, volume)); } catch {} }
+function getSilentAudioDataUrl() {
+  if (silentAudioDataUrl) return silentAudioDataUrl;
+  // A tiny, genuinely silent PCM WAV primes mobile media playback without
+  // producing an audible click or tone.
+  const sampleRate = 8000;
+  const sampleCount = 800; // 100 ms
+  const buffer = new ArrayBuffer(44 + sampleCount * 2);
+  const view = new DataView(buffer);
+  const write = (offset, value) => { for (let i = 0; i < value.length; i++) view.setUint8(offset + i, value.charCodeAt(i)); };
+  write(0, 'RIFF'); view.setUint32(4, buffer.byteLength - 8, true); write(8, 'WAVE');
+  write(12, 'fmt '); view.setUint32(16, 16, true); view.setUint16(20, 1, true);
+  view.setUint16(22, 1, true); view.setUint32(24, sampleRate, true);
+  view.setUint32(28, sampleRate * 2, true); view.setUint16(32, 2, true);
+  view.setUint16(34, 16, true); write(36, 'data'); view.setUint32(40, sampleCount * 2, true);
+  const bytes = new Uint8Array(buffer);
+  let binary = '';
+  for (let i = 0; i < bytes.length; i += 0x8000) binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  silentAudioDataUrl = `data:audio/wav;base64,${btoa(binary)}`;
+  return silentAudioDataUrl;
+}
+function getMusicAudioElement() {
+  if (!musicAudioElement) {
+    musicAudioElement = new Audio();
+    musicAudioElement.preload = 'auto';
+    musicAudioElement.addEventListener('ended', () => {
+      if (state.musicAudio !== musicAudioElement) return;
+      if (!state.currentMusicLoop) {
+        state.musicAudio = null;
+        state.currentMusic = null;
+        state.currentMusicLoop = false;
+        return;
+      }
+      // Native loop should normally handle this; retain a guarded fallback.
+      try { musicAudioElement.currentTime = 0; const restarted = musicAudioElement.play(); if (restarted?.catch) restarted.catch(() => {}); } catch {}
+    });
+    musicAudioElement.addEventListener('error', () => {
+      if (state.musicAudio === musicAudioElement) showToast('Background music could not be loaded.');
+    });
+  }
+  return musicAudioElement;
+}
+function getChannelAudioElement(channel) {
+  if (!channelAudioElements.has(channel)) {
+    const audio = new Audio();
+    audio.preload = 'auto';
+    audio.addEventListener('ended', () => {
+      if (state.audioChannels.get(channel) === audio) state.audioChannels.delete(channel);
+    });
+    audio.addEventListener('error', () => {
+      if (state.audioChannels.get(channel) === audio) showToast('A story sound could not be loaded.');
+    });
+    channelAudioElements.set(channel, audio);
+  }
+  return channelAudioElements.get(channel);
+}
+function primeAudioElement(audio) {
+  if (!audio || primedAudioElements.has(audio)) return Promise.resolve(true);
+  if (audioPrimePromises.has(audio)) return audioPrimePromises.get(audio);
+  const token = {};
+  audio.__narcissuPrimeToken = token;
+  try {
+    audio.pause();
+    audio.src = getSilentAudioDataUrl();
+    audio.loop = false;
+    audio.volume = 1;
+    try { audio.currentTime = 0; } catch {}
+    const result = audio.play();
+    const promise = Promise.resolve(result).then(() => {
+      primedAudioElements.add(audio);
+      // If a real story track replaced the silent source meanwhile, do not
+      // pause it when the priming promise settles.
+      if (audio.__narcissuPrimeToken === token) {
+        audio.pause();
+        try { audio.currentTime = 0; } catch {}
+        audio.__narcissuPrimeToken = null;
+      }
+      return true;
+    }).catch(() => {
+      if (audio.__narcissuPrimeToken === token) audio.__narcissuPrimeToken = null;
+      return false;
+    }).finally(() => audioPrimePromises.delete(audio));
+    audioPrimePromises.set(audio, promise);
+    return promise;
+  } catch {
+    if (audio.__narcissuPrimeToken === token) audio.__narcissuPrimeToken = null;
+    return Promise.resolve(false);
+  }
+}
+function retryPendingStoryAudio() {
+  if (!(state.screen === 'reader' || $('musicRoomDialog')?.open)) return;
+  if (pendingMusicPlayback) {
+    const request = pendingMusicPlayback;
+    pendingMusicPlayback = null;
+    playMusic(request.path, request.loop);
+  }
+  for (const [channel, ev] of [...pendingChannelPlayback]) {
+    pendingChannelPlayback.delete(channel);
+    playChannel(ev);
+  }
+}
+function unlockStoryAudioFromGesture() {
+  const elements = [getMusicAudioElement(), ...STORY_AUDIO_CHANNELS.map(getChannelAudioElement)];
+  Promise.all(elements.map(primeAudioElement)).then(retryPendingStoryAudio).catch(() => {});
+}
 function stopChannel(channel) {
+  pendingChannelPlayback.delete(channel);
   const audio = state.audioChannels.get(channel);
-  if (audio) { audio.pause(); audio.currentTime = 0; state.audioChannels.delete(channel); }
+  if (audio) { audio.pause(); try { audio.currentTime = 0; } catch {} state.audioChannels.delete(channel); }
 }
 function playChannel(ev) {
   const url = assetURL(ev.path);
   if (!url) { showToast(`Missing audio resource: ${ev.path}`); return; }
   stopChannel(ev.channel);
-  const audio = new Audio(url);
+  const audio = getChannelAudioElement(ev.channel);
   audio.loop = !!ev.loop;
-  setAudioVolume(audio, ev.channel === 0 ? state.settings.sfxVolume : state.settings.sfxVolume);
-  audio.addEventListener('ended', () => { if (state.audioChannels.get(ev.channel) === audio) state.audioChannels.delete(ev.channel); });
+  audio.preload = 'auto';
+  audio.__narcissuPrimeToken = null;
+  audio.src = url;
+  try { audio.load(); } catch {}
+  setAudioVolume(audio, state.settings.sfxVolume);
   state.audioChannels.set(ev.channel, audio);
-  audio.play().catch(() => showToast('Audio will start after your first interaction with the reader.'));
+  let playback;
+  try { playback = audio.play(); }
+  catch (error) { playback = Promise.reject(error); }
+  if (playback?.catch) playback.catch(error => {
+    if (state.audioChannels.get(ev.channel) !== audio) return;
+    if (error?.name === 'NotAllowedError') {
+      pendingChannelPlayback.set(ev.channel, { ...ev });
+      showToast('Story sound is waiting for the next interaction.');
+    } else if (error?.name !== 'AbortError') showToast('A story sound could not be played.');
+  });
 }
 function clearMusicFade() {
   if (state.musicFadeTimer !== null) {
@@ -902,7 +1052,8 @@ function stopMusic() {
   // A pending fade belongs to the track that was active when it began. Always
   // cancel it before changing or stopping the current track.
   clearMusicFade();
-  const audio = state.musicAudio;
+  pendingMusicPlayback = null;
+  const audio = state.musicAudio || musicAudioElement;
   state.musicAudio = null;
   state.currentMusic = null;
   state.currentMusicLoop = false;
@@ -914,38 +1065,29 @@ function stopMusic() {
 function playMusic(path, loop) {
   const url = assetURL(path);
   if (!url) { showToast(`Missing music resource: ${path}`); return; }
-  // stopMusic also cancels any fade timer for the previous track. This prevents
-  // an old fade-out from stopping the newly-started track a few seconds later.
+  // Reuse one element across scene changes. This preserves the media-playback
+  // permission granted by the player's first touch/click on mobile browsers.
   stopMusic();
-  const audio = new Audio(url);
+  const audio = getMusicAudioElement();
+  audio.pause();
+  audio.__narcissuPrimeToken = null;
+  audio.src = url;
   audio.preload = 'auto';
   audio.loop = !!loop;
+  try { audio.load(); } catch {}
   setAudioVolume(audio, state.settings.musicVolume);
   state.musicAudio = audio;
   state.currentMusic = path;
   state.currentMusicLoop = !!loop;
-  audio.addEventListener('ended', () => {
-    if (state.musicAudio !== audio) return;
-    if (!state.currentMusicLoop) {
-      state.musicAudio = null;
-      state.currentMusic = null;
-      state.currentMusicLoop = false;
-      return;
-    }
-    // Browsers normally handle loop=true natively. This is a guarded fallback
-    // for engines that still dispatch ended for a looping background track.
-    try {
-      audio.currentTime = 0;
-      const restarted = audio.play();
-      if (restarted?.catch) restarted.catch(() => {});
-    } catch {}
-  });
-  audio.addEventListener('error', () => {
-    if (state.musicAudio === audio) showToast('Background music could not be loaded.');
-  });
-  const playback = audio.play();
-  if (playback?.catch) playback.catch(() => {
-    if (state.musicAudio === audio) showToast('Music will start after your first interaction with the reader.');
+  let playback;
+  try { playback = audio.play(); }
+  catch (error) { playback = Promise.reject(error); }
+  if (playback?.catch) playback.catch(error => {
+    if (state.musicAudio !== audio || state.currentMusic !== path) return;
+    if (error?.name === 'NotAllowedError') {
+      pendingMusicPlayback = { path, loop: !!loop };
+      showToast('The soundtrack will resume after your next interaction.');
+    } else if (error?.name !== 'AbortError') showToast('Background music could not be played.');
   });
 }
 function getMusicRoomTracks() {
@@ -1024,17 +1166,34 @@ function isStandaloneMode() {
   return !!(window.matchMedia?.('(display-mode: standalone)').matches || navigator.standalone === true);
 }
 function requestLandscapeOrientation() {
+  // Browsers generally permit orientation locking only in installed/fullscreen
+  // contexts. The rotate prompt below remains the reliable cross-browser path.
   if (!isStandaloneMode()) return;
   try {
     const lock = screen.orientation?.lock?.('landscape');
     if (lock && typeof lock.catch === 'function') lock.catch(() => {});
   } catch {}
 }
+function isPortraitGameplayBlocked() {
+  const gameplayScreen = state.screen === 'reader' || state.screen === 'chapterEnd';
+  if (!gameplayScreen) return false;
+  const portrait = !!window.matchMedia?.('(orientation: portrait)').matches;
+  const touchDevice = !!window.matchMedia?.('(any-pointer: coarse)').matches || !!window.matchMedia?.('(max-width: 900px)').matches;
+  return portrait && touchDevice;
+}
 function updateOrientationPrompt() {
-  // Portrait reading is supported by the responsive reader layout. A failed
-  // orientation lock must never cover the story with a blocking rotate prompt.
   const prompt = $('orientationPrompt');
-  if (prompt) prompt.hidden = true;
+  const blocked = isPortraitGameplayBlocked();
+  if (prompt) prompt.hidden = !blocked;
+
+  // If Auto or a timed story command reached its next event while the device
+  // was upright, resume the timeline once the device returns to landscape.
+  if (!blocked && state.orientationPaused && state.screen === 'reader') {
+    state.orientationPaused = false;
+    processNext();
+  } else if (!blocked && state.screen !== 'settings' && state.screen !== 'reader' && state.screen !== 'chapterEnd') {
+    state.orientationPaused = false;
+  }
 }
 function updateInstallButton() {
   const button = $('installAppButton');
@@ -1087,6 +1246,7 @@ function fadeMusic(duration) {
 }
 function stopAllAudio() {
   for (const channel of [...state.audioChannels.keys()]) stopChannel(channel);
+  pendingChannelPlayback.clear();
   stopMusic();
 }
 function saveProgress() {
@@ -1276,6 +1436,7 @@ function scheduleAutoAdvance(extraDelayMs = 0) {
 }
 function processNext() {
   if (state.screen !== 'reader') return;
+  if (isPortraitGameplayBlocked()) { state.orientationPaused = true; return; }
   clearWaitingTimer(); state.awaitingClick = false; state.pendingAdvance = false;
   const ch = chapter();
   while (state.eventIndex < ch.events.length) {
@@ -1308,7 +1469,10 @@ function processNext() {
       case 'click_wait':
         state.awaitingClick = true; state.pendingAdvance = true;
         $('dialogueText').textContent = ''; $('dialogueLanguage').textContent = '';
-        $('dialogueStatus').textContent = 'Tap to continue';
+        $('dialogueStatus').textContent = state.auto ? `Auto · ${state.settings.autoDelay}s` : 'Tap to continue';
+        // Ponscripter click-waits are timeline gates. Auto mode must be allowed
+        // to pass them, otherwise later scene changes and their music never run.
+        if (state.auto) scheduleAutoAdvance();
         updateProgress(); saveProgress(); return;
       case 'say':
         state.currentEvent = ev; state.awaitingClick = true; rememberPassage(ev); addHistory(ev);
@@ -1329,6 +1493,7 @@ function processNext() {
 }
 function advance() {
   if (state.screen !== 'reader') return;
+  if (isPortraitGameplayBlocked()) { state.orientationPaused = true; return; }
   if (state.revealActive) {
     clearWaitingTimer();
     finishDialogueReveal();
@@ -1486,33 +1651,56 @@ async function registerServiceWorker() {
     return null;
   }
 }
+function getOfflineAssetUrls() {
+  const urls = new Set();
+  const add = path => {
+    if (!path) return;
+    urls.add(new URL(`./public/${path}`,document.baseURI).toString());
+  };
+  Object.values(assetManifest?.assets || {}).forEach(item => {
+    add(item.url);
+    add(item.mobile_url);
+    add(item.mobile_landscape_url);
+  });
+  // The menu photograph and ambient track are not part of the original archive
+  // manifest, so include them explicitly in the optional offline library.
+  add('assets/images/narcissu-coastal-background.jpg');
+  add('assets/audio/narcissu-coastal-ambience.mp3');
+  return [...urls];
+}
 async function openOfflineDialog() {
-  $('offlineDialog').showModal();
-  $('downloadMeterFill').style.width='0%';$('downloadPercent').textContent='0%';$('downloadStatus').textContent='Not downloaded';
+  const dialog = $('offlineDialog');
+  if (!dialog.open) dialog.showModal();
+  $('downloadMeterFill').style.width='0%';
+  $('downloadPercent').textContent='0%';
+  $('downloadStatus').textContent='Checking saved resources…';
   try {
+    const items = getOfflineAssetUrls();
+    const cache = await caches.open(ASSET_CACHE_NAME);
+    let cached = 0;
+    for (const url of items) if (await cache.match(url)) cached++;
+    const pct = items.length ? Math.round(cached / items.length * 100) : 100;
+    $('downloadMeterFill').style.width = `${pct}%`;
+    $('downloadPercent').textContent = `${pct}%`;
+    $('downloadStatus').textContent = cached === items.length
+      ? `All ${items.length} resources are already saved on this device.`
+      : `${cached} of ${items.length} resources already saved.`;
     const est=await navigator.storage?.estimate?.();
     if(est) $('storageStatus').textContent=`Storage estimate: ${Math.round((est.usage||0)/1024/1024)} MB used of ${Math.round((est.quota||0)/1024/1024)} MB available.`;
     else $('storageStatus').textContent='Storage quota information is not available in this browser.';
-  } catch { $('storageStatus').textContent='Could not read storage quota.'; }
+  } catch {
+    $('downloadStatus').textContent='Could not inspect saved resources. You can still try the download.';
+    $('storageStatus').textContent='Storage information is not available in this browser.';
+  }
 }
 async function downloadOfflineAssets() {
   if(state.downloadBusy)return;
   state.downloadBusy=true;
   $('startDownloadButton').disabled=true;
-  $('downloadStatus').textContent='Preparing resources…';
+  $('downloadStatus').textContent='Preparing the complete game library…';
   let done=0,failed=0,total=0;
   try {
-    const items=Object.values(assetManifest.assets).flatMap(x=>{
-      const paths=[x.url];
-      if(x.mobile_url) paths.push(x.mobile_url);
-      if(x.mobile_landscape_url && x.mobile_landscape_url!==x.mobile_url) paths.push(x.mobile_landscape_url);
-      return paths.map(path=>new URL(`./public/${path}`,document.baseURI).toString());
-    });
-    const menuAssets=[
-      'assets/images/narcissu-coastal-background.jpg',
-      'assets/audio/narcissu-coastal-ambience.mp3'
-    ];
-    for(const path of menuAssets) items.push(new URL(`./public/${path}`,document.baseURI).toString());
+    const items=getOfflineAssetUrls();
     total=items.length;
     const cache=await caches.open(ASSET_CACHE_NAME);
     let cursor=0;
@@ -1540,8 +1728,10 @@ async function downloadOfflineAssets() {
       }
     };
     await Promise.all(Array.from({length:4},worker));
-    $('downloadStatus').textContent=failed?`Completed with ${failed} failed resources.`:'All referenced resources are cached for offline use.';
-    showToast(failed?`Offline download finished; ${failed} files need another attempt.`:'Offline resources are ready.');
+    $('downloadStatus').textContent=failed
+      ? `Completed with ${failed} failed resources. Retry to fetch the missing files.`
+      : `All ${total} game resources are saved for offline use.`;
+    showToast(failed?`Offline download finished; ${failed} files need another attempt.`:'The complete game library is ready offline.');
   } catch(e) {
     console.error('Offline asset download could not start',e);
     $('downloadStatus').textContent='Could not start offline download. Check browser storage permissions and try again.';
@@ -1572,6 +1762,24 @@ function cancelTextSizePreview() {
   scheduleDialogueFit();
 }
 
+function activateSettingsTab(tab, { focus = false } = {}) {
+  const validTabs = new Set(['reading', 'appearance', 'audio', 'accessibility']);
+  const activeTab = validTabs.has(tab) ? tab : 'reading';
+  document.querySelectorAll('[data-settings-tab]').forEach(button => {
+    const active = button.dataset.settingsTab === activeTab;
+    button.classList.toggle('is-active', active);
+    button.setAttribute('aria-selected', String(active));
+    button.tabIndex = active ? 0 : -1;
+    if (active && focus) button.focus();
+  });
+  document.querySelectorAll('[data-settings-panel]').forEach(panel => {
+    const active = panel.dataset.settingsPanel === activeTab;
+    panel.hidden = !active;
+    panel.classList.toggle('is-active', active);
+    panel.setAttribute('aria-hidden', String(!active));
+  });
+}
+
 function openSettingsScreen() {
   settingsReturnScreen = state.screen === 'settings' ? settingsReturnScreen : state.screen;
   const s=state.settings;
@@ -1593,8 +1801,7 @@ function openSettingsScreen() {
   $('fullReduceMotion').checked=!!s.reduceMotion;
   $('fullHighContrast').checked=!!s.highContrast;
   $('fullLanguage').value=state.language;
-  document.querySelectorAll('[data-settings-tab]').forEach(b=>b.classList.toggle('is-active',b.dataset.settingsTab==='reading'));
-  document.querySelectorAll('[data-settings-panel]').forEach(p=>{p.hidden=false;p.classList.toggle('is-active',p.dataset.settingsPanel==='reading');});
+  activateSettingsTab('reading');
   setScreen('settings');
 }
 function saveFullSettings() {
@@ -1632,12 +1839,22 @@ function resetFullSettings() {
   showToast('Settings restored to defaults.');
 }
 function bindFullSettings() {
-  document.querySelectorAll('[data-settings-tab]').forEach(button=>button.addEventListener('click',()=>{
-    const tab=button.dataset.settingsTab;
-    document.querySelectorAll('[data-settings-tab]').forEach(b=>b.classList.toggle('is-active',b===button));
-    const panel=document.querySelector('[data-settings-panel="'+tab+'"]');
-    if(panel){panel.scrollIntoView({behavior:state.settings.reduceMotion?'auto':'smooth',block:'nearest'});}
-  }));
+  const settingsTabs = [...document.querySelectorAll('[data-settings-tab]')];
+  settingsTabs.forEach((button, index) => {
+    button.addEventListener('click', () => activateSettingsTab(button.dataset.settingsTab));
+    button.addEventListener('keydown', event => {
+      const forward = event.key === 'ArrowDown' || event.key === 'ArrowRight';
+      const backward = event.key === 'ArrowUp' || event.key === 'ArrowLeft';
+      let nextIndex = index;
+      if (forward) nextIndex = (index + 1) % settingsTabs.length;
+      else if (backward) nextIndex = (index - 1 + settingsTabs.length) % settingsTabs.length;
+      else if (event.key === 'Home') nextIndex = 0;
+      else if (event.key === 'End') nextIndex = settingsTabs.length - 1;
+      else return;
+      event.preventDefault();
+      activateSettingsTab(settingsTabs[nextIndex].dataset.settingsTab, { focus: true });
+    });
+  });
   const pairs=[['fullTextSize','fullTextSizeValue',v=>v+' px'],['fullAutoDelay','fullAutoDelayValue',v=>v+' s'],['fullMessageOpacity','fullMessageOpacityValue',v=>v+'%'],['fullMusicVolume','fullMusicVolumeValue',v=>v+'%'],['fullSfxVolume','fullSfxVolumeValue',v=>v+'%'],['fullAmbientVolume','fullAmbientVolumeValue',v=>v+'%']];
   pairs.forEach(([id,out,format])=>$(id).addEventListener('input',e=>$(out).textContent=format(e.target.value)));
   $('saveFullSettings').addEventListener('click',saveFullSettings);
@@ -1677,13 +1894,19 @@ function applySettings() {
 }
 function toggleAuto() {
   state.auto=!state.auto;$('autoButton').setAttribute('aria-pressed',String(state.auto));
-  // Do not replace a timeline wait (including the opening statistics cards) with the auto timer.
-  if(state.auto&&state.currentEvent&&!state.pendingAdvance){$('dialogueStatus').textContent=dialogueStatusLabel(state.revealActive?'reveal':'continue');scheduleAutoAdvance(remainingDialogueRevealMs());}
-  else if(!state.auto&&!state.pendingAdvance){clearWaitingTimer();$('dialogueStatus').textContent=dialogueStatusLabel(state.revealActive?'reveal':'continue');}
-}
-function toggleFullscreen() {
-  if(!document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(()=>showToast('Fullscreen is not available here.'));
-  else document.exitFullscreen?.();
+  // Preserve real timeline waits. A click_wait has no timer of its own, so Auto
+  // must schedule it explicitly; this is also what lets its following music_play
+  // event execute without a manual tap.
+  if(state.auto && state.pendingAdvance && !state.waitingTimer) {
+    $('dialogueStatus').textContent=`Auto · ${state.settings.autoDelay}s`;
+    scheduleAutoAdvance();
+  } else if(state.auto && state.currentEvent && !state.pendingAdvance) {
+    $('dialogueStatus').textContent=dialogueStatusLabel(state.revealActive?'reveal':'continue');
+    scheduleAutoAdvance(remainingDialogueRevealMs());
+  } else if(!state.auto && !state.pendingAdvance) {
+    clearWaitingTimer();
+    $('dialogueStatus').textContent=dialogueStatusLabel(state.revealActive?'reveal':'continue');
+  }
 }
 function bindUI() {
   bindFullSettings();
@@ -1700,9 +1923,11 @@ function bindUI() {
     startAmbientSound();
   };
   document.addEventListener('pointerdown', (event) => {
+    unlockStoryAudioFromGesture();
     if (state.screen === 'home') tryAmbientAfterGesture(event);
   }, { capture: true });
   document.addEventListener('keydown', (event) => {
+    unlockStoryAudioFromGesture();
     if (state.screen === 'home') tryAmbientAfterGesture(event);
   }, { capture: true });
   $('continueButton').addEventListener('click',()=>{const p=getProgress();if(p)restoreProgress(p);});
@@ -1719,7 +1944,6 @@ function bindUI() {
   $('textSizeSetting').addEventListener('input', event => previewTextSize(event.target.value));
   $('settingsDialog').addEventListener('close', cancelTextSizePreview);
   $('saveSettingsButton').addEventListener('click',applySettings);
-  $('fullscreenButton').addEventListener('click',toggleFullscreen);
   $('languageSwitch').addEventListener('click',()=>setLanguage(state.language==='en'?'fa':'en'));
   $('nextButton').addEventListener('click',advance);$('previousButton').addEventListener('click',goPrevious);$('dialoguePanel').addEventListener('click',advance);
   $('dialoguePanel').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();advance();}});
@@ -1731,7 +1955,7 @@ function bindUI() {
   $('nextChapterButton').addEventListener('click',continueChapter);
   $('chapterEndPreviousButton').addEventListener('click',goPrevious);
   $('endMenuButton').addEventListener('click',()=>{setScreen('home');});
-  $('offlineDownloadButton').addEventListener('click',openOfflineDialog);
+  $('homeOfflineDownloadButton').addEventListener('click',openOfflineDialog);
   $('startDownloadButton').addEventListener('click',downloadOfflineAssets);
   $('clearDownloadButton').addEventListener('click',clearOfflineAssets);
   window.addEventListener('beforeinstallprompt',event=>{
@@ -1744,8 +1968,8 @@ function bindUI() {
     updateInstallButton();
     showToast('Narcissu has been installed.');
   });
-  window.addEventListener('resize',()=>{refreshBackgroundForViewport();scheduleDialogueFit();},{passive:true});
-  window.addEventListener('orientationchange',()=>{refreshBackgroundForViewport();scheduleDialogueFit();},{passive:true});
+  window.addEventListener('resize',()=>{refreshBackgroundForViewport();scheduleDialogueFit();updateOrientationPrompt();},{passive:true});
+  window.addEventListener('orientationchange',()=>{refreshBackgroundForViewport();scheduleDialogueFit();updateOrientationPrompt();},{passive:true});
   if (document.fonts?.ready) document.fonts.ready.then(scheduleDialogueFit);
   updateInstallButton(); refreshBackgroundForViewport();
   window.addEventListener('online',()=>{updateNetworkStatus();checkForAppUpdate(true);});

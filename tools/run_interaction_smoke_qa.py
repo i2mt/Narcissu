@@ -47,12 +47,25 @@ def main():
       Object.defineProperty(window,'localStorage',{{configurable:true,value:makeStorage()}});
       Object.defineProperty(window,'sessionStorage',{{configurable:true,value:makeStorage()}});
       localStorage.setItem('narcissu-welcome-prepared-v1','1');
-      localStorage.setItem('narcissu-ambient-enabled-v1','0');
-      HTMLMediaElement.prototype.play=function(){{return Promise.resolve()}};
+      localStorage.setItem('narcissu-ambient-enabled-v1','1');
+      window.__audioPlayCalls=[]; window.__primedStoryAudio=new WeakSet();
+      HTMLMediaElement.prototype.play=function(){{
+        const src=this.src||'';
+        if(src.startsWith('data:audio/wav')){{window.__primedStoryAudio.add(this);return Promise.resolve();}}
+        if(!window.__primedStoryAudio.has(this))return Promise.reject(new DOMException('User gesture required','NotAllowedError'));
+        window.__audioPlayCalls.push(src);return Promise.resolve();
+      }};
       HTMLMediaElement.prototype.pause=function(){{}};
+      const ambient=document.getElementById('homeAmbientAudio');
+      let ambientPlaying=false, resolveAmbient=null, deferAmbient=true;
+      Object.defineProperty(ambient,'paused',{{configurable:true,get(){{return !ambientPlaying}}}});
+      ambient.play=function(){{ambientPlaying=true;if(deferAmbient)return new Promise(resolve=>{{resolveAmbient=()=>resolve()}});return Promise.resolve()}};
+      ambient.pause=function(){{ambientPlaying=false}};
+      window.__resolveAmbient=()=>{{deferAmbient=false;if(resolveAmbient){{const r=resolveAmbient;resolveAmbient=null;r()}}}};
+      window.__setAmbientPlaying=(value)=>{{ambientPlaying=!!value}};
     }})();'''
     app=(SITE/'app.js').read_text(encoding='utf-8')
-    viewports=[(390,844,'phone-portrait'),(844,390,'phone-landscape'),(768,1024,'tablet-portrait'),(1024,768,'tablet-landscape'),(1536,864,'desktop')]
+    viewports=[(320,568,'small-phone-portrait'),(390,844,'phone-portrait'),(844,390,'phone-landscape'),(768,1024,'tablet-portrait'),(1024,768,'tablet-landscape'),(1536,864,'desktop')]
     out=[]
     with sync_playwright() as p:
         browser=p.chromium.launch(headless=True,executable_path='/usr/bin/chromium',args=['--no-sandbox'])
@@ -82,21 +95,39 @@ def main():
                 page.locator('#dedicationScreen').evaluate("e=>{e.hidden=true;e.setAttribute('aria-hidden','true')}")
             # Settings controls and tab switching.
             page.locator('#settingsButton').click(timeout=5000)
+            page.evaluate('window.__resolveAmbient()')
+            page.wait_for_timeout(30)
+            ambience_silent_in_settings = page.evaluate("ambientEnabled === false && document.getElementById('homeAmbientAudio').paused") and page.locator('#ambientToggle').is_hidden()
             page.locator('[data-settings-tab="audio"]').click(timeout=2000)
             audio_panel=page.locator('[data-settings-panel="audio"]').evaluate("e=>!e.hidden && getComputedStyle(e).display!=='none'")
+            hidden_panels=page.locator('[data-settings-panel][hidden]').count()==3
+            page.locator('[data-settings-tab="audio"]').focus()
+            page.keyboard.press('ArrowRight')
+            accessibility_panel=page.locator('[data-settings-panel="accessibility"]').evaluate("e=>!e.hidden && getComputedStyle(e).display!=='none'")
+            keyboard_tab_navigation=accessibility_panel and page.locator('[data-settings-tab="accessibility"]').get_attribute('aria-selected')=='true'
             page.locator('#fullLanguage').select_option('fa')
             page.locator('#saveFullSettings').click(timeout=2000)
             settings_language_applied = page.evaluate('document.documentElement.lang') == 'fa'
             # Open the menu ambience and turn it back off.
+            page.evaluate("localStorage.setItem('narcissu-ambient-enabled-v1','0'); window.__resolveAmbient()")
+            page.evaluate("stopAmbientSound(); document.getElementById('homeAmbientAudio').play = function(){ window.__setAmbientPlaying(true); return Promise.resolve(); }; document.getElementById('homeAmbientAudio').pause = function(){ window.__setAmbientPlaying(false); };")
             page.locator('#ambientToggle').click(timeout=2000)
             page.wait_for_timeout(30)
             ambient_on=page.locator('#ambientToggle').get_attribute('aria-pressed')
             page.locator('#ambientToggle').click(timeout=2000)
             ambient_off=page.locator('#ambientToggle').get_attribute('aria-pressed')
+            page.locator('#settingsButton').click(timeout=2000)
+            page.locator('#backFromSettings').click(timeout=2000)
             # Start a new game, check the mobile artwork mapping, and switch languages live.
             page.locator('#newGameButton').click(timeout=5000)
             page.wait_for_timeout(250)
             reader_visible=not page.locator('#readerScreen').evaluate('(e)=>e.hidden')
+            orientation_prompt_visible=not page.locator('#orientationPrompt').evaluate('(e)=>e.hidden')
+            orientation_prompt_expected = (h > w and (w <= 900 or 'tablet' in label))
+            if h > w and (w <= 900 or 'tablet' in label):
+                page.set_viewport_size({'width':h,'height':w})
+                page.wait_for_timeout(80)
+            orientation_prompt_dismisses_in_landscape=page.locator('#orientationPrompt').evaluate('(e)=>e.hidden')
             first_dialogue=page.locator('#dialogueText').inner_text()
             background_src=page.locator('#backgroundImage').get_attribute('src') or ''
             start_language=page.evaluate('document.documentElement.lang')
@@ -106,6 +137,17 @@ def main():
             page.locator('#languageSwitch').click(timeout=2000)
             page.wait_for_timeout(80)
             after_switch_back=page.evaluate('document.documentElement.lang')
+            touch_targets_ok=page.evaluate("""() => {
+              const settings=document.getElementById('settingsButton');
+              const language=document.getElementById('languageSwitch');
+              return settings.getBoundingClientRect().width >= 42 && settings.getBoundingClientRect().height >= 42 &&
+                language.getBoundingClientRect().height >= 40;
+            }""")
+            fullscreen_control_absent=page.evaluate("!document.querySelector('#fullscreenButton, #fullScreenButton, [data-action=fullscreen]')")
+            offline_assets_include_photo_and_ambience=page.evaluate("""() => {
+              const urls=getOfflineAssetUrls().join(' ').toLowerCase();
+              return urls.includes('narcissu-coastal-background.jpg') && urls.includes('narcissu-coastal-ambience.mp3');
+            }""")
             # Save to slot one, return home, then exercise Continue.
             page.locator('#saveButton').click(timeout=2000)
             page.locator('#slotsDialog .slot-item').first.locator('button').click(timeout=2000)
@@ -113,23 +155,59 @@ def main():
             continue_enabled=not page.locator('#continueButton').is_disabled()
             page.locator('#continueButton').click(timeout=3000)
             continue_restored=not page.locator('#readerScreen').evaluate('(e)=>e.hidden')
+            # Exercise a real Ponscripter click_wait followed by music_play.
+            page.evaluate("""() => {
+              clearWaitingTimer(); state.chapterIndex=1; state.eventIndex=7; state.currentEvent=null;
+              state.auto=true; state.settings.autoDelay=0.025; state.pendingAdvance=false; state.awaitingClick=false;
+              processNext();
+            }""")
+            page.wait_for_timeout(220)
+            auto_click_wait_reaches_scene_music=page.evaluate("String(state.currentMusic || '').includes('n04.mp3')")
+            auto_scene_music_play_attempted=page.evaluate("window.__audioPlayCalls.some(src => src.toLowerCase().includes('n04.mp3'))")
+            page.evaluate("playChannel({channel:5,path:'se/umi13.ogg',loop:false})")
+            page.wait_for_timeout(40)
+            auto_channel_sound_play_attempted=page.evaluate("window.__audioPlayCalls.some(src => src.toLowerCase().includes('umi13.ogg'))")
+            page.evaluate("localStorage.setItem('narcissu-ambient-enabled-v1','1')")
+            page.locator('#readerMenuButton').click(timeout=2000)
+            page.wait_for_timeout(30)
+            menu_ambience_restarts_on_return=page.evaluate('ambientEnabled === true')
+            page.locator('#settingsButton').click(timeout=2000)
+            page.wait_for_timeout(30)
+            ambience_stays_off_in_settings_after_return=page.evaluate("ambientEnabled === false && document.getElementById('homeAmbientAudio').paused")
+            page.locator('#backFromSettings').click(timeout=2000)
+            page.locator('#homeOfflineDownloadButton').click(timeout=2000)
+            offline_dialog_opens=page.locator('#offlineDialog').evaluate('(e)=>e.open')
             out.append({
                 'viewport':f'{w}x{h}','class':label,'settings_audio_tab_works':audio_panel,
+                'settings_keyboard_tab_navigation':keyboard_tab_navigation,
+                'only_selected_settings_panel_visible':hidden_panels,
+                'ambient_silent_in_settings':ambience_silent_in_settings,
+                'orientation_prompt_matches_viewport':orientation_prompt_visible == orientation_prompt_expected,
+                'rotate_prompt_hides_in_landscape':orientation_prompt_dismisses_in_landscape,
+                'auto_mode_passes_click_wait_and_starts_scene_music':auto_click_wait_reaches_scene_music,
+                'auto_mode_music_playback_attempted_after_audio_unlock':auto_scene_music_play_attempted,
+                'story_sound_effect_playback_after_audio_unlock':auto_channel_sound_play_attempted,
+                'main_menu_offline_download_opens':offline_dialog_opens,
                 'settings_language_apply_works':settings_language_applied,
                 'ambient_toggle_on':ambient_on=='true','ambient_toggle_off':ambient_off=='false',
                 'new_game_opens_reader':reader_visible,'dialogue_loaded':bool(first_dialogue.strip()),
                 'background_asset_path':background_src,'language_after_continue':page.evaluate('document.documentElement.lang'),'live_language_switch_round_trip':start_language=='fa' and after_switch=='en' and after_switch_back=='fa',
+                'settings_and_language_touch_targets_are_larger':touch_targets_ok,
+                'fullscreen_control_removed':fullscreen_control_absent,
+                'offline_download_includes_photo_and_ambience':offline_assets_include_photo_and_ambience,
+                'menu_ambience_restarts_on_return_home':menu_ambience_restarts_on_return,
+                'ambience_stays_off_in_settings_after_return':ambience_stays_off_in_settings_after_return,
                 'save_slot_and_continue_work':continue_enabled and continue_restored,
                 'page_errors':errors,'console_errors':warnings[:8]
             })
             context.close()
         browser.close()
-    (ROOT/'INTERACTION_SMOKE_RESULTS_0.54.json').write_text(json.dumps(out,indent=2,ensure_ascii=False),encoding='utf-8')
+    (ROOT/'INTERACTION_SMOKE_RESULTS_0.56.json').write_text(json.dumps(out,indent=2,ensure_ascii=False),encoding='utf-8')
     failed=[]
     for r in out:
-        for key in ['settings_audio_tab_works','ambient_toggle_on','ambient_toggle_off','new_game_opens_reader','dialogue_loaded','live_language_switch_round_trip','save_slot_and_continue_work']:
+        for key in ['settings_audio_tab_works','settings_keyboard_tab_navigation','only_selected_settings_panel_visible','ambient_silent_in_settings','orientation_prompt_matches_viewport','rotate_prompt_hides_in_landscape','auto_mode_passes_click_wait_and_starts_scene_music','auto_mode_music_playback_attempted_after_audio_unlock','story_sound_effect_playback_after_audio_unlock','main_menu_offline_download_opens','settings_and_language_touch_targets_are_larger','fullscreen_control_removed','offline_download_includes_photo_and_ambience','menu_ambience_restarts_on_return_home','ambience_stays_off_in_settings_after_return','ambient_toggle_on','ambient_toggle_off','new_game_opens_reader','dialogue_loaded','live_language_switch_round_trip','save_slot_and_continue_work']:
             if not r.get(key): failed.append(f"{r['viewport']}: {key}")
         if r['page_errors']: failed.append(f"{r['viewport']}: page errors {r['page_errors']}")
-    print(json.dumps({'runs':len(out),'failed_checks':failed,'results_file':'INTERACTION_SMOKE_RESULTS_0.54.json','details':out},indent=2,ensure_ascii=False))
+    print(json.dumps({'runs':len(out),'failed_checks':failed,'results_file':'INTERACTION_SMOKE_RESULTS_0.56.json','details':out},indent=2,ensure_ascii=False))
     return 1 if failed else 0
 if __name__=='__main__': raise SystemExit(main())

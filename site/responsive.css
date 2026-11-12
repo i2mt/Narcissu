@@ -277,7 +277,6 @@ body {
   overscroll-behavior: contain;
 }
 .settings-panel { min-width: 0; max-width: none; scroll-margin-top: 12px; }
-.settings-panel[hidden] { display: block !important; }
 .settings-panel h3 {
   margin: 1px 0 5px;
   padding-bottom: 5px;
@@ -315,7 +314,6 @@ body {
   background: transparent;
 }
 .settings-actions button { width: auto !important; min-width: 94px; min-height: 34px; padding: 6px 10px; font-size: 10px; }
-.settings-actions #offlineDownloadButton { min-width: 146px; }
 .settings-actions #installAppButton { min-width: 104px; }
 
 /* Reader: preserve a dedicated title, artwork, dialogue and control band. */
@@ -868,4 +866,198 @@ body {
   .app-shell.is-compact-reading .stage.is-reading:not(.is-panorama) .background-frame {
     top: calc(46px + var(--narcissu-safe-top)) !important;
   }
+}
+
+
+/* Increment 0.55 — one settings category at a time, reliable touch targets,
+   and a gentle landscape-only reading prompt. */
+.settings-main {
+  min-width: 0;
+}
+.settings-panel {
+  grid-column: 1 / -1;
+  width: 100%;
+  min-width: 0;
+}
+.settings-panel[hidden] {
+  display: none !important;
+}
+.settings-panel:not([hidden]) {
+  display: block;
+}
+.settings-nav-button[aria-selected="true"] {
+  border-color: rgba(238, 231, 211, .58);
+}
+
+/* Settings and language controls are deliberately easier to tap. */
+.topbar #settingsButton,
+.reader-top-actions #settingsButton {
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  font-size: 19px;
+}
+.language-switch {
+  min-width: 62px;
+  min-height: 38px;
+  height: 38px;
+  padding: 7px 11px;
+  gap: 7px;
+  font-size: 11px;
+}
+
+.orientation-prompt[hidden] { display: none !important; }
+.orientation-prompt:not([hidden]) {
+  display: grid !important;
+  place-items: center;
+  background: rgba(5, 10, 17, .86);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+.orientation-prompt-card {
+  box-sizing: border-box;
+  width: min(390px, calc(100vw - 44px));
+  padding: 28px 24px 26px;
+  border: 1px solid rgba(235, 231, 218, .24);
+  border-radius: 8px;
+  background: linear-gradient(145deg, rgba(17, 27, 40, .94), rgba(9, 16, 26, .92));
+  box-shadow: 0 18px 55px rgba(0, 0, 0, .32);
+}
+.orientation-symbol {
+  display: inline-block;
+  margin: 0 0 14px;
+  font-size: 48px;
+  transform-origin: center;
+  animation: narcissu-turn-phone 2.8s ease-in-out infinite;
+}
+.orientation-prompt-card .eyebrow {
+  margin: 0 0 8px;
+  color: rgba(232, 224, 204, .72);
+  font-size: 9px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.orientation-prompt-card h2 {
+  margin: 0 0 10px;
+  font-size: clamp(21px, 5vw, 26px);
+  line-height: 1.25;
+}
+.orientation-prompt-card p:last-child {
+  margin: 0;
+  color: rgba(239, 237, 230, .76);
+  font-size: 13px;
+  line-height: 1.7;
+}
+@keyframes narcissu-turn-phone {
+  0%, 18%, 100% { transform: rotate(0deg); }
+  42%, 66% { transform: rotate(90deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orientation-symbol { animation: none; }
+}
+
+@media (max-width: 1100px) {
+  .topbar #settingsButton,
+  .reader-top-actions #settingsButton {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+  }
+  .app-shell.is-compact-reading .reader-top-actions #settingsButton {
+    flex: 0 0 38px;
+  }
+  .app-shell.is-compact-reading .language-switch {
+    min-width: 62px;
+    min-height: 38px;
+    height: 38px;
+    padding: 6px 9px;
+    gap: 6px;
+    font-size: 10px;
+  }
+}
+@media (max-width: 680px) and (orientation: portrait) {
+  .settings-main {
+    display: block !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+  .settings-panel:not([hidden]) {
+    display: block;
+    width: 100%;
+  }
+  .settings-control {
+    grid-template-columns: minmax(0, 1fr) minmax(92px, 1.05fr) 32px;
+  }
+}
+
+.app-shell.is-settings-open #ambientToggle { display: none !important; }
+
+/* Increment 0.56 — focused settings navigation, accessible touch targets,
+   and a strict landscape gate for touch-device gameplay. */
+.settings-panel[hidden],
+.settings-panel:not(.is-active) {
+  display: none !important;
+}
+.settings-panel.is-active:not([hidden]) {
+  display: block !important;
+  width: 100%;
+  min-width: 0;
+}
+.settings-nav-button {
+  touch-action: manipulation;
+}
+
+/* Slightly larger controls without changing the visual language. */
+.topbar #settingsButton,
+.reader-top-actions #settingsButton {
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  font-size: 20px !important;
+}
+.app-shell.is-compact-reading .reader-top-actions #settingsButton {
+  flex: 0 0 44px !important;
+}
+.language-switch,
+.app-shell.is-compact-reading .language-switch {
+  min-width: 68px !important;
+  min-height: 42px !important;
+  height: 42px !important;
+  padding: 8px 11px !important;
+  gap: 7px !important;
+  font-size: 11px !important;
+}
+
+@media (max-width: 680px) and (orientation: portrait) {
+  .settings-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+  }
+  .settings-nav-button {
+    min-height: 38px !important;
+    padding: 8px 7px !important;
+    font-size: 12px !important;
+    line-height: 1.2 !important;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .settings-main {
+    display: block !important;
+    min-height: 0;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding-top: 12px !important;
+  }
+  .settings-panel.is-active:not([hidden]) {
+    display: block !important;
+  }
+}
+
+.orientation-prompt[hidden] { display: none !important; }
+.orientation-prompt:not([hidden]) {
+  display: grid !important;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  place-items: center;
 }

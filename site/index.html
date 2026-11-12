@@ -26,7 +26,6 @@
       <div class="topbar-actions">
         <span class="offline-indicator" id="networkStatus"><i></i><span>Online</span></span>
         <button class="icon-button ambient-toggle" id="ambientToggle" type="button" aria-label="Enable sea ambience" title="Sea ambience" aria-pressed="false">♫</button>
-        <button class="icon-button" id="fullscreenButton" type="button" aria-label="Toggle fullscreen" title="Fullscreen">⛶</button>
         <button class="icon-button" id="settingsButton" type="button" aria-label="Settings" title="Settings">⚙</button>
       </div>
     </header>
@@ -60,13 +59,14 @@
               <button class="menu-button" id="continueButton" type="button" disabled>Continue</button>
               <button class="menu-button" id="chaptersButton" type="button">Chapter Select</button>
               <button class="menu-button" id="musicRoomButton" type="button">Music Room</button>
+              <button class="menu-button" id="homeOfflineDownloadButton" type="button">↓ Download for offline</button>
               <button class="menu-button" id="loadButton" type="button">Load Game</button>
             </div>
           </div>
           <div class="home-footer">
             <span>English source: gp32 / Insani 2005</span>
             <span>Original story and assets remain credited to their respective rights holders.</span>
-            <span class="build-label">Version 0.54</span>
+            <span class="build-label">Version 0.56</span>
           </div>
         </div>
         <div class="chapter-select-panel" id="chapterSelectPanel" hidden>
@@ -80,40 +80,40 @@
         <aside class="settings-sidebar">
           <a class="settings-emblem" href="https://t.me/i_2MT" target="_blank" rel="noopener noreferrer" aria-label="Contact the translator"><img src="./icons/fox-emblem-white.png" alt="" width="54" height="54"></a>
           <h2 id="settingsTitle">Settings</h2>
-          <nav class="settings-nav" aria-label="Settings categories">
-            <button type="button" class="settings-nav-button is-active" data-settings-tab="reading">Reading</button>
-            <button type="button" class="settings-nav-button" data-settings-tab="appearance">Appearance</button>
-            <button type="button" class="settings-nav-button" data-settings-tab="audio">Audio</button>
-            <button type="button" class="settings-nav-button" data-settings-tab="accessibility">Accessibility</button>
+          <nav class="settings-nav" aria-label="Settings categories" role="tablist" aria-orientation="vertical">
+            <button type="button" class="settings-nav-button is-active" id="settingsTabReading" role="tab" aria-selected="true" aria-controls="settingsPanelReading" tabindex="0" data-settings-tab="reading">Reading</button>
+            <button type="button" class="settings-nav-button" id="settingsTabAppearance" role="tab" aria-selected="false" aria-controls="settingsPanelAppearance" tabindex="-1" data-settings-tab="appearance">Appearance</button>
+            <button type="button" class="settings-nav-button" id="settingsTabAudio" role="tab" aria-selected="false" aria-controls="settingsPanelAudio" tabindex="-1" data-settings-tab="audio">Audio</button>
+            <button type="button" class="settings-nav-button" id="settingsTabAccessibility" role="tab" aria-selected="false" aria-controls="settingsPanelAccessibility" tabindex="-1" data-settings-tab="accessibility">Accessibility</button>
           </nav>
         </aside>
         <div class="settings-main">
-          <section class="settings-panel is-active" data-settings-panel="reading">
+          <section class="settings-panel is-active" id="settingsPanelReading" role="tabpanel" aria-labelledby="settingsTabReading" data-settings-panel="reading">
             <h3>Reading</h3>
             <label class="settings-control"><span>Dialogue text size</span><input id="fullTextSize" type="range" min="15" max="24" step="1"><output id="fullTextSizeValue">18</output></label>
             <label class="settings-control"><span>Auto-advance</span><input id="fullAutoAdvance" type="checkbox"></label>
             <label class="settings-control"><span>Auto-advance delay</span><input id="fullAutoDelay" type="range" min="2" max="12" step="1"><output id="fullAutoDelayValue">5 s</output></label>
           </section>
-          <section class="settings-panel" data-settings-panel="appearance" hidden>
+          <section class="settings-panel" id="settingsPanelAppearance" role="tabpanel" aria-labelledby="settingsTabAppearance" data-settings-panel="appearance" hidden>
             <h3>Appearance</h3>
             <label class="settings-control"><span>Interface font</span><select id="fullFontStyle"><option value="serif">Serif</option><option value="sans">Sans serif</option></select></label>
             <label class="settings-control"><span>Message box opacity</span><input id="fullMessageOpacity" type="range" min="40" max="100" step="5"><output id="fullMessageOpacityValue">80%</output></label>
             <label class="settings-control"><span>Persian dialogue font</span><select id="fullPersianFont"><option value="parastoo">Parastoo — literary</option><option value="vazirmatn">Vazirmatn — modern</option><option value="noto">Noto Naskh — original</option></select></label>
           </section>
-          <section class="settings-panel" data-settings-panel="audio" hidden>
+          <section class="settings-panel" id="settingsPanelAudio" role="tabpanel" aria-labelledby="settingsTabAudio" data-settings-panel="audio" hidden>
             <h3>Audio</h3>
             <label class="settings-control"><span>Background music</span><input id="fullMusicVolume" type="range" min="0" max="100" step="5"><output id="fullMusicVolumeValue">55%</output></label>
             <label class="settings-control"><span>Sound effects and voice</span><input id="fullSfxVolume" type="range" min="0" max="100" step="5"><output id="fullSfxVolumeValue">80%</output></label>
             <label class="settings-control"><span>Sea ambience</span><input id="fullAmbientVolume" type="range" min="0" max="100" step="5"><output id="fullAmbientVolumeValue">60%</output></label>
           </section>
-          <section class="settings-panel" data-settings-panel="accessibility" hidden>
+          <section class="settings-panel" id="settingsPanelAccessibility" role="tabpanel" aria-labelledby="settingsTabAccessibility" data-settings-panel="accessibility" hidden>
             <h3>Accessibility</h3>
             <label class="settings-control"><span>Reduce motion</span><input id="fullReduceMotion" type="checkbox"></label>
             <label class="settings-control"><span>High contrast</span><input id="fullHighContrast" type="checkbox"></label>
             <label class="settings-control"><span>Language</span><select id="fullLanguage"><option value="en">English</option><option value="fa">فارسی</option></select></label>
           </section>
         </div>
-        <div class="settings-actions"><button type="button" class="menu-button offline-download-button" id="offlineDownloadButton" aria-label="Download for offline" title="Download for offline">↓ Download for offline</button><button type="button" class="menu-button install-app-button" id="installAppButton">Install App ↗</button><button type="button" class="menu-button" id="resetFullSettings">Reset to Default</button><button type="button" class="primary-button" id="saveFullSettings">Apply settings</button><button type="button" class="menu-button" id="backFromSettings">Back</button></div>
+        <div class="settings-actions"><button type="button" class="menu-button install-app-button" id="installAppButton">Install App ↗</button><button type="button" class="menu-button" id="resetFullSettings">Reset to Default</button><button type="button" class="primary-button" id="saveFullSettings">Apply settings</button><button type="button" class="menu-button" id="backFromSettings">Back</button></div>
       </section>
 
       <section class="reader-screen" id="readerScreen" hidden aria-label="Novel reader">
@@ -161,11 +161,12 @@
         </div>
       </section>
 
-      <div class="orientation-prompt" id="orientationPrompt" hidden>
+      <div class="orientation-prompt" id="orientationPrompt" hidden role="status" aria-live="polite">
         <div class="orientation-prompt-card">
-          <div class="orientation-symbol" aria-hidden="true">↻</div>
-          <h2>Turn your device sideways</h2>
-          <p>Narcissu is designed to be read in landscape orientation.</p>
+          <div class="orientation-symbol" aria-hidden="true">📱</div>
+          <p class="eyebrow">A small note before continuing</p>
+          <h2>Please turn your device sideways</h2>
+          <p>Narcissu is designed for landscape play. Please turn your phone or tablet sideways to continue reading.</p>
         </div>
       </div>
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -256,11 +257,11 @@
   <dialog class="app-dialog" id="offlineDialog">
     <form method="dialog" class="dialog-inner">
       <div class="dialog-heading"><div><p class="eyebrow">Offline library</p><h2>Download game resources</h2></div><button class="close-button" value="cancel" aria-label="Close">×</button></div>
-      <p class="dialog-copy">The story interface is cached separately. This downloads the original referenced image and audio resources for offline play. Keep this page open until the download finishes.</p>
+      <p class="dialog-copy">Download the complete story library for offline play: all original image and audio assets, optimized phone artwork, the coastal background photograph and the optional sea ambience. Keep this page open until the download finishes.</p>
       <div class="download-meter"><span id="downloadMeterFill"></span></div>
       <div class="download-status"><span id="downloadStatus">Not downloaded</span><strong id="downloadPercent">0%</strong></div>
       <p class="small-note" id="storageStatus"></p>
-      <div class="dialog-actions"><button class="primary-button" id="startDownloadButton" type="button">Start download</button><button class="menu-button" id="clearDownloadButton" type="button">Clear offline assets</button></div>
+      <div class="dialog-actions"><button class="primary-button" id="startDownloadButton" type="button">Download all resources</button><button class="menu-button" id="clearDownloadButton" type="button">Clear offline assets</button></div>
     </form>
   </dialog>
 

@@ -72,11 +72,14 @@ def set_state(page, name, language='en'):
       stage.classList.toggle('is-reading', name==='reader');
       shell.classList.toggle('is-home-backdrop', name!=='reader');
       shell.classList.toggle('is-reading', name==='reader');
-      const compact = name==='reader' && innerWidth<=1100;
+      const compact = name==='reader' && (innerWidth<=1100 || matchMedia('(any-pointer: coarse)').matches);
       shell.classList.toggle('is-compact-reading',compact);
       const actions=document.querySelector(compact?'.reader-top-actions':'.topbar-actions');
-      actions.appendChild(document.querySelector('#fullscreenButton'));
       actions.appendChild(document.querySelector('#settingsButton'));
+      document.querySelectorAll('[data-settings-panel]').forEach(panel=>panel.hidden=panel.dataset.settingsPanel!=='reading');
+      document.querySelectorAll('[data-settings-tab]').forEach(tab=>{const active=tab.dataset.settingsTab==='reading';tab.classList.toggle('is-active',active);tab.setAttribute('aria-selected',String(active));});
+      const rotate=document.querySelector('#orientationPrompt');
+      rotate.hidden=!(name==='reader' && matchMedia('(orientation: portrait)').matches && (matchMedia('(any-pointer: coarse)').matches || innerWidth<=900));
       reader.classList.toggle('is-fa', language==='fa');
       reader.setAttribute('dir', language==='fa'?'rtl':'ltr');
       document.querySelector('#dialogueText').textContent = language==='fa'
@@ -90,7 +93,7 @@ def run():
     touch_sizes = [
         (320,568,'phone-small'), (320,640,'phone-small-tall'), (360,740,'phone'),
         (375,812,'phone'), (390,844,'phone'), (414,896,'phone-large'), (430,932,'phone-large'),
-        (600,960,'small-tablet-portrait'), (768,1024,'tablet-portrait'), (800,1280,'tablet-portrait'), (820,1180,'tablet-portrait'),
+        (600,960,'small-tablet-portrait'), (768,1024,'tablet-portrait'), (800,1280,'tablet-portrait'), (820,1180,'tablet-portrait'), (1024,1366,'tablet-wide-portrait'), (1366,1024,'tablet-wide-landscape'),
         (568,320,'phone-landscape'), (640,360,'phone-landscape'), (740,360,'phone-landscape'), (844,390,'phone-landscape'),
         (900,600,'tablet-landscape'), (1024,768,'tablet-landscape'),
     ]
@@ -135,6 +138,7 @@ def run():
                     'panel_inside_viewport':settings['panel']['x']>=0 and settings['panel']['y']>=0 and settings['panel']['right']<=w+1 and settings['panel']['bottom']<=h+1,
                     'actions_inside_panel':settings['actions']['x']>=settings['panel']['x'] and settings['actions']['right']<=settings['panel']['right']+1 and settings['actions']['bottom']<=settings['panel']['bottom']+1,
                     'main_and_actions_do_not_overlap':not overlaps(settings['main'],settings['actions']),
+                    'only_one_settings_panel_visible':page.locator('[data-settings-panel]:not([hidden])').count()==1,
                 }
                 if (w,h) in [(320,568),(390,844),(768,1024),(820,1180),(844,390),(1024,768),(1536,864)]:
                     page.screenshot(path=str(QA_DIR/f'settings-{w}x{h}.png'))
@@ -150,6 +154,7 @@ def run():
                         'dir':page.locator('#readerScreen').get_attribute('dir')
                     }
                     reader_checks[lang]={
+                        'orientation_prompt_matches_viewport':page.locator('#orientationPrompt').evaluate('(e)=>!e.hidden') == (h > w and (is_touch or w <= 900)),
                         'no_document_horizontal_overflow':reader['docW']<=w,
                         'dialogue_inside_viewport':reader['dialogue']['x']>=0 and reader['dialogue']['right']<=w+1 and reader['dialogue']['y']>=0 and reader['dialogue']['bottom']<=h+1,
                         'toolbar_inside_viewport':reader['toolbar']['x']>=0 and reader['toolbar']['right']<=w+1 and reader['toolbar']['y']>=0 and reader['toolbar']['bottom']<=h+1,
@@ -166,10 +171,10 @@ def run():
                 results.append(record)
             context.close()
         browser.close()
-    (ROOT/'BROWSER_QA_RESULTS_0.54.json').write_text(json.dumps(results,indent=2,ensure_ascii=False),encoding='utf-8')
+    (ROOT/'BROWSER_QA_RESULTS_0.56.json').write_text(json.dumps(results,indent=2,ensure_ascii=False),encoding='utf-8')
     failed=[f"{r['viewport']}: {k}" for r in results for k,v in r['checks'].items() if not v]
-    summary={'viewport_count':len(results),'states_tested':['home','settings','reader-en','reader-fa'],'failed_checks':failed,'screenshots':len(list(QA_DIR.glob('*.png'))),'results_file':'BROWSER_QA_RESULTS_0.54.json'}
-    (ROOT/'BROWSER_QA_SUMMARY_0.54.json').write_text(json.dumps(summary,indent=2),encoding='utf-8')
+    summary={'viewport_count':len(results),'states_tested':['home','settings','reader-en','reader-fa'],'failed_checks':failed,'screenshots':len(list(QA_DIR.glob('*.png'))),'results_file':'BROWSER_QA_RESULTS_0.56.json'}
+    (ROOT/'BROWSER_QA_SUMMARY_0.56.json').write_text(json.dumps(summary,indent=2),encoding='utf-8')
     print(json.dumps(summary,indent=2))
     return 1 if failed else 0
 

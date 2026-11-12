@@ -1170,7 +1170,6 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{
 .settings-main{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-content:start;
   gap:clamp(22px,3.2vw,44px) clamp(28px,4vw,64px);padding:16px 0 0 clamp(22px,3vw,48px)}
 .settings-panel{min-width:0;max-width:none;flex:none;scroll-margin-top:18px}
-.settings-panel[hidden]{display:block!important}
 .settings-panel h3{margin:4px 0 10px;padding-bottom:9px}
 .settings-control{grid-template-columns:minmax(100px,1fr) minmax(90px,1.1fr) 38px;gap:12px;min-height:48px}
 .settings-control input[type=range]{min-width:0}
@@ -1541,8 +1540,8 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{
     width:26px;height:26px;min-width:26px
   }
 
-  /* Settings: retain the glass-panel/sidebar design but show all four groups
-     in a compact 2x2 grid at landscape phone/tablet heights. */
+  /* Settings: keep the selected category in the content column on compact
+     landscape screens; hidden categories remain genuinely hidden. */
   .settings-screen {
     position:absolute;inset:0;display:grid!important;
     grid-template-columns:145px minmax(0,1fr);
@@ -1561,9 +1560,10 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{
     grid-template-rows:1fr 1fr auto;align-content:stretch;
     gap:10px 20px;padding:2px 0 0 18px;min-height:0;overflow:hidden
   }
-  .settings-panel,.settings-panel[hidden] {
-    display:block!important;min-width:0;min-height:0;overflow:hidden
+  .settings-panel {
+    min-width:0;min-height:0;overflow:auto
   }
+  .settings-panel[hidden] { display:none!important }
   .settings-panel h3 {font-size:11px;margin:0 0 5px;padding-bottom:5px}
   .settings-control {
     grid-template-columns:minmax(0,1fr) minmax(65px,.9fr) 28px;
