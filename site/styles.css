@@ -1842,8 +1842,10 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{
     white-space:nowrap;overflow:hidden;
   }
   .stage:not(.is-reading) .home-footer > span {
-    min-width:0;overflow:hidden;text-overflow:ellipsis
+    min-width:0;overflow:visible;text-overflow:clip;white-space:normal
   }
+  .stage:not(.is-reading) .home-footer > span:first-child {flex:0 1 auto}
+  .stage:not(.is-reading) .home-footer > span:nth-child(2) {flex:1 1 auto}
   .stage:not(.is-reading) .home-footer .ambient-toggle {
     display:inline-flex;flex:0 0 auto;align-items:center;
     min-height:24px;padding:3px 7px;font-size:clamp(7px,1vh,9px);
