@@ -1688,3 +1688,26 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{
   .stage.is-reading .dialogue-text {max-height:calc(19vh - 18px);font-size:12px}
   .stage.is-reading .toolbar-button,.stage.is-reading .next-button {min-height:26px;font-size:8px}
 }
+
+
+/* The fox seal is part of the main-menu identity and must never be hidden
+   to save vertical space on landscape phones. */
+@media (orientation:landscape) and (max-height:850px) and (pointer:coarse) {
+  .stage:not(.is-reading) .home-identity {
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr);
+    grid-template-rows:auto;
+    align-items:start;
+  }
+  .stage:not(.is-reading) .home-identity > .home-emblem {
+    display:grid!important;
+    visibility:visible!important;
+    opacity:.9!important;
+    width:34px;height:34px;
+    margin:0 0 7px!important;
+    grid-column:1!important;grid-row:auto!important;
+  }
+}
+@media (orientation:landscape) and (max-height:650px) and (pointer:coarse) {
+  .stage:not(.is-reading) .home-emblem {display:grid!important;width:28px;height:28px;margin-bottom:4px!important}
+}
