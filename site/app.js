@@ -104,7 +104,7 @@ function startAmbientSound() {
     ambientAudioContext.resume().then(() => {
       if (!ambientMasterGain) return;
       ambientMasterGain.gain.cancelScheduledValues(ambientAudioContext.currentTime);
-      ambientMasterGain.gain.setTargetAtTime(0.72, ambientAudioContext.currentTime, 1.8);
+      ambientMasterGain.gain.setTargetAtTime(state.settings.ambientVolume ?? 0.6, ambientAudioContext.currentTime, 1.8);
       ambientEnabled = true;
       if (button) {
         button.textContent = '♫ Sea ambience on';
