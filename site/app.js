@@ -49,6 +49,7 @@ const primedAudioElements = new WeakSet();
 const audioPrimePromises = new WeakMap();
 let silentAudioDataUrl = null;
 let pendingMusicPlayback = null;
+let endingMessagePending = false;
 const pendingChannelPlayback = new Map();
 const STORY_AUDIO_CHANNELS = [0, 4, 5, 6];
 const AMBIENT_PREFERENCE_KEY = 'narcissu-ambient-enabled-v1';
@@ -436,7 +437,7 @@ function setScreen(name) {
   // Update the screen state before starting/stopping ambience so the menu-only
   // audio guard sees the destination screen, including when returning from play.
   state.screen = name;
-  if (name !== 'chapterEnd') stopEndingMessage();
+  if (name !== 'reader' && !(name === 'settings' && settingsOverReader)) stopEndingMessage();
   if (name === 'home') {
     if (ambientAutoplayAllowed() && (state.settings.ambientVolume ?? 0.6) > 0) {
       startAmbientSound();
@@ -1065,8 +1066,13 @@ function retryPendingStoryAudio() {
   }
 }
 function unlockStoryAudioFromGesture() {
+  const endingAudio = $('endingMessageAudio');
   const elements = [getMusicAudioElement(), ...STORY_AUDIO_CHANNELS.map(getChannelAudioElement)];
-  Promise.all(elements.map(primeAudioElement)).then(retryPendingStoryAudio).catch(() => {});
+  if (endingAudio) elements.push(endingAudio);
+  Promise.all(elements.map(primeAudioElement)).then(() => {
+    retryPendingStoryAudio();
+    if (endingMessagePending && isEndingCreditsActive()) playEndingMessage();
+  }).catch(() => {});
 }
 function stopChannel(channel) {
   pendingChannelPlayback.delete(channel);
@@ -1318,27 +1324,32 @@ function fadeMusic(duration) {
   state.musicFadeTimer = timer;
 }
 function stopEndingMessage() {
+  endingMessagePending = false;
   const audio = $('endingMessageAudio');
   if (!audio) return;
   audio.pause();
   try { audio.currentTime = 0; } catch {}
-  const button = $('playEndingMessageButton');
-  if (button) button.textContent = 'Play closing message';
+}
+function isEndingMessagePlaying() {
+  const audio = $('endingMessageAudio');
+  return !!audio && !audio.paused && !audio.ended;
 }
 function playEndingMessage() {
   const audio = $('endingMessageAudio');
-  const button = $('playEndingMessageButton');
   if (!audio) return;
+  endingMessagePending = false;
+  audio.src = new URL('./public/assets/audio/narcissu-ending-message.m4a', document.baseURI).toString();
+  audio.preload = 'auto';
   try { audio.currentTime = 0; } catch {}
   audio.volume = Math.max(0, Math.min(1, Number(state.settings.sfxVolume ?? 0.8)));
+  try { audio.load(); } catch {}
   let playback;
   try { playback = audio.play(); }
   catch (error) { playback = Promise.reject(error); }
-  Promise.resolve(playback).then(() => {
-    if (button) button.textContent = 'Replay closing message';
-  }).catch(error => {
-    if (button) button.textContent = 'Play closing message';
-    if (error?.name !== 'NotAllowedError' && error?.name !== 'AbortError') {
+  Promise.resolve(playback).catch(error => {
+    if (error?.name === 'NotAllowedError') {
+      endingMessagePending = true;
+    } else if (error?.name !== 'AbortError') {
       console.info('The closing message could not start.', error);
     }
   });
@@ -1347,6 +1358,7 @@ function stopAllAudio() {
   for (const channel of [...state.audioChannels.keys()]) stopChannel(channel);
   pendingChannelPlayback.clear();
   stopMusic();
+  stopEndingMessage();
 }
 function saveProgress() {
   if (!story || state.screen === 'home') return;
@@ -1393,6 +1405,12 @@ function restoreProgress(payload) {
     renderChapterEndScreen();
   } else {
     setScreen('reader');
+    // If progress is restored during the final photo/credit sequence, resume
+    // its voice message rather than leaving the player with silent credits.
+    if (isEndingCreditsActive()) {
+      stopAllAudio();
+      playEndingMessage();
+    }
     if (state.currentEvent) {
       renderCurrentDialogue();
       if (Number(payload.dialoguePageIndex) > 0 && state.dialoguePages.length > 1) {
@@ -1533,6 +1551,17 @@ function scheduleAutoAdvance(extraDelayMs = 0) {
     advance();
   }, Math.max(0, extraDelayMs) + state.settings.autoDelay * 1000);
 }
+function isEndingCreditsBackground(ev) {
+  return state.chapterIndex === story.chapters.length - 1 &&
+    ev?.type === 'background' &&
+    normalizePath(ev.path) === 'english/1/st01.jpg';
+}
+function isEndingCreditsActive() {
+  if (!story || state.screen !== 'reader' || state.chapterIndex !== story.chapters.length - 1) return false;
+  const events = chapter()?.events || [];
+  const startIndex = events.findIndex(ev => isEndingCreditsBackground(ev));
+  return startIndex >= 0 && state.eventIndex > startIndex && state.eventIndex < events.length;
+}
 function processNext() {
   if (state.screen !== 'reader') return;
   if (isPortraitGameplayBlocked()) { state.orientationPaused = true; return; }
@@ -1542,6 +1571,12 @@ function processNext() {
     const ev = ch.events[state.eventIndex++];
     switch (ev.type) {
       case 'background':
+        if (isEndingCreditsBackground(ev)) {
+          // The final photo sequence is the credit roll. Give the voice message
+          // the audio space before the first credit image appears.
+          stopAllAudio();
+          playEndingMessage();
+        }
         setBackground(ev.path, ev.effect, ev.duration_ms);
         if (Number(ev.hold_ms) > 0) {
           state.awaitingClick = true; state.pendingAdvance = true;
@@ -1550,9 +1585,13 @@ function processNext() {
           updateProgress(); saveProgress(); return;
         }
         break;
-      case 'audio_play': playChannel(ev); break;
+      case 'audio_play':
+        if (!isEndingMessagePlaying() && !endingMessagePending) playChannel(ev);
+        break;
       case 'audio_stop_channel': stopChannel(ev.channel); break;
-      case 'music_play': playMusic(ev.path, ev.loop); break;
+      case 'music_play':
+        if (!isEndingMessagePlaying() && !endingMessagePending) playMusic(ev.path, ev.loop);
+        break;
       case 'music_fadeout': fadeMusic(ev.duration_ms); break;
       case 'window_mode': state.windowMode = ev.window; break;
       case 'alignment_hint': state.centerNext = true; break;
@@ -1621,12 +1660,8 @@ function renderChapterEndScreen() {
   $('chapterEndMessage').textContent = hasNext ? 'You have reached the end of this chapter.' : 'You have reached the end of Narcissu 1.';
   $('nextChapterButton').textContent = hasNext ? 'Continue to next chapter' : 'Return to Main Menu';
   $('nextChapterButton').dataset.last = hasNext ? 'false' : 'true';
-  const endingPanel = $('endingMessagePanel');
-  if (endingPanel) endingPanel.hidden = hasNext;
   if (!hasNext) stopAllAudio();
-  // Keep the final photos and credit sequence completely unobstructed.
-  // The closing message is intentionally user-started from the end screen,
-  // after the player has finished viewing the credits.
+  // The closing message now plays automatically over the final photo/credit sequence.
   setScreen('chapterEnd');
 }
 function showChapterEnd() {
@@ -1775,6 +1810,7 @@ function getOfflineAssetUrls() {
   // manifest, so include them explicitly in the optional offline library.
   add('assets/images/narcissu-coastal-background.jpg');
   add('assets/audio/narcissu-coastal-ambience.mp3');
+  add('assets/audio/narcissu-ending-message.m4a');
   return [...urls];
 }
 async function openOfflineDialog() {
@@ -2089,10 +2125,6 @@ function bindUI() {
   $('readerLoadButton').addEventListener('click',()=>openSlots('load'));
   $('readerMenuButton').addEventListener('click',returnHome);
   $('nextChapterButton').addEventListener('click',continueChapter);
-  $('playEndingMessageButton').addEventListener('click',playEndingMessage);
-  $('endingMessageAudio').addEventListener('ended',()=>{
-    $('playEndingMessageButton').textContent='Replay closing message';
-  });
   $('chapterEndPreviousButton').addEventListener('click',goPrevious);
   $('endMenuButton').addEventListener('click',()=>{setScreen('home');});
   $('homeOfflineDownloadButton').addEventListener('click',openOfflineDialog);

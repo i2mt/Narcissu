@@ -1,4 +1,4 @@
-const SHELL_CACHE = 'narcissu-shell-v72';
+const SHELL_CACHE = 'narcissu-shell-v73';
 const ASSET_CACHE = 'narcissu-assets-v6';
 const FONT_CACHE = 'narcissu-fonts-v1';
 const FONT_HOSTS = new Set(['fonts.googleapis.com', 'fonts.gstatic.com']);
@@ -124,9 +124,13 @@ async function handleFontRequest(request) {
 
 async function handleAssetRequest(request) {
   const cache = await caches.open(ASSET_CACHE);
+  const shellCache = await caches.open(SHELL_CACHE);
   const fullRequest = new Request(request.url, { method: 'GET' });
   const rangeHeader = request.headers.get('range');
-  const cachedFull = await cache.match(fullRequest);
+  // The closing voice message is also part of the install-time shell cache.
+  // Check it as a fallback so it remains available before an offline-library
+  // download has populated the dedicated asset cache.
+  const cachedFull = await cache.match(fullRequest) || await shellCache.match(fullRequest);
 
   if (rangeHeader) {
     try {
