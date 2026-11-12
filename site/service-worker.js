@@ -1,4 +1,4 @@
-const SHELL_CACHE = 'narcissu-shell-v71';
+const SHELL_CACHE = 'narcissu-shell-v72';
 const ASSET_CACHE = 'narcissu-assets-v6';
 const FONT_CACHE = 'narcissu-fonts-v1';
 const FONT_HOSTS = new Set(['fonts.googleapis.com', 'fonts.gstatic.com']);
@@ -41,7 +41,8 @@ const SHELL_FILES = [
   './fonts/NotoSans-Regular.ttf', './fonts/NotoSansArabic-Regular.ttf', './fonts/NotoNaskhArabic-Regular.ttf', './fonts/NotoNaskhArabic-SemiBold.ttf', './fonts/Noto-Font-License.txt',
   './icons/narcissu-192.png', './icons/narcissu-512.png', './icons/fox-emblem-white.png',
   './public/assets/images/narcissu-coastal-background.jpg',
-  './public/assets/audio/narcissu-coastal-ambience.mp3'
+  './public/assets/audio/narcissu-coastal-ambience.mp3',
+  './public/assets/audio/narcissu-ending-message.m4a'
 ];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(SHELL_CACHE).then(cache => cache.addAll(SHELL_FILES)).then(() => self.skipWaiting()));
