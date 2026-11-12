@@ -57,7 +57,7 @@
             <div class="menu-actions">
               <button class="primary-button" id="newGameButton" type="button">New Game</button>
               <button class="menu-button" id="continueButton" type="button" disabled>Continue</button>
-              <button class="menu-button" id="chaptersButton" type="button">Chapter Select</button>
+              <button class="menu-button" id="chaptersButton" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="chapterSelectPanel">Chapter Select</button>
               <button class="menu-button" id="musicRoomButton" type="button">Music Room</button>
               <button class="menu-button" id="homeOfflineDownloadButton" type="button">↓ Download for offline</button>
               <button class="menu-button" id="loadButton" type="button">Load Game</button>
@@ -66,12 +66,8 @@
           <div class="home-footer">
             <span>English source: gp32 / Insani 2005</span>
             <span>Original story and assets remain credited to their respective rights holders.</span>
-            <span class="build-label">Version 0.56</span>
+            <span class="build-label">Version 0.57</span>
           </div>
-        </div>
-        <div class="chapter-select-panel" id="chapterSelectPanel" hidden>
-          <div class="panel-heading"><div><p class="eyebrow">Story</p><h2>Choose a chapter</h2></div><button class="close-button" id="closeChapters" aria-label="Close chapter selection">×</button></div>
-          <div class="chapter-list" id="chapterList"></div>
         </div>
       </section>
 
@@ -161,16 +157,14 @@
         </div>
       </section>
 
-      <div class="orientation-prompt" id="orientationPrompt" hidden role="status" aria-live="polite">
-        <div class="orientation-prompt-card">
-          <div class="orientation-symbol" aria-hidden="true">📱</div>
-          <p class="eyebrow">A small note before continuing</p>
-          <h2>Please turn your device sideways</h2>
-          <p>Narcissu is designed for landscape play. Please turn your phone or tablet sideways to continue reading.</p>
-        </div>
-      </div>
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
     </main>
+    <!-- Chapter picker is a shell-level overlay so it can sit above both the
+         home stage and the global header without competing stacking contexts. -->
+    <div class="chapter-select-panel" id="chapterSelectPanel" hidden role="dialog" aria-modal="true" aria-labelledby="chapterSelectTitle">
+      <div class="panel-heading"><div><p class="eyebrow">Story</p><h2 id="chapterSelectTitle">Choose a chapter</h2></div><button class="close-button" id="closeChapters" aria-label="Close chapter selection">×</button></div>
+      <div class="chapter-list" id="chapterList"></div>
+    </div>
     <audio id="homeAmbientAudio" src="./public/assets/audio/narcissu-coastal-ambience.mp3" preload="none" loop></audio>
 
     <section class="welcome-preload" id="welcomeScreen" hidden aria-labelledby="welcomeTitle" aria-hidden="true">
@@ -197,6 +191,17 @@
       </div>
     </section>
 
+  </div>
+
+  <!-- Kept outside the app shell so the portrait gate covers the menu, reader,
+       header and all interactive controls on phones and tablets. -->
+  <div class="orientation-prompt" id="orientationPrompt" hidden role="status" aria-live="polite" aria-label="Landscape orientation required">
+    <div class="orientation-prompt-card">
+      <div class="orientation-symbol" aria-hidden="true">📱</div>
+      <p class="eyebrow">A small note before continuing</p>
+      <h2>Please turn your device sideways</h2>
+      <p>Narcissu is designed for landscape play. Please turn your phone or tablet sideways to continue.</p>
+    </div>
   </div>
 
   <dialog class="app-dialog" id="settingsDialog">

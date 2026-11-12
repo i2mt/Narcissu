@@ -79,7 +79,8 @@ def set_state(page, name, language='en'):
       document.querySelectorAll('[data-settings-panel]').forEach(panel=>panel.hidden=panel.dataset.settingsPanel!=='reading');
       document.querySelectorAll('[data-settings-tab]').forEach(tab=>{const active=tab.dataset.settingsTab==='reading';tab.classList.toggle('is-active',active);tab.setAttribute('aria-selected',String(active));});
       const rotate=document.querySelector('#orientationPrompt');
-      rotate.hidden=!(name==='reader' && matchMedia('(orientation: portrait)').matches && (matchMedia('(any-pointer: coarse)').matches || innerWidth<=900));
+      const portraitBlocked=['home','reader','chapterEnd'].includes(name) && matchMedia('(orientation: portrait)').matches && (matchMedia('(any-pointer: coarse)').matches || innerWidth<=900);
+      rotate.hidden=!portraitBlocked; shell.inert=portraitBlocked;
       reader.classList.toggle('is-fa', language==='fa');
       reader.setAttribute('dir', language==='fa'?'rtl':'ltr');
       document.querySelector('#dialogueText').textContent = language==='fa'
@@ -118,11 +119,33 @@ def run():
                     'identity':box(page,'.home-identity'),'menu':box(page,'.home-menu-column'),
                     'footer':box(page,'.home-footer')
                 }
+                prompt_home_visible = page.locator('#orientationPrompt').evaluate('(e)=>!e.hidden')
+                prompt_home_expected = h > w and (is_touch or w <= 900)
+                home_inert = page.locator('.app-shell').evaluate('(e)=>e.inert')
+                # The portrait gate intentionally covers the chapter panel. Check
+                # its foreground stacking after temporarily switching to landscape.
+                if prompt_home_expected:
+                    page.set_viewport_size({'width':h,'height':w})
+                    set_state(page,'home')
+                    page.wait_for_timeout(20)
+                page.locator('#chapterSelectPanel').evaluate('(e)=>e.hidden=false')
+                chapter_layer = page.locator('#chapterSelectPanel').evaluate("""e=>{
+                  const r=e.getBoundingClientRect(), hit=document.elementFromPoint(r.left+Math.min(20,r.width/3),r.top+Math.min(20,r.height/3));
+                  return {z:Number(getComputedStyle(e).zIndex),hitInside:!!hit?.closest('#chapterSelectPanel'),visible:r.width>0&&r.height>0};
+                }""")
+                page.locator('#chapterSelectPanel').evaluate('(e)=>e.hidden=true')
+                if prompt_home_expected:
+                    page.set_viewport_size({'width':w,'height':h})
+                    set_state(page,'home')
+                    page.wait_for_timeout(20)
                 home_checks={
                     'no_document_horizontal_overflow':home['docW']<=w,
                     'identity_and_menu_do_not_overlap':not overlaps(home['identity'],home['menu']),
                     'menu_inside_home_screen':home['menu']['x']>=home['screen']['x']-1 and home['menu']['right']<=home['screen']['right']+1,
                     'footer_inside_home_screen':home['footer']['bottom']<=home['screen']['bottom']+1 or home['screen']['scrollH']>home['screen']['clientH'],
+                    'home_orientation_prompt_matches_viewport':prompt_home_visible==prompt_home_expected,
+                    'portrait_home_is_inert':home_inert==prompt_home_expected,
+                    'chapter_select_is_foreground_layer':chapter_layer['visible'] and chapter_layer['z']>=50 and chapter_layer['hitInside'],
                 }
                 if (w,h) in [(320,568),(390,844),(768,1024),(820,1180),(844,390),(1024,768),(1536,864)]:
                     page.screenshot(path=str(QA_DIR/f'home-{w}x{h}.png'))
@@ -155,6 +178,7 @@ def run():
                     }
                     reader_checks[lang]={
                         'orientation_prompt_matches_viewport':page.locator('#orientationPrompt').evaluate('(e)=>!e.hidden') == (h > w and (is_touch or w <= 900)),
+                        'reader_portrait_is_inert':page.locator('.app-shell').evaluate('(e)=>e.inert') == (h > w and (is_touch or w <= 900)),
                         'no_document_horizontal_overflow':reader['docW']<=w,
                         'dialogue_inside_viewport':reader['dialogue']['x']>=0 and reader['dialogue']['right']<=w+1 and reader['dialogue']['y']>=0 and reader['dialogue']['bottom']<=h+1,
                         'toolbar_inside_viewport':reader['toolbar']['x']>=0 and reader['toolbar']['right']<=w+1 and reader['toolbar']['y']>=0 and reader['toolbar']['bottom']<=h+1,
@@ -171,10 +195,10 @@ def run():
                 results.append(record)
             context.close()
         browser.close()
-    (ROOT/'BROWSER_QA_RESULTS_0.56.json').write_text(json.dumps(results,indent=2,ensure_ascii=False),encoding='utf-8')
+    (ROOT/'BROWSER_QA_RESULTS_0.57.json').write_text(json.dumps(results,indent=2,ensure_ascii=False),encoding='utf-8')
     failed=[f"{r['viewport']}: {k}" for r in results for k,v in r['checks'].items() if not v]
-    summary={'viewport_count':len(results),'states_tested':['home','settings','reader-en','reader-fa'],'failed_checks':failed,'screenshots':len(list(QA_DIR.glob('*.png'))),'results_file':'BROWSER_QA_RESULTS_0.56.json'}
-    (ROOT/'BROWSER_QA_SUMMARY_0.56.json').write_text(json.dumps(summary,indent=2),encoding='utf-8')
+    summary={'viewport_count':len(results),'states_tested':['home','settings','reader-en','reader-fa'],'failed_checks':failed,'screenshots':len(list(QA_DIR.glob('*.png'))),'results_file':'BROWSER_QA_RESULTS_0.57.json'}
+    (ROOT/'BROWSER_QA_SUMMARY_0.57.json').write_text(json.dumps(summary,indent=2),encoding='utf-8')
     print(json.dumps(summary,indent=2))
     return 1 if failed else 0
 

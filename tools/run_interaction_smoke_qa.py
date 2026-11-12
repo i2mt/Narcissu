@@ -89,10 +89,31 @@ def main():
             page.set_content(build_html(),wait_until='domcontentloaded')
             page.add_script_tag(content=prelude)
             page.add_script_tag(content=app)
-            # The app starts with its first-visit dedication card. Dismiss it for deterministic interaction checks.
+            # Dismiss dedication through the real app handler; the landscape
+            # prompt should then appear on the home screen in portrait.
             page.wait_for_timeout(250)
-            if page.locator('#dedicationScreen').count():
-                page.locator('#dedicationScreen').evaluate("e=>{e.hidden=true;e.setAttribute('aria-hidden','true')}")
+            page.evaluate('dismissDedication()')
+            page.wait_for_timeout(30)
+            home_orientation_prompt_visible = not page.locator('#orientationPrompt').evaluate('(e)=>e.hidden')
+            home_orientation_prompt_expected = (h > w and (w <= 900 or 'tablet' in label))
+            home_app_inert = page.locator('.app-shell').evaluate('(e)=>e.inert')
+            if h > w and (w <= 900 or 'tablet' in label):
+                page.set_viewport_size({'width':h,'height':w})
+                page.wait_for_timeout(80)
+            home_prompt_hides_in_landscape = page.locator('#orientationPrompt').evaluate('(e)=>e.hidden') and not page.locator('.app-shell').evaluate('(e)=>e.inert')
+            # Verify Chapter Select is above the menu and closes with Escape.
+            page.locator('#chaptersButton').click(timeout=2000)
+            chapter_panel_visible = page.locator('#chapterSelectPanel').evaluate('(e)=>!e.hidden')
+            chapter_choices_populated = page.locator('#chapterList .chapter-choice').count() >= 8
+            chapter_panel_focus = page.evaluate("document.activeElement.id === 'closeChapters'")
+            chapter_panel_foreground = page.locator('#chapterSelectPanel').evaluate("e=>Number(getComputedStyle(e).zIndex)>=50 && !!document.elementFromPoint(e.getBoundingClientRect().left+12,e.getBoundingClientRect().top+12)?.closest('#chapterSelectPanel')")
+            page.keyboard.press('Escape')
+            chapter_panel_escape_closes = page.locator('#chapterSelectPanel').evaluate('(e)=>e.hidden') and page.locator('#chaptersButton').get_attribute('aria-expanded')=='false' and page.evaluate("document.activeElement.id === 'chaptersButton'")
+            home_button_balance = page.evaluate("""() => {
+              const s=document.querySelector('#settingsButton').getBoundingClientRect();
+              const a=document.querySelector('#ambientToggle').getBoundingClientRect();
+              return Math.abs(s.width-a.width)<=2 && Math.abs(s.height-a.height)<=2;
+            }""")
             # Settings controls and tab switching.
             page.locator('#settingsButton').click(timeout=5000)
             page.evaluate('window.__resolveAmbient()')
@@ -122,12 +143,22 @@ def main():
             page.locator('#newGameButton').click(timeout=5000)
             page.wait_for_timeout(250)
             reader_visible=not page.locator('#readerScreen').evaluate('(e)=>e.hidden')
+            # Rotate into portrait after starting in landscape; the reader must
+            # be covered and inert, then resume when landscape is restored.
+            reader_portrait_expected = (w <= 900 or 'tablet' in label)
+            if reader_portrait_expected:
+                current=page.evaluate('({w:innerWidth,h:innerHeight})')
+                if current['w'] > current['h']:
+                    page.set_viewport_size({'width':current['h'],'height':current['w']})
+                    page.wait_for_timeout(80)
             orientation_prompt_visible=not page.locator('#orientationPrompt').evaluate('(e)=>e.hidden')
-            orientation_prompt_expected = (h > w and (w <= 900 or 'tablet' in label))
-            if h > w and (w <= 900 or 'tablet' in label):
-                page.set_viewport_size({'width':h,'height':w})
+            orientation_prompt_expected = reader_portrait_expected
+            reader_app_inert = page.locator('.app-shell').evaluate('(e)=>e.inert')
+            if reader_portrait_expected:
+                current=page.evaluate('({w:innerWidth,h:innerHeight})')
+                page.set_viewport_size({'width':current['h'],'height':current['w']})
                 page.wait_for_timeout(80)
-            orientation_prompt_dismisses_in_landscape=page.locator('#orientationPrompt').evaluate('(e)=>e.hidden')
+            orientation_prompt_dismisses_in_landscape=page.locator('#orientationPrompt').evaluate('(e)=>e.hidden') and not page.locator('.app-shell').evaluate('(e)=>e.inert')
             first_dialogue=page.locator('#dialogueText').inner_text()
             background_src=page.locator('#backgroundImage').get_attribute('src') or ''
             start_language=page.evaluate('document.documentElement.lang')
@@ -140,8 +171,9 @@ def main():
             touch_targets_ok=page.evaluate("""() => {
               const settings=document.getElementById('settingsButton');
               const language=document.getElementById('languageSwitch');
-              return settings.getBoundingClientRect().width >= 42 && settings.getBoundingClientRect().height >= 42 &&
-                language.getBoundingClientRect().height >= 40;
+              const sr=settings.getBoundingClientRect(), lr=language.getBoundingClientRect();
+              return sr.width >= 28 && sr.width <= 36 && sr.height >= 28 && sr.height <= 36 &&
+                lr.height >= 30 && lr.height <= 35;
             }""")
             fullscreen_control_absent=page.evaluate("!document.querySelector('#fullscreenButton, #fullScreenButton, [data-action=fullscreen]')")
             offline_assets_include_photo_and_ambience=page.evaluate("""() => {
@@ -182,7 +214,15 @@ def main():
                 'settings_keyboard_tab_navigation':keyboard_tab_navigation,
                 'only_selected_settings_panel_visible':hidden_panels,
                 'ambient_silent_in_settings':ambience_silent_in_settings,
-                'orientation_prompt_matches_viewport':orientation_prompt_visible == orientation_prompt_expected,
+                'home_orientation_prompt_matches_viewport':home_orientation_prompt_visible == home_orientation_prompt_expected,
+                'home_portrait_gate_makes_app_inert':home_app_inert == home_orientation_prompt_expected,
+                'home_prompt_hides_in_landscape':home_prompt_hides_in_landscape,
+                'chapter_select_visible_in_foreground':chapter_panel_visible and chapter_panel_foreground,
+                'chapter_select_populates_chapters':chapter_choices_populated,
+                'chapter_select_moves_focus_to_close':chapter_panel_focus,
+                'chapter_select_escape_closes':chapter_panel_escape_closes,
+                'home_settings_button_matches_ambient_size':home_button_balance,
+                'orientation_prompt_matches_viewport':orientation_prompt_visible == orientation_prompt_expected and reader_app_inert == orientation_prompt_expected,
                 'rotate_prompt_hides_in_landscape':orientation_prompt_dismisses_in_landscape,
                 'auto_mode_passes_click_wait_and_starts_scene_music':auto_click_wait_reaches_scene_music,
                 'auto_mode_music_playback_attempted_after_audio_unlock':auto_scene_music_play_attempted,
@@ -202,12 +242,12 @@ def main():
             })
             context.close()
         browser.close()
-    (ROOT/'INTERACTION_SMOKE_RESULTS_0.56.json').write_text(json.dumps(out,indent=2,ensure_ascii=False),encoding='utf-8')
+    (ROOT/'INTERACTION_SMOKE_RESULTS_0.57.json').write_text(json.dumps(out,indent=2,ensure_ascii=False),encoding='utf-8')
     failed=[]
     for r in out:
-        for key in ['settings_audio_tab_works','settings_keyboard_tab_navigation','only_selected_settings_panel_visible','ambient_silent_in_settings','orientation_prompt_matches_viewport','rotate_prompt_hides_in_landscape','auto_mode_passes_click_wait_and_starts_scene_music','auto_mode_music_playback_attempted_after_audio_unlock','story_sound_effect_playback_after_audio_unlock','main_menu_offline_download_opens','settings_and_language_touch_targets_are_larger','fullscreen_control_removed','offline_download_includes_photo_and_ambience','menu_ambience_restarts_on_return_home','ambience_stays_off_in_settings_after_return','ambient_toggle_on','ambient_toggle_off','new_game_opens_reader','dialogue_loaded','live_language_switch_round_trip','save_slot_and_continue_work']:
+        for key in ['settings_audio_tab_works','settings_keyboard_tab_navigation','only_selected_settings_panel_visible','ambient_silent_in_settings','home_orientation_prompt_matches_viewport','home_portrait_gate_makes_app_inert','home_prompt_hides_in_landscape','chapter_select_visible_in_foreground','chapter_select_populates_chapters','chapter_select_moves_focus_to_close','chapter_select_escape_closes','home_settings_button_matches_ambient_size','orientation_prompt_matches_viewport','rotate_prompt_hides_in_landscape','auto_mode_passes_click_wait_and_starts_scene_music','auto_mode_music_playback_attempted_after_audio_unlock','story_sound_effect_playback_after_audio_unlock','main_menu_offline_download_opens','settings_and_language_touch_targets_are_larger','fullscreen_control_removed','offline_download_includes_photo_and_ambience','menu_ambience_restarts_on_return_home','ambience_stays_off_in_settings_after_return','ambient_toggle_on','ambient_toggle_off','new_game_opens_reader','dialogue_loaded','live_language_switch_round_trip','save_slot_and_continue_work']:
             if not r.get(key): failed.append(f"{r['viewport']}: {key}")
         if r['page_errors']: failed.append(f"{r['viewport']}: page errors {r['page_errors']}")
-    print(json.dumps({'runs':len(out),'failed_checks':failed,'results_file':'INTERACTION_SMOKE_RESULTS_0.56.json','details':out},indent=2,ensure_ascii=False))
+    print(json.dumps({'runs':len(out),'failed_checks':failed,'results_file':'INTERACTION_SMOKE_RESULTS_0.57.json','details':out},indent=2,ensure_ascii=False))
     return 1 if failed else 0
 if __name__=='__main__': raise SystemExit(main())

@@ -841,12 +841,6 @@ body {
   .app-shell.is-compact-reading .language-switch {
     display: inline-flex;
     flex: 0 0 auto;
-    min-width: 48px;
-    min-height: 30px;
-    height: 30px;
-    padding: 4px 7px;
-    gap: 5px;
-    font-size: 8px;
     white-space: nowrap;
   }
   .app-shell.is-compact-reading .reader-screen {
@@ -889,31 +883,6 @@ body {
   border-color: rgba(238, 231, 211, .58);
 }
 
-/* Settings and language controls are deliberately easier to tap. */
-.topbar #settingsButton,
-.reader-top-actions #settingsButton {
-  width: 42px !important;
-  height: 42px !important;
-  min-width: 42px !important;
-  font-size: 19px;
-}
-.language-switch {
-  min-width: 62px;
-  min-height: 38px;
-  height: 38px;
-  padding: 7px 11px;
-  gap: 7px;
-  font-size: 11px;
-}
-
-.orientation-prompt[hidden] { display: none !important; }
-.orientation-prompt:not([hidden]) {
-  display: grid !important;
-  place-items: center;
-  background: rgba(5, 10, 17, .86);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-}
 .orientation-prompt-card {
   box-sizing: border-box;
   width: min(390px, calc(100vw - 44px));
@@ -956,77 +925,7 @@ body {
   .orientation-symbol { animation: none; }
 }
 
-@media (max-width: 1100px) {
-  .topbar #settingsButton,
-  .reader-top-actions #settingsButton {
-    width: 38px !important;
-    height: 38px !important;
-    min-width: 38px !important;
-  }
-  .app-shell.is-compact-reading .reader-top-actions #settingsButton {
-    flex: 0 0 38px;
-  }
-  .app-shell.is-compact-reading .language-switch {
-    min-width: 62px;
-    min-height: 38px;
-    height: 38px;
-    padding: 6px 9px;
-    gap: 6px;
-    font-size: 10px;
-  }
-}
-@media (max-width: 680px) and (orientation: portrait) {
-  .settings-main {
-    display: block !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-  }
-  .settings-panel:not([hidden]) {
-    display: block;
-    width: 100%;
-  }
-  .settings-control {
-    grid-template-columns: minmax(0, 1fr) minmax(92px, 1.05fr) 32px;
-  }
-}
-
 .app-shell.is-settings-open #ambientToggle { display: none !important; }
-
-/* Increment 0.56 — focused settings navigation, accessible touch targets,
-   and a strict landscape gate for touch-device gameplay. */
-.settings-panel[hidden],
-.settings-panel:not(.is-active) {
-  display: none !important;
-}
-.settings-panel.is-active:not([hidden]) {
-  display: block !important;
-  width: 100%;
-  min-width: 0;
-}
-.settings-nav-button {
-  touch-action: manipulation;
-}
-
-/* Slightly larger controls without changing the visual language. */
-.topbar #settingsButton,
-.reader-top-actions #settingsButton {
-  width: 44px !important;
-  height: 44px !important;
-  min-width: 44px !important;
-  font-size: 20px !important;
-}
-.app-shell.is-compact-reading .reader-top-actions #settingsButton {
-  flex: 0 0 44px !important;
-}
-.language-switch,
-.app-shell.is-compact-reading .language-switch {
-  min-width: 68px !important;
-  min-height: 42px !important;
-  height: 42px !important;
-  padding: 8px 11px !important;
-  gap: 7px !important;
-  font-size: 11px !important;
-}
 
 @media (max-width: 680px) and (orientation: portrait) {
   .settings-nav {
@@ -1051,13 +950,171 @@ body {
   .settings-panel.is-active:not([hidden]) {
     display: block !important;
   }
+  .settings-control {
+    grid-template-columns: minmax(0, 1fr) minmax(92px, 1.05fr) 32px;
+  }
 }
 
+
+
+/* Increment 0.57 — balanced controls, foreground Chapter Select and a
+   full-viewport landscape gate. Responsive dimensions are centralized here. */
+.settings-panel[hidden],
+.settings-panel:not(.is-active) { display: none !important; }
+.settings-panel.is-active:not([hidden]) {
+  display: block !important;
+  width: 100%;
+  min-width: 0;
+}
+.settings-nav-button { touch-action: manipulation; }
+
+/* Main-menu and reader Settings buttons remain close in size to the sound icon. */
+.topbar #settingsButton,
+.reader-top-actions #settingsButton,
+.app-shell.is-compact-reading .reader-top-actions #settingsButton {
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  min-height: 36px !important;
+  flex: 0 0 36px !important;
+  padding: 0 !important;
+  font-size: 17px !important;
+  line-height: 1 !important;
+}
+.language-switch,
+.app-shell.is-compact-reading .language-switch {
+  width: 58px !important;
+  min-width: 58px !important;
+  max-width: 58px !important;
+  min-height: 34px !important;
+  height: 34px !important;
+  flex: 0 0 58px !important;
+  padding: 5px !important;
+  gap: 4px !important;
+  justify-content: center;
+  font-size: 10px !important;
+  white-space: nowrap;
+}
+
+/* Chapter Select lives at shell level so it is above the stage and top bar. */
+.home-content { position: relative; z-index: 1; }
+.chapter-select-panel {
+  position: absolute;
+  z-index: 60 !important;
+  top: clamp(84px, 10vh, 110px);
+  right: clamp(18px, 3vw, 36px);
+  bottom: clamp(18px, 3vh, 28px);
+  isolation: isolate;
+  background: rgba(7, 11, 16, .975);
+  border-color: rgba(235, 231, 218, .34);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .62);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  pointer-events: auto;
+}
+.chapter-select-panel[hidden] { display: none !important; }
+
+/* The prompt sits outside .app-shell and blocks the header as well as the stage. */
 .orientation-prompt[hidden] { display: none !important; }
 .orientation-prompt:not([hidden]) {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 10000 !important;
   display: grid !important;
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
   place-items: center;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  padding: max(22px, env(safe-area-inset-top)) max(22px, env(safe-area-inset-right))
+           max(22px, env(safe-area-inset-bottom)) max(22px, env(safe-area-inset-left));
+  background: rgba(5, 10, 17, .94);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  pointer-events: auto;
+}
+.orientation-prompt-card {
+  width: min(390px, calc(100vw - 44px));
+  max-height: calc(100dvh - 44px);
+  overflow: auto;
+}
+.app-shell[inert] { pointer-events: none; user-select: none; }
+
+@media (max-width: 1100px) {
+  .topbar #settingsButton,
+  .reader-top-actions #settingsButton,
+  .app-shell.is-compact-reading .reader-top-actions #settingsButton {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    min-height: 34px !important;
+    flex-basis: 34px !important;
+    font-size: 16px !important;
+  }
+  .language-switch,
+  .app-shell.is-compact-reading .language-switch {
+    width: 56px !important;
+    min-width: 56px !important;
+    max-width: 56px !important;
+    flex-basis: 56px !important;
+  }
+}
+@media (max-width: 760px) {
+  .topbar #settingsButton,
+  .reader-top-actions #settingsButton,
+  .app-shell.is-compact-reading .reader-top-actions #settingsButton {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+    flex-basis: 30px !important;
+    font-size: 14px !important;
+  }
+  .language-switch,
+  .app-shell.is-compact-reading .language-switch {
+    width: 54px !important;
+    min-width: 54px !important;
+    max-width: 54px !important;
+    min-height: 32px !important;
+    height: 32px !important;
+    flex-basis: 54px !important;
+    padding: 5px !important;
+    font-size: 9px !important;
+  }
+  .chapter-select-panel {
+    inset: calc(58px + env(safe-area-inset-top)) 10px 10px !important;
+    width: auto !important;
+    max-width: none !important;
+    padding: 18px !important;
+  }
+}
+@media (max-width: 350px) {
+  .topbar #settingsButton,
+  .reader-top-actions #settingsButton,
+  .app-shell.is-compact-reading .reader-top-actions #settingsButton {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    min-height: 28px !important;
+    flex-basis: 28px !important;
+  }
+  .language-switch,
+  .app-shell.is-compact-reading .language-switch {
+    width: 52px !important;
+    min-width: 52px !important;
+    max-width: 52px !important;
+    min-height: 30px !important;
+    height: 30px !important;
+    flex-basis: 52px !important;
+    padding: 4px !important;
+    font-size: 8px !important;
+  }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  .topbar #settingsButton {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+    flex-basis: 30px !important;
+  }
 }

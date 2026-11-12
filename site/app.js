@@ -436,7 +436,13 @@ function dismissDedication() {
   if (!screen) return;
   screen.setAttribute('aria-hidden', 'true');
   screen.classList.add('is-leaving');
-  const finish = () => { screen.hidden = true; screen.classList.remove('is-leaving'); };
+  const finish = () => {
+    screen.hidden = true;
+    screen.classList.remove('is-leaving');
+    // The home-menu orientation gate appears after the dedication card has
+    // cleared, so the first-visit introduction is not covered by the prompt.
+    updateOrientationPrompt();
+  };
   if (state.settings.reduceMotion || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) finish();
   else setTimeout(finish, 740);
 }
@@ -1175,8 +1181,10 @@ function requestLandscapeOrientation() {
   } catch {}
 }
 function isPortraitGameplayBlocked() {
-  const gameplayScreen = state.screen === 'reader' || state.screen === 'chapterEnd';
-  if (!gameplayScreen) return false;
+  // The orientation requirement applies to the main menu as well as the story:
+  // visitors should see the landscape reminder before starting a chapter.
+  const orientationRequiredScreen = state.screen === 'home' || state.screen === 'reader' || state.screen === 'chapterEnd';
+  if (!orientationRequiredScreen) return false;
   const portrait = !!window.matchMedia?.('(orientation: portrait)').matches;
   const touchDevice = !!window.matchMedia?.('(any-pointer: coarse)').matches || !!window.matchMedia?.('(max-width: 900px)').matches;
   return portrait && touchDevice;
@@ -1184,7 +1192,14 @@ function isPortraitGameplayBlocked() {
 function updateOrientationPrompt() {
   const prompt = $('orientationPrompt');
   const blocked = isPortraitGameplayBlocked();
-  if (prompt) prompt.hidden = !blocked;
+  if (prompt) {
+    prompt.hidden = !blocked;
+    prompt.setAttribute('aria-hidden', String(!blocked));
+  }
+  // The prompt is outside .app-shell. Inert makes the whole app (including the
+  // top bar and menu buttons) genuinely non-interactive while portrait-locked.
+  const appShell = document.querySelector('.app-shell');
+  if (appShell) appShell.inert = blocked;
 
   // If Auto or a timed story command reached its next event while the device
   // was upright, resume the timeline once the device returns to landscape.
@@ -1540,7 +1555,11 @@ function renderChapters() {
     const button = document.createElement('button'); button.className = 'chapter-choice'; button.type = 'button';
     const index = String(i).padStart(2,'0');
     button.innerHTML = `<span class="chapter-index">${index}</span><span><strong>${escapeHTML(ch.title_en)}</strong><small>${escapeHTML(ch.chapter)} · ${ch.events.filter(e=>e.type==='say').length} passages</small></span>`;
-    button.addEventListener('click', () => { $('chapterSelectPanel').hidden = true; startChapter(i,0); });
+    button.addEventListener('click', () => {
+      $('chapterSelectPanel').hidden = true;
+      $('chaptersButton').setAttribute('aria-expanded','false');
+      startChapter(i,0);
+    });
     list.appendChild(button);
   });
 }
@@ -1931,8 +1950,35 @@ function bindUI() {
     if (state.screen === 'home') tryAmbientAfterGesture(event);
   }, { capture: true });
   $('continueButton').addEventListener('click',()=>{const p=getProgress();if(p)restoreProgress(p);});
-  $('chaptersButton').addEventListener('click',()=>{$('chapterSelectPanel').hidden=false;});
-  $('closeChapters').addEventListener('click',()=>{$('chapterSelectPanel').hidden=true;});
+  $('chaptersButton').addEventListener('click',()=>{
+    const panel=$('chapterSelectPanel');
+    panel.hidden=false;
+    $('chaptersButton').setAttribute('aria-expanded','true');
+    $('closeChapters').focus();
+  });
+  $('closeChapters').addEventListener('click',()=>{
+    $('chapterSelectPanel').hidden=true;
+    $('chaptersButton').setAttribute('aria-expanded','false');
+    $('chaptersButton').focus();
+  });
+  document.addEventListener('keydown',event=>{
+    const panel=$('chapterSelectPanel');
+    if(panel.hidden) return;
+    if(event.key==='Escape'){
+      event.preventDefault();
+      panel.hidden=true;
+      $('chaptersButton').setAttribute('aria-expanded','false');
+      $('chaptersButton').focus();
+      return;
+    }
+    if(event.key==='Tab'){
+      const focusable=[...panel.querySelectorAll('button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')];
+      if(!focusable.length) return;
+      const first=focusable[0], last=focusable[focusable.length-1];
+      if(event.shiftKey && document.activeElement===first){event.preventDefault();last.focus();}
+      else if(!event.shiftKey && document.activeElement===last){event.preventDefault();first.focus();}
+    }
+  });
   $('loadButton').addEventListener('click',()=>openSlots('load'));
   $('musicRoomButton').addEventListener('click',openMusicRoom);
   $('closeMusicRoom').addEventListener('click',()=>$('musicRoomDialog').close());
