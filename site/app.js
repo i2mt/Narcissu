@@ -1078,9 +1078,16 @@ function retryPendingStoryAudio() {
     playChannel(ev);
   }
 }
-function unlockStoryAudioFromGesture() {
+function unlockStoryAudioFromGesture(event) {
   const endingAudio = $('endingMessageAudio');
-  const elements = [getMusicAudioElement(), ...STORY_AUDIO_CHANNELS.map(getChannelAudioElement)];
+  const restoringProgress = event?.target?.closest?.('#continueButton, #loadButton, #readerLoadButton, #slotList');
+  // Continue/load immediately restores the saved scene soundtrack in its click
+  // handler. Do not replace the shared music element with the silent priming
+  // source on pointerdown first; that races the restored track's play() call.
+  const elements = [
+    ...(restoringProgress ? [] : [getMusicAudioElement()]),
+    ...STORY_AUDIO_CHANNELS.map(getChannelAudioElement)
+  ];
   if (endingAudio) elements.push(endingAudio);
   Promise.all(elements.map(primeAudioElement)).then(() => {
     retryPendingStoryAudio();
@@ -2147,11 +2154,11 @@ function bindUI() {
     startAmbientSound();
   };
   document.addEventListener('pointerdown', (event) => {
-    unlockStoryAudioFromGesture();
+    unlockStoryAudioFromGesture(event);
     if (state.screen === 'home') tryAmbientAfterGesture(event);
   }, { capture: true });
   document.addEventListener('keydown', (event) => {
-    unlockStoryAudioFromGesture();
+    unlockStoryAudioFromGesture(event);
     if (state.screen === 'home') tryAmbientAfterGesture(event);
   }, { capture: true });
   $('continueButton').addEventListener('click',()=>{const p=getProgress();if(p)restoreProgress(p);});
