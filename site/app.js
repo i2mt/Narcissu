@@ -1084,8 +1084,14 @@ function unlockStoryAudioFromGesture(event) {
   // Continue/load immediately restores the saved scene soundtrack in its click
   // handler. Do not replace the shared music element with the silent priming
   // source on pointerdown first; that races the restored track's play() call.
+  // Never prime the shared music element while it owns a real scene track.
+  // Continue/load deliberately skips priming so restoreProgress() can start
+  // music immediately; priming it on the next dialogue tap would replace that
+  // track with the silent data URL and stop the soundtrack.
+  const hasActiveMusicTrack = !!(state.musicAudio && state.currentMusic);
+  const shouldPrimeMusic = !restoringProgress && !hasActiveMusicTrack;
   const elements = [
-    ...(restoringProgress ? [] : [getMusicAudioElement()]),
+    ...(shouldPrimeMusic ? [getMusicAudioElement()] : []),
     ...STORY_AUDIO_CHANNELS.map(getChannelAudioElement)
   ];
   if (endingAudio) elements.push(endingAudio);
