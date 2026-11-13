@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "language": "fa",
+  "project": "Narcissu Persian Edition",
+  "increment": 66,
+  "layer": "conversational_narration_polish",
+  "title": "Conversational Persian narration polish",
+  "description": "Targeted revisions to the active Persian runtime translations, prompted by the discovery that several formal-sounding passages were supplied by later overlays rather than the archival fa.json. The revisions preserve the restrained, reflective atmosphere of the narration while favoring natural contemporary Persian. Independent native-Persian sign-off remains pending.",
+  "style_guide": [
+    "Narration should sound intimate, natural, and conversational without becoming slang-heavy.",
+    "Preserve the quiet, reflective atmosphere and emotional understatement of Narcissu.",
+    "Avoid unnecessarily formal constructions and literal translationese, especially when a simpler spoken Persian construction carries the same meaning.",
+    "Preserve source meaning, event boundaries, and character voice; do not add actions or explanations."
+  ],
+  "review_scope": {
+    "entries_revised": 27,
+    "method": "Review of flagged active runtime entries across recovery, editorial, conversational-tone, and literary-revision overlays. This final overlay intentionally takes precedence over earlier entries with the same event IDs.",
+    "approval": "User-authorized assistant-led tone revision; independent native-Persian sign-off pending"
+  },
+  "translations": {
+    "gp32_honpen2:089610": {
+      "text": "اومد کنارم.",
+      "source_text_before": "به کنارم آمد.",
+      "status": "conversational_tone_revision",
+      "rationale": "بازنویسی کوتاه و گفتاری؛ رویداد بعدی نشستن روی صندلی را جداگانه نگه می‌دارد."
+    },
+    "gp32_honpen2:089614": {
+      "text": "چیزی نگفت و روی صندلی کنارم نشست.",
+      "source_text_before": "بی‌آنکه حرف دیگری بزند، روی صندلی کنارم نشست.",
+      "status": "conversational_tone_revision",
+      "rationale": "حفظ معنای رویداد با ساختاری ساده و طبیعی‌تر در فارسی محاوره‌ای."
+    },
+    "gp32_honpen2:089215": {
+      "text": "همون‌جا وایساده بودم و هم‌زمان که به این فکرها مشغول بودم، رفت‌وآمد مردم رو تماشا می‌کردم.",
+      "source_text_before": "همون‌جا ایستاده بودم و درحالی‌که به این فکرها مشغول بودم، رفت‌وآمد تند مردم رو تماشا می‌کردم.",
+      "status": "conversational_tone_revision",
+      "rationale": "کاهش سنگینیِ «درحالی‌که» و روان‌تر کردن ترتیب جمله، بدون تغییر کنش اصلی."
+    },
+    "gp32_honpen2:089769": {
+      "text": "همین‌طور که بی‌هدف به هر دوشون خیره شده بودم، به حرف زدن ادامه دادم.",
+      "source_text_before": "در حالی که بی‌هدف به هر دو خیره مانده بودم، به حرف‌زدن ادامه دادم.",
+      "status": "conversational_tone_revision",
+      "rationale": "جایگزینی ترکیب‌های رسمی با بیان طبیعی و حفظ لحن اول‌شخص."
+    },
+    "gp32_honpen3:090308": {
+      "text": "تو همون حالت آشنای همیشگیش، رو به پنجره وایساده بود و بی‌توجه به من، بیرون رو تماشا می‌کرد.",
+      "source_text_before": "در اون حالت آشنایش، رو به پنجره ایستاده بود و بی‌آنکه کوچک‌ترین اعتنایی به حضور من کند، بیرون رو تماشا می‌کرد.",
+      "status": "conversational_tone_revision",
+      "rationale": "حفظ تصویر و بی‌اعتنایی شخصیت، با حذف عبارت بسیار رسمی «بی‌آنکه کوچک‌ترین اعتنایی... کند»."
+    },
+    "gp32_honpen3:091309": {
+      "text": "همین که درهای خودکار باز شد، بوی وایتکس و مواد شوینده پیچید توی دماغم.",
+      "source_text_before": "به‌محض بازشدن درهای خودکار، بوی وایتکس و مواد شوینده توی بینی‌ام پیچید.",
+      "status": "conversational_tone_revision",
+      "rationale": "بیان محاوره‌ای‌تر و تصویری‌تر، با حفظ جزئیات بو و لحظهٔ باز شدن درها."
+    },
+    "gp32_honpen3:091352": {
+      "text": "به این فکر می‌کردم که یه بار دیگه اطراف رو نگاه کردم تا مطمئن شم کسی اون دوروبر نیست.",
+      "source_text_before": "درحالی‌که به این فکر می‌کردم، یه بار دیگه اطراف رو نگاه کردم تا مطمئن شم کسی اون دوروبر نیست.",
+      "status": "conversational_tone_revision",
+      "rationale": "حذف ساختار ترجمه‌ایِ «درحالی‌که» و روان‌تر کردن گذار بین فکر و عمل."
+    },
+    "gp32_honpen3:091439": {
+      "text": "یه دستم روی فرمون بود و دوباره به بقچهٔ لباس‌ها نگاه کردم.",
+      "source_text_before": "در حالی که یک دستم روی فرمان بود، دوباره به بقچهٔ لباس‌ها نگاه کردم.",
+      "status": "conversational_tone_revision",
+      "rationale": "کوتاه‌تر و نزدیک‌تر به گفتار راوی، بدون حذف جزئیات."
+    },
+    "gp32_honpen3:091547": {
+      "text": "همون‌طور که پشت فرمون نشسته بودم، شلوار جین و پلیورم رو پوشیدم.",
+      "source_text_before": "در حالی که پشت فرمان نشسته بودم، یک شلوار جین و یک پلیور پوشیدم.",
+      "status": "conversational_tone_revision",
+      "rationale": "طبیعی‌تر کردن ساختار و مالکیت لباس‌ها در روایت اول‌شخص."
+    },
+    "gp32_honpen3:091786": {
+      "text": "یه اونیگیریِ آماده دستش بود و زیر لب چیزی گفت.",
+      "source_text_before": "در حالی که یک اونیگیریِ فروشگاهی در دست داشت، زیر لب چیزی گفت.",
+      "status": "conversational_tone_revision",
+      "rationale": "جایگزینی عبارت توصیفی و خشک با بیان ساده‌تر و طبیعی‌تر."
+    },
+    "gp32_honpen4:092102": {
+      "text": "در امتداد قوسِ دماغه پیش می‌رفتم... روی شن‌های سفید ساحل می‌دویدم و آفتاب از پشت سرم می‌تابید.",
+      "source_text_before": "در امتداد قوسِ یک دماغه پیش می‌رفتم... و روی شن‌های سفید ساحل می‌دویدم، درحالی‌که آفتاب از پشت سرم می‌تابید.",
+      "status": "conversational_tone_revision",
+      "rationale": "حفظ تصویر شاعرانه، اما حذف اتصال سنگین «درحالی‌که» و روان‌تر کردن جمله."
+    },
+    "gp32_honpen4:093085": {
+      "text": "اون عددها رو با بی‌اعتنایی پشت سر هم می‌گفت و من هم تقریباً بی‌اختیار، همون‌ها رو روی برگهٔ مشخصات ماشین پیدا می‌کردم.",
+      "source_text_before": "درحالی‌که اون عددها رو با بی‌اعتنایی کامل پشت سر هم می‌گفت، تقریباً بی‌اختیار دنبالشون رو روی برگهٔ مشخصات خودرو می‌گرفتم.",
+      "status": "conversational_tone_revision",
+      "rationale": "شکستن ساختار تو‌در‌تو و جایگزینی «خودرو» و «دنبال‌شان را گرفتن» با ترکیب‌های طبیعی‌تر."
+    },
+    "gp32_honpen4:093496": {
+      "text": "حواسم به بازیکن‌های دستگاه‌های اسلات و متصدی‌ها بود و آروم به اون باجه نزدیک شدم.",
+      "source_text_before": "درحالی‌که حواسم به کسانی بود که پای دستگاه‌های اسلات بازی می‌کردن و به متصدی‌ها، آروم به اون جایگاه نزدیک شدم.",
+      "status": "conversational_tone_revision",
+      "rationale": "روان‌سازی جملهٔ طولانی و جایگزینی «جایگاه» با «باجه» برای بیان طبیعی‌تر."
+    },
+    "gp32_honpen5:093895": {
+      "text": "فصل‌های زیادی رو گذرونده بودم؛ زیر آسمون‌های سفید و ابریِ زیادی... بی‌اینکه بخوام یا دلیلی ببینم با کسی حرف بزنم...",
+      "source_text_before": "فصل‌های زیادی رو گذرونده بودم، زیر آسمون‌های سفید و ابریِ بی‌شمار... بی‌آنکه بخوام یا نیازی ببینم با کسی حرف بزنم...",
+      "status": "conversational_tone_revision",
+      "rationale": "حفظ لحن تأملی و ادبی تصویر، با جایگزینی «بی‌شمار» و «نیازی ببینم» که در این بافت بیش از حد رسمی‌اند."
+    },
+    "gp32_honpen5:094382": {
+      "text": "داخل ماشین بودم و تاریکی شب همه‌جا رو گرفته بود.",
+      "source_text_before": "داخل ماشین، درحالی‌که تاریکی شب همه‌جا رو پوشونده بود.",
+      "status": "conversational_tone_revision",
+      "rationale": "تبدیل عبارت معلق به جمله‌ای کامل و طبیعی."
+    },
+    "gp32_honpen5:095014": {
+      "text": "تمام این مدت، داشت برای یه سفرِ تنها آماده می‌شد، بی‌اینکه مقصدی داشته باشه؟",
+      "source_text_before": "تمام این مدت، داشت برای سفری تنهایی آماده می‌شد، بی‌آنکه مقصدی داشته باشه؟",
+      "status": "conversational_tone_revision",
+      "rationale": "حفظ لحن پرسشی و جایگزینی ساختار رسمی با گفتار طبیعی."
+    },
+    "gp32_honpen5:095061": {
+      "text": "یکی‌مون بی‌درنگ از طبقهٔ هفتم فرار کرده بود؛ اون یکی هم بی‌اینکه مقصدی داشته باشه، خودش رو برای یه سفر بی‌فایده آماده کرده بود.",
+      "source_text_before": "یکی‌مون بی‌درنگ از طبقهٔ هفتم فرار کرده بود؛ اون یکی بی‌آنکه مقصدی داشته باشه، تدارکاتی بی‌فایده دیده بود.",
+      "status": "conversational_tone_revision",
+      "rationale": "حفظ تقابل دو بخش، با جایگزینی «تدارکاتی دیده بود» با فعل طبیعی‌تر و روشن‌تر."
+    },
+    "gp32_honpen5:095115": {
+      "text": "می‌خواستم راه بیفتم؛ هر جا که می‌خواست باشه.",
+      "source_text_before": "می‌خواستم به‌سوی مقصدی حرکت کنم؛ هر مقصدی که می‌خواست باشه.",
+      "status": "conversational_tone_revision",
+      "rationale": "حذف «به‌سوی مقصدی حرکت کنم» که در این بافت رسمی و ترجمه‌ای است."
+    },
+    "gp32_honpen6:095196": {
+      "text": "جادهٔ شمارهٔ ۱ تا بی‌نهایت کشیده شده بود؛ به سمت مقصدهایی که نمی‌شناختم. ماشین‌ها رو دوست داشتم، چون می‌تونستن منو هر جایی ببرن.",
+      "source_text_before": "جادهٔ شمارهٔ ۱ که تا بی‌نهایت امتداد داشت؛ به‌سوی مقصدهایی ناشناخته. ماشین‌ها رو دوست داشتم، چون می‌تونستن مرا به هر جایی ببرند.",
+      "status": "conversational_tone_revision",
+      "rationale": "حفظ حس تأملی و تصویری جمله، با اصلاح ترکیب‌های رسمی و یکدست کردن ضمیرها با لحن راوی."
+    },
+    "gp32_honpen6:095778": {
+      "text": "حتی یه بار هم لبخند نزد و هیچ احساسی توی صورتش پیدا نبود، ولی به نظرم یه‌جوری از این کار خوشحال بود.",
+      "source_text_before": "حتی یک بار هم لبخند نزد و هیچ احساسی در چهره‌اش بروز نداد، اما به‌نظرم به‌نحوی از این کار خوشحال بود.",
+      "status": "conversational_tone_revision",
+      "rationale": "جایگزینی «بروز نداد» و «به‌نحوی» با بیان روزمره‌تر و حفظ تضاد ظریف جمله."
+    },
+    "gp32_honpen7:097472": {
+      "text": "وقتی با لکنت و تته‌پته حرف می‌زدم، داروساز با شک و تردید نگاهم می‌کرد.",
+      "source_text_before": "در حالی که با لکنت و تته‌پته حرف می‌زدم، داروساز با سوءظن نگاهم می‌کرد.",
+      "status": "conversational_tone_revision",
+      "rationale": "حذف اتصال سنگین و انتخاب تعبیر طبیعی‌تر برای نگاه داروساز."
+    },
+    "gp32_honpen7:097671": {
+      "text": "اون با نگرانی نگاهم می‌کرد و من دستم رو تکون دادم تا بهش بفهمونم نگران نباشه.",
+      "source_text_before": "در حالی که با نگرانی نگاهم می‌کرد، دستم رو تکون دادم تا بهش بفهمونم نگران نباشه.",
+      "status": "conversational_tone_revision",
+      "rationale": "بازچینی جمله برای وضوح و ریتم طبیعی‌تر."
+    },
+    "gp32_honpen7:098263": {
+      "text": "خودمم نمی‌دونستم چرا، ولی از این کار خوشم می‌اومد و با همون لحن به حرف زدن باهاش ادامه می‌دادم.",
+      "source_text_before": "و بی‌آنکه بدونم چرا، از این کار خوشم می‌اومد و با همون لحن به حرف زدن باهاش ادامه می‌دادم.",
+      "status": "conversational_tone_revision",
+      "rationale": "حذف ساختار رسمی «بی‌آنکه» و روان‌تر کردن آغاز جمله."
+    },
+    "gp32_honpen8:098585": {
+      "text": "حواسمون نبود و ماه بزرگی توی آسمون شب بالا اومده بود.",
+      "source_text_before": "بی‌آنکه متوجه شویم، ماه عظیمی در آسمان شب بالا آمده بود.",
+      "status": "conversational_tone_revision",
+      "rationale": "حفظ مفهوم گذر زمان و ناآگاه ماندن شخصیت‌ها با بیانی طبیعی‌تر."
+    },
+    "gp32_honpen8:099425": {
+      "text": "نفرینش هیچ فایده‌ای نداشت؟ ناپدید شد، بی‌اینکه کاری جز ناراحت کردن نارسیس کرده باشه...؟",
+      "source_text_before": "نفرینش هیچ نتیجه‌ای نداشت؟ ناپدید شد، بی‌آنکه کاری جز رنجوندن نارسیس کرده باشه...؟",
+      "status": "conversational_tone_revision",
+      "rationale": "حذف ساختار رسمی «بی‌آنکه» و ساده‌تر کردن واژگان، با حفظ لحن پرسشی و تلخ."
+    },
+    "gp32_honpen9:100627": {
+      "text": "همین‌طور که ازم دور می‌شد، آخرین حرف‌هام رو زدم.",
+      "source_text_before": "در حالی که ازم دور می‌شد، آخرین حرف‌هام رو زدم.",
+      "status": "conversational_tone_revision",
+      "rationale": "روان‌تر کردن اتصال دو کنش بدون تغییر معنا."
+    },
+    "gp32_honpen9:100793": {
+      "text": "و دریای زمردی پشت سرش بود...",
+      "source_text_before": "و در حالی که دریای زمردی پس‌زمینه‌اش بود...",
+      "status": "conversational_tone_revision",
+      "rationale": "حفظ تصویر بصری با حذف عبارت ترجمه‌ای «پس‌زمینه‌اش بود»."
+    }
+  }
+}
