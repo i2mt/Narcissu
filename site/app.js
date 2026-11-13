@@ -2158,7 +2158,7 @@ function bindUI() {
     if (state.screen === 'home') tryAmbientAfterGesture(event);
   }, { capture: true });
   document.addEventListener('keydown', (event) => {
-    unlockStoryAudioFromGesture();
+    unlockStoryAudioFromGesture(event);
     if (state.screen === 'home') tryAmbientAfterGesture(event);
   }, { capture: true });
   $('continueButton').addEventListener('click',()=>{const p=getProgress();if(p)restoreProgress(p);});
